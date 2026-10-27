@@ -31,10 +31,10 @@ lists what to fill in.
 | Snap | `snap/snapcraft.yaml` | Builds from the git tag with the `rust` plugin, `strict` confinement, `network` plug. `snapcraft remote-build` (or `snapcraft` in LXD), then `snapcraft upload --release=stable cwv_<version>_amd64.snap` (and arm64). Register the name once with `snapcraft register cwv`. |
 | Docker | `rust/Dockerfile` | `FROM scratch` image with the static binary. `docker buildx build --platform linux/amd64,linux/arm64 --build-arg VERSION=<version> -t coworkingview/cwv:<version> -t coworkingview/cwv:latest --push rust/` (Docker Hub, namespace `coworkingview`). |
 
-All manifests point to https://github.com/coworkingview/flex-office-data as the
-project URL and to https://coworkingview.com as the homepage where the format
-has a separate field (Snap `website`; Chocolatey has none, so the homepage is in
-the description).
+The homepage is https://coworkingview.com wherever a manifest has one field for
+it (AUR `url`, Chocolatey `projectUrl`, Snap `website`); the source repository
+https://github.com/coworkingview/flex-office-data goes in the source, docs and
+issue fields.
 
 Licensing to state in every listing: the code is MIT; the Price Index data the
 tool prints is CC BY 4.0; catalogue content belongs to the operators and is not

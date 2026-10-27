@@ -7,10 +7,9 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  # TODO(release): replace with the sha256 of the sdist published on PyPI, e.g.
-  #   curl -sL <url above> | shasum -a 256
-  sha256: 0000000000000000000000000000000000000000000000000000000000000000  # PLACEHOLDER
+  # Local builds (`conda build python/conda`) use the checked-out package.
+  # conda-forge's staged-recipes needs `url:` + `sha256:` of the PyPI sdist instead.
+  path: ..
 
 build:
   noarch: python

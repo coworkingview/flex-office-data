@@ -16,8 +16,8 @@ Description: Retrieve the 'CoworkingView' Price Index, an open data set of
     keyless 'CoworkingView' API <https://api.coworkingview.com> and are
     returned as tidy data frames that carry their attribution.
 License: MIT + file LICENSE
-URL: https://github.com/coworkingview/flex-office-data,
-    https://coworkingview.com/en/tools/price-index
+URL: https://coworkingview.com,
+    https://github.com/coworkingview/flex-office-data
 BugReports: https://github.com/coworkingview/flex-office-data/issues
 Depends:
     R (>= 4.1)

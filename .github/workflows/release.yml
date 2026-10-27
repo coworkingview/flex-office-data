@@ -1,0 +1,152 @@
+name: Release cwv
+
+# Pushing a tag `rust-v<version>` builds `cwv` for Linux, macOS and Windows and
+# attaches the archives plus a SHA256SUMS file to a GitHub release. Pull requests
+# that touch the crate or this file run the same builds without publishing.
+
+on:
+  push:
+    tags: ["rust-v*"]
+  pull_request:
+    paths: ["rust/**", ".github/workflows/release.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    name: Build ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { target: x86_64-unknown-linux-musl, os: ubuntu-latest, archive: tar.gz }
+          - { target: aarch64-unknown-linux-musl, os: ubuntu-24.04-arm, archive: tar.gz }
+          - { target: x86_64-apple-darwin, os: macos-15-intel, archive: tar.gz }
+          - { target: aarch64-apple-darwin, os: macos-latest, archive: tar.gz }
+          - { target: x86_64-pc-windows-msvc, os: windows-latest, archive: zip }
+    defaults:
+      run:
+        shell: bash
+        working-directory: rust
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Version
+        id: version
+        run: |
+          crate=$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)
+          if [[ "$GITHUB_REF" == refs/tags/rust-v* ]]; then
+            tag="${GITHUB_REF_NAME#rust-v}"
+            if [[ "$tag" != "$crate" ]]; then
+              echo "::error::tag rust-v$tag does not match rust/Cargo.toml version $crate"
+              exit 1
+            fi
+          fi
+          echo "version=$crate" >> "$GITHUB_OUTPUT"
+
+      - name: Install musl tools
+        if: contains(matrix.target, 'musl')
+        run: sudo apt-get update && sudo apt-get install -y musl-tools
+
+      - name: Build
+        env:
+          # Static CRT on Windows, so the binary needs no VC++ redistributable.
+          RUSTFLAGS: ${{ contains(matrix.target, 'windows') && '-C target-feature=+crt-static' || '' }}
+        run: cargo build --release --locked --target ${{ matrix.target }}
+
+      - name: Package
+        id: package
+        run: |
+          name="cwv-${{ steps.version.outputs.version }}-${{ matrix.target }}"
+          exe=""; [[ "${{ matrix.target }}" == *windows* ]] && exe=".exe"
+          bin="target/${{ matrix.target }}/release/cwv$exe"
+          "$bin" --version
+
+          stage="$RUNNER_TEMP/$name"
+          mkdir -p "$stage/completions"
+          cp "$bin" LICENSE README.md CHANGELOG.md "$stage/"
+          "$bin" completions bash       > "$stage/completions/cwv.bash"
+          "$bin" completions zsh        > "$stage/completions/_cwv"
+          "$bin" completions fish       > "$stage/completions/cwv.fish"
+          "$bin" completions powershell > "$stage/completions/_cwv.ps1"
+          "$bin" man > "$stage/cwv.1"
+
+          cd "$RUNNER_TEMP"
+          if [[ "${{ matrix.archive }}" == zip ]]; then
+            7z a -tzip "$name.zip" "$name" > /dev/null
+            echo "file=$RUNNER_TEMP/$name.zip" >> "$GITHUB_OUTPUT"
+          else
+            tar -czf "$name.tar.gz" "$name"
+            echo "file=$RUNNER_TEMP/$name.tar.gz" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check the Windows binary is statically linked
+        if: contains(matrix.target, 'windows')
+        shell: pwsh
+        run: |
+          $dumpbin = Get-ChildItem "${env:ProgramFiles}\Microsoft Visual Studio" -Recurse -Filter dumpbin.exe |
+            Where-Object FullName -like '*Hostx64\x64*' | Select-Object -First 1
+          $deps = & $dumpbin.FullName /dependents "target/${{ matrix.target }}/release/cwv.exe" | Out-String
+          if ($deps -match 'VCRUNTIME|api-ms-win-crt') { Write-Output $deps; throw 'cwv.exe links the dynamic CRT' }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.target }}
+          path: ${{ steps.package.outputs.file }}
+          if-no-files-found: error
+
+  publish:
+    name: Publish GitHub release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/rust-v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Checksums
+        working-directory: dist
+        run: sha256sum cwv-* | tee SHA256SUMS
+
+      - name: Release notes from the changelog
+        run: |
+          version="${GITHUB_REF_NAME#rust-v}"
+          awk -v v="$version" '
+            $0 ~ "^## \\[" v "\\]" { on = 1; next }
+            on && /^## \[/ { exit }
+            on && /^\[/ { exit }
+            on { print }
+          ' rust/CHANGELOG.md > notes.md
+          cat >> notes.md <<NOTES
+
+          Install: \`cargo install coworkingview\`, or download the archive for your
+          platform below and check it against \`SHA256SUMS\`.
+
+          The Price Index data \`cwv\` prints is licensed CC BY 4.0 — https://coworkingview.com/en/tools/price-index
+          NOTES
+          cat notes.md
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/* \
+            --title "cwv ${GITHUB_REF_NAME#rust-v}" \
+            --notes-file notes.md \
+            --verify-tag

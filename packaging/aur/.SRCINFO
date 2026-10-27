@@ -1,0 +1,15 @@
+pkgbase = cwv
+	pkgdesc = Flexible-office prices by city (CoworkingView Price Index) and coworking search, from the command line
+	pkgver = 0.1.0
+	pkgrel = 1
+	url = https://github.com/coworkingview/flex-office-data
+	arch = x86_64
+	arch = aarch64
+	license = MIT
+	makedepends = cargo
+	depends = gcc-libs
+	depends = glibc
+	source = coworkingview-0.1.0.tar.gz::https://static.crates.io/crates/coworkingview/coworkingview-0.1.0.crate
+	sha256sums = TODO(release)
+
+pkgname = cwv

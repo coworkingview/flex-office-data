@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: "flex-office-data: CoworkingView Price Index clients for Python, R and the command line"
+message: "If you use these figures, please cite the CoworkingView Price Index (CC BY 4.0)."
+type: software
+authors:
+  - name: CoworkingView
+    email: info@coworkingview.com
+    website: https://coworkingview.com
+repository-code: https://github.com/coworkingview/flex-office-data
+url: https://coworkingview.com/en/tools/price-index
+license: MIT
+keywords:
+  - coworking
+  - flexible office
+  - commercial real estate
+  - price index
+  - open data
+references:
+  - type: data
+    title: CoworkingView Price Index
+    authors:
+      - name: CoworkingView
+    url: https://coworkingview.com/en/tools/price-index
+    license: CC-BY-4.0

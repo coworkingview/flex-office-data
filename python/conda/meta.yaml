@@ -1,0 +1,62 @@
+{% set name = "coworkingview" %}
+{% set version = "0.1.0" %}
+{% set python_min = "3.9" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  # TODO(release): replace with the sha256 of the sdist published on PyPI, e.g.
+  #   curl -sL <url above> | shasum -a 256
+  sha256: 0000000000000000000000000000000000000000000000000000000000000000  # PLACEHOLDER
+
+build:
+  noarch: python
+  number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python {{ python_min }}
+    - hatchling >=1.27
+    - pip
+  run:
+    - python >={{ python_min }}
+    - pandas >=2.0
+
+test:
+  requires:
+    - python {{ python_min }}
+    - pip
+    - pytest
+  imports:
+    - coworkingview
+  source_files:
+    - tests
+    - spec
+  commands:
+    - pip check
+    - python -c "import coworkingview; assert coworkingview.__version__ == '{{ version }}'"
+    # Offline: golden-file and HTTP tests run against a local fake server.
+    - pytest tests -p no:cacheprovider -k "not live"
+
+about:
+  home: https://coworkingview.com
+  summary: Flexible-office prices (CoworkingView Price Index, CC BY 4.0) and coworking catalogue search as tidy pandas DataFrames.
+  description: |
+    Python client for the public, keyless CoworkingView API. rates() and
+    cities() return the CoworkingView Price Index (flex desk, fixed desk and
+    private office monthly prices, day pass and meeting room rates by city),
+    licensed CC BY 4.0. spaces() and space() search the catalogue of coworking
+    spaces, meeting rooms, event spaces and virtual offices.
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  doc_url: https://github.com/coworkingview/flex-office-data/tree/main/python#readme
+  dev_url: https://github.com/coworkingview/flex-office-data
+
+extra:
+  recipe-maintainers:
+    - coworkingview  # TODO(release): replace with the GitHub handle(s) of the maintainer(s)

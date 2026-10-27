@@ -1,0 +1,33 @@
+VERIFICATION
+Verification is intended to assist the Chocolatey moderators and community
+in verifying that this package's contents are trustworthy.
+
+This package is published by CoworkingView, the maintainer of the software.
+The package does not embed binaries: chocolateyinstall.ps1 downloads the
+official release archive from the project's GitHub releases and verifies it
+with a SHA-256 checksum.
+
+1. Download the archive the install script uses:
+
+     https://github.com/coworkingview/flex-office-data/releases/download/rust-v0.1.0/cwv-0.1.0-x86_64-pc-windows-msvc.zip
+
+2. Compute its checksum, e.g. in PowerShell:
+
+     Get-FileHash .\cwv-0.1.0-x86_64-pc-windows-msvc.zip -Algorithm SHA256
+
+   or with Chocolatey's checksum tool:
+
+     checksum -t sha256 -f cwv-0.1.0-x86_64-pc-windows-msvc.zip
+
+3. Compare it with `checksum64` in tools\chocolateyinstall.ps1 and with the
+   SHA256SUMS file attached to the same GitHub release:
+
+     https://github.com/coworkingview/flex-office-data/releases/tag/rust-v0.1.0
+
+   TODO(release): paste the published checksum here as well:
+     checksum64: TODO(release)
+
+The binary is built by the project's release workflow from the tagged source
+in https://github.com/coworkingview/flex-office-data/tree/main/rust and is
+licensed MIT:
+https://github.com/coworkingview/flex-office-data/blob/main/rust/LICENSE

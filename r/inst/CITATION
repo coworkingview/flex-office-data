@@ -1,0 +1,30 @@
+bibentry(
+  bibtype = "Misc",
+  header = "To cite the CoworkingView Price Index (data, CC BY 4.0) in publications use:",
+  title = "{CoworkingView} Price Index: Flexible Office Prices by City",
+  author = person("CoworkingView"),
+  organization = "CoworkingView",
+  year = "2026",
+  url = "https://coworkingview.com/en/tools/price-index",
+  note = "Data set. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Retrieved with the R package coworkingview",
+  textVersion = paste(
+    "CoworkingView (2026). CoworkingView Price Index: Flexible Office Prices by City.",
+    "Data set, licensed under CC BY 4.0.",
+    "https://coworkingview.com/en/tools/price-index"
+  )
+)
+
+bibentry(
+  bibtype = "Manual",
+  header = "To cite the R package in publications use:",
+  title = "{coworkingview}: Flexible Office Prices and Coworking Spaces from the {CoworkingView} {API}",
+  author = person("CoworkingView"),
+  year = "2026",
+  note = paste("R package version", meta$Version),
+  url = "https://github.com/coworkingview/flex-office-data",
+  textVersion = paste0(
+    "CoworkingView (2026). coworkingview: Flexible Office Prices and Coworking Spaces ",
+    "from the CoworkingView API. R package version ", meta$Version, ". ",
+    "https://github.com/coworkingview/flex-office-data"
+  )
+)

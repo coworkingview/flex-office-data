@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+python/dist/
+# R
+.Rhistory
+.RData
+.Rproj.user/
+r/*.tar.gz
+r/*.Rcheck/
+r/doc/
+r/Meta/
+# Rust
+rust/target/
+# OS
+.DS_Store

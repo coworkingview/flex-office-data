@@ -1,0 +1,57 @@
+# Maintainer: CoworkingView <info@coworkingview.com>
+#
+# Builds `cwv` from the crate published on crates.io (the .crate file is a
+# gzipped tarball that includes Cargo.lock, so the build is --frozen).
+
+pkgname=cwv
+_crate=coworkingview
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='Flexible-office prices by city (CoworkingView Price Index) and coworking search, from the command line'
+arch=('x86_64' 'aarch64')
+url='https://github.com/coworkingview/flex-office-data'
+license=('MIT')
+depends=('gcc-libs' 'glibc')
+makedepends=('cargo')
+source=("$_crate-$pkgver.tar.gz::https://static.crates.io/crates/$_crate/$_crate-$pkgver.crate")
+# TODO(release): replace with the output of `updpkgsums` once 0.1.0 is on crates.io.
+sha256sums=('TODO(release)')
+
+prepare() {
+  cd "$_crate-$pkgver"
+  export RUSTUP_TOOLCHAIN=stable
+  cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+  cd "$_crate-$pkgver"
+  export RUSTUP_TOOLCHAIN=stable
+  export CARGO_TARGET_DIR=target
+  cargo build --frozen --release
+
+  local bin=target/release/cwv
+  mkdir -p completions
+  "$bin" completions bash > completions/cwv
+  "$bin" completions zsh  > completions/_cwv
+  "$bin" completions fish > completions/cwv.fish
+  "$bin" man > cwv.1
+}
+
+check() {
+  cd "$_crate-$pkgver"
+  export RUSTUP_TOOLCHAIN=stable
+  # Unit tests only: the fixture-based suites live in the git repository, and
+  # nothing here touches the network.
+  cargo test --frozen --release --lib --bins
+}
+
+package() {
+  cd "$_crate-$pkgver"
+  install -Dm755 target/release/cwv "$pkgdir/usr/bin/cwv"
+  install -Dm644 completions/cwv "$pkgdir/usr/share/bash-completion/completions/cwv"
+  install -Dm644 completions/_cwv "$pkgdir/usr/share/zsh/site-functions/_cwv"
+  install -Dm644 completions/cwv.fish "$pkgdir/usr/share/fish/vendor_completions.d/cwv.fish"
+  install -Dm644 cwv.1 "$pkgdir/usr/share/man/man1/cwv.1"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+}

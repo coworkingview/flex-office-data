@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>cwv</id>
+    <version>0.1.0</version>
+    <title>cwv (CoworkingView CLI)</title>
+    <authors>CoworkingView</authors>
+    <owners>CoworkingView</owners>
+    <projectUrl>https://github.com/coworkingview/flex-office-data</projectUrl>
+    <projectSourceUrl>https://github.com/coworkingview/flex-office-data/tree/main/rust</projectSourceUrl>
+    <docsUrl>https://github.com/coworkingview/flex-office-data/tree/main/rust#readme</docsUrl>
+    <bugTrackerUrl>https://github.com/coworkingview/flex-office-data/issues</bugTrackerUrl>
+    <licenseUrl>https://github.com/coworkingview/flex-office-data/blob/main/rust/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!-- TODO(release): add <iconUrl> once a raw icon URL exists in the repository. -->
+    <tags>coworking office real-estate price-index cli open-data</tags>
+    <summary>Flexible-office prices by city, and coworking search, from CoworkingView.</summary>
+    <description><![CDATA[
+`cwv` reads the public, keyless API of [CoworkingView](https://coworkingview.com).
+
+* `cwv rates` and `cwv cities` print the **CoworkingView Price Index**: median,
+  25th and 75th percentile prices for flex desks, fixed desks and private offices
+  per month, day passes per day and meeting rooms per hour, city by city.
+  The data is licensed CC BY 4.0; `cwv` prints the required attribution.
+* `cwv spaces` and `cwv space` search the catalogue of coworking spaces,
+  private offices, meeting rooms, event spaces and virtual offices.
+
+Output as aligned tables, CSV or JSON. A single static binary (rustls, no OpenSSL).
+
+Homepage: https://coworkingview.com
+]]></description>
+    <releaseNotes>https://github.com/coworkingview/flex-office-data/blob/main/rust/CHANGELOG.md</releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

@@ -1,0 +1,5 @@
+city_slug,city_name,country_code,currency,published,property_count,operator_count,entry_median,entry_min,entry_max,p25,p75,sample_size,as_of
+abu-dhabi,Abu Dhabi,AE,AED,true,2,1,1453,1069,7535,1400,2200,2,2026-10-27T21:06:48.313Z
+berlin,Berlin,DE,EUR,true,85,48,265,80,2100,219,450,85,2026-10-27T21:06:48.313Z
+madrid,Madrid,ES,EUR,true,10,6,325,85,1980,195,349,10,2026-10-27T21:06:48.313Z
+example-town,Example Town,,,false,,,,,,,,,2026-10-27T21:06:48.313Z

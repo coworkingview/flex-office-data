@@ -1,0 +1,126 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file. -->
+
+# coworkingview
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+**coworkingview** brings the [CoworkingView Price
+Index](https://coworkingview.com/en/tools/price-index) – what flexible
+office space costs, city by city – into R as tidy data frames, in one
+call. It also searches the CoworkingView catalogue of coworking spaces,
+event spaces, meeting rooms and virtual offices.
+
+- **Price Index**: monthly prices for a flex desk, a fixed desk and a
+  private office (median and quartiles), the daily price of a day pass
+  and the hourly price of a meeting room. Open data under [CC BY
+  4.0](https://creativecommons.org/licenses/by/4.0/).
+- **Catalogue**: search spaces by city, zone, operator, product,
+  capacity and price, and get a link to each listing.
+- No API key, no sign-up. The API is public and read-only.
+
+## Installation
+
+``` r
+# Once on CRAN:
+install.packages("coworkingview")
+
+# Development version:
+# install.packages("remotes")
+remotes::install_github("coworkingview/flex-office-data", subdir = "r")
+```
+
+## Usage
+
+``` r
+library(coworkingview)
+
+rates <- cwv_rates(city = "berlin")
+rates[, c("product", "unit", "median", "p25", "p75", "sample_size")]
+#> # A tibble: 5 x 6
+#>   product        unit  median   p25   p75 sample_size
+#>   <chr>          <chr>  <dbl> <dbl> <dbl>       <int>
+#> 1 flex_desk      month    214   199   292          72
+#> 2 fix_desk       month    310   290   421          60
+#> 3 private_office month    480   399   550          59
+#> 4 day_pass       day       35    NA    NA          59
+#> 5 meeting_room   hour      32    NA    NA          79
+```
+
+Every city, with its entry price (the median of the cheapest monthly
+option of each space):
+
+``` r
+cwv_cities()
+```
+
+Prices in another currency (converted, approximate):
+
+``` r
+cwv_rates(city = "madrid", currency = "USD")
+```
+
+Search the catalogue and look at one space:
+
+``` r
+cwv_spaces(city = "berlin", product = "private_office",
+           sort = "price-asc", limit = 10)
+
+space <- cwv_space("sankt-oberholz-rosenthaler-berlin")
+space$pricing
+```
+
+| Function            | Returns                                        |
+|---------------------|------------------------------------------------|
+| `cwv_rates()`       | Price Index, one row per city and product      |
+| `cwv_cities()`      | One row per city, with city-level figures      |
+| `cwv_spaces()`      | Catalogue search, one row per space (max. 200) |
+| `cwv_space()`       | One space and its pricing table                |
+| `cwv_attribution()` | The attribution a result carries               |
+
+## Credit the source
+
+The Price Index is licensed under CC BY 4.0: you may share and adapt it,
+commercially too, as long as you credit CoworkingView. The text to use
+travels with every result:
+
+``` r
+cwv_attribution(rates)
+#> [1] "Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied."
+```
+
+The catalogue is different: names, descriptions, photos and prices of
+the spaces belong to their operators. You may search it and link to
+listings, but not bulk-copy it, so `cwv_spaces()` returns at most 200
+spaces per call and never returns descriptions, photos or logos.
+
+## Errors and limits
+
+- Invalid arguments fail early with a message listing the valid values.
+- API errors raise a `cwv_api_error` condition carrying `status`,
+  `code`, `title` and `detail`.
+- Rate limit: 120 requests per minute per IP. A `429` or `5xx` answer is
+  retried once, after at most 10 seconds.
+- If the API cannot be reached, functions show a message and return
+  `NULL`.
+- Set `options(coworkingview.base_url = ...)` or the environment
+  variable `COWORKINGVIEW_API_URL` to use another server.
+
+## Citation
+
+``` r
+citation("coworkingview")
+```
+
+## Related
+
+The same data are available for Python and as a command-line tool from
+the
+[flex-office-data](https://github.com/coworkingview/flex-office-data)
+repository.
+
+## Licence
+
+Code: MIT (c) CoworkingView. Price Index data: CC BY 4.0.

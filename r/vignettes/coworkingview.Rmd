@@ -1,0 +1,186 @@
+---
+title: "Flexible office prices across European cities"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Flexible office prices across European cities}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+The CoworkingView Price Index publishes what flexible office space costs,
+city by city: monthly prices for a flex (hot) desk, a fixed desk and a
+private office, plus the daily price of a day pass and the hourly price of a
+meeting room. The figures are medians and quartiles of the prices listed on
+[coworkingview.com](https://coworkingview.com/en/tools/price-index), and they
+are open data under the Creative Commons Attribution 4.0 licence.
+
+This vignette shows how to read the index with **coworkingview**, compare
+cities, and find spaces behind the numbers.
+
+> The code below needs an internet connection, so it is not run when the
+> vignette is built. The output shown was produced from real API responses
+> of 27 October 2026 (the same responses the package's tests use). Your
+> numbers will differ as the index is updated.
+
+```{r}
+library(coworkingview)
+```
+
+## The index in one call
+
+`cwv_rates()` returns one row per city and product. Monthly products come
+with the 25th and 75th percentiles; `sample_size` tells you how many prices
+are behind each figure, and `low_confidence` flags figures based on fewer
+than ten.
+
+```{r}
+rates <- cwv_rates()
+monthly <- rates[rates$unit == "month", ]
+monthly[, c("city_slug", "currency", "product", "median", "p25", "p75",
+            "sample_size", "low_confidence")]
+#> # A tibble: 9 x 8
+#>   city_slug currency product        median   p25   p75 sample_size low_confidence
+#>   <chr>     <chr>    <chr>           <dbl> <dbl> <dbl>       <int> <lgl>
+#> 1 abu-dhabi AED      flex_desk        1400  1400  1800           3 TRUE
+#> 2 abu-dhabi AED      fix_desk         1800  1800  1800           2 TRUE
+#> 3 abu-dhabi AED      private_office   2057  1486  2629           2 TRUE
+#> 4 berlin    EUR      flex_desk         214   199   292          72 FALSE
+#> 5 berlin    EUR      fix_desk          310   290   421          60 FALSE
+#> 6 berlin    EUR      private_office    480   399   550          59 FALSE
+#> 7 madrid    EUR      flex_desk         175   130   199          13 FALSE
+#> 8 madrid    EUR      fix_desk          260   249   280           9 TRUE
+#> 9 madrid    EUR      private_office    385   275   449           9 TRUE
+```
+
+A private office price is per office per month, not per person; a flex desk
+is a membership for one person.
+
+Day passes and meeting rooms have their own units:
+
+```{r}
+rates[rates$unit %in% c("day", "hour"),
+      c("city_slug", "product", "unit", "median", "sample_size")]
+#> # A tibble: 4 x 5
+#>   city_slug product      unit  median sample_size
+#>   <chr>     <chr>        <chr>  <dbl>       <int>
+#> 1 berlin    day_pass     day       35          59
+#> 2 berlin    meeting_room hour      32          79
+#> 3 madrid    day_pass     day       22          11
+#> 4 madrid    meeting_room hour      28           8
+```
+
+## Comparing cities in one currency
+
+Each city is priced in its local currency. To compare across currencies, ask
+the API to convert (rates are approximate):
+
+```{r}
+cwv_rates(city = "berlin", currency = "USD")[
+  , c("product", "unit", "currency", "median", "p25", "p75")]
+#> # A tibble: 5 x 6
+#>   product        unit  currency median   p25   p75
+#>   <chr>          <chr> <chr>     <dbl> <dbl> <dbl>
+#> 1 flex_desk      month USD         233   216   317
+#> 2 fix_desk       month USD         337   315   458
+#> 3 private_office month USD         522   434   598
+#> 4 day_pass       day   USD          38    NA    NA
+#> 5 meeting_room   hour  USD          35    NA    NA
+```
+
+With base R you can reshape the monthly figures to one row per city:
+
+```{r}
+eur <- cwv_rates(currency = "EUR")
+wide <- reshape(
+  as.data.frame(eur[eur$unit == "month", c("city_slug", "product", "median")]),
+  idvar = "city_slug", timevar = "product", direction = "wide"
+)
+wide[order(wide$median.flex_desk), ]
+```
+
+and plot the spread of flex desk prices, using the interquartile range to
+show how much prices vary within each city:
+
+```{r, fig.width = 6, fig.height = 3}
+flex <- eur[eur$product == "flex_desk" & !eur$low_confidence, ]
+flex <- flex[order(flex$median), ]
+plot(flex$median, seq_len(nrow(flex)), xlim = range(flex$p25, flex$p75),
+     yaxt = "n", pch = 19, xlab = "Flex desk, EUR per month", ylab = "")
+segments(flex$p25, seq_len(nrow(flex)), flex$p75, seq_len(nrow(flex)))
+axis(2, at = seq_len(nrow(flex)), labels = flex$city_name, las = 1)
+```
+
+## Which cities are covered?
+
+`cwv_cities()` lists every city in the index. `entry_median` is the median
+of the cheapest monthly option of each space: a good single number for "what
+does it cost to get a desk here".
+
+```{r}
+cities <- cwv_cities()
+cities[, c("city_slug", "published", "property_count",
+           "entry_median", "entry_min", "entry_max")]
+#> # A tibble: 4 x 6
+#>   city_slug    published property_count entry_median entry_min entry_max
+#>   <chr>        <lgl>              <int>        <dbl>     <dbl>     <dbl>
+#> 1 abu-dhabi    TRUE                   2         1453      1069      7535
+#> 2 berlin       TRUE                  85          265        80      2100
+#> 3 madrid       TRUE                  10          325        85      1980
+#> 4 example-town FALSE                 NA           NA        NA        NA
+```
+
+Cities with `published = FALSE` do not have enough prices yet; they have no
+rows in `cwv_rates()`.
+
+## Crediting the source
+
+The licence asks you to credit CoworkingView when you publish the figures.
+The exact text travels with every result:
+
+```{r}
+cwv_attribution(rates)
+#> [1] "Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied."
+cwv_attribution(rates, "as_of")
+#> [1] "2026-10-27T21:06:48.313Z"
+```
+
+Put it in the caption of a chart or under a table.
+
+## From the index to the spaces
+
+`cwv_spaces()` searches the catalogue behind the index: coworking spaces,
+event spaces, meeting rooms and virtual offices. It returns each space's
+position against the city median and a link to its page.
+
+```{r}
+spaces <- cwv_spaces(city = "berlin", product = "flex_desk", limit = 3)
+spaces[, c("title", "zone_slug", "market_verdict", "url")]
+```
+
+`cwv_space()` returns one space with its full pricing table:
+
+```{r}
+space <- cwv_space("sankt-oberholz-rosenthaler-berlin")
+space$pricing
+#> # A tibble: 5 x 8
+#>   product        title             price currency billing_period price_on_request
+#>   <chr>          <chr>             <dbl> <chr>    <chr>          <lgl>
+#> 1 flex_desk      Coworking Member~   209 EUR      month          FALSE
+#> 2 fix_desk       Fixed Desk           NA <NA>     month          TRUE
+#> 3 private_office Private Team Room    NA <NA>     month          TRUE
+#> 4 meeting_room   Meeting & Worksh~    NA <NA>     once           TRUE
+#> 5 virtual_office Virtual Office w~    69 EUR      month          FALSE
+#> # i 2 more variables: min_capacity <int>, max_capacity <int>
+```
+
+The catalogue can be searched and linked to, but not bulk-copied: a call
+returns at most 200 spaces, and the descriptions and photos (which belong to
+the operators) are never returned. Link to the `url` column instead.

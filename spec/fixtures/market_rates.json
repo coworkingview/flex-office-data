@@ -1,0 +1,609 @@
+{
+  "data": {
+    "cities": [
+      {
+        "city": {
+          "slug": "abu-dhabi",
+          "name": "Abu Dhabi"
+        },
+        "countryCode": "AE",
+        "currency": "AED",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "min": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "max": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "sampleSize": 2
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 2057,
+              "currency": "AED"
+            },
+            "min": {
+              "amount": 914,
+              "currency": "AED"
+            },
+            "max": {
+              "amount": 3200,
+              "currency": "AED"
+            },
+            "sampleSize": 2
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 1400,
+              "currency": "AED"
+            },
+            "min": {
+              "amount": 1400,
+              "currency": "AED"
+            },
+            "max": {
+              "amount": 2200,
+              "currency": "AED"
+            },
+            "sampleSize": 3
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "p25": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "p75": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "sampleSize": 2,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 2057,
+              "currency": "AED"
+            },
+            "p25": {
+              "amount": 1486,
+              "currency": "AED"
+            },
+            "p75": {
+              "amount": 2629,
+              "currency": "AED"
+            },
+            "sampleSize": 2,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 1400,
+              "currency": "AED"
+            },
+            "p25": {
+              "amount": 1400,
+              "currency": "AED"
+            },
+            "p75": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "sampleSize": 3,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 2,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 1400,
+          "currency": "AED"
+        },
+        "p75": {
+          "amount": 2200,
+          "currency": "AED"
+        },
+        "min": {
+          "amount": 914,
+          "currency": "AED"
+        },
+        "max": {
+          "amount": 3200,
+          "currency": "AED"
+        },
+        "entryMedian": {
+          "amount": 1453,
+          "currency": "AED"
+        },
+        "entryMin": {
+          "amount": 1069,
+          "currency": "AED"
+        },
+        "entryMax": {
+          "amount": 7535,
+          "currency": "AED"
+        },
+        "buildings": [
+          {
+            "price": {
+              "amount": 1069,
+              "currency": "AED"
+            },
+            "name": "Regus Al Bateen C6",
+            "slug": "regus-al-bateen-c6-abu-dhabi",
+            "operatorName": "Regus",
+            "operatorSlug": "regus"
+          },
+          {
+            "price": {
+              "amount": 1149,
+              "currency": "AED"
+            },
+            "name": "Regus Metal Park Kezad",
+            "slug": "regus-metal-park-kezad-abu-dhabi",
+            "operatorName": "Regus",
+            "operatorSlug": "regus"
+          },
+          {
+            "price": {
+              "amount": 1269,
+              "currency": "AED"
+            },
+            "name": "Regus Al Odaid Office Tower",
+            "slug": "regus-al-odaid-office-tower-abu-dhabi",
+            "operatorName": "Regus",
+            "operatorSlug": "regus"
+          }
+        ],
+        "sampleSize": 2
+      },
+      {
+        "city": {
+          "slug": "berlin",
+          "name": "Berlin"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 310,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 160,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 680,
+              "currency": "EUR"
+            },
+            "sampleSize": 60
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 480,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 70,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 1000,
+              "currency": "EUR"
+            },
+            "sampleSize": 59
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 214,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 80,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 750,
+              "currency": "EUR"
+            },
+            "sampleSize": 72
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 310,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 290,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 421,
+              "currency": "EUR"
+            },
+            "sampleSize": 60,
+            "propertyCount": 56,
+            "operatorCount": 37,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 480,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 550,
+              "currency": "EUR"
+            },
+            "sampleSize": 59,
+            "propertyCount": 38,
+            "operatorCount": 20,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 214,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 292,
+              "currency": "EUR"
+            },
+            "sampleSize": 72,
+            "propertyCount": 66,
+            "operatorCount": 38,
+            "insufficientData": false
+          }
+        ],
+        "dayPass": {
+          "median": {
+            "amount": 35,
+            "currency": "EUR"
+          },
+          "sampleSize": 59,
+          "propertyCount": 55,
+          "operatorCount": 27,
+          "insufficientData": false
+        },
+        "meetingRoom": {
+          "median": {
+            "amount": 32,
+            "currency": "EUR"
+          },
+          "sampleSize": 79,
+          "propertyCount": 51,
+          "operatorCount": 25,
+          "insufficientData": false
+        },
+        "propertyCount": 85,
+        "operatorCount": 48,
+        "insufficientData": false,
+        "p25": {
+          "amount": 219,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 450,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 70,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 1000,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 265,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 80,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 2100,
+          "currency": "EUR"
+        },
+        "buildings": [
+          {
+            "price": {
+              "amount": 80,
+              "currency": "EUR"
+            },
+            "name": "CoWoS Berlin Schöneberg",
+            "slug": "cowos-kolonnenstrasse-schoeneberg-berlin",
+            "operatorName": "CoWoS Berlin",
+            "operatorSlug": "cowos-berlin"
+          },
+          {
+            "price": {
+              "amount": 99,
+              "currency": "EUR"
+            },
+            "name": "MACHWERK Social Coworking Space Berlin",
+            "slug": "machwerk-social-coworking-space-berlin",
+            "operatorName": "MACHWERK",
+            "operatorSlug": "machwerk"
+          },
+          {
+            "price": {
+              "amount": 115,
+              "currency": "EUR"
+            },
+            "name": "betahaus Kreuzberg",
+            "slug": "betahaus-rudi-dutschke-strasse-kreuzberg-berlin",
+            "operatorName": "betahaus Berlin",
+            "operatorSlug": "betahaus-berlin"
+          }
+        ],
+        "sampleSize": 85
+      },
+      {
+        "city": {
+          "slug": "madrid",
+          "name": "Madrid"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 260,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 197,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 349,
+              "currency": "EUR"
+            },
+            "sampleSize": 9
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 385,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 275,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 660,
+              "currency": "EUR"
+            },
+            "sampleSize": 9
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 175,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 85,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "sampleSize": 13
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 260,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 249,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 280,
+              "currency": "EUR"
+            },
+            "sampleSize": 9,
+            "propertyCount": 7,
+            "operatorCount": 5,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 385,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 275,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 449,
+              "currency": "EUR"
+            },
+            "sampleSize": 9,
+            "propertyCount": 7,
+            "operatorCount": 3,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 175,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 130,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "sampleSize": 13,
+            "propertyCount": 6,
+            "operatorCount": 4,
+            "insufficientData": false
+          }
+        ],
+        "dayPass": {
+          "median": {
+            "amount": 22,
+            "currency": "EUR"
+          },
+          "sampleSize": 11,
+          "propertyCount": 7,
+          "operatorCount": 4,
+          "insufficientData": false
+        },
+        "meetingRoom": {
+          "median": {
+            "amount": 28,
+            "currency": "EUR"
+          },
+          "sampleSize": 8,
+          "propertyCount": 6,
+          "operatorCount": 3,
+          "insufficientData": false
+        },
+        "propertyCount": 10,
+        "operatorCount": 6,
+        "insufficientData": false,
+        "p25": {
+          "amount": 195,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 349,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 85,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 660,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 325,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 85,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 1980,
+          "currency": "EUR"
+        },
+        "buildings": [
+          {
+            "price": {
+              "amount": 85,
+              "currency": "EUR"
+            },
+            "name": "LIVINK Coworking – Príncipe Pío, Madrid",
+            "slug": "livink-coworking-madrid-principe-pio",
+            "operatorName": "LIVINK Coworking",
+            "operatorSlug": "livink-coworking"
+          },
+          {
+            "price": {
+              "amount": 105,
+              "currency": "EUR"
+            },
+            "name": "AREA Coworking Madrid – Delicias, Madrid",
+            "slug": "area-coworking-madrid-delicias",
+            "operatorName": "AREA Coworking Madrid",
+            "operatorSlug": "area-coworking-madrid"
+          },
+          {
+            "price": {
+              "amount": 129,
+              "currency": "EUR"
+            },
+            "name": "HQ La Florida",
+            "slug": "hq-la-florida-madrid",
+            "operatorName": "HQ",
+            "operatorSlug": "hq"
+          }
+        ],
+        "sampleSize": 10
+      }
+    ],
+    "unpublished": [
+      {
+        "city": {
+          "slug": "example-town",
+          "name": "Example Town"
+        },
+        "insufficientData": true
+      }
+    ],
+    "totalProperties": 209,
+    "totalPricePoints": 475,
+    "asOf": "2026-10-27T21:06:48.313Z",
+    "license": "CC-BY-4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied.",
+    "scope": "This licence covers the CoworkingView Price Index and catalogue data in this dataset: prices and price statistics, space and operator names, and descriptions written by CoworkingView. It does not cover, and this dataset does not contain: photos, logos, reviews or ratings, data obtained from Google, or any other content of coworkingview.com, its API or MCP server, which remain subject to their own terms. Names are included for identification only; no trademark rights in CoworkingView or operator names and marks are licensed.",
+    "copyright": "Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied."
+  },
+  "meta": {
+    "contractVersion": "1.0.0"
+  }
+}

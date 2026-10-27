@@ -1,0 +1,6 @@
+product,title,price,currency,billing_period,price_on_request,min_capacity,max_capacity
+flex_desk,Coworking Membership – Flex Desk,209,EUR,month,false,,
+fix_desk,Fixed Desk,,,month,true,,
+private_office,Private Team Room,,,month,true,,
+meeting_room,Meeting & Workshop Room,,,once,true,,
+virtual_office,Virtual Office with St.Dropscan,69,EUR,month,false,,

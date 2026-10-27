@@ -1,0 +1,111 @@
+# flex-office-data
+
+**Open data on flexible office prices** — flex desks, fixed desks, private
+offices, day passes and meeting rooms — city by city, from the
+[CoworkingView Price Index](https://coworkingview.com/en/tools/price-index).
+One call returns a tidy table you can analyse, chart or join with your own data.
+
+| Language | Package | Install |
+|---|---|---|
+| Python | [`coworkingview`](python/) | `pip install coworkingview` · `conda install -c conda-forge coworkingview` |
+| R | [`coworkingview`](r/) | `install.packages("coworkingview")` |
+| Command line | [`cwv`](rust/) (Rust) | `cargo install coworkingview` · `docker run --rm coworkingview/cwv` · AUR · Chocolatey · Snap |
+
+All three read the same public API, follow the same [specification](spec/SPEC.md)
+and are tested against the same [fixtures and expected outputs](spec/), so a
+number is the same whichever tool you use.
+
+## Why
+
+Flexible workspace is priced in thousands of operator pages, in different
+currencies, units and formats. Analysts, proptech teams, journalists and
+companies choosing where to open an office end up copying prices by hand.
+This kit gives you the medians and spreads behind the Price Index directly —
+with the sample size next to every figure, so you know how much to trust it.
+
+## Quickstart
+
+**Python**
+
+```python
+import coworkingview as cwv
+
+rates = cwv.rates(city="berlin")
+rates[["product", "unit", "median", "p25", "p75", "sample_size"]]
+#           product   unit  median    p25    p75  sample_size
+# 0       flex_desk  month   214.0  199.0  292.0           72
+# 1        fix_desk  month   310.0  290.0  421.0           60
+# 2  private_office  month   480.0  399.0  550.0           59
+# 3        day_pass    day    35.0   <NA>   <NA>           59
+# 4    meeting_room   hour    32.0   <NA>   <NA>           79
+```
+
+**R**
+
+```r
+library(coworkingview)
+rates <- cwv_rates(country = "germany")
+subset(rates, product == "private_office", c(city_name, median, sample_size))
+```
+
+**Command line**
+
+```console
+$ cwv rates --city berlin
+$ cwv spaces --city madrid --product meeting_room --format csv > meeting-rooms.csv
+```
+
+## What's in the data
+
+| Function | One row per | Highlights |
+|---|---|---|
+| `rates()` | city × product | median, 25th/75th percentile, sample size, `low_confidence` flag |
+| `cities()` | city | entry price (cheapest monthly option per space), coverage |
+| `spaces()` | space | search the catalogue by city, product (incl. event spaces, virtual offices, meeting rooms), capacity, price — with a link to each listing |
+| `space(slug)` | space | every published price option of one space |
+
+Products: `flex_desk`, `fix_desk` (dedicated desk), `private_office`,
+`exclusive_bereich` (exclusive area), `day_pass`, `meeting_room`,
+`event_space`, `virtual_office`, `membership`. New aggregates published by the
+Price Index appear in `rates()` without a package update.
+
+## Licence and attribution
+
+- **Code:** MIT (each package's `LICENSE`).
+- **Price Index data** (`rates()`, `cities()`): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  Credit *CoworkingView Price Index* with a link to
+  <https://coworkingview.com/en/tools/price-index>. Every result carries the
+  exact attribution text (`df.attrs["attribution"]` in Python,
+  `attr(x, "attribution")` in R, stderr in the CLI).
+- **Catalogue** (`spaces()`, `space()`): names, prices and links are for search
+  and reference. Descriptions, photos and logos belong to the operators and
+  are not included. The packages cap a search at 200 results; please don't use
+  them to copy the catalogue.
+
+## Data source and freshness
+
+Figures come from the operator-published prices of the spaces listed on
+[CoworkingView](https://coworkingview.com), normalised to a monthly price per
+desk (monthly products), per day (day pass) or per hour (meeting rooms). The
+API recomputes them as listings change; `as_of` on every row says when. Cities
+below the publication threshold are listed by `cities()` with
+`published = false` and no figures.
+
+## Repository layout
+
+```
+spec/       SPEC.md, API fixtures, golden outputs (the contract all packages share)
+python/     coworkingview on PyPI / conda-forge
+r/          coworkingview on CRAN
+rust/       cwv CLI and the coworkingview crate (crates.io, Docker)
+packaging/  AUR, Chocolatey and Snap manifests for cwv
+```
+
+## Contributing
+
+Issues and pull requests are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md).
+Found a wrong price? Report it on the space's page at
+[coworkingview.com](https://coworkingview.com) so it is fixed at the source.
+
+Maintained by [CoworkingView](https://coworkingview.com), the coworking and
+flexible office comparison platform for Europe and the UAE.

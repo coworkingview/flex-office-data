@@ -1,0 +1,219 @@
+{
+  "data": {
+    "cities": [
+      {
+        "city": {
+          "slug": "berlin",
+          "name": "Berlin"
+        },
+        "countryCode": "DE",
+        "currency": "USD",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 337,
+              "currency": "USD"
+            },
+            "min": {
+              "amount": 174,
+              "currency": "USD"
+            },
+            "max": {
+              "amount": 739,
+              "currency": "USD"
+            },
+            "sampleSize": 60
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 522,
+              "currency": "USD"
+            },
+            "min": {
+              "amount": 76,
+              "currency": "USD"
+            },
+            "max": {
+              "amount": 1087,
+              "currency": "USD"
+            },
+            "sampleSize": 59
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 233,
+              "currency": "USD"
+            },
+            "min": {
+              "amount": 87,
+              "currency": "USD"
+            },
+            "max": {
+              "amount": 815,
+              "currency": "USD"
+            },
+            "sampleSize": 72
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 337,
+              "currency": "USD"
+            },
+            "p25": {
+              "amount": 315,
+              "currency": "USD"
+            },
+            "p75": {
+              "amount": 458,
+              "currency": "USD"
+            },
+            "sampleSize": 60,
+            "propertyCount": 56,
+            "operatorCount": 37,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 522,
+              "currency": "USD"
+            },
+            "p25": {
+              "amount": 434,
+              "currency": "USD"
+            },
+            "p75": {
+              "amount": 598,
+              "currency": "USD"
+            },
+            "sampleSize": 59,
+            "propertyCount": 38,
+            "operatorCount": 20,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 233,
+              "currency": "USD"
+            },
+            "p25": {
+              "amount": 216,
+              "currency": "USD"
+            },
+            "p75": {
+              "amount": 317,
+              "currency": "USD"
+            },
+            "sampleSize": 72,
+            "propertyCount": 66,
+            "operatorCount": 38,
+            "insufficientData": false
+          }
+        ],
+        "dayPass": {
+          "median": {
+            "amount": 38,
+            "currency": "USD"
+          },
+          "sampleSize": 59,
+          "propertyCount": 55,
+          "operatorCount": 27,
+          "insufficientData": false
+        },
+        "meetingRoom": {
+          "median": {
+            "amount": 35,
+            "currency": "USD"
+          },
+          "sampleSize": 79,
+          "propertyCount": 51,
+          "operatorCount": 25,
+          "insufficientData": false
+        },
+        "propertyCount": 85,
+        "operatorCount": 48,
+        "insufficientData": false,
+        "p25": {
+          "amount": 238,
+          "currency": "USD"
+        },
+        "p75": {
+          "amount": 489,
+          "currency": "USD"
+        },
+        "min": {
+          "amount": 76,
+          "currency": "USD"
+        },
+        "max": {
+          "amount": 1087,
+          "currency": "USD"
+        },
+        "entryMedian": {
+          "amount": 288,
+          "currency": "USD"
+        },
+        "entryMin": {
+          "amount": 87,
+          "currency": "USD"
+        },
+        "entryMax": {
+          "amount": 2283,
+          "currency": "USD"
+        },
+        "buildings": [
+          {
+            "price": {
+              "amount": 87,
+              "currency": "USD"
+            },
+            "name": "CoWoS Berlin Schöneberg",
+            "slug": "cowos-kolonnenstrasse-schoeneberg-berlin",
+            "operatorName": "CoWoS Berlin",
+            "operatorSlug": "cowos-berlin"
+          },
+          {
+            "price": {
+              "amount": 108,
+              "currency": "USD"
+            },
+            "name": "MACHWERK Social Coworking Space Berlin",
+            "slug": "machwerk-social-coworking-space-berlin",
+            "operatorName": "MACHWERK",
+            "operatorSlug": "machwerk"
+          },
+          {
+            "price": {
+              "amount": 125,
+              "currency": "USD"
+            },
+            "name": "betahaus Kreuzberg",
+            "slug": "betahaus-rudi-dutschke-strasse-kreuzberg-berlin",
+            "operatorName": "betahaus Berlin",
+            "operatorSlug": "betahaus-berlin"
+          }
+        ],
+        "sampleSize": 85
+      }
+    ],
+    "unpublished": [],
+    "totalProperties": 85,
+    "totalPricePoints": 191,
+    "asOf": "2026-10-27T21:06:48.313Z",
+    "license": "CC-BY-4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied.",
+    "scope": "This licence covers the CoworkingView Price Index and catalogue data in this dataset: prices and price statistics, space and operator names, and descriptions written by CoworkingView. It does not cover, and this dataset does not contain: photos, logos, reviews or ratings, data obtained from Google, or any other content of coworkingview.com, its API or MCP server, which remain subject to their own terms. Names are included for identification only; no trademark rights in CoworkingView or operator names and marks are licensed.",
+    "copyright": "Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied."
+  },
+  "meta": {
+    "contractVersion": "1.0.0"
+  }
+}

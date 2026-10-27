@@ -1,0 +1,49 @@
+name: cwv
+base: core24
+version: '0.1.0'
+summary: Flexible-office prices by city, and coworking search (CoworkingView)
+description: |
+  `cwv` reads the public, keyless API of CoworkingView (https://coworkingview.com).
+
+  - `cwv rates` and `cwv cities` print the CoworkingView Price Index: median,
+    25th and 75th percentile prices for flex desks, fixed desks and private
+    offices per month, day passes per day and meeting rooms per hour, city by
+    city. The data is licensed CC BY 4.0; `cwv` prints the attribution.
+  - `cwv spaces` and `cwv space` search the catalogue of coworking spaces,
+    private offices, meeting rooms, event spaces and virtual offices.
+
+  Output as aligned tables, CSV or JSON.
+license: MIT
+grade: stable
+confinement: strict
+website: https://coworkingview.com
+source-code: https://github.com/coworkingview/flex-office-data
+issues: https://github.com/coworkingview/flex-office-data/issues
+contact: info@coworkingview.com
+
+platforms:
+  amd64:
+  arm64:
+
+apps:
+  cwv:
+    command: bin/cwv
+    completer: share/bash-completion/completions/cwv
+    plugs:
+      - network
+
+parts:
+  cwv:
+    plugin: rust
+    source: https://github.com/coworkingview/flex-office-data.git
+    # TODO(release): the tag created for the release.
+    source-tag: rust-v0.1.0
+    source-subdir: rust
+    rust-channel: stable
+    override-build: |
+      craftctl default
+      bin="$CRAFT_PART_INSTALL/bin/cwv"
+      install -d "$CRAFT_PART_INSTALL/share/bash-completion/completions" \
+                 "$CRAFT_PART_INSTALL/share/man/man1"
+      "$bin" completions bash > "$CRAFT_PART_INSTALL/share/bash-completion/completions/cwv"
+      "$bin" man > "$CRAFT_PART_INSTALL/share/man/man1/cwv.1"

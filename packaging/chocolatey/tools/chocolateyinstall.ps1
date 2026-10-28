@@ -8,8 +8,7 @@ $packageArgs = @{
   unzipLocation  = $toolsDir
   # Static x86_64 Windows build attached to the GitHub release.
   url64bit       = "https://github.com/coworkingview/flex-office-data/releases/download/rust-v$version/cwv-$version-x86_64-pc-windows-msvc.zip"
-  # TODO(release): SHA-256 of the zip above, from the release's SHA256SUMS file.
-  checksum64     = 'TODO(release)'
+  checksum64     = '616bc646fb81acc49bf600caa6df8340f37a1f446d8e8a3aec428631a3f9076b'
   checksumType64 = 'sha256'
 }
 

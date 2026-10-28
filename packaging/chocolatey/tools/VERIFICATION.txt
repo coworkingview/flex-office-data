@@ -24,8 +24,9 @@ with a SHA-256 checksum.
 
      https://github.com/coworkingview/flex-office-data/releases/tag/rust-v0.1.0
 
-   TODO(release): paste the published checksum here as well:
-     checksum64: TODO(release)
+   Expected values:
+     checksumType64: sha256
+     checksum64: 616bc646fb81acc49bf600caa6df8340f37a1f446d8e8a3aec428631a3f9076b
 
 The binary is built by the project's release workflow from the tagged source
 in https://github.com/coworkingview/flex-office-data/tree/main/rust and is

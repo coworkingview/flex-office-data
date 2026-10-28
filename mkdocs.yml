@@ -1,0 +1,25 @@
+site_name: CoworkingView flex-office-data
+site_url: https://coworkingview.readthedocs.io/
+site_description: Open data on flexible office prices (CoworkingView Price Index) for Python, R and the command line.
+repo_url: https://github.com/coworkingview/flex-office-data
+edit_uri: ""
+theme:
+  name: readthedocs
+copyright: 'Data: <a href="https://coworkingview.com">CoworkingView</a> · <a href="https://coworkingview.com/en/tools/price-index">CoworkingView Price Index</a>'
+docs_dir: docs
+# docs/*.md are real files. docs_hooks.py fills them from the READMEs and
+# spec/SPEC.md so the build does not depend on symlinks.
+hooks:
+  - docs_hooks.py
+watch:
+  - README.md
+  - python/README.md
+  - r/README.md
+  - rust/README.md
+  - spec/SPEC.md
+nav:
+  - Overview: index.md
+  - Python: python.md
+  - R: r.md
+  - Command line (cwv): cli.md
+  - Specification: spec.md

@@ -26,7 +26,7 @@ This crate is also a Rust library (`coworkingview`) — see
 | Cargo | `cargo install coworkingview` |
 | Arch Linux (AUR) | `paru -S cwv` (or `yay -S cwv`) |
 | Windows (Chocolatey) | `choco install cwv` |
-| Linux (Snap) | `sudo snap install cwv` |
+| Linux (Snap) | `sudo snap install coworkingview` (command `coworkingview.cwv`; optional `sudo snap alias coworkingview.cwv cwv`) |
 | Docker | `docker run --rm coworkingview/cwv rates --city berlin` |
 | Binaries | [GitHub releases](https://github.com/coworkingview/flex-office-data/releases) (Linux static, macOS, Windows) |
 

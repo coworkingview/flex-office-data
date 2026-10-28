@@ -1,4 +1,4 @@
-name: cwv
+name: coworkingview
 base: core24
 version: '0.1.0'
 summary: Flexible-office prices by city, and coworking search (CoworkingView)
@@ -13,6 +13,9 @@ description: |
     private offices, meeting rooms, event spaces and virtual offices.
 
   Output as aligned tables, CSV or JSON.
+
+  The command is `coworkingview.cwv`. To call it as `cwv`, run:
+  `sudo snap alias coworkingview.cwv cwv`
 license: MIT
 grade: stable
 confinement: strict

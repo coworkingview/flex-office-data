@@ -91,6 +91,11 @@ API recomputes them as listings change; `as_of` on every row says when. Cities
 below the publication threshold are listed by `cities()` with
 `published = false` and no figures.
 
+## Browse offices
+
+- [Offices in Berlin](https://coworkingview.com/en/office-space/berlin)
+- [Coworking spaces in Berlin](https://coworkingview.com/en/coworking/berlin)
+
 ## Repository layout
 
 ```

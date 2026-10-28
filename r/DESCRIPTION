@@ -3,18 +3,18 @@ Type: Package
 Title: Flexible Office Prices and Coworking Spaces from the 'CoworkingView' API
 Version: 0.1.0
 Authors@R: c(
-    person("CoworkingView", role = c("aut", "cph"),
+    person("Carlos", "Müller González", role = c("aut", "cre"),
            email = "info@coworkingview.com"),
-    person("Maintainer", "Name", role = "cre",
-           email = "info@coworkingview.com")
+    person("CoworkingView", role = "cph")
     )
 Description: Retrieve the 'CoworkingView' Price Index, an open data set of
     flexible office prices by city (monthly flex desk, fixed desk and private
     office rates, daily day pass and hourly meeting room rates) licensed under
-    CC BY 4.0, and search the 'CoworkingView' catalogue of coworking spaces,
-    event spaces, meeting rooms and virtual offices. Data come from the public,
-    keyless 'CoworkingView' API <https://api.coworkingview.com> and are
-    returned as tidy data frames that carry their attribution.
+    the Creative Commons Attribution 4.0 licence ('CC BY 4.0'), and search the
+    'CoworkingView' catalogue of coworking spaces, event spaces, meeting rooms
+    and virtual offices. Data come from the public, keyless 'CoworkingView'
+    application programming interface ('API') <https://coworkingview.com/en/api>
+    and are returned as tidy data frames that carry their attribution.
 License: MIT + file LICENSE
 URL: https://coworkingview.com,
     https://github.com/coworkingview/flex-office-data

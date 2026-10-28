@@ -48,7 +48,7 @@ $ cwv rates --city berlin
 │        ┆ Meeting room   ┆ hour  ┆  32 EUR ┆       — ┆       — ┆    79  ┆     51 ┆        25 │
 ╰────────┴────────────────┴───────┴─────────┴─────────┴─────────┴────────┴────────┴───────────╯
 
-Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of
+Source: CoworkingView Price Index (https://coworkingview.com/en/tools/price-index), as of
 October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). …
 License: https://creativecommons.org/licenses/by/4.0/ (as of 2026-10-27T21:06:48.313Z)
 ```

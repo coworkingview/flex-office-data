@@ -9,7 +9,10 @@ package:
 source:
   # Local builds (`conda build python/conda`) use the checked-out package.
   # conda-forge's staged-recipes needs `url:` + `sha256:` of the PyPI sdist instead.
-  path: ..
+  - path: ..
+  # The shared test fixtures live outside python/; put them at spec/ so tests/conftest.py finds them.
+  - path: ../../spec
+    folder: spec
 
 build:
   noarch: python
@@ -58,4 +61,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - coworkingview  # TODO(release): replace with the GitHub handle(s) of the maintainer(s)
+    - coworkingview

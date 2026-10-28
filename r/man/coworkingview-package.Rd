@@ -6,7 +6,7 @@
 \alias{coworkingview-package}
 \title{coworkingview: Flexible Office Prices and Coworking Spaces from the 'CoworkingView' API}
 \description{
-Retrieve the 'CoworkingView' Price Index, an open data set of flexible office prices by city (monthly flex desk, fixed desk and private office rates, daily day pass and hourly meeting room rates) licensed under CC BY 4.0, and search the 'CoworkingView' catalogue of coworking spaces, event spaces, meeting rooms and virtual offices. Data come from the public, keyless 'CoworkingView' API \url{https://api.coworkingview.com} and are returned as tidy data frames that carry their attribution.
+Retrieve the 'CoworkingView' Price Index, an open data set of flexible office prices by city (monthly flex desk, fixed desk and private office rates, daily day pass and hourly meeting room rates) licensed under the Creative Commons Attribution 4.0 licence ('CC BY 4.0'), and search the 'CoworkingView' catalogue of coworking spaces, event spaces, meeting rooms and virtual offices. Data come from the public, keyless 'CoworkingView' application programming interface ('API') \url{https://coworkingview.com/en/api} and are returned as tidy data frames that carry their attribution.
 }
 \details{
 The package is a small client for the public, keyless CoworkingView API.
@@ -58,18 +58,18 @@ to, not bulk-copied.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://coworkingview.com}
   \item \url{https://github.com/coworkingview/flex-office-data}
-  \item \url{https://coworkingview.com/en/tools/price-index}
   \item Report bugs at \url{https://github.com/coworkingview/flex-office-data/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Maintainer Name \email{info@coworkingview.com}
+\strong{Maintainer}: Carlos Müller González \email{info@coworkingview.com}
 
-Authors:
+Other contributors:
 \itemize{
-  \item CoworkingView \email{info@coworkingview.com} [copyright holder]
+  \item CoworkingView [copyright holder]
 }
 
 }

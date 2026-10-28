@@ -6,14 +6,16 @@
     <title>cwv (CoworkingView CLI)</title>
     <authors>CoworkingView</authors>
     <owners>CoworkingView</owners>
+    <packageSourceUrl>https://github.com/coworkingview/flex-office-data/tree/main/packaging/chocolatey</packageSourceUrl>
     <projectUrl>https://coworkingview.com</projectUrl>
     <projectSourceUrl>https://github.com/coworkingview/flex-office-data/tree/main/rust</projectSourceUrl>
     <docsUrl>https://github.com/coworkingview/flex-office-data/tree/main/rust#readme</docsUrl>
     <bugTrackerUrl>https://github.com/coworkingview/flex-office-data/issues</bugTrackerUrl>
     <licenseUrl>https://github.com/coworkingview/flex-office-data/blob/main/rust/LICENSE</licenseUrl>
+    <copyright>Copyright (c) 2026 CoworkingView</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>https://coworkingview.com/favicon.png</iconUrl>
-    <tags>coworking office real-estate price-index cli open-data</tags>
+    <tags>coworking flex-office office-space real-estate price-index open-data cli api</tags>
     <summary>Flexible-office prices by city, and coworking search, from CoworkingView.</summary>
     <description><![CDATA[
 `cwv` reads the public, keyless API of [CoworkingView](https://coworkingview.com).

@@ -11,11 +11,13 @@ pkgdesc='Flexible-office prices by city (CoworkingView Price Index) and coworkin
 arch=('x86_64' 'aarch64')
 url='https://coworkingview.com'
 license=('MIT')
-depends=('gcc-libs' 'glibc')
+depends=('libgcc' 'glibc')
 makedepends=('cargo')
+# !lto: makepkg's -flto CFLAGS break ring's C objects in the Rust LTO link (undefined ring_core_* symbols).
+# !debug: the release profile strips the binary, so the -debug split package would be empty.
+options=('!lto' '!debug')
 source=("$_crate-$pkgver.tar.gz::https://static.crates.io/crates/$_crate/$_crate-$pkgver.crate")
-# TODO(release): replace with the output of `updpkgsums` once 0.1.0 is on crates.io.
-sha256sums=('TODO(release)')
+sha256sums=('d1f5b5cad9a1738c9a0048ec223989b3ed06bb27d6bd14f5176ee583c72b43b4')
 
 prepare() {
   cd "$_crate-$pkgver"

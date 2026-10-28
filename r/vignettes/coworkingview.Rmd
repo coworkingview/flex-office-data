@@ -147,7 +147,7 @@ The exact text travels with every result:
 
 ```{r}
 cwv_attribution(rates)
-#> [1] "Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied."
+#> [1] "Source: CoworkingView Price Index (https://coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied."
 cwv_attribution(rates, "as_of")
 #> [1] "2026-10-27T21:06:48.313Z"
 ```

@@ -48,7 +48,7 @@ Requires Python 3.9 or newer.
 4    meeting_room   hour    32.0   <NA>   <NA>           79           False
 
 >>> print(berlin.attrs["attribution"])
-Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied.
+Source: CoworkingView Price Index (https://coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied.
 
 >>> cwv.cities()[["city_slug", "currency", "published", "property_count", "entry_median"]]
       city_slug currency  published  property_count  entry_median

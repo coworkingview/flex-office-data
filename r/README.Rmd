@@ -98,7 +98,7 @@ travels with every result:
 
 ```{r}
 cwv_attribution(rates)
-#> [1] "Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied."
+#> [1] "Source: CoworkingView Price Index (https://coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied."
 ```
 
 The catalogue is different: names, descriptions, photos and prices of the

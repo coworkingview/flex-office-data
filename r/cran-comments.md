@@ -2,33 +2,30 @@
 
 This is a new submission.
 
-## TODO before submitting
+## Test environments
 
-* **The maintainer is a placeholder.** `Authors@R` lists
-  `person("Maintainer", "Name", role = "cre", email = "info@coworkingview.com")`.
-  CRAN requires the maintainer (`cre`) to be a natural person with a
-  personal, monitored email address. Replace it with the real person's name
-  and email before running `devtools::submit_cran()`; CRAN will send the
-  confirmation email to that address.
+* Local: Debian Linux (x86_64), R 4.5.3, `R CMD check --as-cran` with the PDF
+  manual (TinyTeX) and HTML Tidy.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 2 notes
 
-* This is a new release. ("New submission" NOTE.)
-
-Checked locally with R 4.6.1 on macOS (aarch64), `R CMD check --as-cran`.
+* Checking CRAN incoming feasibility: "New submission".
+* Checking for future file timestamps: "unable to verify current time".
+  The check machine could not reach a time server; this comes from the check
+  environment, not from the package.
 
 ## Internet resources
 
 * The package is a client for a public, keyless web API
-  (<https://api.coworkingview.com>).
+  (<https://coworkingview.com/en/api>).
 * Examples that need the API are wrapped in `@examplesIf interactive()`, so
   they do not run during checks.
 * Tests use recorded API responses (`tests/testthat/fixtures/`) through
   `httr2::local_mocked_responses()` and make no network requests. Live tests
-  run only when the environment variable `COWORKINGVIEW_LIVE_TESTS` is set
-  to `1`, and are skipped on CRAN.
-* The vignette does not evaluate network code.
+  call `skip_on_cran()` and run only when the environment variable
+  `COWORKINGVIEW_LIVE_TESTS` is set to `1`.
+* The vignette does not evaluate network code (`eval = FALSE`).
 * When the API cannot be reached, functions show an informative message and
   return `NULL` instead of throwing an error.

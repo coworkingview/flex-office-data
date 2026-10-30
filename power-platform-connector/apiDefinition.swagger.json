@@ -1,0 +1,2827 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CoworkingView",
+    "description": "Read public CoworkingView catalogue and price index data for coworking spaces and private offices. Search listings, open a space, operator, or place profile, and read aggregated city prices. No sign-in is required.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "CoworkingView",
+      "url": "https://coworkingview.com",
+      "email": "info@coworkingview.com"
+    }
+  },
+  "x-ms-connector-metadata": [
+    {
+      "propertyName": "Website",
+      "propertyValue": "https://coworkingview.com"
+    },
+    {
+      "propertyName": "Privacy policy",
+      "propertyValue": "https://coworkingview.com/en/privacy"
+    },
+    {
+      "propertyName": "Categories",
+      "propertyValue": "Data"
+    }
+  ],
+  "host": "api.coworkingview.com",
+  "basePath": "/v1",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {},
+  "security": [],
+  "paths": {
+    "/config": {
+      "get": {
+        "operationId": "config",
+        "summary": "Get remote configuration",
+        "x-ms-summary": "Remote configuration",
+        "description": "Returns remote configuration for official clients, including feature flags and the minimum supported build. Catalogue reads do not depend on this operation. No sign-in is required.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConfigResponse"
+            }
+          },
+          "400": {
+            "description": "The request failed validation. The body is a problem document with code VALIDATION_FAILED."
+          },
+          "429": {
+            "description": "The caller exceeded the rate limit of 120 requests per 60 seconds per IP address. The body is a problem document with code RATE_LIMITED."
+          },
+          "500": {
+            "description": "The service failed to handle the request. The body is a problem document with code INTERNAL_ERROR."
+          },
+          "502": {
+            "description": "An upstream dependency was unavailable. The body is a problem document with code UPSTREAM_UNAVAILABLE."
+          }
+        },
+        "x-ms-visibility": "advanced"
+      }
+    },
+    "/facets": {
+      "get": {
+        "operationId": "facets",
+        "summary": "Get filter options",
+        "x-ms-summary": "Filter options",
+        "description": "Returns filter options with contextual counts for the current catalogue query. No sign-in is required.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "required": true,
+            "x-ms-summary": "Locale",
+            "description": "Response language. Allowed values are en, de, and es.",
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "es"
+            ]
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Country",
+            "description": "Country slug. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "City",
+            "description": "City slug. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "zone",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Zone",
+            "description": "Zone slug within a city. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "operator",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Operator",
+            "description": "Operator slug. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "pricingOptionType",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Pricing option",
+            "description": "Pricing option used as a filter. Allowed values are private_office, exclusive_bereich, fix_desk, flex_desk, day_pass, meeting_room, virtual_office, event_space, and membership.",
+            "type": "string",
+            "enum": [
+              "private_office",
+              "exclusive_bereich",
+              "fix_desk",
+              "flex_desk",
+              "day_pass",
+              "meeting_room",
+              "virtual_office",
+              "event_space",
+              "membership"
+            ]
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Currency",
+            "description": "Currency code for prices. Allowed values are EUR, GBP, USD, CHF, VES, and AED.",
+            "type": "string",
+            "enum": [
+              "EUR",
+              "GBP",
+              "USD",
+              "CHF",
+              "VES",
+              "AED"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FacetsResponse"
+            }
+          },
+          "400": {
+            "description": "The request failed validation. The body is a problem document with code VALIDATION_FAILED."
+          },
+          "429": {
+            "description": "The caller exceeded the rate limit of 120 requests per 60 seconds per IP address. The body is a problem document with code RATE_LIMITED."
+          },
+          "500": {
+            "description": "The service failed to handle the request. The body is a problem document with code INTERNAL_ERROR."
+          },
+          "502": {
+            "description": "An upstream dependency was unavailable. The body is a problem document with code UPSTREAM_UNAVAILABLE."
+          }
+        }
+      }
+    },
+    "/geo/bootstrap": {
+      "get": {
+        "operationId": "geoBootstrap",
+        "summary": "Get places index",
+        "x-ms-summary": "Places index",
+        "description": "Returns the countries, cities, and zones index. The payload is small and long-lived. No sign-in is required.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "required": true,
+            "x-ms-summary": "Locale",
+            "description": "Response language. Allowed values are en, de, and es.",
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "es"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GeoBootstrapResponse"
+            }
+          },
+          "400": {
+            "description": "The request failed validation. The body is a problem document with code VALIDATION_FAILED."
+          },
+          "429": {
+            "description": "The caller exceeded the rate limit of 120 requests per 60 seconds per IP address. The body is a problem document with code RATE_LIMITED."
+          },
+          "500": {
+            "description": "The service failed to handle the request. The body is a problem document with code INTERNAL_ERROR."
+          },
+          "502": {
+            "description": "An upstream dependency was unavailable. The body is a problem document with code UPSTREAM_UNAVAILABLE."
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "health",
+        "summary": "Get service health",
+        "x-ms-summary": "Service health",
+        "description": "Returns a liveness probe that reports the deployed build identifier. No sign-in is required.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/HealthResponse"
+            }
+          },
+          "400": {
+            "description": "The request failed validation. The body is a problem document with code VALIDATION_FAILED."
+          },
+          "429": {
+            "description": "The caller exceeded the rate limit of 120 requests per 60 seconds per IP address. The body is a problem document with code RATE_LIMITED."
+          },
+          "500": {
+            "description": "The service failed to handle the request. The body is a problem document with code INTERNAL_ERROR."
+          },
+          "502": {
+            "description": "An upstream dependency was unavailable. The body is a problem document with code UPSTREAM_UNAVAILABLE."
+          }
+        },
+        "x-ms-visibility": "advanced"
+      }
+    },
+    "/properties": {
+      "get": {
+        "operationId": "listProperties",
+        "summary": "List spaces",
+        "x-ms-summary": "Space list",
+        "description": "Returns one page of listing cards. No sign-in is required. Catalogue content belongs to the listed operators, and systematic copying of the catalogue is not permitted.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "required": true,
+            "x-ms-summary": "Locale",
+            "description": "Response language. Allowed values are en, de, and es.",
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "es"
+            ]
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Page",
+            "description": "Page number. The first page is 1 and the highest page is 500.",
+            "type": "integer",
+            "default": 1,
+            "minimum": 0,
+            "maximum": 500,
+            "exclusiveMinimum": true
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Page size",
+            "description": "Number of items on the page. The value is from 1 to 50.",
+            "type": "integer",
+            "default": 20,
+            "minimum": 0,
+            "maximum": 50,
+            "exclusiveMinimum": true
+          },
+          {
+            "name": "seed",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Random seed",
+            "description": "Seed for sortBy=random. Required to paginate a random list: reuse the seed returned in meta.seed on every following page, or results repeat and skip.",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Country",
+            "description": "Country slug. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "City",
+            "description": "City slug. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "zone",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Zone",
+            "description": "Zone slug within a city. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "operator",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Operator",
+            "description": "Operator slug. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "pricingOptionType",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Pricing option",
+            "description": "Pricing option used as a filter. Allowed values are private_office, exclusive_bereich, fix_desk, flex_desk, day_pass, meeting_room, virtual_office, event_space, and membership.",
+            "type": "string",
+            "enum": [
+              "private_office",
+              "exclusive_bereich",
+              "fix_desk",
+              "flex_desk",
+              "day_pass",
+              "meeting_room",
+              "virtual_office",
+              "event_space",
+              "membership"
+            ]
+          },
+          {
+            "name": "amenities",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Amenities",
+            "description": "Comma-separated amenity slugs, e.g. wifi,coffee,parking (max 20).",
+            "type": "string"
+          },
+          {
+            "name": "minCapacity",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Minimum capacity",
+            "description": "Minimum capacity the listing must offer. The value must be greater than 0.",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "exclusiveMinimum": true
+          },
+          {
+            "name": "minPrice",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Minimum price",
+            "description": "Minimum price in the selected currency. The value is 0 or greater.",
+            "type": "number",
+            "minimum": 0
+          },
+          {
+            "name": "maxPrice",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Maximum price",
+            "description": "Maximum price in the selected currency. The value is 0 or greater.",
+            "type": "number",
+            "minimum": 0
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Currency",
+            "description": "Currency code for prices. Allowed values are EUR, GBP, USD, CHF, VES, and AED.",
+            "type": "string",
+            "enum": [
+              "EUR",
+              "GBP",
+              "USD",
+              "CHF",
+              "VES",
+              "AED"
+            ]
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Sort order",
+            "description": "Result order. A legacy rating order is deprecated: it is still accepted and ordered as the default (random). It is not a member of this enum.",
+            "type": "string",
+            "enum": [
+              "random",
+              "date-desc",
+              "date-asc",
+              "distance",
+              "price-asc"
+            ]
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Latitude",
+            "description": "Latitude in WGS84 degrees, from -90 to 90.",
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Longitude",
+            "description": "Longitude in WGS84 degrees, from -180 to 180.",
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          {
+            "name": "radiusMeters",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Radius in meters",
+            "description": "Search radius in meters around the given latitude and longitude. The value must be greater than 0 and at most 200000.",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 200000,
+            "exclusiveMinimum": true
+          },
+          {
+            "name": "bbox",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Bounding box",
+            "description": "Viewport as \"west,south,east,north\" in WGS84 degrees, e.g. 13.2,52.4,13.6,52.6.",
+            "type": "string"
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Street address",
+            "description": "Street address, e.g. \"Domstraße 17\" or \"Calle Velázquez 34\". Narrows to listings AT that address (house number inside the listing's number or range) and on the same street; the ones at the address come first, each group in sortBy order. Not geocoded: to search AROUND an address, pass lat/lng + radiusMeters.",
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListPropertiesResponse"
+            }
+          },
+          "400": {
+            "description": "The request failed validation. The body is a problem document with code VALIDATION_FAILED."
+          },
+          "429": {
+            "description": "The caller exceeded the rate limit of 120 requests per 60 seconds per IP address. The body is a problem document with code RATE_LIMITED."
+          },
+          "500": {
+            "description": "The service failed to handle the request. The body is a problem document with code INTERNAL_ERROR."
+          },
+          "502": {
+            "description": "An upstream dependency was unavailable. The body is a problem document with code UPSTREAM_UNAVAILABLE."
+          }
+        }
+      }
+    },
+    "/properties/map": {
+      "get": {
+        "operationId": "mapProperties",
+        "summary": "List map markers",
+        "x-ms-summary": "Map markers",
+        "description": "Returns a lightweight projection of the matching listings for map markers. No sign-in is required.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "required": true,
+            "x-ms-summary": "Locale",
+            "description": "Response language. Allowed values are en, de, and es.",
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "es"
+            ]
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Page",
+            "description": "Page number. The first page is 1 and the highest page is 500.",
+            "type": "integer",
+            "default": 1,
+            "minimum": 0,
+            "maximum": 500,
+            "exclusiveMinimum": true
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Page size",
+            "description": "Number of items on the page. The value is from 1 to 50.",
+            "type": "integer",
+            "default": 20,
+            "minimum": 0,
+            "maximum": 50,
+            "exclusiveMinimum": true
+          },
+          {
+            "name": "seed",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Random seed",
+            "description": "Seed for sortBy=random. Required to paginate a random list: reuse the seed returned in meta.seed on every following page, or results repeat and skip.",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Country",
+            "description": "Country slug. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "City",
+            "description": "City slug. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "zone",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Zone",
+            "description": "Zone slug within a city. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "operator",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Operator",
+            "description": "Operator slug. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "pricingOptionType",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Pricing option",
+            "description": "Pricing option used as a filter. Allowed values are private_office, exclusive_bereich, fix_desk, flex_desk, day_pass, meeting_room, virtual_office, event_space, and membership.",
+            "type": "string",
+            "enum": [
+              "private_office",
+              "exclusive_bereich",
+              "fix_desk",
+              "flex_desk",
+              "day_pass",
+              "meeting_room",
+              "virtual_office",
+              "event_space",
+              "membership"
+            ]
+          },
+          {
+            "name": "amenities",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Amenities",
+            "description": "Comma-separated amenity slugs, e.g. wifi,coffee,parking (max 20).",
+            "type": "string"
+          },
+          {
+            "name": "minCapacity",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Minimum capacity",
+            "description": "Minimum capacity the listing must offer. The value must be greater than 0.",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "exclusiveMinimum": true
+          },
+          {
+            "name": "minPrice",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Minimum price",
+            "description": "Minimum price in the selected currency. The value is 0 or greater.",
+            "type": "number",
+            "minimum": 0
+          },
+          {
+            "name": "maxPrice",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Maximum price",
+            "description": "Maximum price in the selected currency. The value is 0 or greater.",
+            "type": "number",
+            "minimum": 0
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Currency",
+            "description": "Currency code for prices. Allowed values are EUR, GBP, USD, CHF, VES, and AED.",
+            "type": "string",
+            "enum": [
+              "EUR",
+              "GBP",
+              "USD",
+              "CHF",
+              "VES",
+              "AED"
+            ]
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Sort order",
+            "description": "Result order. A legacy rating order is deprecated: it is still accepted and ordered as the default (random). It is not a member of this enum.",
+            "type": "string",
+            "enum": [
+              "random",
+              "date-desc",
+              "date-asc",
+              "distance",
+              "price-asc"
+            ]
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Latitude",
+            "description": "Latitude in WGS84 degrees, from -90 to 90.",
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Longitude",
+            "description": "Longitude in WGS84 degrees, from -180 to 180.",
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          {
+            "name": "radiusMeters",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Radius in meters",
+            "description": "Search radius in meters around the given latitude and longitude. The value must be greater than 0 and at most 200000.",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 200000,
+            "exclusiveMinimum": true
+          },
+          {
+            "name": "bbox",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Bounding box",
+            "description": "Viewport as \"west,south,east,north\" in WGS84 degrees, e.g. 13.2,52.4,13.6,52.6.",
+            "type": "string"
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Street address",
+            "description": "Street address, e.g. \"Domstraße 17\" or \"Calle Velázquez 34\". Narrows to listings AT that address (house number inside the listing's number or range) and on the same street; the ones at the address come first, each group in sortBy order. Not geocoded: to search AROUND an address, pass lat/lng + radiusMeters.",
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MapPropertiesResponse"
+            }
+          },
+          "400": {
+            "description": "The request failed validation. The body is a problem document with code VALIDATION_FAILED."
+          },
+          "429": {
+            "description": "The caller exceeded the rate limit of 120 requests per 60 seconds per IP address. The body is a problem document with code RATE_LIMITED."
+          },
+          "500": {
+            "description": "The service failed to handle the request. The body is a problem document with code INTERNAL_ERROR."
+          },
+          "502": {
+            "description": "An upstream dependency was unavailable. The body is a problem document with code UPSTREAM_UNAVAILABLE."
+          }
+        }
+      }
+    },
+    "/market/rates": {
+      "get": {
+        "operationId": "marketRates",
+        "summary": "Get market rates",
+        "x-ms-summary": "Market rates",
+        "description": "Returns aggregated pricing per city, including median, minimum, and maximum by option type. The payload is a snapshot, not a time series. No sign-in is required.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "required": true,
+            "x-ms-summary": "Locale",
+            "description": "Response language. Allowed values are en, de, and es.",
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "es"
+            ]
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "City",
+            "description": "City slug. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Country",
+            "description": "Country slug. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Currency",
+            "description": "Currency code for prices. Allowed values are EUR, GBP, USD, CHF, VES, and AED.",
+            "type": "string",
+            "enum": [
+              "EUR",
+              "GBP",
+              "USD",
+              "CHF",
+              "VES",
+              "AED"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MarketRatesResponse"
+            }
+          },
+          "400": {
+            "description": "The request failed validation. The body is a problem document with code VALIDATION_FAILED."
+          },
+          "429": {
+            "description": "The caller exceeded the rate limit of 120 requests per 60 seconds per IP address. The body is a problem document with code RATE_LIMITED."
+          },
+          "500": {
+            "description": "The service failed to handle the request. The body is a problem document with code INTERNAL_ERROR."
+          },
+          "502": {
+            "description": "An upstream dependency was unavailable. The body is a problem document with code UPSTREAM_UNAVAILABLE."
+          }
+        }
+      }
+    },
+    "/operators/{slug}": {
+      "get": {
+        "operationId": "operatorProfile",
+        "summary": "Get operator profile",
+        "x-ms-summary": "Operator profile",
+        "description": "Returns an operator brand hub, including editorial copy, frequently asked questions, and computed stats. No sign-in is required.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "x-ms-summary": "Slug",
+            "description": "URL slug of the record. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "x-ms-url-encoding": "single",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": true,
+            "x-ms-summary": "Locale",
+            "description": "Response language. Allowed values are en, de, and es.",
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "es"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperatorProfileResponse"
+            }
+          },
+          "400": {
+            "description": "The request failed validation. The body is a problem document with code VALIDATION_FAILED."
+          },
+          "404": {
+            "description": "No record exists for the given path. The body is a problem document with code NOT_FOUND."
+          },
+          "429": {
+            "description": "The caller exceeded the rate limit of 120 requests per 60 seconds per IP address. The body is a problem document with code RATE_LIMITED."
+          },
+          "500": {
+            "description": "The service failed to handle the request. The body is a problem document with code INTERNAL_ERROR."
+          },
+          "502": {
+            "description": "An upstream dependency was unavailable. The body is a problem document with code UPSTREAM_UNAVAILABLE."
+          }
+        }
+      }
+    },
+    "/places/{kind}/{slug}": {
+      "get": {
+        "operationId": "placeProfile",
+        "summary": "Get place profile",
+        "x-ms-summary": "Place profile",
+        "description": "Returns a country, city, or zone hub, including editorial copy, frequently asked questions, and computed stats. No sign-in is required.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "x-ms-summary": "Place kind",
+            "description": "Kind of place hub. Allowed values are country, city, and zone.",
+            "type": "string",
+            "x-ms-url-encoding": "single",
+            "enum": [
+              "country",
+              "city",
+              "zone"
+            ]
+          },
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "x-ms-summary": "Slug",
+            "description": "URL slug of the record. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "x-ms-url-encoding": "single",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": true,
+            "x-ms-summary": "Locale",
+            "description": "Response language. Allowed values are en, de, and es.",
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "es"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PlaceProfileResponse"
+            }
+          },
+          "400": {
+            "description": "The request failed validation. The body is a problem document with code VALIDATION_FAILED."
+          },
+          "404": {
+            "description": "No record exists for the given path. The body is a problem document with code NOT_FOUND."
+          },
+          "429": {
+            "description": "The caller exceeded the rate limit of 120 requests per 60 seconds per IP address. The body is a problem document with code RATE_LIMITED."
+          },
+          "500": {
+            "description": "The service failed to handle the request. The body is a problem document with code INTERNAL_ERROR."
+          },
+          "502": {
+            "description": "An upstream dependency was unavailable. The body is a problem document with code UPSTREAM_UNAVAILABLE."
+          }
+        }
+      }
+    },
+    "/properties/{slug}": {
+      "get": {
+        "operationId": "propertyDetail",
+        "summary": "Get space detail",
+        "x-ms-summary": "Space detail",
+        "description": "Returns the full detail for one listing. No sign-in is required.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "x-ms-summary": "Slug",
+            "description": "URL slug of the record. Use lowercase letters, digits, and hyphens, from 1 to 200 characters.",
+            "type": "string",
+            "x-ms-url-encoding": "single",
+            "minLength": 1,
+            "maxLength": 200,
+            "pattern": "^[a-z0-9-]+$"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": true,
+            "x-ms-summary": "Locale",
+            "description": "Response language. Allowed values are en, de, and es.",
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "es"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PropertyDetailResponse"
+            }
+          },
+          "400": {
+            "description": "The request failed validation. The body is a problem document with code VALIDATION_FAILED."
+          },
+          "404": {
+            "description": "No record exists for the given path. The body is a problem document with code NOT_FOUND."
+          },
+          "429": {
+            "description": "The caller exceeded the rate limit of 120 requests per 60 seconds per IP address. The body is a problem document with code RATE_LIMITED."
+          },
+          "500": {
+            "description": "The service failed to handle the request. The body is a problem document with code INTERNAL_ERROR."
+          },
+          "502": {
+            "description": "An upstream dependency was unavailable. The body is a problem document with code UPSTREAM_UNAVAILABLE."
+          }
+        }
+      }
+    },
+    "/search/suggest": {
+      "get": {
+        "operationId": "searchSuggest",
+        "summary": "Suggest search matches",
+        "x-ms-summary": "Search suggestions",
+        "description": "Returns city, zone, operator, and property suggestions for a short query. No sign-in is required.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "required": true,
+            "x-ms-summary": "Locale",
+            "description": "Response language. Allowed values are en, de, and es.",
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "es"
+            ]
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "x-ms-summary": "Query",
+            "description": "Text to match. The value is from 1 to 100 characters.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "x-ms-summary": "Result limit",
+            "description": "Maximum number of suggestions. The value is from 1 to 20.",
+            "type": "integer",
+            "default": 8,
+            "minimum": 0,
+            "maximum": 20,
+            "exclusiveMinimum": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SearchSuggestResponse"
+            }
+          },
+          "400": {
+            "description": "The request failed validation. The body is a problem document with code VALIDATION_FAILED."
+          },
+          "429": {
+            "description": "The caller exceeded the rate limit of 120 requests per 60 seconds per IP address. The body is a problem document with code RATE_LIMITED."
+          },
+          "500": {
+            "description": "The service failed to handle the request. The body is a problem document with code INTERNAL_ERROR."
+          },
+          "502": {
+            "description": "An upstream dependency was unavailable. The body is a problem document with code UPSTREAM_UNAVAILABLE."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConfigResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "minSupportedBuild": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "recommendedBuild": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "flags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "boolean"
+              }
+            },
+            "message": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "severity": {
+                  "type": "string",
+                  "enum": [
+                    "info",
+                    "warning",
+                    "critical"
+                  ]
+                }
+              },
+              "required": [
+                "title",
+                "body",
+                "severity"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "minSupportedBuild",
+            "flags"
+          ],
+          "additionalProperties": false
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "additionalProperties": false
+    },
+    "FacetsResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "facets": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "country",
+                      "city",
+                      "zone",
+                      "operator",
+                      "pricingOptionType",
+                      "amenities"
+                    ]
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "values": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200,
+                          "pattern": "^[a-z0-9_-]+$"
+                        },
+                        "label": {
+                          "type": "string"
+                        },
+                        "count": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 9007199254740991
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "label",
+                        "count"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "key",
+                  "label",
+                  "values"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "priceRange": {
+              "$ref": "#/definitions/PriceRange"
+            },
+            "capacityRange": {
+              "type": "object",
+              "properties": {
+                "min": {
+                  "minimum": 0,
+                  "exclusiveMinimum": true,
+                  "type": "integer",
+                  "maximum": 9007199254740991
+                },
+                "max": {
+                  "minimum": 0,
+                  "exclusiveMinimum": true,
+                  "type": "integer",
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "min",
+                "max"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "facets"
+          ],
+          "additionalProperties": false
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "additionalProperties": false
+    },
+    "GeoBootstrapResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "countries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "slug": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "pattern": "^[a-z0-9-]+$"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 2
+                  },
+                  "propertyCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "slug",
+                  "name",
+                  "code",
+                  "propertyCount"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "cities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "slug": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "pattern": "^[a-z0-9-]+$"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "countryCode": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 2
+                  },
+                  "propertyCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "center": {
+                    "$ref": "#/definitions/Center"
+                  },
+                  "icon": {
+                    "$ref": "#/definitions/Logo"
+                  },
+                  "zones": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "slug": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200,
+                          "pattern": "^[a-z0-9-]+$"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "propertyCount": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 9007199254740991
+                        }
+                      },
+                      "required": [
+                        "slug",
+                        "name",
+                        "propertyCount"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "slug",
+                  "name",
+                  "countryCode",
+                  "propertyCount",
+                  "center",
+                  "zones"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "currencies": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Currency"
+              }
+            }
+          },
+          "required": [
+            "countries",
+            "cities",
+            "currencies"
+          ],
+          "additionalProperties": false
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "additionalProperties": false
+    },
+    "HealthResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "enum": [
+                "ok"
+              ],
+              "type": "string"
+            },
+            "sha": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "status",
+            "sha"
+          ],
+          "additionalProperties": false
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "additionalProperties": false
+    },
+    "ListPropertiesResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slug": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "title": {
+                "type": "string"
+              },
+              "countryCode": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+              },
+              "city": {
+                "$ref": "#/definitions/City"
+              },
+              "zone": {
+                "$ref": "#/definitions/City"
+              },
+              "operator": {
+                "$ref": "#/definitions/Operator"
+              },
+              "coordinates": {
+                "$ref": "#/definitions/Coordinates"
+              },
+              "fromPrice": {
+                "$ref": "#/definitions/Median"
+              },
+              "fromBillingPeriod": {
+                "$ref": "#/definitions/FromBillingPeriod"
+              },
+              "featured": {
+                "type": "boolean"
+              },
+              "updatedAt": {
+                "description": "When the underlying CMS record was last updated. Use as a price-freshness signal; absent for rows with no tracked update time.",
+                "type": "string",
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|[+-](?:[01]\\d|2[0-3]):[0-5]\\d))$"
+              },
+              "excerpt": {
+                "type": "string"
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Logo"
+                }
+              },
+              "amenities": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200,
+                  "pattern": "^[a-z0-9_-]+$"
+                }
+              },
+              "capacity": {
+                "minimum": 0,
+                "exclusiveMinimum": true,
+                "type": "integer",
+                "maximum": 9007199254740991
+              },
+              "capacity_status": {
+                "type": "string",
+                "enum": [
+                  "confirmed",
+                  "possible_undeclared"
+                ]
+              },
+              "marketPosition": {
+                "$ref": "#/definitions/MarketPosition"
+              },
+              "distanceMeters": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "slug",
+              "title",
+              "featured",
+              "images",
+              "amenities"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta3"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "additionalProperties": false
+    },
+    "MapPropertiesResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slug": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "title": {
+                "type": "string"
+              },
+              "coordinates": {
+                "$ref": "#/definitions/Coordinates"
+              },
+              "fromPrice": {
+                "$ref": "#/definitions/Median"
+              },
+              "fromBillingPeriod": {
+                "$ref": "#/definitions/FromBillingPeriod"
+              },
+              "featured": {
+                "type": "boolean"
+              },
+              "image": {
+                "$ref": "#/definitions/Logo"
+              }
+            },
+            "required": [
+              "slug",
+              "title",
+              "coordinates",
+              "featured"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta3"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "additionalProperties": false
+    },
+    "MarketRatesResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "cities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "$ref": "#/definitions/City"
+                  },
+                  "countryCode": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 2
+                  },
+                  "currency": {
+                    "$ref": "#/definitions/Currency"
+                  },
+                  "byType": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "optionType": {
+                          "$ref": "#/definitions/OptionType"
+                        },
+                        "median": {
+                          "$ref": "#/definitions/Median"
+                        },
+                        "min": {
+                          "$ref": "#/definitions/Median"
+                        },
+                        "max": {
+                          "$ref": "#/definitions/Median"
+                        },
+                        "sampleSize": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 9007199254740991,
+                          "description": "How many priced properties of this optionType the aggregate is computed from. Low values mean low confidence — do not present as \"the market rate\" without surfacing this number."
+                        }
+                      },
+                      "required": [
+                        "optionType",
+                        "median",
+                        "min",
+                        "max",
+                        "sampleSize"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "figures": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "optionType": {
+                          "$ref": "#/definitions/OptionType"
+                        },
+                        "median": {
+                          "$ref": "#/definitions/Median"
+                        },
+                        "p25": {
+                          "$ref": "#/definitions/P25"
+                        },
+                        "p75": {
+                          "$ref": "#/definitions/P25"
+                        },
+                        "sampleSize": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 9007199254740991
+                        },
+                        "propertyCount": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 9007199254740991
+                        },
+                        "operatorCount": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 9007199254740991
+                        },
+                        "insufficientData": {
+                          "enum": [
+                            false
+                          ],
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "optionType",
+                        "median",
+                        "p25",
+                        "p75",
+                        "sampleSize",
+                        "propertyCount",
+                        "operatorCount",
+                        "insufficientData"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "dayPass": {
+                    "$ref": "#/definitions/DayPass"
+                  },
+                  "meetingRoom": {
+                    "$ref": "#/definitions/DayPass"
+                  },
+                  "propertyCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "operatorCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "insufficientData": {
+                    "enum": [
+                      false
+                    ],
+                    "type": "boolean"
+                  },
+                  "p25": {
+                    "$ref": "#/definitions/P25"
+                  },
+                  "p75": {
+                    "$ref": "#/definitions/P25"
+                  },
+                  "min": {
+                    "$ref": "#/definitions/Median"
+                  },
+                  "max": {
+                    "$ref": "#/definitions/Median"
+                  },
+                  "entryMedian": {
+                    "$ref": "#/definitions/Median"
+                  },
+                  "entryMin": {
+                    "$ref": "#/definitions/Median"
+                  },
+                  "entryMax": {
+                    "$ref": "#/definitions/Median"
+                  },
+                  "buildings": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "price": {
+                          "$ref": "#/definitions/Median"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "slug": {
+                          "type": "string"
+                        },
+                        "operatorName": {
+                          "type": "string"
+                        },
+                        "operatorSlug": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "price"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "sampleSize": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991,
+                    "description": "Total priced properties in this city backing the aggregate, across all option types."
+                  }
+                },
+                "required": [
+                  "city",
+                  "currency",
+                  "byType",
+                  "sampleSize"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "unpublished": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "$ref": "#/definitions/City"
+                  },
+                  "insufficientData": {
+                    "enum": [
+                      true
+                    ],
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "city",
+                  "insufficientData"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "totalProperties": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "totalPricePoints": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "asOf": {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|[+-](?:[01]\\d|2[0-3]):[0-5]\\d))$"
+            },
+            "license": {
+              "description": "Price Index licence URL for the request locale. https://coworkingview.com/en/terms#price-index-licence",
+              "type": "string"
+            },
+            "licenseUrl": {
+              "description": "CC BY 4.0 legal deed. https://creativecommons.org/licenses/by/4.0/",
+              "type": "string"
+            },
+            "attribution": {
+              "description": "Attribution notice for the data month. No copyright symbol.",
+              "type": "string"
+            },
+            "scope": {
+              "description": "This licence covers the CoworkingView Price Index and catalogue data in this dataset: prices and price statistics, space and operator names, and descriptions written by CoworkingView. It does not cover, and this dataset does not contain: photos, logos, reviews or ratings, data obtained from Google, or any other content of coworkingview.com, its API or MCP server, which remain subject to their own terms. Names are included for identification only; no trademark rights in CoworkingView or operator names and marks are licensed.",
+              "type": "string"
+            },
+            "copyright": {
+              "description": "© CoworkingView. You may quote and embed these figures with attribution and a link to the source. Systematic extraction or re-use of the underlying database is not permitted.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cities",
+            "totalProperties",
+            "totalPricePoints",
+            "asOf"
+          ],
+          "additionalProperties": false
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "additionalProperties": false
+    },
+    "OperatorProfileResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200,
+              "pattern": "^[a-z0-9-]+$"
+            },
+            "name": {
+              "type": "string"
+            },
+            "logo": {
+              "$ref": "#/definitions/Logo"
+            },
+            "tagline": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "faqs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Items"
+              }
+            },
+            "propertyCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "cities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/City"
+              }
+            },
+            "pricePosition": {
+              "type": "object",
+              "properties": {
+                "verdict": {
+                  "$ref": "#/definitions/Verdict"
+                },
+                "sampleSize": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991,
+                  "description": "Priced properties this verdict is computed from; low values mean low confidence."
+                }
+              },
+              "required": [
+                "verdict",
+                "sampleSize"
+              ],
+              "additionalProperties": false
+            },
+            "asOf": {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|[+-](?:[01]\\d|2[0-3]):[0-5]\\d))$"
+            },
+            "indexabilityBrand": {
+              "type": "object",
+              "properties": {
+                "founded": {
+                  "type": "boolean",
+                  "x-nullable": true
+                },
+                "locationCount": {
+                  "type": "number",
+                  "x-nullable": true
+                },
+                "hasTerms": {
+                  "type": "boolean",
+                  "x-nullable": true
+                }
+              },
+              "required": [
+                "founded",
+                "locationCount",
+                "hasTerms"
+              ],
+              "additionalProperties": false,
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "slug",
+            "name",
+            "faqs",
+            "propertyCount",
+            "cities",
+            "asOf"
+          ],
+          "additionalProperties": false
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta2"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "additionalProperties": false
+    },
+    "PlaceProfileResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "country",
+                "city",
+                "zone"
+              ]
+            },
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200,
+              "pattern": "^[a-z0-9-]+$"
+            },
+            "name": {
+              "type": "string"
+            },
+            "intro": {
+              "type": "string"
+            },
+            "shortDescription": {
+              "type": "string"
+            },
+            "faqs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Items"
+              }
+            },
+            "propertyCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "priceRange": {
+              "$ref": "#/definitions/PriceRange"
+            },
+            "center": {
+              "$ref": "#/definitions/Coordinates"
+            },
+            "parent": {
+              "$ref": "#/definitions/City"
+            },
+            "asOf": {
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|[+-](?:[01]\\d|2[0-3]):[0-5]\\d))$"
+            }
+          },
+          "required": [
+            "kind",
+            "slug",
+            "name",
+            "faqs",
+            "propertyCount",
+            "asOf"
+          ],
+          "additionalProperties": false
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta2"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "additionalProperties": false
+    },
+    "PropertyDetailResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200,
+              "pattern": "^[a-z0-9-]+$"
+            },
+            "title": {
+              "type": "string"
+            },
+            "countryCode": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2
+            },
+            "city": {
+              "$ref": "#/definitions/City"
+            },
+            "zone": {
+              "$ref": "#/definitions/City"
+            },
+            "operator": {
+              "$ref": "#/definitions/Operator"
+            },
+            "coordinates": {
+              "$ref": "#/definitions/Coordinates"
+            },
+            "fromPrice": {
+              "$ref": "#/definitions/Median"
+            },
+            "fromBillingPeriod": {
+              "$ref": "#/definitions/FromBillingPeriod"
+            },
+            "featured": {
+              "type": "boolean"
+            },
+            "updatedAt": {
+              "description": "When the underlying CMS record was last updated. Use as a price-freshness signal; absent for rows with no tracked update time.",
+              "type": "string",
+              "format": "date-time",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|[+-](?:[01]\\d|2[0-3]):[0-5]\\d))$"
+            },
+            "description": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "images": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Logo"
+              }
+            },
+            "amenities": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[a-z0-9_-]+$"
+              }
+            },
+            "capacity": {
+              "minimum": 0,
+              "exclusiveMinimum": true,
+              "type": "integer",
+              "maximum": 9007199254740991
+            },
+            "capacity_status": {
+              "type": "string",
+              "enum": [
+                "confirmed",
+                "possible_undeclared"
+              ]
+            },
+            "pricingOptions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "optionType": {
+                    "$ref": "#/definitions/OptionType"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "$ref": "#/definitions/Median"
+                  },
+                  "priceOnRequest": {
+                    "type": "boolean"
+                  },
+                  "billingPeriod": {
+                    "$ref": "#/definitions/FromBillingPeriod"
+                  },
+                  "minCapacity": {
+                    "minimum": 0,
+                    "exclusiveMinimum": true,
+                    "type": "integer",
+                    "maximum": 9007199254740991
+                  },
+                  "maxCapacity": {
+                    "minimum": 0,
+                    "exclusiveMinimum": true,
+                    "type": "integer",
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "optionType",
+                  "title",
+                  "priceOnRequest",
+                  "billingPeriod"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "marketPosition": {
+              "$ref": "#/definitions/MarketPosition"
+            },
+            "webUrl": {
+              "type": "string"
+            },
+            "indexabilityCompleteness": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "number"
+                },
+                "hasAddress": {
+                  "type": "boolean"
+                },
+                "hasGeo": {
+                  "type": "boolean"
+                },
+                "hasVerifiedPriceOrOnRequest": {
+                  "type": "boolean",
+                  "x-nullable": true
+                },
+                "priceVerifiedAt": {
+                  "type": "string",
+                  "x-nullable": true
+                },
+                "verifiedProviderPhotoCount": {
+                  "type": "number",
+                  "x-nullable": true
+                },
+                "uniqueWordCount": {
+                  "type": "number",
+                  "x-nullable": true
+                },
+                "productCount": {
+                  "type": "number",
+                  "x-nullable": true
+                }
+              },
+              "required": [
+                "score",
+                "hasAddress",
+                "hasGeo",
+                "hasVerifiedPriceOrOnRequest",
+                "priceVerifiedAt",
+                "verifiedProviderPhotoCount",
+                "uniqueWordCount",
+                "productCount"
+              ],
+              "additionalProperties": false,
+              "x-nullable": true
+            },
+            "indexabilityState": {
+              "type": "object",
+              "properties": {
+                "indexable": {
+                  "type": "boolean"
+                },
+                "belowSince": {
+                  "type": "string",
+                  "x-nullable": true
+                }
+              },
+              "required": [
+                "indexable",
+                "belowSince"
+              ],
+              "additionalProperties": false,
+              "x-nullable": true
+            }
+          },
+          "required": [
+            "slug",
+            "title",
+            "featured",
+            "description",
+            "address",
+            "images",
+            "amenities",
+            "pricingOptions",
+            "webUrl"
+          ],
+          "additionalProperties": false
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta2"
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "additionalProperties": false
+    },
+    "SearchSuggestResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "country",
+                  "city",
+                  "zone",
+                  "operator",
+                  "property"
+                ]
+              },
+              "slug": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "label": {
+                "type": "string"
+              },
+              "sublabel": {
+                "type": "string"
+              },
+              "center": {
+                "$ref": "#/definitions/Center"
+              },
+              "propertyCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "kind",
+              "slug",
+              "label"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "contractVersion": {
+              "type": "string"
+            },
+            "pagination": {
+              "$ref": "#/definitions/Pagination"
+            },
+            "truncated": {
+              "type": "boolean"
+            },
+            "seed": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "citation": {
+              "$ref": "#/definitions/Citation"
+            }
+          },
+          "required": [
+            "contractVersion",
+            "pagination"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "additionalProperties": false
+    },
+    "Verdict": {
+      "enum": [
+        "below",
+        "around",
+        "above"
+      ],
+      "type": "string"
+    },
+    "Currency": {
+      "enum": [
+        "EUR",
+        "GBP",
+        "USD",
+        "CHF",
+        "VES",
+        "AED"
+      ],
+      "type": "string"
+    },
+    "FromBillingPeriod": {
+      "enum": [
+        "month",
+        "day",
+        "hour",
+        "week",
+        "year",
+        "once"
+      ],
+      "type": "string"
+    },
+    "Center": {
+      "additionalProperties": false,
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "lat",
+        "lng"
+      ],
+      "type": "object"
+    },
+    "Items": {
+      "additionalProperties": false,
+      "properties": {
+        "answer": {
+          "type": "string"
+        },
+        "question": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "question",
+        "answer"
+      ],
+      "type": "object"
+    },
+    "OptionType": {
+      "enum": [
+        "private_office",
+        "exclusive_bereich",
+        "fix_desk",
+        "flex_desk",
+        "day_pass",
+        "meeting_room",
+        "virtual_office",
+        "event_space",
+        "membership"
+      ],
+      "type": "string"
+    },
+    "Median": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "currency": {
+          "$ref": "#/definitions/Currency"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "type": "object"
+    },
+    "PriceRange": {
+      "additionalProperties": false,
+      "properties": {
+        "max": {
+          "$ref": "#/definitions/Median"
+        },
+        "min": {
+          "$ref": "#/definitions/Median"
+        }
+      },
+      "required": [
+        "min",
+        "max"
+      ],
+      "type": "object"
+    },
+    "Coordinates": {
+      "additionalProperties": false,
+      "properties": {
+        "lat": {
+          "maximum": 90,
+          "minimum": -90,
+          "type": "number"
+        },
+        "lng": {
+          "maximum": 180,
+          "minimum": -180,
+          "type": "number"
+        }
+      },
+      "required": [
+        "lat",
+        "lng"
+      ],
+      "type": "object"
+    },
+    "City": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[a-z0-9-]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "slug",
+        "name"
+      ],
+      "type": "object"
+    },
+    "P25": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "currency": {
+          "$ref": "#/definitions/Currency"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "type": "object",
+      "x-nullable": true
+    },
+    "MarketPosition": {
+      "additionalProperties": false,
+      "properties": {
+        "median": {
+          "$ref": "#/definitions/Median"
+        },
+        "sampleSize": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "verdict": {
+          "$ref": "#/definitions/Verdict"
+        }
+      },
+      "required": [
+        "verdict",
+        "median",
+        "sampleSize"
+      ],
+      "type": "object"
+    },
+    "Logo": {
+      "additionalProperties": false,
+      "properties": {
+        "alt": {
+          "type": "string"
+        },
+        "height": {
+          "exclusiveMinimum": true,
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "thumbHash": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "width": {
+          "exclusiveMinimum": true,
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "url",
+        "width",
+        "height",
+        "alt"
+      ],
+      "type": "object"
+    },
+    "Operator": {
+      "additionalProperties": false,
+      "properties": {
+        "logo": {
+          "$ref": "#/definitions/Logo"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[a-z0-9-]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "slug",
+        "name"
+      ],
+      "type": "object"
+    },
+    "Pagination": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "exclusiveMinimum": true,
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "pageCount": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "pageSize": {
+          "exclusiveMinimum": true,
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "total": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "page",
+        "pageSize",
+        "total",
+        "pageCount"
+      ],
+      "type": "object"
+    },
+    "DayPass": {
+      "additionalProperties": false,
+      "properties": {
+        "insufficientData": {
+          "enum": [
+            false
+          ],
+          "type": "boolean"
+        },
+        "median": {
+          "$ref": "#/definitions/Median"
+        },
+        "operatorCount": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "propertyCount": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "sampleSize": {
+          "description": "Sample size backing this median. See the top-level note on presenting aggregates.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "median",
+        "sampleSize"
+      ],
+      "type": "object"
+    },
+    "Citation": {
+      "additionalProperties": false,
+      "description": "Source and canonical page for this data. Copy `text`, or build your own from `title` + `url`.",
+      "properties": {
+        "accessed": {
+          "description": "ISO date (YYYY-MM-DD, UTC) the data was served.",
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "CoworkingView"
+          ],
+          "type": "string"
+        },
+        "text": {
+          "description": "One-line source credit, ready to paste: \"Source: CoworkingView — {title}, {url}.\" (localized by the request locale).",
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "title",
+        "url",
+        "accessed",
+        "text"
+      ],
+      "type": "object"
+    },
+    "Meta": {
+      "additionalProperties": false,
+      "properties": {
+        "citation": {
+          "$ref": "#/definitions/Citation"
+        },
+        "contractVersion": {
+          "type": "string"
+        },
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "seed": {
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991,
+          "type": "integer"
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "contractVersion"
+      ],
+      "type": "object"
+    },
+    "Meta2": {
+      "additionalProperties": false,
+      "properties": {
+        "catalogueNotice": {
+          "description": "Catalogue content (descriptions, images, logos, names and prices) belongs to the respective operators and rights holders. No licence to reuse it is granted. You may link to listing pages. Systematic extraction or re-use of the catalogue database is not permitted.",
+          "type": "string"
+        },
+        "citation": {
+          "$ref": "#/definitions/Citation"
+        },
+        "contractVersion": {
+          "type": "string"
+        },
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "seed": {
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991,
+          "type": "integer"
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "contractVersion"
+      ],
+      "type": "object"
+    },
+    "Meta3": {
+      "additionalProperties": false,
+      "properties": {
+        "catalogueNotice": {
+          "description": "Catalogue content (descriptions, images, logos, names and prices) belongs to the respective operators and rights holders. No licence to reuse it is granted. You may link to listing pages. Systematic extraction or re-use of the catalogue database is not permitted.",
+          "type": "string"
+        },
+        "citation": {
+          "$ref": "#/definitions/Citation"
+        },
+        "contractVersion": {
+          "type": "string"
+        },
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        },
+        "seed": {
+          "maximum": 9007199254740991,
+          "minimum": -9007199254740991,
+          "type": "integer"
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "contractVersion",
+        "pagination"
+      ],
+      "type": "object"
+    }
+  }
+}

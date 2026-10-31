@@ -1,0 +1,74 @@
+identity:
+  name: get_workspace
+  author: coworkingview
+  label:
+    en_US: Get workspace
+description:
+  human:
+    en_US: Open one CoworkingView listing by its slug. Returns the name, city, street address when the API publishes one, the product types on the listing, and the coworkingview.com URL.
+  llm: >
+    Get one CoworkingView workspace by the slug returned from search_workspaces.
+    Returns name, city, address, type, url, and slug. address is the street
+    address string from the API, or null when the listing does not publish one.
+    type is the list of product codes published on that listing (for example
+    flex_desk or private_office), or null when the listing publishes none.
+    url is the https://coworkingview.com listing page. Do not invent a price
+    or fill a null field. Prices are intentionally omitted.
+parameters:
+  - name: slug
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: Listing slug
+    human_description:
+      en_US: Slug from Search workspaces, for example sankt-oberholz-rosenthaler-berlin.
+    llm_description: >
+      Listing slug copied from a search_workspaces result. Do not guess a slug.
+  - name: locale
+    type: select
+    required: false
+    form: llm
+    default: en
+    label:
+      en_US: Language
+    human_description:
+      en_US: Language of the listing name and URL. en, de, or es.
+    llm_description: Response language. Use en, de, or es. Defaults to en.
+    options:
+      - value: en
+        label:
+          en_US: English
+      - value: de
+        label:
+          en_US: German
+      - value: es
+        label:
+          en_US: Spanish
+extra:
+  python:
+    source: tools/get_workspace.py
+output_schema:
+  type: object
+  properties:
+    workspace:
+      type: object
+      properties:
+        name:
+          type: string
+        city:
+          type: string
+        address:
+          type: string
+        type:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+        slug:
+          type: string
+    citation:
+      type: string
+    notice:
+      type: string

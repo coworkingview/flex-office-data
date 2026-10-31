@@ -1,0 +1,18 @@
+identity:
+  author: coworkingview
+  name: coworkingview
+  label:
+    en_US: CoworkingView
+  description:
+    en_US: Search the public CoworkingView catalogue of coworking spaces and flexible offices. No API key. Results link to the listing on coworkingview.com and never invent a price.
+  icon: icon.png
+  tags:
+    - search
+    - business
+tools:
+  - tools/search_workspaces.yaml
+  - tools/get_workspace.yaml
+  - tools/list_cities.yaml
+extra:
+  python:
+    source: provider/coworkingview.py

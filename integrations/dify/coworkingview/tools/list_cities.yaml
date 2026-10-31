@@ -1,0 +1,68 @@
+identity:
+  name: list_cities
+  author: coworkingview
+  label:
+    en_US: List cities
+description:
+  human:
+    en_US: List the cities in the CoworkingView catalogue. Each row has a slug you can pass to Search workspaces, the display name, the country code, and how many listings the API reports.
+  llm: >
+    List cities supported by the CoworkingView catalogue. Call this before
+    search_workspaces when you do not already have a city slug. Each city has
+    slug, name, country_code, and property_count. Pass slug to search_workspaces
+    as city. property_count is the API's figure and may be zero. Optional
+    country is an ISO 3166-1 alpha-2 code such as DE or ES. Do not invent cities
+    that are not in the JSON.
+parameters:
+  - name: locale
+    type: select
+    required: false
+    form: llm
+    default: en
+    label:
+      en_US: Language
+    human_description:
+      en_US: Language of city names. en, de, or es.
+    llm_description: Language of city names. Use en, de, or es. Defaults to en.
+    options:
+      - value: en
+        label:
+          en_US: English
+      - value: de
+        label:
+          en_US: German
+      - value: es
+        label:
+          en_US: Spanish
+  - name: country
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Country code
+    human_description:
+      en_US: Optional ISO country code, for example DE. Leave empty for every country.
+    llm_description: >
+      Optional ISO 3166-1 alpha-2 country code such as DE, ES, FR, or AE.
+      Omit it to list every supported city.
+extra:
+  python:
+    source: tools/list_cities.py
+output_schema:
+  type: object
+  properties:
+    cities:
+      type: array
+      items:
+        type: object
+        properties:
+          slug:
+            type: string
+          name:
+            type: string
+          country_code:
+            type: string
+          property_count:
+            type: number
+    citation:
+      type: string

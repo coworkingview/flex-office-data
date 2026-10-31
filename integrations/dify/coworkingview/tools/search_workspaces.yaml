@@ -1,0 +1,137 @@
+identity:
+  name: search_workspaces
+  author: coworkingview
+  label:
+    en_US: Search workspaces
+description:
+  human:
+    en_US: Search flexible workspaces in a city, optionally limited to one workspace type. Returns the name, city, type, and the coworkingview.com listing URL. The street address is not on this page of the API, so address is null until you open the listing.
+  llm: >
+    Search CoworkingView for flexible workspaces. city is required and must be a
+    slug from list_cities, such as berlin, madrid, paris, or abu-dhabi. A display
+    name such as "Berlin" is accepted and turned into that slug.
+    workspace_type is optional. When set, it is a published product code:
+    flex_desk, fix_desk, private_office, exclusive_bereich, day_pass,
+    meeting_room, event_space, virtual_office, or membership.
+    Each result has name, city, address, type, url, and slug. address is null
+    because the search endpoint does not publish a street address; call
+    get_workspace with slug for the address and the product types on the listing.
+    type on a search result is only the filter you passed, or null when you did
+    not filter. Do not invent a price, a street address, an amenity, or a type
+    the JSON does not contain. This tool returns one page of at most 20 listings.
+    Do not page through the catalogue.
+parameters:
+  - name: city
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: City
+    human_description:
+      en_US: City slug from List cities, for example berlin or abu-dhabi.
+    llm_description: >
+      City slug from list_cities. Examples: berlin, madrid, paris, abu-dhabi.
+      A plain name such as Berlin is lowercased into the slug.
+  - name: workspace_type
+    type: select
+    required: false
+    form: llm
+    label:
+      en_US: Workspace type
+    human_description:
+      en_US: Product the space must offer. Leave empty to search every type in the city.
+    llm_description: >
+      Optional product filter. Omit it to search every type. Allowed values are
+      flex_desk, fix_desk, private_office, exclusive_bereich, day_pass,
+      meeting_room, event_space, virtual_office, and membership.
+    options:
+      - value: flex_desk
+        label:
+          en_US: Flex desk
+      - value: fix_desk
+        label:
+          en_US: Fixed desk
+      - value: private_office
+        label:
+          en_US: Private office
+      - value: exclusive_bereich
+        label:
+          en_US: Exclusive area
+      - value: day_pass
+        label:
+          en_US: Day pass
+      - value: meeting_room
+        label:
+          en_US: Meeting room
+      - value: event_space
+        label:
+          en_US: Event space
+      - value: virtual_office
+        label:
+          en_US: Virtual office
+      - value: membership
+        label:
+          en_US: Membership
+  - name: locale
+    type: select
+    required: false
+    form: llm
+    default: en
+    label:
+      en_US: Language
+    human_description:
+      en_US: Language of names and of the listing URL. en, de, or es.
+    llm_description: Response language. Use en, de, or es. Defaults to en.
+    options:
+      - value: en
+        label:
+          en_US: English
+      - value: de
+        label:
+          en_US: German
+      - value: es
+        label:
+          en_US: Spanish
+  - name: limit
+    type: number
+    required: false
+    form: llm
+    default: 10
+    min: 1
+    max: 20
+    label:
+      en_US: Limit
+    human_description:
+      en_US: How many listings to return, from 1 to 20. Defaults to 10.
+    llm_description: Page size from 1 to 20. Defaults to 10. One page only.
+extra:
+  python:
+    source: tools/search_workspaces.py
+output_schema:
+  type: object
+  properties:
+    workspaces:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          city:
+            type: string
+          address:
+            type: string
+          type:
+            type: array
+            items:
+              type: string
+          url:
+            type: string
+          slug:
+            type: string
+    total:
+      type: number
+    citation:
+      type: string
+    notice:
+      type: string

@@ -82,3 +82,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker build -t cwv:ci -f rust/Dockerfile rust && docker run --rm cwv:ci --version
+
+  nextcloud:
+    name: Nextcloud app
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/nextcloud/coworkingview
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+          tools: composer
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer lint
+      - run: composer test
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: integrations/nextcloud/coworkingview/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build

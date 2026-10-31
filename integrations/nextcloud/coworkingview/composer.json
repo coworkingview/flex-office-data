@@ -1,0 +1,40 @@
+{
+	"name": "coworkingview/nextcloud",
+	"description": "CoworkingView dashboard widget and unified search for Nextcloud",
+	"license": "AGPL-3.0-or-later",
+	"type": "project",
+	"require": {
+		"php": ">=8.2 <=8.5",
+		"ext-curl": "*",
+		"ext-json": "*",
+		"ext-mbstring": "*"
+	},
+	"require-dev": {
+		"nextcloud/coding-standard": "^1.4",
+		"phpunit/phpunit": "^11.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"OCA\\CoworkingView\\": "lib/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"OCA\\CoworkingView\\Tests\\": "tests/"
+		}
+	},
+	"scripts": {
+		"lint": [
+			"php-cs-fixer fix --dry-run --diff",
+			"@php-syntax"
+		],
+		"php-syntax": "find lib tests appinfo bin -name '*.php' -print0 | xargs -0 -n1 php -l",
+		"test": "phpunit --do-not-cache-result"
+	},
+	"config": {
+		"sort-packages": true,
+		"allow-plugins": {
+			"php-http/discovery": false
+		}
+	}
+}

@@ -1,0 +1,15 @@
+/**
+ * SPDX-FileCopyrightText: 2026 CoworkingView <info@coworkingview.com>
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
+/* Official mark: serif CV, gold dot, off-white ground. Not a mask icon. */
+.icon-coworkingview {
+	background-image: url('../img/app.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 16px 16px;
+	filter: none !important;
+	mask: none !important;
+	-webkit-mask: none !important;
+}

@@ -1,0 +1,36 @@
+version: 0.0.1
+type: plugin
+author: coworkingview
+name: coworkingview
+label:
+  en_US: CoworkingView
+description:
+  en_US: Search flexible workspaces on CoworkingView by city and workspace type, open one listing, and list supported cities. Results carry the public listing URL. Prices are never guessed.
+icon: icon.png
+created_at: "2026-10-31T00:00:00Z"
+repo: https://github.com/coworkingview/flex-office-data
+homepage: https://coworkingview.com
+contact: info@coworkingview.com
+privacy: ./PRIVACY.md
+tags:
+  - search
+  - business
+resource:
+  memory: 268435456
+plugins:
+  tools:
+    - provider/coworkingview.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+  minimum_dify_version: 1.0.0
+network:
+  domains:
+    - api.coworkingview.com
+    - coworkingview.com

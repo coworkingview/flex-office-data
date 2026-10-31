@@ -1,0 +1,20 @@
+[general]
+name=CoworkingView
+qgisMinimumVersion=3.22
+qgisMaximumVersion=3.99
+description=Load CoworkingView flexible workspaces as points and open each listing.
+about=Shows flexible workspaces from the public CoworkingView catalogue as points on the map. Filter by city and workspace type, then use the attribute table for the name, city, address, workspace type and the link to the listing on coworkingview.com. An Open on CoworkingView action opens that listing. The plugin reads the public API at api.coworkingview.com. It does not store prices, photos or descriptions.
+version=0.1.0
+author=CoworkingView
+email=info@coworkingview.com
+homepage=https://coworkingview.com
+repository=https://github.com/coworkingview/flex-office-data
+tracker=https://github.com/coworkingview/flex-office-data/issues
+changelog=0.1.0 - First release.
+tags=coworking,flexible office,workspace,points
+icon=icon.png
+category=Vector
+experimental=False
+deprecated=False
+server=False
+hasProcessingProvider=False

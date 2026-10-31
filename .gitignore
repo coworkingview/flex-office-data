@@ -22,3 +22,5 @@ rust/target/
 .DS_Store
 # Docs (mkdocs build output)
 site/
+# QGIS plugin zip (integrations/qgis/build.py)
+integrations/qgis/dist/

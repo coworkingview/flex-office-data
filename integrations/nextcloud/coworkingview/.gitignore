@@ -1,0 +1,10 @@
+/node_modules/
+/vendor/
+/js/
+/css/*.chunk.css
+/css/coworkingview-dashboard.css
+/build/
+/preview/data.js
+.php-cs-fixer.cache
+.phpunit.cache/
+.phpunit.result.cache

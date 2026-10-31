@@ -9,9 +9,10 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 |---|---|---|
 | Python | [`coworkingview`](python/) | `pip install coworkingview` · `conda install -c conda-forge coworkingview` |
 | R | [`coworkingview`](r/) | `install.packages("coworkingview")` |
+| Java | [`coworkingview`](integrations/java/) | Maven Central `io.github.coworkingview:coworkingview` |
 | Command line | [`cwv`](rust/) (Rust) | `cargo install coworkingview` · `docker run --rm coworkingview/cwv` · AUR · Chocolatey · Snap |
 
-All three read the same public API, follow the same [specification](spec/SPEC.md)
+The packages read the same public API, follow the same [specification](spec/SPEC.md)
 and are tested against the same [fixtures and expected outputs](spec/), so a
 number is the same whichever tool you use.
 
@@ -46,6 +47,16 @@ rates[["product", "unit", "median", "p25", "p75", "sample_size"]]
 library(coworkingview)
 rates <- cwv_rates(country = "germany")
 subset(rates, product == "private_office", c(city_name, median, sample_size))
+```
+
+**Java**
+
+```java
+import io.github.coworkingview.Client;
+import io.github.coworkingview.RatesQuery;
+
+Client client = Client.create();
+client.rates(new RatesQuery().city("berlin"));
 ```
 
 **Command line**
@@ -99,11 +110,12 @@ below the publication threshold are listed by `cities()` with
 ## Repository layout
 
 ```
-spec/       SPEC.md, API fixtures, golden outputs (the contract all packages share)
-python/     coworkingview on PyPI / conda-forge
-r/          coworkingview on CRAN
-rust/       cwv CLI and the coworkingview crate (crates.io, Docker)
-packaging/  AUR, Chocolatey and Snap manifests for cwv
+spec/               SPEC.md, API fixtures, golden outputs (the contract all packages share)
+python/             coworkingview on PyPI / conda-forge
+r/                  coworkingview on CRAN
+rust/               cwv CLI and the coworkingview crate (crates.io, Docker)
+integrations/java/  coworkingview on Maven Central
+packaging/          AUR, Chocolatey and Snap manifests for cwv
 ```
 
 ## Contributing

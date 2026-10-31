@@ -1,7 +1,7 @@
 # flex-office-data — shared specification
 
-This file is the contract the Python, R and Rust packages implement. When it
-changes, all three change in the same pull request, and the golden files in
+This file is the contract the Python, R, Rust and Java packages implement. When it
+changes, all four change in the same pull request, and the golden files in
 `spec/golden/` are regenerated with `python3 spec/tools/make_golden.py`.
 
 ## 1. Source
@@ -33,10 +33,11 @@ Accepted values:
   `event_space`, `virtual_office`, `membership`
 - `sort`: `random` (default), `price-asc`, `date-desc`, `date-asc`
 
-## 2. HTTP behaviour (all three packages)
+## 2. HTTP behaviour (every package)
 
 - `User-Agent: <package>/<version> (+https://github.com/coworkingview/flex-office-data)`
-  e.g. `coworkingview-python/0.1.0 (+https://github.com/coworkingview/flex-office-data)`.
+  e.g. `coworkingview-python/0.1.0 (+https://github.com/coworkingview/flex-office-data)`,
+  `coworkingview-java/0.1.0 (+https://github.com/coworkingview/flex-office-data)`.
 - `Accept: application/json`. Timeout 20 s.
 - On `429` or `5xx`: wait `Retry-After` seconds, else `RateLimit-Reset`, else
   2 s — capped at 10 s — then retry **once**. Never more.
@@ -161,6 +162,9 @@ the response's `attribution` string, its `licenseUrl` (under the name
 - R: `attr(x, "attribution")`, `attr(x, "license")`, `attr(x, "as_of")`
 - Rust CLI: printed to **stderr** after a table (never into CSV/JSON on stdout);
   the JSON output wraps rows as `{ "attribution", "license", "as_of", "rows" }`.
+- Java: `dataset.getAttribution()`, `dataset.getLicense()`, `dataset.getAsOf()`;
+  catalogue results also expose `dataset.getNotice()` and, for a search,
+  `dataset.getTotal()` (`pagination.total` of the first page).
 
 `spaces()` / `space()` carry `meta.citation.text` the same way, under
 `attribution`, plus `meta.catalogueNotice` under `notice`.

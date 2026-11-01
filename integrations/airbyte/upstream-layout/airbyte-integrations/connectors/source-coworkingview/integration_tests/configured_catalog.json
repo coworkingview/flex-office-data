@@ -1,0 +1,575 @@
+{
+  "streams": [
+    {
+      "stream": {
+        "name": "properties",
+        "json_schema": {
+          "type": "object",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "additionalProperties": true,
+          "required": [
+            "slug",
+            "title"
+          ],
+          "properties": {
+            "slug": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "countryCode": {
+              "type": "string"
+            },
+            "city": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "slug": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "zone": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "slug": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "operator": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "slug": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "coordinates": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "lat": {
+                  "type": "number"
+                },
+                "lng": {
+                  "type": "number"
+                }
+              }
+            },
+            "fromPrice": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                }
+              }
+            },
+            "fromBillingPeriod": {
+              "type": "string"
+            },
+            "featured": {
+              "type": "boolean"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "amenities": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "capacity": {
+              "type": "integer"
+            },
+            "marketPosition": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "verdict": {
+                  "type": "string"
+                },
+                "median": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "sampleSize": {
+                  "type": "integer"
+                }
+              }
+            },
+            "citation": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "source": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "accessed": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            },
+            "catalogueNotice": {
+              "type": "string"
+            }
+          }
+        },
+        "supported_sync_modes": [
+          "full_refresh"
+        ],
+        "source_defined_cursor": null,
+        "default_cursor_field": null,
+        "source_defined_primary_key": [
+          [
+            "slug"
+          ]
+        ],
+        "namespace": null,
+        "is_resumable": false,
+        "is_file_based": false
+      },
+      "sync_mode": "full_refresh",
+      "destination_sync_mode": "overwrite",
+      "cursor_field": null,
+      "destination_object_name": null,
+      "primary_key": null,
+      "generation_id": null,
+      "minimum_generation_id": null,
+      "sync_id": null,
+      "include_files": null
+    },
+    {
+      "stream": {
+        "name": "market_rates",
+        "json_schema": {
+          "type": "object",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "additionalProperties": true,
+          "required": [
+            "city_slug",
+            "city",
+            "countryCode",
+            "currency",
+            "attribution",
+            "license",
+            "licenseUrl",
+            "asOf"
+          ],
+          "properties": {
+            "city_slug": {
+              "type": "string",
+              "description": "Copy of city.slug. The runtime rejects a nested primary key."
+            },
+            "city": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "slug": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "countryCode": {
+              "type": "string"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "byType": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "optionType": {
+                    "type": "string"
+                  },
+                  "median": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                      "amount": {
+                        "type": "number"
+                      },
+                      "currency": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "min": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                      "amount": {
+                        "type": "number"
+                      },
+                      "currency": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "max": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                      "amount": {
+                        "type": "number"
+                      },
+                      "currency": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "sampleSize": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "figures": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "optionType": {
+                    "type": "string"
+                  },
+                  "median": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                      "amount": {
+                        "type": "number"
+                      },
+                      "currency": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "p25": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "amount": {
+                        "type": "number"
+                      },
+                      "currency": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "p75": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "amount": {
+                        "type": "number"
+                      },
+                      "currency": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "sampleSize": {
+                    "type": "integer"
+                  },
+                  "propertyCount": {
+                    "type": "integer"
+                  },
+                  "operatorCount": {
+                    "type": "integer"
+                  },
+                  "insufficientData": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "dayPass": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "median": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "sampleSize": {
+                  "type": "integer"
+                },
+                "propertyCount": {
+                  "type": "integer"
+                },
+                "operatorCount": {
+                  "type": "integer"
+                },
+                "insufficientData": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "meetingRoom": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "median": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "amount": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "sampleSize": {
+                  "type": "integer"
+                },
+                "propertyCount": {
+                  "type": "integer"
+                },
+                "operatorCount": {
+                  "type": "integer"
+                },
+                "insufficientData": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "buildings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "price": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                      "amount": {
+                        "type": "number"
+                      },
+                      "currency": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "slug": {
+                    "type": "string"
+                  },
+                  "operatorName": {
+                    "type": "string"
+                  },
+                  "operatorSlug": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "propertyCount": {
+              "type": "integer"
+            },
+            "operatorCount": {
+              "type": "integer"
+            },
+            "insufficientData": {
+              "type": "boolean"
+            },
+            "p25": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": true,
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                }
+              }
+            },
+            "p75": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": true,
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                }
+              }
+            },
+            "min": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                }
+              }
+            },
+            "max": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                }
+              }
+            },
+            "entryMedian": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                }
+              }
+            },
+            "entryMin": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                }
+              }
+            },
+            "entryMax": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "currency": {
+                  "type": "string"
+                }
+              }
+            },
+            "sampleSize": {
+              "type": "integer"
+            },
+            "attribution": {
+              "type": "string"
+            },
+            "license": {
+              "type": "string"
+            },
+            "licenseUrl": {
+              "type": "string"
+            },
+            "asOf": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "scope": {
+              "type": "string"
+            },
+            "copyright": {
+              "type": "string"
+            }
+          }
+        },
+        "supported_sync_modes": [
+          "full_refresh"
+        ],
+        "source_defined_cursor": null,
+        "default_cursor_field": null,
+        "source_defined_primary_key": [
+          [
+            "city_slug"
+          ]
+        ],
+        "namespace": null,
+        "is_resumable": false,
+        "is_file_based": false
+      },
+      "sync_mode": "full_refresh",
+      "destination_sync_mode": "overwrite",
+      "cursor_field": null,
+      "destination_object_name": null,
+      "primary_key": null,
+      "generation_id": null,
+      "minimum_generation_id": null,
+      "sync_id": null,
+      "include_files": null
+    }
+  ]
+}

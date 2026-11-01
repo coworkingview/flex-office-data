@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Workspace Count</title>
+		<script src="sdpi-components.js"></script>
+	</head>
+	<body>
+		<sdpi-item label="City">
+			<sdpi-select
+				setting="city"
+				datasource="getCities"
+				default="berlin"
+				loading="Loading cities..."
+				placeholder="Choose a city"
+			></sdpi-select>
+		</sdpi-item>
+		<sdpi-item label="Website">
+			<button class="sdpi-item-value" type="button" id="open-site">coworkingview.com</button>
+		</sdpi-item>
+		<script>
+			document.querySelector("#open-site").addEventListener("click", () => {
+				SDPIComponents.streamDeckClient.send("sendToPlugin", { event: "openSite" });
+			});
+		</script>
+	</body>
+</html>

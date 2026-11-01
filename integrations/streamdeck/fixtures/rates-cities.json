@@ -1,0 +1,27 @@
+{
+    "data": {
+        "cities": [
+            {
+                "city": {
+                    "slug": "amsterdam",
+                    "name": "Amsterdam"
+                },
+                "countryCode": "NL"
+            },
+            {
+                "city": {
+                    "slug": "berlin",
+                    "name": "Berlin"
+                },
+                "countryCode": "DE"
+            },
+            {
+                "city": {
+                    "slug": "madrid",
+                    "name": "Madrid"
+                },
+                "countryCode": "ES"
+            }
+        ]
+    }
+}

@@ -1,0 +1,27 @@
+# See [Connector Acceptance Tests](https://docs.airbyte.com/connector-development/testing-connectors/connector-acceptance-tests-reference)
+# for more information about how to configure these tests
+connector_image: airbyte/source-coworkingview:dev
+acceptance_tests:
+  spec:
+    tests:
+      - spec_path: "manifest.yaml"
+  connection:
+    tests:
+      - config_path: "integration_tests/config.json"
+        status: "succeed"
+      - config_path: "integration_tests/invalid_config.json"
+        status: "failed"
+  discovery:
+    tests:
+      - config_path: "integration_tests/config.json"
+  basic_read:
+    tests:
+      - config_path: "integration_tests/config.json"
+        configured_catalog_path: "integration_tests/configured_catalog.json"
+        empty_streams: []
+  incremental:
+    bypass_reason: "Neither stream has an incremental cursor. The API returns the current catalogue page and the current Price Index."
+  full_refresh:
+    tests:
+      - config_path: "integration_tests/config.json"
+        configured_catalog_path: "integration_tests/configured_catalog.json"

@@ -161,6 +161,31 @@ jobs:
       - run: test -f publish/com.coworkingview.joplin.jpl
       - run: test -f publish/com.coworkingview.joplin.json
 
+  streamdeck:
+    name: Stream Deck plugin
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/streamdeck
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: integrations/streamdeck/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - run: npm run validate
+      - run: npm run pack
+      - uses: actions/upload-artifact@v4
+        with:
+          name: com.coworkingview.prices.streamDeckPlugin
+          path: integrations/streamdeck/com.coworkingview.prices.streamDeckPlugin
+          if-no-files-found: error
+
   matomo:
     name: Matomo plugin
     runs-on: ubuntu-latest
@@ -264,6 +289,30 @@ jobs:
           print("plugin.json ok")
           PY
           php integrations/matomo/CoworkingView/tests/parser.php
+
+  airbyte-coworkingview:
+    name: source-coworkingview manifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: YAML lint
+        run: |
+          python -m pip install 'yamllint==1.35.1'
+          yamllint -c integrations/airbyte/.yamllint.yml \
+            integrations/airbyte/source-coworkingview \
+            integrations/airbyte/upstream-layout
+      - name: Upstream layout matches the connector directory
+        run: |
+          diff -rq \
+            integrations/airbyte/source-coworkingview \
+            integrations/airbyte/upstream-layout/airbyte-integrations/connectors/source-coworkingview
+      - name: airbyte-cdk spec, check, discover and read
+        run: |
+          python -m pip install 'airbyte-cdk==7.39.1'
+          python integrations/airbyte/scripts/validate_manifest.py
 
   libreoffice:
     name: LibreOffice Calc extension

@@ -12,6 +12,10 @@ CoworkingView is not affiliated with or endorsed by Open Source Matters or the J
 
 GNU General Public License version 2 or later. The full text is [LICENSE.txt](mod_coworkingview/LICENSE.txt) inside the package. You may use, study, share, and change this module under that licence. There are no extra restrictions and no commercial key.
 
+## License
+
+The public license page for this module is [LICENSE.txt on main](https://github.com/coworkingview/flex-office-data/blob/main/integrations/joomla/mod_coworkingview/LICENSE.txt). That file is the GNU General Public License version 2. The module is version 2 or later.
+
 The Price Index figures are not covered by the GPL. They are [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The module shows the attribution string the API returns and a link labelled `Data: CoworkingView` to `https://coworkingview.com`.
 
 ## Install
@@ -63,6 +67,8 @@ composer install --no-interaction --prefer-dist
 ./build.sh
 ```
 
-`check.sh` runs `php -l`, the parser fixture tests, and `tools/jed-check.php`. That script applies the JED Checker rules that can run without a Joomla site: the GPL phrase, the `_JEXEC` pattern used by PH2, the manifest (`<licence>`, update server, name, version), language files, and the zip layout. The JED Checker component itself needs a Joomla installation and a database, so CI does not boot that component. `phpcs` uses the Joomla standard from `joomla/coding-standards` 3.0.0-alpha. CI repeats the syntax checks on PHP 8.1, 8.2, and 8.3 and uploads `mod_coworkingview-1.0.0.zip` as an artifact.
+`check.sh` runs `php -l`, the parser fixture tests, and `tools/jed-check.php`. That script applies the JED Checker rules that can run without a Joomla site: the GPL phrase, the `_JEXEC` pattern used by PH2, the manifest (`<licence>`, update server, name, version), language files, and the zip layout. `phpcs` uses the Joomla standard from `joomla/coding-standards` 3.0.0-alpha. CI repeats the syntax checks on PHP 8.1, 8.2, and 8.3 and uploads `mod_coworkingview-1.0.0.zip` as an artifact.
+
+The official component is a separate CI job. `tools/official-jedchecker.sh` downloads Joomla 5.4.10 and JED Checker 2.4.4 (the latest GitHub release), installs both, and calls each installed rule on the zip. The saved result is [docs/jed-checker-report-1.0.0.html](docs/jed-checker-report-1.0.0.html). The job fails when that run reports any error.
 
 Screenshots in [screenshots/](screenshots/) are rendered from `tmpl/default.php` with a live API response. See [docs/JED-LISTING.md](docs/JED-LISTING.md) for the directory listing text.

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description>
+      CoworkingView Workspace Prices. Plug-in code is MIT. Price Index data is CC BY 4.0.
+   </description>
+   <feature id="com.coworkingview.eclipse.feature" version="0.0.0">
+      <category name="coworkingview"/>
+   </feature>
+   <category-def name="coworkingview" label="CoworkingView">
+      <description>
+         Flexible workspace price ranges from the CoworkingView Price Index.
+      </description>
+   </category-def>
+</site>

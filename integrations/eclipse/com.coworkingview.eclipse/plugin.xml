@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.ui.views">
+      <category
+            id="com.coworkingview.eclipse.category"
+            name="CoworkingView">
+      </category>
+      <view
+            category="com.coworkingview.eclipse.category"
+            class="com.coworkingview.eclipse.PricesView"
+            icon="icons/cv16.png"
+            id="com.coworkingview.eclipse.views.prices"
+            name="CoworkingView Workspace Prices"
+            restorable="true">
+      </view>
+   </extension>
+</plugin>

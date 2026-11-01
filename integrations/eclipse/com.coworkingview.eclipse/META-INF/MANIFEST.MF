@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CoworkingView Workspace Prices
+Bundle-SymbolicName: com.coworkingview.eclipse;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: CoworkingView
+Bundle-License: MIT;link="https://opensource.org/licenses/MIT"
+Bundle-DocURL: https://coworkingview.com/en/api
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.jobs,
+ org.eclipse.jface,
+ org.eclipse.swt,
+ org.eclipse.ui
+Import-Package: java.net.http
+Automatic-Module-Name: com.coworkingview.eclipse
+Export-Package: com.coworkingview.eclipse

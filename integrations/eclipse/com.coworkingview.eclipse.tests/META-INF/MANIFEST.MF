@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CoworkingView Workspace Prices Tests
+Bundle-SymbolicName: com.coworkingview.eclipse.tests
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: CoworkingView
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Require-Bundle: com.coworkingview.eclipse,
+ org.junit,
+ org.eclipse.core.runtime,
+ org.eclipse.jface,
+ org.eclipse.swt
+Bundle-ActivationPolicy: lazy
+Import-Package: java.net.http

@@ -23,6 +23,13 @@ cleanup() {
 }
 trap cleanup EXIT
 
+# actions/setup-python puts its own lib directory on LD_LIBRARY_PATH.
+# LibreOffice then loads that libstdc++/libpython and unopkg aborts with
+# std::bad_alloc inside the UNO bridge. The office programs set their own
+# library path.
+unset LD_LIBRARY_PATH
+unset PYTHONHOME
+
 export SAL_USE_VCLPLUGIN=svp
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8

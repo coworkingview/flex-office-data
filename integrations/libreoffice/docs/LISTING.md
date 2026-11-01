@@ -60,7 +60,7 @@ Save the entry, then add one release. Upload the file. Do not make the Download 
 | Compatibility | 7.0 |
 | Operating systems | Linux, Windows, macOS |
 | License | MIT |
-| File | `coworkingview-calc-0.1.0.oxt` (the zip from `./build.sh`) |
+| File | `release/coworkingview-calc-0.1.0.oxt` (the zip from `./build.sh`) |
 
 Release notes:
 
@@ -76,14 +76,21 @@ After **Publish**, a moderator handles the request. That is the current site, no
 
 ## Screenshots to upload
 
-The maintainer guide says screenshots are optional and help the extension show up in search. The older publishing PDF capped a screenshot at 800×600 and said a larger image is resized. Capture these from a real LibreOffice window before upload. They are not in the repository: the headless check does not open the Function Wizard or the Extension Manager.
+Captured from LibreOffice 24.2.7 on an English (USA) locale. Each PNG is at least 1024 pixels wide. Upload these three files with the English entry. The maintainer guide says screenshots are optional and help the extension show up in search.
 
 | File | What it shows |
 |---|---|
-| `01-extension-manager.png` | Extension Manager with **CoworkingView for Calc**, the wordmark icon, and the publisher **CoworkingView** linking to https://coworkingview.com. |
-| `02-function-wizard.png` | Function Wizard, category **Add-In**, `CWV_PRICE` selected, City and Product described. |
-| `03-sheet-berlin.png` | A sheet with `CWV_SPACES`, `CWV_PRICE`, `CWV_CURRENCY`, `CWV_SOURCE` and `CWV_ATTRIBUTION` for berlin, and one cell showing a `CWV:` error for an unknown product. |
-| `04-license.png` | The MIT license page shown while the `.oxt` is added. |
+| [screenshots/sheet-berlin.png](screenshots/sheet-berlin.png) | Calc sheet. `CWV_SPACES("berlin")` is 143, `CWV_PRICE("berlin","flex_desk")` is 214, `CWV_RATE("berlin","flex_desk","p25")` is 199, `CWV_RATE("berlin","day_pass","median")` is 35. The formula bar shows the comma separators English (USA) uses. |
+| [screenshots/function-wizard.png](screenshots/function-wizard.png) | Function Wizard, category **Add-in**, `CWV_PRICE` selected. The signature is `CWV_PRICE(City, Product)` and the description is the median market rate. The other `CWV_` functions are in the list. |
+| [screenshots/extension-manager.png](screenshots/extension-manager.png) | Extension Manager entry **CoworkingView for Calc 0.1.0**, the wordmark icon, the publisher link **CoworkingView**, and the description ending with `Homepage: https://coworkingview.com`. |
+
+![Calc sheet with live CoworkingView results](screenshots/sheet-berlin.png)
+
+![Function Wizard with CWV_PRICE selected](screenshots/function-wizard.png)
+
+![Extension Manager entry](screenshots/extension-manager.png)
+
+English (USA) check, same session: typing `=CWV_PRICE("berlin","flex_desk")` with commas returned **214**. `=CWV_SPACES("berlin")` returned **143**. `=CWV_RATE("berlin","flex_desk","p25")` returned **199**. `=CWV_RATE("berlin","day_pass","median")` returned **35**. `=CWV_CURRENCY("berlin")` returned **EUR**. `=CWV_SOURCE()` returned `Data: CoworkingView https://coworkingview.com`. The status bar read English (USA).
 
 ## What not to put on the page
 

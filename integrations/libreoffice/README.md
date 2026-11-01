@@ -30,6 +30,8 @@ A locale that uses `.` as the decimal separator (for example English (USA)) uses
 =CWV_PRICE("berlin","flex_desk")
 ```
 
+On LibreOffice 24.2.7 with English (USA), that formula returned 214, `=CWV_SPACES("berlin")` returned 143, and `=CWV_RATE("berlin","flex_desk","p25")` returned 199 (1 November 2026).
+
 An empty city is Berlin. The city is the catalogue slug (`berlin`, `bad-homburg`), not a translated name.
 
 ## Functions

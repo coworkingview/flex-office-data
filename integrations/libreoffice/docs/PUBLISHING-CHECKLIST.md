@@ -72,8 +72,8 @@ LibreOffice reads these. A package that fails here never reaches a reviewer in a
 2. Tags: Calc, Spreadsheets, Extensions, Business. Category Calc if that control is separate.
 3. Homepage `https://coworkingview.com`. Repository `https://github.com/coworkingview/flex-office-data`. Logo `docs/logo-150.png`, linked to the same homepage.
 4. Release 0.1.0, compatibility 7.0, Linux + Windows + macOS, license MIT, the `.oxt` uploaded, release notes pasted.
-5. Screenshots from [LISTING.md](LISTING.md) if a desktop LibreOffice is available. They are optional. Do not upload a mock.
-6. Install that same `.oxt` in Extension Manager on 7.x or 24.x, accept the MIT page, restart, and try `=CWV_SOURCE()` and `=CWV_PRICE("berlin","flex_desk")` (or with `;` where the locale requires it).
+5. Screenshots from [LISTING.md](LISTING.md): `docs/screenshots/sheet-berlin.png`, `docs/screenshots/function-wizard.png`, and `docs/screenshots/extension-manager.png`. They were captured from LibreOffice 24.2.7. Do not replace them with a mock.
+6. Install `release/coworkingview-calc-0.1.0.oxt` in Extension Manager on 7.x or 24.x, accept the MIT page, restart, and try `=CWV_SOURCE()` and `=CWV_PRICE("berlin","flex_desk")` (or with `;` where the locale requires it).
 7. Confirm the publisher link opens `https://coworkingview.com` and the icon is the wordmark.
 
-The headless job in CI covers the build, `unopkg add`, and the formula results. It does not open the Extension Manager or the Function Wizard, so those two screenshots are still a manual step.
+The headless job in CI covers the build, `unopkg add`, and the formula results. The three listing screenshots above are the Extension Manager, Function Wizard, and sheet captures.

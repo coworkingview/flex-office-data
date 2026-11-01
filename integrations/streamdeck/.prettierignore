@@ -4,4 +4,5 @@ com.coworkingview.prices.sdPlugin/ui/sdpi-components.js
 com.coworkingview.prices.sdPlugin/logs/
 marketplace/
 *.png
+*.py
 *.streamDeckPlugin

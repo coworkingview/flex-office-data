@@ -37,4 +37,18 @@ describe("icons", () => {
 		assert.equal(bytes.readUInt32BE(16), 288);
 		assert.equal(bytes.readUInt32BE(20), 288);
 	});
+
+	it("provides a 1920 by 960 thumbnail and three gallery renderings", () => {
+		for (const name of [
+			"thumbnail.png",
+			"gallery-keys.png",
+			"gallery-workspace-count.png",
+			"gallery-market-rate.png",
+		]) {
+			const bytes = readFileSync(new URL(`../marketplace/${name}`, import.meta.url));
+			assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", name);
+			assert.equal(bytes.readUInt32BE(16), 1920, name);
+			assert.equal(bytes.readUInt32BE(20), 960, name);
+		}
+	});
 });

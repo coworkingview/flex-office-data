@@ -61,19 +61,19 @@ First release. Workspace Count shows how many coworking spaces a city lists. Mar
 
 Upload `integrations/streamdeck/marketplace/app-icon-288.png`. It is a 288 × 288 PNG of the CoworkingView mark: black serif CV and gold dot on a warm paper background. Do not replace it with a red square, and do not put the word Official on it.
 
-## Screenshots a person must capture
+## Thumbnail and gallery
 
-The manifest icons are not the gallery. Maker Console needs a thumbnail and at least three gallery items, each a 1920 × 960 PNG, shot from the Stream Deck app on macOS or Windows. This repository cannot produce those shots.
+Upload these 1920 × 960 PNGs. They are renderings of neutral rounded keys, labeled RENDERING, with the Berlin figures fetched from the public API. They do not show a branded device.
 
-Capture:
+| File | What it shows |
+| --- | --- |
+| `integrations/streamdeck/marketplace/thumbnail.png` | Both keys: catalogue total and flex desk median |
+| `integrations/streamdeck/marketplace/gallery-keys.png` | The same two titles in a row of blank keys |
+| `integrations/streamdeck/marketplace/gallery-workspace-count.png` | Workspace Count |
+| `integrations/streamdeck/marketplace/gallery-market-rate.png` | Market Rate |
 
-1. **Thumbnail.** A Stream Deck with both keys installed, showing a real city. Workspace Count shows the catalogue total. Market Rate shows a real median, currency, and figure name. Keep extra caption text short.
-2. **Gallery — action list.** The Coworking Prices group with Workspace Count and Market Rate, white icons on the list background.
-3. **Gallery — property inspector.** Market Rate settings: city select populated from the API, and the figure select (flex desk, fixed desk, private office, day pass, meeting room).
-4. **Gallery — another city.** The same keys after changing city, still showing values returned by the API.
-
-Use English. Draw the Stream Deck hardware accurately, or crop to the app. Do not copy another maker's images and do not add website URLs inside the pictures.
+Regenerate them with `python3 integrations/streamdeck/scripts/make-marketplace.py`. The script reads `GET /v1/properties` and `GET /v1/market/rates` for Berlin at the moment it runs.
 
 ## AI declaration
 
-Say in the submission that AI assisted the plugin source, the listing text, and the icon layout derived from the existing CoworkingView mark. The figures on the keys come from the public API, and the gallery must be captured from Stream Deck by a person. Products created entirely with AI are not eligible.
+Say in the submission that AI assisted the plugin source, the listing text, the icon layout, and the gallery renderings. The numbers on those renderings are the live API figures. Products created entirely with AI are not eligible.

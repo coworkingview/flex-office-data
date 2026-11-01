@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "name": "coworkingview-nuxt-playground",
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@coworkingview/nuxt": "file:..",
+    "nuxt": "^4.6.3"
+  }
+}

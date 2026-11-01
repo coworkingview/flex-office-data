@@ -18,6 +18,8 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 
 [Backstage](integrations/backstage/) (`@coworkingview/backstage-plugin-coworkingview`) shows the same prices and spaces on a portal page.
 
+[Nuxt](integrations/nuxt/) (`@coworkingview/nuxt`) auto-imports `useCoworkingProperties` and `useCoworkingRates` for the same two endpoints.
+
 The Python, R, Java and command-line packages read the same public API, follow
 the same [specification](spec/SPEC.md) and are tested against the same
 [fixtures and expected outputs](spec/), so a number is the same whichever of
@@ -145,6 +147,7 @@ clients/swift/      CoworkingView Swift package (Swift Package Index, CocoaPods)
 integrations/matomo/CoworkingView/  Matomo 5 dashboard widget
 integrations/libreoffice/  Calc add-in (CWV_SPACES, CWV_PRICE)
 integrations/backstage/  Backstage frontend plugin
+integrations/nuxt/  `@coworkingview/nuxt` module (`useCoworkingProperties`, `useCoworkingRates`)
 packaging/          AUR, Chocolatey and Snap manifests for cwv
 ```
 

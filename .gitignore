@@ -47,3 +47,6 @@ integrations/backstage/coverage/
 # Thunderbird add-on
 integrations/thunderbird/node_modules/
 integrations/thunderbird/dist/
+# Joomla module build and PHP_CodeSniffer
+integrations/joomla/dist/
+integrations/joomla/vendor/

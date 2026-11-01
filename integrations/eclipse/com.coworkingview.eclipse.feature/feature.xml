@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.coworkingview.eclipse.feature"
+      label="CoworkingView Workspace Prices"
+      version="0.1.0.qualifier"
+      provider-name="CoworkingView">
+
+   <description url="https://coworkingview.com/en/api">
+      An Eclipse view of city-level hot desk, dedicated desk, and private office ranges from the public CoworkingView Price Index.
+      Refresh fetches https://api.coworkingview.com over HTTPS and falls back to a snapshot bundled in the plug-in.
+      No API key and no telemetry. Plug-in code is MIT. Price Index data is CC BY 4.0.
+   </description>
+
+   <copyright>
+      Copyright (c) 2026 CoworkingView
+   </copyright>
+
+   <license url="https://opensource.org/licenses/MIT">
+MIT License
+
+Copyright (c) 2026 CoworkingView
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+The Price Index data shown by this feature is not covered by the MIT License.
+It is licensed under CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+   </requires>
+
+   <plugin
+         id="com.coworkingview.eclipse"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

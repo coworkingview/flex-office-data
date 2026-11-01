@@ -27,6 +27,8 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 
 [LM Studio](integrations/lmstudio/) (`coworkingview/coworkingview-workspace-prices`) gives a local model tools for the same prices and a short catalogue search. That plugin is published with `lms push`.
 
+[Eclipse](integrations/eclipse/) (`com.coworkingview.eclipse.feature`) adds a view, CoworkingView Workspace Prices, for the same Price Index. Install it from the p2 update site. The plug-in code is MIT.
+
 The Python, R, Java and command-line packages read the same public API, follow
 the same [specification](spec/SPEC.md) and are tested against the same
 [fixtures and expected outputs](spec/), so a number is the same whichever of
@@ -169,6 +171,7 @@ integrations/nuxt/  `@coworkingview/nuxt` module (`useCoworkingProperties`, `use
 integrations/thunderbird/  Thunderbird MailExtension (CoworkingView prices)
 integrations/joomla/   Joomla 4/5 site module (CoworkingView Workspace Prices)
 integrations/lmstudio/  LM Studio tools-provider plugin (coworkingview-workspace-prices)
+integrations/eclipse/  Eclipse view (CoworkingView Workspace Prices) and p2 update site
 packaging/          AUR, Chocolatey and Snap manifests for cwv
 ```
 

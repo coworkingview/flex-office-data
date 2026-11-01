@@ -1,0 +1,4673 @@
+{
+  "data": {
+    "cities": [
+      {
+        "city": {
+          "slug": "abu-dhabi",
+          "name": "Abu Dhabi"
+        },
+        "countryCode": "AE",
+        "currency": "AED",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "min": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "max": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "sampleSize": 2
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 2057,
+              "currency": "AED"
+            },
+            "min": {
+              "amount": 914,
+              "currency": "AED"
+            },
+            "max": {
+              "amount": 3200,
+              "currency": "AED"
+            },
+            "sampleSize": 2
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 1400,
+              "currency": "AED"
+            },
+            "min": {
+              "amount": 1400,
+              "currency": "AED"
+            },
+            "max": {
+              "amount": 2200,
+              "currency": "AED"
+            },
+            "sampleSize": 3
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "p25": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "p75": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "sampleSize": 2,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 2057,
+              "currency": "AED"
+            },
+            "p25": {
+              "amount": 1486,
+              "currency": "AED"
+            },
+            "p75": {
+              "amount": 2629,
+              "currency": "AED"
+            },
+            "sampleSize": 2,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 1400,
+              "currency": "AED"
+            },
+            "p25": {
+              "amount": 1400,
+              "currency": "AED"
+            },
+            "p75": {
+              "amount": 1800,
+              "currency": "AED"
+            },
+            "sampleSize": 3,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 2,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 1400,
+          "currency": "AED"
+        },
+        "p75": {
+          "amount": 2200,
+          "currency": "AED"
+        },
+        "min": {
+          "amount": 914,
+          "currency": "AED"
+        },
+        "max": {
+          "amount": 3200,
+          "currency": "AED"
+        },
+        "entryMedian": {
+          "amount": 1453,
+          "currency": "AED"
+        },
+        "entryMin": {
+          "amount": 1069,
+          "currency": "AED"
+        },
+        "entryMax": {
+          "amount": 7535,
+          "currency": "AED"
+        },
+        "sampleSize": 2
+      },
+      {
+        "city": {
+          "slug": "amsterdam",
+          "name": "Amsterdam"
+        },
+        "countryCode": "NL",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 250,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 250,
+              "currency": "EUR"
+            },
+            "sampleSize": 3
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 500,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 225,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 1350,
+              "currency": "EUR"
+            },
+            "sampleSize": 17
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 190,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 150,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 345,
+              "currency": "EUR"
+            },
+            "sampleSize": 5
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 250,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 225,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 250,
+              "currency": "EUR"
+            },
+            "sampleSize": 3,
+            "propertyCount": 3,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 500,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 410,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 500,
+              "currency": "EUR"
+            },
+            "sampleSize": 17,
+            "propertyCount": 6,
+            "operatorCount": 2,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 190,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 150,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 219,
+              "currency": "EUR"
+            },
+            "sampleSize": 5,
+            "propertyCount": 5,
+            "operatorCount": 3,
+            "insufficientData": false
+          }
+        ],
+        "dayPass": {
+          "median": {
+            "amount": 35,
+            "currency": "EUR"
+          },
+          "sampleSize": 5,
+          "propertyCount": 5,
+          "operatorCount": 3,
+          "insufficientData": false
+        },
+        "propertyCount": 7,
+        "operatorCount": 3,
+        "insufficientData": false,
+        "p25": {
+          "amount": 250,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 500,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 150,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 1350,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 345,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 150,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 689,
+          "currency": "EUR"
+        },
+        "sampleSize": 7
+      },
+      {
+        "city": {
+          "slug": "augsburg",
+          "name": "Augsburg"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 310,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 275,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 345,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "bad-homburg",
+          "name": "Bad Homburg"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 285,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 285,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 285,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "barcelona",
+          "name": "Barcelona"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 280,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 175,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 349,
+              "currency": "EUR"
+            },
+            "sampleSize": 10
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 300,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 63,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 449,
+              "currency": "EUR"
+            },
+            "sampleSize": 67
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 150,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 278,
+              "currency": "EUR"
+            },
+            "sampleSize": 13
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 280,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 180,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 325,
+              "currency": "EUR"
+            },
+            "sampleSize": 10,
+            "propertyCount": 10,
+            "operatorCount": 5,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 300,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 170,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 67,
+            "propertyCount": 17,
+            "operatorCount": 4,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 160,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "sampleSize": 13,
+            "propertyCount": 12,
+            "operatorCount": 5,
+            "insufficientData": false
+          }
+        ],
+        "dayPass": {
+          "median": {
+            "amount": 24.2,
+            "currency": "EUR"
+          },
+          "sampleSize": 7,
+          "propertyCount": 6,
+          "operatorCount": 4,
+          "insufficientData": false
+        },
+        "propertyCount": 19,
+        "operatorCount": 6,
+        "insufficientData": false,
+        "p25": {
+          "amount": 169,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 370,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 63,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 449,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 255,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 150,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 1600,
+          "currency": "EUR"
+        },
+        "sampleSize": 19
+      },
+      {
+        "city": {
+          "slug": "berlin",
+          "name": "Berlin"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 310,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 160,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 680,
+              "currency": "EUR"
+            },
+            "sampleSize": 60
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 480,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 70,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 1000,
+              "currency": "EUR"
+            },
+            "sampleSize": 59
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 214,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 80,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 750,
+              "currency": "EUR"
+            },
+            "sampleSize": 72
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 310,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 290,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 421,
+              "currency": "EUR"
+            },
+            "sampleSize": 60,
+            "propertyCount": 56,
+            "operatorCount": 37,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 480,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 550,
+              "currency": "EUR"
+            },
+            "sampleSize": 59,
+            "propertyCount": 38,
+            "operatorCount": 20,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 214,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 292,
+              "currency": "EUR"
+            },
+            "sampleSize": 72,
+            "propertyCount": 66,
+            "operatorCount": 38,
+            "insufficientData": false
+          }
+        ],
+        "dayPass": {
+          "median": {
+            "amount": 35,
+            "currency": "EUR"
+          },
+          "sampleSize": 59,
+          "propertyCount": 55,
+          "operatorCount": 27,
+          "insufficientData": false
+        },
+        "meetingRoom": {
+          "median": {
+            "amount": 32,
+            "currency": "EUR"
+          },
+          "sampleSize": 79,
+          "propertyCount": 51,
+          "operatorCount": 25,
+          "insufficientData": false
+        },
+        "propertyCount": 85,
+        "operatorCount": 48,
+        "insufficientData": false,
+        "p25": {
+          "amount": 219,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 450,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 70,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 1000,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 265,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 80,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 2100,
+          "currency": "EUR"
+        },
+        "sampleSize": 85
+      },
+      {
+        "city": {
+          "slug": "bilbao",
+          "name": "Bilbao"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 259,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 249,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 305,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "bonn",
+          "name": "Bonn"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 449,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 429,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 469,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "bremen",
+          "name": "Bremen"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 2
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 2
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 2,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 2,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 2,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 199,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 469,
+          "currency": "EUR"
+        },
+        "sampleSize": 2
+      },
+      {
+        "city": {
+          "slug": "cambrils",
+          "name": "Cambrils"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 155,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 150,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 160,
+              "currency": "EUR"
+            },
+            "sampleSize": 2
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 155,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 153,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 158,
+              "currency": "EUR"
+            },
+            "sampleSize": 2,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 150,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 160,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 150,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 160,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 150,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 150,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 150,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "chemnitz",
+          "name": "Chemnitz"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 227,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 179,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 275,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "cologne",
+          "name": "Cologne"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 933,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 933,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 933,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 933,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 933,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 933,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 933,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 933,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 933,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 933,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 409,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 1399,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "darmstadt",
+          "name": "Darmstadt"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 254,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 239,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 269,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "dortmund",
+          "name": "Dortmund"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 307,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 249,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 365,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "dresden",
+          "name": "Dresden"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 345,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 239,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 409,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "dubai",
+          "name": "Dubai"
+        },
+        "countryCode": "AE",
+        "currency": "AED",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 1500,
+              "currency": "AED"
+            },
+            "min": {
+              "amount": 1500,
+              "currency": "AED"
+            },
+            "max": {
+              "amount": 1500,
+              "currency": "AED"
+            },
+            "sampleSize": 1
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 5000,
+              "currency": "AED"
+            },
+            "min": {
+              "amount": 5000,
+              "currency": "AED"
+            },
+            "max": {
+              "amount": 5000,
+              "currency": "AED"
+            },
+            "sampleSize": 1
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 1200,
+              "currency": "AED"
+            },
+            "min": {
+              "amount": 1200,
+              "currency": "AED"
+            },
+            "max": {
+              "amount": 1200,
+              "currency": "AED"
+            },
+            "sampleSize": 1
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 1500,
+              "currency": "AED"
+            },
+            "p25": {
+              "amount": 1500,
+              "currency": "AED"
+            },
+            "p75": {
+              "amount": 1500,
+              "currency": "AED"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 5000,
+              "currency": "AED"
+            },
+            "p25": {
+              "amount": 5000,
+              "currency": "AED"
+            },
+            "p75": {
+              "amount": 5000,
+              "currency": "AED"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 1200,
+              "currency": "AED"
+            },
+            "p25": {
+              "amount": 1200,
+              "currency": "AED"
+            },
+            "p75": {
+              "amount": 1200,
+              "currency": "AED"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 1200,
+          "currency": "AED"
+        },
+        "p75": {
+          "amount": 5000,
+          "currency": "AED"
+        },
+        "min": {
+          "amount": 1200,
+          "currency": "AED"
+        },
+        "max": {
+          "amount": 5000,
+          "currency": "AED"
+        },
+        "entryMedian": {
+          "amount": 2029,
+          "currency": "AED"
+        },
+        "entryMin": {
+          "amount": 1029,
+          "currency": "AED"
+        },
+        "entryMax": {
+          "amount": 3915,
+          "currency": "AED"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "dusseldorf",
+          "name": "Düsseldorf"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 299,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 249,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 349,
+              "currency": "EUR"
+            },
+            "sampleSize": 2
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 299,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 274,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 324,
+              "currency": "EUR"
+            },
+            "sampleSize": 2,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 249,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 349,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 249,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 349,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 479,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 249,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 2850,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "erfurt",
+          "name": "Erfurt"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 232,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 149,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "escaldes-engordany",
+          "name": "Escaldes-Engordany"
+        },
+        "countryCode": "AD",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 349,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 279,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 349,
+              "currency": "EUR"
+            },
+            "sampleSize": 10
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 349,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 287,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 349,
+              "currency": "EUR"
+            },
+            "sampleSize": 10,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 2,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 287,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 349,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 279,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 349,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 349,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 349,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 349,
+          "currency": "EUR"
+        },
+        "sampleSize": 2
+      },
+      {
+        "city": {
+          "slug": "eschborn",
+          "name": "Eschborn"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 409,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 409,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 409,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "essen",
+          "name": "Essen"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 355,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 345,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 365,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "frankfurt",
+          "name": "Frankfurt"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 699,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 699,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 699,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 289,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 289,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 289,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 699,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 699,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 699,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 289,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 289,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 289,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 2,
+        "operatorCount": 2,
+        "insufficientData": false,
+        "p25": {
+          "amount": 289,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 699,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 289,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 699,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 457,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 279,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 2850,
+          "currency": "EUR"
+        },
+        "sampleSize": 2
+      },
+      {
+        "city": {
+          "slug": "frankfurt-oder",
+          "name": "Frankfurt (Oder)"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 209,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 209,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 209,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 209,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 209,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 209,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "gelsenkirchen",
+          "name": "Gelsenkirchen"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "gibraltar",
+          "name": "Gibraltar"
+        },
+        "countryCode": "GI",
+        "currency": "GBP",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 489,
+          "currency": "GBP"
+        },
+        "entryMin": {
+          "amount": 489,
+          "currency": "GBP"
+        },
+        "entryMax": {
+          "amount": 489,
+          "currency": "GBP"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "gijon",
+          "name": "Gijón"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 259,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 259,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 259,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "gilching",
+          "name": "Gilching"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "hamburg",
+          "name": "Hamburg"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 5
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 600,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 350,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 800,
+              "currency": "EUR"
+            },
+            "sampleSize": 12
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 295,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 295,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 5
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 5,
+            "propertyCount": 5,
+            "operatorCount": 2,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 600,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 485,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 661,
+              "currency": "EUR"
+            },
+            "sampleSize": 12,
+            "propertyCount": 7,
+            "operatorCount": 2,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 295,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 295,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 5,
+            "propertyCount": 5,
+            "operatorCount": 2,
+            "insufficientData": false
+          }
+        ],
+        "dayPass": {
+          "median": {
+            "amount": 35,
+            "currency": "EUR"
+          },
+          "sampleSize": 7,
+          "propertyCount": 5,
+          "operatorCount": 3,
+          "insufficientData": false
+        },
+        "propertyCount": 12,
+        "operatorCount": 4,
+        "insufficientData": false,
+        "p25": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 600,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 295,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 800,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 409,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 269,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 1199,
+          "currency": "EUR"
+        },
+        "sampleSize": 12
+      },
+      {
+        "city": {
+          "slug": "hanover",
+          "name": "Hanover"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "heidelberg",
+          "name": "Heidelberg"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 419,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 419,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 419,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "iserlohn",
+          "name": "Iserlohn"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 129,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 129,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 129,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "ismaning",
+          "name": "Ismaning"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 225,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 225,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 225,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "kaiserslautern",
+          "name": "Kaiserslautern"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 335,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 335,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 335,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "karlsruhe",
+          "name": "Karlsruhe"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 392,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 385,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "kiel",
+          "name": "Kiel"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 312,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 249,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 375,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "konstanz",
+          "name": "Konstanz"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "l-hospitalet-de-llobregat",
+          "name": "L'Hospitalet de Llobregat"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 109,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 100,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "sampleSize": 3
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 109,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 105,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 155,
+              "currency": "EUR"
+            },
+            "sampleSize": 3,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 100,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 200,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 100,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 200,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 300,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 300,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 300,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "leipzig",
+          "name": "Leipzig"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 250,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 250,
+              "currency": "EUR"
+            },
+            "sampleSize": 5
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 250,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 250,
+              "currency": "EUR"
+            },
+            "sampleSize": 5,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 200,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 250,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 200,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 250,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 242,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 200,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 295,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "leverkusen",
+          "name": "Leverkusen"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "lisboa",
+          "name": "Lisboa"
+        },
+        "countryCode": "PT",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 5
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 411,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 5,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 411,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 289,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 219,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "london",
+          "name": "London"
+        },
+        "countryCode": "GB",
+        "currency": "GBP",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 350,
+              "currency": "GBP"
+            },
+            "min": {
+              "amount": 350,
+              "currency": "GBP"
+            },
+            "max": {
+              "amount": 350,
+              "currency": "GBP"
+            },
+            "sampleSize": 4
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 580,
+              "currency": "GBP"
+            },
+            "min": {
+              "amount": 313,
+              "currency": "GBP"
+            },
+            "max": {
+              "amount": 1950,
+              "currency": "GBP"
+            },
+            "sampleSize": 35
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 350,
+              "currency": "GBP"
+            },
+            "min": {
+              "amount": 250,
+              "currency": "GBP"
+            },
+            "max": {
+              "amount": 400,
+              "currency": "GBP"
+            },
+            "sampleSize": 13
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 350,
+              "currency": "GBP"
+            },
+            "p25": {
+              "amount": 350,
+              "currency": "GBP"
+            },
+            "p75": {
+              "amount": 350,
+              "currency": "GBP"
+            },
+            "sampleSize": 4,
+            "propertyCount": 4,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 580,
+              "currency": "GBP"
+            },
+            "p25": {
+              "amount": 490,
+              "currency": "GBP"
+            },
+            "p75": {
+              "amount": 660,
+              "currency": "GBP"
+            },
+            "sampleSize": 35,
+            "propertyCount": 32,
+            "operatorCount": 2,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 350,
+              "currency": "GBP"
+            },
+            "p25": {
+              "amount": 250,
+              "currency": "GBP"
+            },
+            "p75": {
+              "amount": 350,
+              "currency": "GBP"
+            },
+            "sampleSize": 13,
+            "propertyCount": 13,
+            "operatorCount": 3,
+            "insufficientData": false
+          }
+        ],
+        "dayPass": {
+          "median": {
+            "amount": 45,
+            "currency": "GBP"
+          },
+          "sampleSize": 36,
+          "propertyCount": 36,
+          "operatorCount": 3,
+          "insufficientData": false
+        },
+        "meetingRoom": {
+          "median": {
+            "amount": 44,
+            "currency": "GBP"
+          },
+          "sampleSize": 33,
+          "propertyCount": 33,
+          "operatorCount": 2,
+          "insufficientData": false
+        },
+        "propertyCount": 40,
+        "operatorCount": 4,
+        "insufficientData": false,
+        "p25": {
+          "amount": 350,
+          "currency": "GBP"
+        },
+        "p75": {
+          "amount": 620,
+          "currency": "GBP"
+        },
+        "min": {
+          "amount": 250,
+          "currency": "GBP"
+        },
+        "max": {
+          "amount": 1950,
+          "currency": "GBP"
+        },
+        "entryMedian": {
+          "amount": 429,
+          "currency": "GBP"
+        },
+        "entryMin": {
+          "amount": 195,
+          "currency": "GBP"
+        },
+        "entryMax": {
+          "amount": 2400,
+          "currency": "GBP"
+        },
+        "sampleSize": 40
+      },
+      {
+        "city": {
+          "slug": "luebeck",
+          "name": "Lübeck"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 309,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 309,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 309,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "madrid",
+          "name": "Madrid"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 260,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 197,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 349,
+              "currency": "EUR"
+            },
+            "sampleSize": 9
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 370,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 275,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 660,
+              "currency": "EUR"
+            },
+            "sampleSize": 26
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 175,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 85,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 200,
+              "currency": "EUR"
+            },
+            "sampleSize": 13
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 260,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 249,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 280,
+              "currency": "EUR"
+            },
+            "sampleSize": 9,
+            "propertyCount": 7,
+            "operatorCount": 5,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 370,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 334,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 449,
+              "currency": "EUR"
+            },
+            "sampleSize": 26,
+            "propertyCount": 8,
+            "operatorCount": 3,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 175,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 130,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "sampleSize": 13,
+            "propertyCount": 6,
+            "operatorCount": 4,
+            "insufficientData": false
+          }
+        ],
+        "dayPass": {
+          "median": {
+            "amount": 22,
+            "currency": "EUR"
+          },
+          "sampleSize": 11,
+          "propertyCount": 7,
+          "operatorCount": 4,
+          "insufficientData": false
+        },
+        "meetingRoom": {
+          "median": {
+            "amount": 28,
+            "currency": "EUR"
+          },
+          "sampleSize": 8,
+          "propertyCount": 6,
+          "operatorCount": 3,
+          "insufficientData": false
+        },
+        "propertyCount": 11,
+        "operatorCount": 6,
+        "insufficientData": false,
+        "p25": {
+          "amount": 200,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 385,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 85,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 660,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 335,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 85,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 1980,
+          "currency": "EUR"
+        },
+        "sampleSize": 11
+      },
+      {
+        "city": {
+          "slug": "malaga",
+          "name": "Málaga"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 190,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 179,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 350,
+              "currency": "EUR"
+            },
+            "sampleSize": 7
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 69,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 491,
+              "currency": "EUR"
+            },
+            "sampleSize": 14
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 90,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 390,
+              "currency": "EUR"
+            },
+            "sampleSize": 9
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 190,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 185,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 299,
+              "currency": "EUR"
+            },
+            "sampleSize": 7,
+            "propertyCount": 7,
+            "operatorCount": 4,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 322,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 14,
+            "propertyCount": 4,
+            "operatorCount": 2,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 139,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 225,
+              "currency": "EUR"
+            },
+            "sampleSize": 9,
+            "propertyCount": 5,
+            "operatorCount": 3,
+            "insufficientData": false
+          }
+        ],
+        "dayPass": {
+          "median": {
+            "amount": 24,
+            "currency": "EUR"
+          },
+          "sampleSize": 7,
+          "propertyCount": 5,
+          "operatorCount": 3,
+          "insufficientData": false
+        },
+        "propertyCount": 7,
+        "operatorCount": 4,
+        "insufficientData": false,
+        "p25": {
+          "amount": 179,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 69,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 491,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 195,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 90,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 259,
+          "currency": "EUR"
+        },
+        "sampleSize": 7
+      },
+      {
+        "city": {
+          "slug": "manchester",
+          "name": "Manchester"
+        },
+        "countryCode": "GB",
+        "currency": "GBP",
+        "byType": [
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 225,
+              "currency": "GBP"
+            },
+            "min": {
+              "amount": 179,
+              "currency": "GBP"
+            },
+            "max": {
+              "amount": 270,
+              "currency": "GBP"
+            },
+            "sampleSize": 2
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 225,
+              "currency": "GBP"
+            },
+            "p25": {
+              "amount": 202,
+              "currency": "GBP"
+            },
+            "p75": {
+              "amount": 247,
+              "currency": "GBP"
+            },
+            "sampleSize": 2,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 2,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 179,
+          "currency": "GBP"
+        },
+        "p75": {
+          "amount": 270,
+          "currency": "GBP"
+        },
+        "min": {
+          "amount": 179,
+          "currency": "GBP"
+        },
+        "max": {
+          "amount": 270,
+          "currency": "GBP"
+        },
+        "entryMedian": {
+          "amount": 225,
+          "currency": "GBP"
+        },
+        "entryMin": {
+          "amount": 179,
+          "currency": "GBP"
+        },
+        "entryMax": {
+          "amount": 270,
+          "currency": "GBP"
+        },
+        "sampleSize": 2
+      },
+      {
+        "city": {
+          "slug": "mannheim",
+          "name": "Mannheim"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 2
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 2
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 2,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 2,
+            "propertyCount": 2,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 2,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 295,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "sampleSize": 2
+      },
+      {
+        "city": {
+          "slug": "marbella",
+          "name": "Marbella"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 199,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 199,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 199,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "metzingen",
+          "name": "Metzingen"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 175,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 175,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 175,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "moenchengladbach",
+          "name": "Mönchengladbach"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 239,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 239,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 239,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "monheim-am-rhein",
+          "name": "Monheim am Rhein"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 312,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 269,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 355,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "munich",
+          "name": "Munich"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 400,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 5
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 250,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 5
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 5,
+            "propertyCount": 5,
+            "operatorCount": 2,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 5,
+            "propertyCount": 5,
+            "operatorCount": 2,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 5,
+        "operatorCount": 2,
+        "insufficientData": false,
+        "p25": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 250,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 250,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 2850,
+          "currency": "EUR"
+        },
+        "sampleSize": 5
+      },
+      {
+        "city": {
+          "slug": "neu-isenburg",
+          "name": "Neu-Isenburg"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 325,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 325,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 325,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "neuss",
+          "name": "Neuss"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 179,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 179,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 179,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "neustadt-an-der-weinstrasse",
+          "name": "Neustadt an der Weinstraße"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 499,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 399,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 499,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 399,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "nuremberg",
+          "name": "Nuremberg"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 239,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 219,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 295,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "oberhausen",
+          "name": "Oberhausen"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 335,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 335,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 335,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "oldenburg",
+          "name": "Oldenburg"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 279,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 279,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 279,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "oviedo",
+          "name": "Oviedo"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 215,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 215,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 215,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "palma",
+          "name": "Palma"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 217,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 155,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 279,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "ratingen",
+          "name": "Ratingen"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 297,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 279,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "regensburg",
+          "name": "Regensburg"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "sabadell",
+          "name": "Sabadell"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 150,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 150,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 150,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 153,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 117,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 175,
+              "currency": "EUR"
+            },
+            "sampleSize": 4
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 130,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 130,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 130,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 150,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 150,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 150,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 153,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 142,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 161,
+              "currency": "EUR"
+            },
+            "sampleSize": 4,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 130,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 130,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 130,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 130,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 156,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 117,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 175,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 130,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 130,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 130,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "schwetzingen",
+          "name": "Schwetzingen"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 239,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 239,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 239,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "sevilla",
+          "name": "Sevilla"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 165,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 279,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "stuttgart",
+          "name": "Stuttgart"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 320,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 269,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 439,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "teltow",
+          "name": "Teltow"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 315,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "unterfoehring",
+          "name": "Unterföhring"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 335,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 295,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 375,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "utrecht",
+          "name": "Utrecht"
+        },
+        "countryCode": "NL",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "sampleSize": 1
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 199,
+              "currency": "EUR"
+            },
+            "sampleSize": 1,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 199,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 199,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 199,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 199,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 199,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 199,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 199,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      },
+      {
+        "city": {
+          "slug": "valencia",
+          "name": "Valencia"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 220,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 150,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 450,
+              "currency": "EUR"
+            },
+            "sampleSize": 11
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 449,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 359,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 449,
+              "currency": "EUR"
+            },
+            "sampleSize": 5
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 175,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 170,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 175,
+              "currency": "EUR"
+            },
+            "sampleSize": 3
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {
+              "amount": 220,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 213,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 220,
+              "currency": "EUR"
+            },
+            "sampleSize": 11,
+            "propertyCount": 5,
+            "operatorCount": 4,
+            "insufficientData": false
+          },
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 449,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 370,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 449,
+              "currency": "EUR"
+            },
+            "sampleSize": 5,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {
+              "amount": 175,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 173,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 175,
+              "currency": "EUR"
+            },
+            "sampleSize": 3,
+            "propertyCount": 3,
+            "operatorCount": 2,
+            "insufficientData": false
+          }
+        ],
+        "meetingRoom": {
+          "median": {
+            "amount": 25,
+            "currency": "EUR"
+          },
+          "sampleSize": 9,
+          "propertyCount": 5,
+          "operatorCount": 4,
+          "insufficientData": false
+        },
+        "propertyCount": 6,
+        "operatorCount": 5,
+        "insufficientData": false,
+        "p25": {
+          "amount": 205,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 370,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 150,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 450,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 220,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 150,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 449,
+          "currency": "EUR"
+        },
+        "sampleSize": 6
+      },
+      {
+        "city": {
+          "slug": "walldorf",
+          "name": "Walldorf"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 355,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 355,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 355,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "wiesbaden",
+          "name": "Wiesbaden"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [],
+        "figures": [],
+        "propertyCount": 0,
+        "operatorCount": 0,
+        "insufficientData": false,
+        "p25": null,
+        "p75": null,
+        "entryMedian": {
+          "amount": 459,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 459,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 459,
+          "currency": "EUR"
+        },
+        "sampleSize": 0
+      },
+      {
+        "city": {
+          "slug": "zaragoza",
+          "name": "Zaragoza"
+        },
+        "countryCode": "ES",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 299,
+              "currency": "EUR"
+            },
+            "min": {
+              "amount": 239,
+              "currency": "EUR"
+            },
+            "max": {
+              "amount": 299,
+              "currency": "EUR"
+            },
+            "sampleSize": 5
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "private_office",
+            "median": {
+              "amount": 299,
+              "currency": "EUR"
+            },
+            "p25": {
+              "amount": 246,
+              "currency": "EUR"
+            },
+            "p75": {
+              "amount": 299,
+              "currency": "EUR"
+            },
+            "sampleSize": 5,
+            "propertyCount": 1,
+            "operatorCount": 1,
+            "insufficientData": false
+          }
+        ],
+        "propertyCount": 1,
+        "operatorCount": 1,
+        "insufficientData": false,
+        "p25": {
+          "amount": 246,
+          "currency": "EUR"
+        },
+        "p75": {
+          "amount": 299,
+          "currency": "EUR"
+        },
+        "min": {
+          "amount": 239,
+          "currency": "EUR"
+        },
+        "max": {
+          "amount": 299,
+          "currency": "EUR"
+        },
+        "entryMedian": {
+          "amount": 229,
+          "currency": "EUR"
+        },
+        "entryMin": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "entryMax": {
+          "amount": 299,
+          "currency": "EUR"
+        },
+        "sampleSize": 1
+      }
+    ],
+    "unpublished": [],
+    "totalProperties": 218,
+    "totalPricePoints": 557,
+    "asOf": "2026-10-31T22:12:47.295Z",
+    "license": "CC-BY-4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied.",
+    "scope": "This licence covers the CoworkingView Price Index and catalogue data in this dataset: prices and price statistics, space and operator names, and descriptions written by CoworkingView. It does not cover, and this dataset does not contain: photos, logos, reviews or ratings, data obtained from Google, or any other content of coworkingview.com, its API or MCP server, which remain subject to their own terms. Names are included for identification only; no trademark rights in CoworkingView or operator names and marks are licensed.",
+    "copyright": "Source: CoworkingView Price Index (https://www.coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied."
+  },
+  "meta": {
+    "contractVersion": "1.0.0"
+  }
+}

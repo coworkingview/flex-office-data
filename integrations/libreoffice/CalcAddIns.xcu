@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry" xmlns:xs="http://www.w3.org/2001/XMLSchema" oor:name="CalcAddIns" oor:package="org.openoffice.Office">
+ <node oor:name="AddInInfo">
+  <node oor:name="com.coworkingview.calc.CoworkingView" oor:op="replace">
+   <node oor:name="AddInFunctions">
+    <node oor:name="CWV_SPACES" oor:op="replace">
+     <prop oor:name="DisplayName">
+      <value xml:lang="en">CWV_SPACES</value>
+     </prop>
+     <prop oor:name="Description">
+      <value xml:lang="en">Number of coworking workspace listings published for a city.</value>
+     </prop>
+     <prop oor:name="Category">
+      <value>Add-In</value>
+     </prop>
+     <prop oor:name="CompatibilityName">
+      <value xml:lang="en">CWV_SPACES</value>
+     </prop>
+     <node oor:name="Parameters">
+      <node oor:name="City" oor:op="replace">
+       <prop oor:name="DisplayName">
+        <value xml:lang="en">City</value>
+       </prop>
+       <prop oor:name="Description">
+        <value xml:lang="en">City slug, for example berlin. Blank uses berlin.</value>
+       </prop>
+      </node>
+     </node>
+    </node>
+    <node oor:name="CWV_PRICE" oor:op="replace">
+     <prop oor:name="DisplayName">
+      <value xml:lang="en">CWV_PRICE</value>
+     </prop>
+     <prop oor:name="Description">
+      <value xml:lang="en">Median market rate for one product in a city. The amount is in that city's currency.</value>
+     </prop>
+     <prop oor:name="Category">
+      <value>Add-In</value>
+     </prop>
+     <prop oor:name="CompatibilityName">
+      <value xml:lang="en">CWV_PRICE</value>
+     </prop>
+     <node oor:name="Parameters">
+      <node oor:name="City" oor:op="replace">
+       <prop oor:name="DisplayName">
+        <value xml:lang="en">City</value>
+       </prop>
+       <prop oor:name="Description">
+        <value xml:lang="en">City slug, for example berlin. Blank uses berlin.</value>
+       </prop>
+      </node>
+      <node oor:name="Product" oor:op="replace">
+       <prop oor:name="DisplayName">
+        <value xml:lang="en">Product</value>
+       </prop>
+       <prop oor:name="Description">
+        <value xml:lang="en">Product code, for example flex_desk, fix_desk, private_office, day_pass, or meeting_room.</value>
+       </prop>
+      </node>
+     </node>
+    </node>
+    <node oor:name="CWV_RATE" oor:op="replace">
+     <prop oor:name="DisplayName">
+      <value xml:lang="en">CWV_RATE</value>
+     </prop>
+     <prop oor:name="Description">
+      <value xml:lang="en">One published price statistic for a product: median, min, max, p25, or p75.</value>
+     </prop>
+     <prop oor:name="Category">
+      <value>Add-In</value>
+     </prop>
+     <prop oor:name="CompatibilityName">
+      <value xml:lang="en">CWV_RATE</value>
+     </prop>
+     <node oor:name="Parameters">
+      <node oor:name="City" oor:op="replace">
+       <prop oor:name="DisplayName">
+        <value xml:lang="en">City</value>
+       </prop>
+       <prop oor:name="Description">
+        <value xml:lang="en">City slug, for example berlin. Blank uses berlin.</value>
+       </prop>
+      </node>
+      <node oor:name="Product" oor:op="replace">
+       <prop oor:name="DisplayName">
+        <value xml:lang="en">Product</value>
+       </prop>
+       <prop oor:name="Description">
+        <value xml:lang="en">Product code, for example flex_desk or day_pass.</value>
+       </prop>
+      </node>
+      <node oor:name="Stat" oor:op="replace">
+       <prop oor:name="DisplayName">
+        <value xml:lang="en">Stat</value>
+       </prop>
+       <prop oor:name="Description">
+        <value xml:lang="en">One of median, min, max, p25, p75.</value>
+       </prop>
+      </node>
+     </node>
+    </node>
+    <node oor:name="CWV_CURRENCY" oor:op="replace">
+     <prop oor:name="DisplayName">
+      <value xml:lang="en">CWV_CURRENCY</value>
+     </prop>
+     <prop oor:name="Description">
+      <value xml:lang="en">ISO currency code of the city price index, for example EUR.</value>
+     </prop>
+     <prop oor:name="Category">
+      <value>Add-In</value>
+     </prop>
+     <prop oor:name="CompatibilityName">
+      <value xml:lang="en">CWV_CURRENCY</value>
+     </prop>
+     <node oor:name="Parameters">
+      <node oor:name="City" oor:op="replace">
+       <prop oor:name="DisplayName">
+        <value xml:lang="en">City</value>
+       </prop>
+       <prop oor:name="Description">
+        <value xml:lang="en">City slug, for example berlin. Blank uses berlin.</value>
+       </prop>
+      </node>
+     </node>
+    </node>
+    <node oor:name="CWV_SAMPLE" oor:op="replace">
+     <prop oor:name="DisplayName">
+      <value xml:lang="en">CWV_SAMPLE</value>
+     </prop>
+     <prop oor:name="Description">
+      <value xml:lang="en">Number of price observations behind that product.</value>
+     </prop>
+     <prop oor:name="Category">
+      <value>Add-In</value>
+     </prop>
+     <prop oor:name="CompatibilityName">
+      <value xml:lang="en">CWV_SAMPLE</value>
+     </prop>
+     <node oor:name="Parameters">
+      <node oor:name="City" oor:op="replace">
+       <prop oor:name="DisplayName">
+        <value xml:lang="en">City</value>
+       </prop>
+       <prop oor:name="Description">
+        <value xml:lang="en">City slug, for example berlin. Blank uses berlin.</value>
+       </prop>
+      </node>
+      <node oor:name="Product" oor:op="replace">
+       <prop oor:name="DisplayName">
+        <value xml:lang="en">Product</value>
+       </prop>
+       <prop oor:name="Description">
+        <value xml:lang="en">Product code, for example flex_desk or day_pass.</value>
+       </prop>
+      </node>
+     </node>
+    </node>
+    <node oor:name="CWV_ASOF" oor:op="replace">
+     <prop oor:name="DisplayName">
+      <value xml:lang="en">CWV_ASOF</value>
+     </prop>
+     <prop oor:name="Description">
+      <value xml:lang="en">Publication timestamp of the price index (asOf).</value>
+     </prop>
+     <prop oor:name="Category">
+      <value>Add-In</value>
+     </prop>
+     <prop oor:name="CompatibilityName">
+      <value xml:lang="en">CWV_ASOF</value>
+     </prop>
+     <node oor:name="Parameters">
+      <node oor:name="City" oor:op="replace">
+       <prop oor:name="DisplayName">
+        <value xml:lang="en">City</value>
+       </prop>
+       <prop oor:name="Description">
+        <value xml:lang="en">City slug, for example berlin. Blank uses berlin.</value>
+       </prop>
+      </node>
+     </node>
+    </node>
+    <node oor:name="CWV_SOURCE" oor:op="replace">
+     <prop oor:name="DisplayName">
+      <value xml:lang="en">CWV_SOURCE</value>
+     </prop>
+     <prop oor:name="Description">
+      <value xml:lang="en">Credit line for the CoworkingView data.</value>
+     </prop>
+     <prop oor:name="Category">
+      <value>Add-In</value>
+     </prop>
+     <prop oor:name="CompatibilityName">
+      <value xml:lang="en">CWV_SOURCE</value>
+     </prop>
+    </node>
+    <node oor:name="CWV_ATTRIBUTION" oor:op="replace">
+     <prop oor:name="DisplayName">
+      <value xml:lang="en">CWV_ATTRIBUTION</value>
+     </prop>
+     <prop oor:name="Description">
+      <value xml:lang="en">Attribution text shipped with the price index. Keep it with any figure you publish.</value>
+     </prop>
+     <prop oor:name="Category">
+      <value>Add-In</value>
+     </prop>
+     <prop oor:name="CompatibilityName">
+      <value xml:lang="en">CWV_ATTRIBUTION</value>
+     </prop>
+     <node oor:name="Parameters">
+      <node oor:name="City" oor:op="replace">
+       <prop oor:name="DisplayName">
+        <value xml:lang="en">City</value>
+       </prop>
+       <prop oor:name="Description">
+        <value xml:lang="en">City slug, for example berlin. Blank uses berlin.</value>
+       </prop>
+      </node>
+     </node>
+    </node>
+   </node>
+  </node>
+ </node>
+</oor:component-data>

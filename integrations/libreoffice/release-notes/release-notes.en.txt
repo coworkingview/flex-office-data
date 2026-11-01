@@ -1,0 +1,7 @@
+0.1.0
+
+Initial release for LibreOffice 7.0 and newer, including 24.x, on every platform.
+
+Functions: CWV_SPACES, CWV_PRICE, CWV_RATE, CWV_CURRENCY, CWV_SAMPLE, CWV_ASOF, CWV_SOURCE, CWV_ATTRIBUTION.
+
+CWV_PRICE is the published median. CWV_SPACES is the catalogue count, not the price-index sample. The extension does not copy workspace listings.

@@ -1,0 +1,7 @@
+CoworkingView for Calc adds spreadsheet functions for the public CoworkingView catalogue and price index.
+
+CWV_SPACES returns how many workspace listings a city has. CWV_PRICE returns the median market rate for a product such as flex_desk or day_pass. CWV_SOURCE returns the data credit. No API key is required.
+
+Only the city you enter is sent to api.coworkingview.com, plus the fixed locale the API requires. Spreadsheet contents are not sent.
+
+Homepage: https://coworkingview.com

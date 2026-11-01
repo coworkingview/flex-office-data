@@ -1,10 +1,10 @@
 {
     "name": "CoworkingView",
-    "description": "Flexible office price medians for one city from the CoworkingView Price Index.",
+    "description": "Flexible office price medians for one city. Loads api.coworkingview.com; no visitor data is sent.",
     "version": "0.1.0",
     "theme": false,
     "license": "GPL-3.0+",
-    "keywords": ["coworking", "flexible-office", "price-index", "office-prices"],
+    "keywords": ["widget", "dashboard", "coworking", "flexible-office", "price-index", "office-prices"],
     "homepage": "https://coworkingview.com",
     "authors": [
         {
@@ -17,10 +17,11 @@
         "email": "info@coworkingview.com",
         "issues": "https://github.com/coworkingview/flex-office-data/issues",
         "source": "https://github.com/coworkingview/flex-office-data/tree/main/integrations/matomo/CoworkingView",
-        "docs": "https://coworkingview.com"
+        "docs": "https://github.com/coworkingview/flex-office-data/blob/main/integrations/matomo/CoworkingView/docs/index.md"
     },
     "require": {
-        "matomo": ">=5.0.0-b1,<6.0.0-b1"
+        "matomo": ">=5.0.0-b1,<6.0.0-b1",
+        "php": ">=8.1.0"
     },
-    "category": "insights"
+    "category": "integration"
 }

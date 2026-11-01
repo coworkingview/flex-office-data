@@ -1,28 +1,41 @@
 # FAQ
 
-## Does the widget track visitors?
+## Does this plugin send data to external services?
 
-No. It does not register a tracker and it does not send visitor data anywhere.
+Yes. The Matomo server calls `https://api.coworkingview.com` when a dashboard containing the widget is viewed.
 
-## What is sent to CoworkingView?
+The requests are:
 
-Only the chosen city. The Matomo server calls `GET /v1/market/rates?city=<city>&locale=en` and `GET /v1/properties?city=<city>&locale=en&pageSize=1` on `https://api.coworkingview.com`. `locale=en` is fixed because the API requires it. `pageSize=1` is sent so the widget can read `meta.pagination.total` without a page of listings. No API key is sent. No visitor data is sent.
+- `GET /v1/market/rates?city=<city>&locale=en`
+- `GET /v1/properties?city=<city>&locale=en&pageSize=1`
+
+`city` is the slug from the system setting or, when a user has set one, from the personal setting. `locale=en` is fixed because the API returns HTTP 400 without it. `pageSize=1` is sent so the workspace response is only the count in `meta.pagination.total`.
+
+No API key is sent. No visitor id, user id, page URL, or analytics payload is sent. The browser does not call the API. The plugin does not load an external script or image.
 
 ## Where do I set the city?
 
-A superuser sets the default under **Administration → System → General settings**. The default is `berlin`. Each user can set another city under **Personal → Settings**. Leave the personal value empty to use the system city.
+A superuser sets the default under **Administration > System > General settings**, section CoworkingView. The default is `berlin`.
 
-## What do the numbers mean?
+Each user can set another city under **Personal > Settings**. Leave that value empty to use the system city.
 
-Market-rate rows come from `figures` on the city (or `byType` when `figures` is empty): median, 25th percentile, 75th percentile and sample size, when those fields are present. `dayPass` and `meetingRoom` are separate objects on the same city and are shown too.
+## How often is the data refreshed?
 
-The workspace count is `meta.pagination.total`. It is a different number from `propertyCount` on the rates payload.
+A successful response is cached for about 12 hours. The next dashboard view after that fetches again. A failed request is not cached.
 
-Monthly rows come from `figures` and `byType`. Day pass is per day. Meeting room is per hour. The API does not send a unit field; this is the same rule as the other CoworkingView clients.
+## What happens if the API is down?
 
-## What if loading fails?
+The widget stays on the dashboard and says the prices or the workspace count could not be loaded. If the API returned a problem title or detail, that text is included. The next view tries again.
 
-The widget stays on the dashboard and says the data could not be loaded. A failed request is not cached. The next time the widget renders, it tries again.
+## What do the columns mean?
+
+The product name is `optionType` (or `dayPass` / `meetingRoom`). Median, 25th percentile, and 75th percentile are the `amount` and `currency` on those objects. Sample size is `sampleSize`. A dash means that field was not in the response.
+
+The workspace line is `meta.pagination.total`. It is a different number from `propertyCount` on the rates payload.
+
+## Which Matomo versions are supported?
+
+Matomo 5.x, from `5.0.0-b1` up to but not including `6.0.0-b1`, on PHP 8.1 or newer.
 
 ## Where does the link go?
 

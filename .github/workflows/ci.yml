@@ -226,6 +226,12 @@ jobs:
               raise SystemExit("unexpected homepage")
           if plugin["require"].get("matomo") != ">=5.0.0-b1,<6.0.0-b1":
               raise SystemExit("unexpected matomo requirement")
+          if plugin["require"].get("php") != ">=8.1.0":
+              raise SystemExit("unexpected php requirement")
+          if plugin.get("category") != "integration":
+              raise SystemExit("unexpected category")
+          if "api.coworkingview.com" not in plugin["description"]:
+              raise SystemExit("description must name the external API")
           if not plugin["keywords"]:
               raise SystemExit("keywords are required")
           for keyword in plugin["keywords"]:

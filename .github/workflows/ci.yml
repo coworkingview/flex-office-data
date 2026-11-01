@@ -444,3 +444,26 @@ jobs:
       - run: npm run prepack
       - run: npm run lint
       - run: npm run test
+
+  thunderbird:
+    name: Thunderbird add-on
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/thunderbird
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: integrations/thunderbird/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: ./build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coworkingview-workspace-prices-0.1.0.xpi
+          path: integrations/thunderbird/dist/coworkingview-workspace-prices-0.1.0.xpi
+          if-no-files-found: error

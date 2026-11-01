@@ -1,0 +1,231 @@
+{
+  "extensionName": {
+    "message": "CoworkingView – Workspace Prices",
+    "description": "Add-on name in the Add-ons Manager."
+  },
+  "extensionDescription": {
+    "message": "Flexible workspace prices by city, from the message or compose window. Sends the city slug to api.coworkingview.com. Does not read your messages.",
+    "description": "Short description in the Add-ons Manager."
+  },
+  "buttonLabel": {
+    "message": "CoworkingView prices",
+    "description": "Label and tooltip of the message display and compose toolbar button."
+  },
+  "popupTitle": {
+    "message": "CoworkingView prices",
+    "description": "Popup heading."
+  },
+  "cityLabel": {
+    "message": "City",
+    "description": "Label for the city selector."
+  },
+  "refresh": {
+    "message": "Refresh",
+    "description": "Reloads prices for the selected city."
+  },
+  "colProduct": {
+    "message": "Product",
+    "description": "Table column."
+  },
+  "colMedian": {
+    "message": "Median",
+    "description": "Table column for the median."
+  },
+  "colP25": {
+    "message": "25th",
+    "description": "Table column for the 25th percentile."
+  },
+  "colP75": {
+    "message": "75th",
+    "description": "Table column for the 75th percentile."
+  },
+  "colSample": {
+    "message": "Sample",
+    "description": "Table column for the number of observations."
+  },
+  "loading": {
+    "message": "Loading prices…",
+    "description": "Status while a request is in flight."
+  },
+  "workspaceCount": {
+    "message": "$COUNT$ workspace listings in this city",
+    "description": "Catalogue size from meta.pagination.total. Not the price-index propertyCount.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "143"
+      }
+    }
+  },
+  "workspaceUnavailable": {
+    "message": "The workspace count could not be loaded.",
+    "description": "Shown when GET /v1/properties fails and the price table is still shown."
+  },
+  "asOf": {
+    "message": "Figures as of $DATE$ ($RAW$).",
+    "description": "Price-index timestamp. RAW is the API asOf string, unchanged.",
+    "placeholders": {
+      "date": {
+        "content": "$1",
+        "example": "30 Oct 2026, 13:21"
+      },
+      "raw": {
+        "content": "$2",
+        "example": "2026-10-30T13:21:31.959Z"
+      }
+    }
+  },
+  "licenseLink": {
+    "message": "CC BY 4.0",
+    "description": "Link text for data.licenseUrl."
+  },
+  "homeLink": {
+    "message": "coworkingview.com",
+    "description": "Link to the publisher site."
+  },
+  "optionsLink": {
+    "message": "Default city",
+    "description": "Opens the options page."
+  },
+  "lowConfidence": {
+    "message": "fewer than 10 observations",
+    "description": "Shown when sampleSize is below 10."
+  },
+  "notPublished": {
+    "message": "—",
+    "description": "Shown when a percentile is absent. Not a zero."
+  },
+  "errorUnknownCity": {
+    "message": "That city is not in the published price index.",
+    "description": "The slug was not in data.cities."
+  },
+  "errorBadCity": {
+    "message": "Enter a city slug such as berlin.",
+    "description": "The slug failed validation."
+  },
+  "errorBadResponse": {
+    "message": "The API response could not be read.",
+    "description": "Non-JSON body or a missing required field."
+  },
+  "errorRateLimit": {
+    "message": "The API is rate limiting requests. Try again in a moment.",
+    "description": "HTTP 429 after the single retry."
+  },
+  "errorApi": {
+    "message": "The API returned an error: $DETAIL$",
+    "description": "Problem JSON detail from the API, unchanged.",
+    "placeholders": {
+      "detail": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorNetwork": {
+    "message": "Could not reach api.coworkingview.com.",
+    "description": "Connection failure."
+  },
+  "attributionMissing": {
+    "message": "The response did not include the CC BY 4.0 attribution.",
+    "description": "Shown only when data.attribution is absent."
+  },
+  "product_flex_desk": {
+    "message": "Flex desk",
+    "description": "optionType flex_desk."
+  },
+  "product_fix_desk": {
+    "message": "Fixed desk",
+    "description": "optionType fix_desk."
+  },
+  "product_private_office": {
+    "message": "Private office",
+    "description": "optionType private_office."
+  },
+  "product_exclusive_bereich": {
+    "message": "Exclusive area",
+    "description": "optionType exclusive_bereich."
+  },
+  "product_day_pass": {
+    "message": "Day pass",
+    "description": "dayPass aggregate."
+  },
+  "product_meeting_room": {
+    "message": "Meeting room",
+    "description": "meetingRoom aggregate."
+  },
+  "product_event_space": {
+    "message": "Event space",
+    "description": "eventSpace aggregate, when the API publishes it."
+  },
+  "product_virtual_office": {
+    "message": "Virtual office",
+    "description": "virtualOffice aggregate, when the API publishes it."
+  },
+  "product_membership": {
+    "message": "Membership",
+    "description": "optionType membership."
+  },
+  "unit_month": {
+    "message": "per month",
+    "description": "Unit for monthly products."
+  },
+  "unit_day": {
+    "message": "per day",
+    "description": "Unit for a day pass."
+  },
+  "unit_hour": {
+    "message": "per hour",
+    "description": "Unit for a meeting room or event space."
+  },
+  "optionsTitle": {
+    "message": "CoworkingView prices",
+    "description": "Options page title."
+  },
+  "optionsIntro": {
+    "message": "Choose the city the prices button opens with. You can still switch city in the popup.",
+    "description": "Options page introduction."
+  },
+  "optionsCityLabel": {
+    "message": "Default city slug",
+    "description": "Label for the stored city."
+  },
+  "optionsCityPlaceholder": {
+    "message": "berlin",
+    "description": "Example slug."
+  },
+  "optionsCityHelp": {
+    "message": "A catalogue slug, for example berlin or bad-homburg. This value is stored on this computer and sent as the city parameter to api.coworkingview.com.",
+    "description": "Explains what is stored and sent."
+  },
+  "optionsCitiesLabel": {
+    "message": "Published cities",
+    "description": "Label for the city list from GET /v1/market/rates."
+  },
+  "optionsSave": {
+    "message": "Save",
+    "description": "Saves the default city."
+  },
+  "optionsSaved": {
+    "message": "Saved.",
+    "description": "Confirmation after storage.local.set."
+  },
+  "optionsPrivacyTitle": {
+    "message": "What is sent",
+    "description": "Privacy section heading."
+  },
+  "optionsPrivacyBody": {
+    "message": "The default city is stored only in Thunderbird on this computer. It is not synced. Opening the prices button sends that city slug and the interface language (en, de or es) to https://api.coworkingview.com as GET /v1/market/rates and GET /v1/properties (page 1, page size 1). The city list uses GET /v1/market/rates with the language only. No message, contact or account data is read or sent. The add-on does not set a cookie.",
+    "description": "Add-on privacy notice shown on the options page."
+  },
+  "optionsSitePrivacy": {
+    "message": "CoworkingView website privacy policy",
+    "description": "Link to https://coworkingview.com/en/privacy."
+  },
+  "cityPage": {
+    "message": "City page",
+    "description": "Link to meta.citation.url."
+  },
+  "citiesUnavailable": {
+    "message": "The city list could not be loaded. You can still type a slug.",
+    "description": "Options page, when GET /v1/market/rates fails."
+  }
+}

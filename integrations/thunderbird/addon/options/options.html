@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title data-i18n-content="optionsTitle"></title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <h1 data-i18n-content="optionsTitle"></h1>
+      <p data-i18n-content="optionsIntro"></p>
+      <form id="options-form">
+        <label for="city" data-i18n-content="optionsCityLabel"></label>
+        <input
+          id="city"
+          name="city"
+          type="text"
+          required
+          spellcheck="false"
+          autocomplete="off"
+          data-i18n-placeholder="optionsCityPlaceholder"
+        />
+        <label for="cities" data-i18n-content="optionsCitiesLabel"></label>
+        <select id="cities"></select>
+        <p class="help" data-i18n-content="optionsCityHelp"></p>
+        <button type="submit" data-i18n-content="optionsSave"></button>
+        <p id="saved" role="status"></p>
+      </form>
+      <h2 data-i18n-content="optionsPrivacyTitle"></h2>
+      <p data-i18n-content="optionsPrivacyBody"></p>
+      <p>
+        <a href="https://coworkingview.com/en/privacy" data-i18n-content="optionsSitePrivacy"></a>
+      </p>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title data-i18n-content="popupTitle"></title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <img src="../icons/icon-32.png" width="32" height="32" alt="" />
+      <h1 data-i18n-content="popupTitle"></h1>
+    </header>
+    <form id="city-form">
+      <label for="city" data-i18n-content="cityLabel"></label>
+      <select id="city" name="city"></select>
+      <button type="submit" data-i18n-content="refresh"></button>
+    </form>
+    <p id="status" role="status"></p>
+    <section id="results" hidden>
+      <p id="summary"></p>
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n-content="colProduct" scope="col"></th>
+            <th class="num" data-i18n-content="colMedian" scope="col"></th>
+            <th class="num" data-i18n-content="colP25" scope="col"></th>
+            <th class="num" data-i18n-content="colP75" scope="col"></th>
+            <th class="num" data-i18n-content="colSample" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p id="workspaces"></p>
+      <p id="asof"></p>
+      <p id="attribution"></p>
+      <p id="license"></p>
+      <p id="citation"></p>
+    </section>
+    <footer>
+      <a id="home" href="https://coworkingview.com" data-i18n-content="homeLink"></a>
+      <button type="button" id="open-options" data-i18n-content="optionsLink"></button>
+    </footer>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

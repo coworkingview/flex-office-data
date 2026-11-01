@@ -1,0 +1,197 @@
+{
+  "data": [
+    {
+      "slug": "sankt-oberholz-rosenthaler-berlin",
+      "title": "St. Oberholz Coworking Berlin Mitte – Rosenthaler Straße",
+      "countryCode": "DE",
+      "city": {
+        "slug": "berlin",
+        "name": "Berlin"
+      },
+      "zone": {
+        "slug": "mitte",
+        "name": "Mitte"
+      },
+      "operator": {
+        "slug": "sankt-oberholz",
+        "name": "St. Oberholz",
+        "logo": {
+          "url": "https://example.com/logo.png",
+          "width": 200,
+          "height": 100,
+          "alt": "St. Oberholz"
+        }
+      },
+      "coordinates": {
+        "lat": 52.5294539,
+        "lng": 13.4018374
+      },
+      "featured": true,
+      "updatedAt": "2026-10-19T16:27:57.522Z",
+      "excerpt": "Example description used as a test fixture.",
+      "images": [
+        {
+          "url": "https://example.com/image.webp",
+          "width": 1200,
+          "height": 800,
+          "alt": "St. Oberholz Coworking Berlin Mitte – Rosenthaler Straße"
+        }
+      ],
+      "amenities": [
+        "reception",
+        "wifi",
+        "power_outlets",
+        "meeting_rooms",
+        "kitchenette",
+        "free_coffee_tea",
+        "lounge_area",
+        "phone_booths",
+        "natural_light"
+      ],
+      "marketPosition": {
+        "verdict": "around",
+        "median": {
+          "amount": 214,
+          "currency": "EUR"
+        },
+        "sampleSize": 72
+      }
+    },
+    {
+      "slug": "smartspaces-berlin-spandau",
+      "title": "smartspaces Coworking Berlin-Spandau",
+      "countryCode": "DE",
+      "city": {
+        "slug": "berlin",
+        "name": "Berlin"
+      },
+      "zone": {
+        "slug": "spandau",
+        "name": "Spandau"
+      },
+      "operator": {
+        "slug": "smartspaces",
+        "name": "smartspaces",
+        "logo": {
+          "url": "https://example.com/logo.png",
+          "width": 200,
+          "height": 100,
+          "alt": "smartspaces"
+        }
+      },
+      "coordinates": {
+        "lat": 52.5476944,
+        "lng": 13.2194038
+      },
+      "fromPrice": {
+        "amount": 750,
+        "currency": "EUR"
+      },
+      "fromBillingPeriod": "month",
+      "featured": false,
+      "updatedAt": "2026-10-19T16:29:40.269Z",
+      "excerpt": "Example description used as a test fixture.",
+      "images": [
+        {
+          "url": "https://example.com/image.webp",
+          "width": 1200,
+          "height": 800,
+          "alt": "smartspaces Coworking Berlin-Spandau"
+        }
+      ],
+      "amenities": [
+        "ergonomic_chairs",
+        "access_24_7",
+        "bicycles",
+        "green_areas",
+        "mail_service",
+        "wifi",
+        "ergonomic_desks",
+        "meeting_rooms",
+        "lockers",
+        "printer_scanner",
+        "kitchenette",
+        "free_coffee_tea",
+        "surveillance_cameras",
+        "access_control",
+        "phone_booths"
+      ],
+      "capacity": 30,
+      "marketPosition": {
+        "verdict": "around",
+        "median": {
+          "amount": 214,
+          "currency": "EUR"
+        },
+        "sampleSize": 72
+      }
+    },
+    {
+      "slug": "regus-charlottenburg-berlin",
+      "title": "Regus Charlottenburg",
+      "countryCode": "DE",
+      "city": {
+        "slug": "berlin",
+        "name": "Berlin"
+      },
+      "zone": {
+        "slug": "charlottenburg-wilmersdorf",
+        "name": "Charlottenburg - Wilmersdorf"
+      },
+      "operator": {
+        "slug": "regus",
+        "name": "Regus",
+        "logo": {
+          "url": "https://example.com/logo.png",
+          "width": 200,
+          "height": 100,
+          "alt": "Regus"
+        }
+      },
+      "coordinates": {
+        "lat": 52.501028,
+        "lng": 13.318559
+      },
+      "fromPrice": {
+        "amount": 409,
+        "currency": "EUR"
+      },
+      "fromBillingPeriod": "month",
+      "featured": false,
+      "updatedAt": "2026-10-19T16:28:51.449Z",
+      "excerpt": "Example description used as a test fixture.",
+      "images": [
+        {
+          "url": "https://example.com/image.webp",
+          "width": 1200,
+          "height": 800,
+          "alt": "Regus Charlottenburg"
+        }
+      ],
+      "amenities": [
+        "meeting_rooms",
+        "wheelchair_access",
+        "parking",
+        "lounge_area"
+      ]
+    }
+  ],
+  "meta": {
+    "contractVersion": "1.0.0",
+    "pagination": {
+      "page": 1,
+      "pageSize": 3,
+      "total": 110,
+      "pageCount": 37
+    },
+    "seed": 2085917097,
+    "citation": {
+      "source": "CoworkingView",
+      "title": "Coworking spaces in Berlin",
+      "url": "https://coworkingview.com/en/coworking/berlin",
+      "accessed": "2026-10-27",
+      "text": "Source: CoworkingView — Coworking spaces in Berlin, https://coworkingview.com/en/coworking/berlin."
+    },
+    "catalogueNotice": "Catalogue content (descriptions, images, logos, names and prices) belongs to the respective operators and rights holders. No licence to reuse it is granted. You may link to listing pages. Systematic extraction or re-use of the catalogue database is not permitted."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "https://coworkingview.com/problems/validation-failed",
+  "title": "Validation failed",
+  "status": 400,
+  "code": "VALIDATION_FAILED",
+  "detail": "currency \"VES\" has no approximate rate from \"EUR\" — rates priced in \"EUR\" cannot be presented in it.",
+  "errors": [
+    {
+      "path": "currency",
+      "message": "\"VES\" cannot be used to present rates priced in \"EUR\" — no conversion rate is available."
+    }
+  ]
+}

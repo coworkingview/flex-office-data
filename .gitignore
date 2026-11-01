@@ -27,6 +27,11 @@ integrations/java/dist/
 # OCaml
 _build/
 *.install
+# D
+.dub/
+clients/d/coworkingview-test-library
+clients/d/libcoworkingview.a
+clients/d/examples/berlin/coworkingview_example
 # OS
 .DS_Store
 # Docs (mkdocs build output)

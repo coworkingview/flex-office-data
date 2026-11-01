@@ -34,6 +34,7 @@ prose or images.
 | Backstage | `cd integrations/backstage && npm ci && npm run tsc && npm run lint && npm test && npm run build` |
 | Nuxt | `cd integrations/nuxt && npm ci && npm run prepack && npm run lint && npm test` |
 | Thunderbird | `cd integrations/thunderbird && npm ci && npm test && npm run lint && ./build.sh` |
+| D | `cd clients/d && dub build && dub test` |
 
 Tests never call the live API unless `COWORKINGVIEW_LIVE_TESTS=1` is set, and
 then make at most three requests. The API is free and keyless; please keep it

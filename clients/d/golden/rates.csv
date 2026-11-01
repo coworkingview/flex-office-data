@@ -1,0 +1,14 @@
+city_slug,city_name,country_code,currency,product,unit,median,p25,p75,sample_size,property_count,operator_count,low_confidence,as_of
+abu-dhabi,Abu Dhabi,AE,AED,flex_desk,month,1400,1400,1800,3,2,1,true,2026-10-27T21:06:48.313Z
+abu-dhabi,Abu Dhabi,AE,AED,fix_desk,month,1800,1800,1800,2,2,1,true,2026-10-27T21:06:48.313Z
+abu-dhabi,Abu Dhabi,AE,AED,private_office,month,2057,1486,2629,2,2,1,true,2026-10-27T21:06:48.313Z
+berlin,Berlin,DE,EUR,flex_desk,month,214,199,292,72,66,38,false,2026-10-27T21:06:48.313Z
+berlin,Berlin,DE,EUR,fix_desk,month,310,290,421,60,56,37,false,2026-10-27T21:06:48.313Z
+berlin,Berlin,DE,EUR,private_office,month,480,399,550,59,38,20,false,2026-10-27T21:06:48.313Z
+berlin,Berlin,DE,EUR,day_pass,day,35,,,59,55,27,false,2026-10-27T21:06:48.313Z
+berlin,Berlin,DE,EUR,meeting_room,hour,32,,,79,51,25,false,2026-10-27T21:06:48.313Z
+madrid,Madrid,ES,EUR,flex_desk,month,175,130,199,13,6,4,false,2026-10-27T21:06:48.313Z
+madrid,Madrid,ES,EUR,fix_desk,month,260,249,280,9,7,5,true,2026-10-27T21:06:48.313Z
+madrid,Madrid,ES,EUR,private_office,month,385,275,449,9,7,3,true,2026-10-27T21:06:48.313Z
+madrid,Madrid,ES,EUR,day_pass,day,22,,,11,7,4,false,2026-10-27T21:06:48.313Z
+madrid,Madrid,ES,EUR,meeting_room,hour,28,,,8,6,3,true,2026-10-27T21:06:48.313Z

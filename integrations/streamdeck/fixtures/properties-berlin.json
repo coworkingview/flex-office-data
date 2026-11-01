@@ -1,0 +1,27 @@
+{
+    "data": [
+        {
+            "slug": "wework-neue-schoenhauser-strasse-mitte-berlin",
+            "city": {
+                "slug": "berlin",
+                "name": "Berlin"
+            }
+        }
+    ],
+    "meta": {
+        "contractVersion": "1.0.0",
+        "pagination": {
+            "page": 1,
+            "pageSize": 1,
+            "total": 143,
+            "pageCount": 143
+        },
+        "citation": {
+            "source": "CoworkingView",
+            "title": "Coworking spaces in Berlin",
+            "url": "https://coworkingview.com/en/coworking/berlin",
+            "accessed": "2026-11-01",
+            "text": "Source: CoworkingView \u2014 Coworking spaces in Berlin, https://coworkingview.com/en/coworking/berlin."
+        }
+    }
+}

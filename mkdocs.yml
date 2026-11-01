@@ -1,6 +1,6 @@
 site_name: CoworkingView flex-office-data
 site_url: https://coworkingview.readthedocs.io/
-site_description: Open data on flexible office prices (CoworkingView Price Index) for Python, R and the command line.
+site_description: Open data on flexible office prices (CoworkingView Price Index) for Python, R, Java, OCaml and the command line.
 repo_url: https://github.com/coworkingview/flex-office-data
 edit_uri: ""
 theme:
@@ -16,10 +16,13 @@ watch:
   - python/README.md
   - r/README.md
   - rust/README.md
+  - clients/ocaml/README.md
   - spec/SPEC.md
 nav:
   - Overview: index.md
   - Python: python.md
   - R: r.md
   - Command line (cwv): cli.md
+  - OCaml: ocaml.md
+  - opam publication: OPAM-CHECKLIST.md
   - Specification: spec.md

@@ -1,0 +1,69 @@
+# PLACEHOLDER CHECKSUMS. Do not open the opam-repository pull request until
+# tag ocaml-v0.1.0 exists, the release asset below has been uploaded, and both
+# hashes have been replaced with the real sha256 and sha512 of that asset.
+# Delete this comment at the same time. The file to hash is a tarball of
+# clients/ocaml (dune-project at the archive root), not the automatic GitHub
+# archive of the whole repository:
+#
+#   git archive --format=tar.gz --prefix=coworkingview-0.1.0/ \
+#     ocaml-v0.1.0:clients/ocaml -o coworkingview-0.1.0.tar.gz
+#
+# Upload coworkingview-0.1.0.tar.gz to the GitHub release for tag ocaml-v0.1.0.
+# See docs/OPAM-CHECKLIST.md in the flex-office-data repository.
+opam-version: "2.0"
+synopsis: "Client for the CoworkingView public API"
+description: """
+Read-only OCaml client for the public CoworkingView API
+(https://api.coworkingview.com). It covers paginated catalogue search
+(GET /v1/properties) and the CoworkingView Price Index
+(GET /v1/market/rates). No API key.
+
+Price Index figures are CC BY 4.0. Every rates result includes the
+attribution string returned by the API. Catalogue results omit operator
+photos, logos and descriptions, and a search that follows pages stops
+at 200 listings.
+"""
+maintainer: ["CoworkingView <info@coworkingview.com>"]
+authors: ["CoworkingView <info@coworkingview.com>"]
+license: "MIT"
+tags: ["http" "json" "coworking"]
+homepage: "https://coworkingview.com"
+doc:
+  "https://github.com/coworkingview/flex-office-data/blob/main/clients/ocaml/README.md"
+bug-reports: "https://github.com/coworkingview/flex-office-data/issues"
+depends: [
+  "dune" {>= "3.8"}
+  "ocaml" {>= "4.14"}
+  "yojson" {>= "2.0.0"}
+  "lwt" {>= "5.7.0"}
+  "uri" {>= "4.2.0"}
+  "cohttp" {>= "5.3.0"}
+  "cohttp-lwt" {>= "5.3.0"}
+  "cohttp-lwt-unix" {>= "5.3.0"}
+  "alcotest" {with-test & >= "1.7.0"}
+  "odoc" {with-doc & >= "2.4.0"}
+]
+build: [
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/coworkingview/flex-office-data.git"
+x-maintenance-intent: ["(latest)"]
+url {
+  src:
+    "https://github.com/coworkingview/flex-office-data/releases/download/ocaml-v0.1.0/coworkingview-0.1.0.tar.gz"
+  checksum: [
+    "sha256=0000000000000000000000000000000000000000000000000000000000000000"
+    "sha512=00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  ]
+}

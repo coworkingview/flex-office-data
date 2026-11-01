@@ -1,0 +1,53 @@
+(lang dune 3.8)
+
+(name coworkingview)
+
+(version 0.1.0)
+
+(generate_opam_files false)
+
+(source (github coworkingview/flex-office-data))
+
+(license MIT)
+
+(authors "CoworkingView <info@coworkingview.com>")
+
+(maintainers "CoworkingView <info@coworkingview.com>")
+
+(homepage https://coworkingview.com)
+
+(documentation
+ https://github.com/coworkingview/flex-office-data/blob/main/clients/ocaml/README.md)
+
+(bug_reports https://github.com/coworkingview/flex-office-data/issues)
+
+(package
+ (name coworkingview)
+ (synopsis "Client for the CoworkingView public API")
+ (description
+  "Read-only client for the public CoworkingView API. Covers paginated catalogue search (GET /v1/properties) and the Price Index (GET /v1/market/rates).")
+ (depends
+  (ocaml
+   (>= 4.14))
+  (yojson
+   (>= 2.0.0))
+  (lwt
+   (>= 5.7.0))
+  (uri
+   (>= 4.2.0))
+  (cohttp
+   (>= 5.3.0))
+  (cohttp-lwt
+   (>= 5.3.0))
+  (cohttp-lwt-unix
+   (>= 5.3.0))
+  (alcotest
+   (and
+    :with-test
+    (>= 1.7.0)))
+  (odoc
+   (and
+    :with-doc
+    (>= 2.4.0))))
+ (tags
+  (http json coworking)))

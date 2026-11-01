@@ -1,0 +1,15 @@
+{
+    "data": [
+        {
+            "slug": "ignored-listing"
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "page": 1,
+            "pageSize": 1,
+            "total": 143,
+            "pageCount": 143
+        }
+    }
+}

@@ -29,6 +29,7 @@ prose or images.
 | Rust | `cd rust && cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test` |
 | Java | `cd integrations/java && mvn -B verify` |
 | Joplin | `cd integrations/joplin && npm ci && npm test && npm run dist` |
+| Matomo | `cd integrations/matomo/CoworkingView && find . -name '*.php' -exec php -l {} + && php tests/parser.php` |
 
 Tests never call the live API unless `COWORKINGVIEW_LIVE_TESTS=1` is set, and
 then make at most three requests. The API is free and keyless; please keep it

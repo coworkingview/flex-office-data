@@ -10,6 +10,7 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 | Python | [`coworkingview`](python/) | `pip install coworkingview` · `conda install -c conda-forge coworkingview` |
 | R | [`coworkingview`](r/) | `install.packages("coworkingview")` |
 | Java | [`coworkingview`](integrations/java/) | Maven Central `io.github.coworkingview:coworkingview` |
+| Swift | [`CoworkingView`](clients/swift/) | Swift Package Manager · CocoaPods `pod 'CoworkingView'` |
 | Command line | [`cwv`](rust/) (Rust) | `cargo install coworkingview` · `docker run --rm coworkingview/cwv` · AUR · Chocolatey · Snap |
 
 [LibreOffice Calc](integrations/libreoffice/) uses the same public API as spreadsheet functions (`CWV_SPACES`, `CWV_PRICE`, and the others in that README).
@@ -59,6 +60,16 @@ import io.github.coworkingview.RatesQuery;
 
 Client client = Client.create();
 client.rates(new RatesQuery().city("berlin"));
+```
+
+**Swift**
+
+```swift
+import CoworkingView
+
+let client = try Client()
+let berlin = try await client.rates(city: "berlin")
+print(berlin.attribution ?? "")
 ```
 
 **Command line**
@@ -117,6 +128,7 @@ python/             coworkingview on PyPI / conda-forge
 r/                  coworkingview on CRAN
 rust/               cwv CLI and the coworkingview crate (crates.io, Docker)
 integrations/java/  coworkingview on Maven Central
+clients/swift/      CoworkingView Swift package (Swift Package Index, CocoaPods)
 integrations/matomo/CoworkingView/  Matomo 5 dashboard widget
 integrations/libreoffice/  Calc add-in (CWV_SPACES, CWV_PRICE)
 packaging/          AUR, Chocolatey and Snap manifests for cwv

@@ -343,3 +343,31 @@ jobs:
         with:
           name: coworkingview-calc-0.1.0.oxt
           path: integrations/libreoffice/dist/coworkingview-calc-0.1.0.oxt
+
+  swift:
+    name: Swift
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: swift build and test
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/src" \
+            -w /src/clients/swift \
+            swift:5.9 \
+            sh -c "swift build && swift test"
+
+  cocoapods:
+    name: CocoaPods lib lint
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: clients/swift
+    steps:
+      - uses: actions/checkout@v4
+      - name: pod lib lint
+        run: |
+          if ! command -v pod >/dev/null 2>&1; then
+            sudo gem install cocoapods -N
+          fi
+          pod lib lint --allow-warnings

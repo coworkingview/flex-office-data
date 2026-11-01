@@ -21,6 +21,9 @@ rust/target/
 # Java
 integrations/java/target/
 integrations/java/dist/
+# Swift
+.build/
+.swiftpm/
 # OS
 .DS_Store
 # Docs (mkdocs build output)

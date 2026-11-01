@@ -343,3 +343,23 @@ jobs:
         with:
           name: coworkingview-calc-0.1.0.oxt
           path: integrations/libreoffice/dist/coworkingview-calc-0.1.0.oxt
+
+  nuxt:
+    name: Nuxt module
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/nuxt
+    env:
+      NUXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: integrations/nuxt/package-lock.json
+      - run: npm ci
+      - run: npm run prepack
+      - run: npm run lint
+      - run: npm run test

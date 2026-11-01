@@ -14,6 +14,8 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 
 [LibreOffice Calc](integrations/libreoffice/) uses the same public API as spreadsheet functions (`CWV_SPACES`, `CWV_PRICE`, and the others in that README).
 
+[Nuxt](integrations/nuxt/) (`@coworkingview/nuxt`) auto-imports `useCoworkingProperties` and `useCoworkingRates` for the same two endpoints.
+
 The packages read the same public API, follow the same [specification](spec/SPEC.md)
 and are tested against the same [fixtures and expected outputs](spec/), so a
 number is the same whichever tool you use.
@@ -119,6 +121,7 @@ rust/               cwv CLI and the coworkingview crate (crates.io, Docker)
 integrations/java/  coworkingview on Maven Central
 integrations/matomo/CoworkingView/  Matomo 5 dashboard widget
 integrations/libreoffice/  Calc add-in (CWV_SPACES, CWV_PRICE)
+integrations/nuxt/  `@coworkingview/nuxt` module (`useCoworkingProperties`, `useCoworkingRates`)
 packaging/          AUR, Chocolatey and Snap manifests for cwv
 ```
 

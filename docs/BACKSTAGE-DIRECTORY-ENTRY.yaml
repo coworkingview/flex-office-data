@@ -1,0 +1,11 @@
+---
+title: CoworkingView
+author: CoworkingView
+authorUrl: https://coworkingview.com
+category: Discovery
+description: Flexible workspace prices and spaces by city, from the CoworkingView Price Index, for teams planning offices and offsites.
+documentation: https://github.com/coworkingview/flex-office-data/blob/main/integrations/backstage/README.md
+iconUrl: https://raw.githubusercontent.com/coworkingview/flex-office-data/main/integrations/nextcloud/coworkingview/img/app.png
+npmPackageName: '@coworkingview/backstage-plugin-coworkingview'
+addedDate: '2026-11-01'
+status: active

@@ -31,6 +31,7 @@ prose or images.
 | Joplin | `cd integrations/joplin && npm ci && npm test && npm run dist` |
 | Matomo | `cd integrations/matomo/CoworkingView && find . -name '*.php' -exec php -l {} + && php tests/parser.php` |
 | LibreOffice | `cd integrations/libreoffice && ruff check . && python -m unittest discover -s tests && ./build.sh && ./tests/smoke.sh` |
+| Backstage | `cd integrations/backstage && npm ci && npm run tsc && npm run lint && npm test && npm run build` |
 | Nuxt | `cd integrations/nuxt && npm ci && npm run prepack && npm run lint && npm test` |
 
 Tests never call the live API unless `COWORKINGVIEW_LIVE_TESTS=1` is set, and

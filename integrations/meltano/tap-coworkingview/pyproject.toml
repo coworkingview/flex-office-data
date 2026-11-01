@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tap-coworkingview"
+dynamic = ["version"]
+description = "Singer tap for CoworkingView listings and the Price Index."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "CoworkingView", email = "info@coworkingview.com" }]
+maintainers = [{ name = "CoworkingView", email = "info@coworkingview.com" }]
+keywords = [
+    "singer",
+    "meltano",
+    "coworking",
+    "flexible office",
+    "price index",
+    "elt",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = ["singer-sdk>=0.54.9,<0.55"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "requests-mock>=1.11",
+]
+
+[project.urls]
+Homepage = "https://coworkingview.com"
+Repository = "https://github.com/coworkingview/flex-office-data"
+Documentation = "https://github.com/coworkingview/flex-office-data/tree/main/integrations/meltano/tap-coworkingview#readme"
+Issues = "https://github.com/coworkingview/flex-office-data/issues"
+"Price Index" = "https://coworkingview.com/en/tools/price-index"
+
+[project.scripts]
+tap-coworkingview = "tap_coworkingview.tap:TapCoworkingView.cli"
+
+[tool.hatch.version]
+path = "src/tap_coworkingview/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tap_coworkingview"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+pythonpath = ["."]

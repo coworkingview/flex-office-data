@@ -1,0 +1,6 @@
+# Entry to merge into https://github.com/meltano/hub `_data/maintainers.yml`.
+# Not submitted. Keys in that file are sorted alphabetically.
+coworkingview:
+  label: CoworkingView
+  name: coworkingview
+  url: https://coworkingview.com

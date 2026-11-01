@@ -1,0 +1,35 @@
+# Example Meltano project for tap-coworkingview.
+# From a Meltano project, the same plugin is:
+#   meltano add extractor tap-coworkingview --pip-url \
+#     "git+https://github.com/coworkingview/flex-office-data.git#subdirectory=integrations/meltano/tap-coworkingview"
+version: 1
+default_environment: dev
+project_id: tap-coworkingview-example
+environments:
+- name: dev
+plugins:
+  extractors:
+  - name: tap-coworkingview
+    namespace: tap_coworkingview
+    executable: tap-coworkingview
+    pip_url: git+https://github.com/coworkingview/flex-office-data.git#subdirectory=integrations/meltano/tap-coworkingview
+    capabilities:
+    - about
+    - activate-version
+    - batch
+    - catalog
+    - discover
+    - schema-flattening
+    - state
+    - stream-maps
+    - structured-logging
+    config:
+      city: berlin
+    select:
+    - workspaces.*
+    - market_rates.*
+    metadata:
+      workspaces:
+        replication-method: FULL_TABLE
+      market_rates:
+        replication-method: FULL_TABLE

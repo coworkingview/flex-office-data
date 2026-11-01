@@ -1,0 +1,14 @@
+.dub/
+*.o
+*.obj
+*.lst
+__dummy.html
+docs.json
+*.a
+*.lib
+*.so
+*.dylib
+*.exe
+dub.selections.json
+coworkingview-test-library
+coworkingview_example

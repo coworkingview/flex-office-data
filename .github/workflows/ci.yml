@@ -467,3 +467,27 @@ jobs:
           name: coworkingview-workspace-prices-0.1.0.xpi
           path: integrations/thunderbird/dist/coworkingview-workspace-prices-0.1.0.xpi
           if-no-files-found: error
+
+  d:
+    name: D (${{ matrix.compiler }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [dmd, ldc]
+    defaults:
+      run:
+        working-directory: clients/d
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dlang-community/setup-dlang@v2
+        with:
+          compiler: ${{ matrix.compiler }}
+      - name: Install libcurl
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev
+      - name: Build
+        run: dub build --compiler="$DC"
+      - name: Test
+        run: dub test --compiler="$DC"
+      - name: Build the example
+        run: dub build :example --compiler="$DC"

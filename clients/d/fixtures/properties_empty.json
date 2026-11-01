@@ -1,0 +1,21 @@
+{
+  "data": [],
+  "meta": {
+    "contractVersion": "1.0.0",
+    "pagination": {
+      "page": 1,
+      "pageSize": 20,
+      "total": 0,
+      "pageCount": 0
+    },
+    "seed": 1762202070,
+    "citation": {
+      "source": "CoworkingView",
+      "title": "Coworking space catalogue",
+      "url": "https://coworkingview.com/en/coworking/nowhere-xyz",
+      "accessed": "2026-10-27",
+      "text": "Source: CoworkingView — Coworking space catalogue, https://coworkingview.com/en/coworking/nowhere-xyz."
+    },
+    "catalogueNotice": "Catalogue content (descriptions, images, logos, names and prices) belongs to the respective operators and rights holders. No licence to reuse it is granted. You may link to listing pages. Systematic extraction or re-use of the catalogue database is not permitted."
+  }
+}

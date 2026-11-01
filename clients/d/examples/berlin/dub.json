@@ -1,0 +1,12 @@
+{
+	"name": "example",
+	"description": "Print Berlin Price Index medians with the coworkingview client",
+	"authors": ["CoworkingView"],
+	"copyright": "Copyright © 2026, CoworkingView",
+	"license": "MIT",
+	"homepage": "https://coworkingview.com",
+	"targetType": "executable",
+	"dependencies": {
+		"coworkingview": {"path": "../../"}
+	}
+}

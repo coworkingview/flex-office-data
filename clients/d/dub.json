@@ -1,0 +1,15 @@
+{
+	"name": "coworkingview",
+	"description": "Read-only client for the public CoworkingView API: Price Index and catalogue search, no API key",
+	"authors": ["CoworkingView"],
+	"copyright": "Copyright © 2026, CoworkingView",
+	"license": "MIT",
+	"homepage": "https://coworkingview.com",
+	"version": "0.1.0",
+	"targetType": "library",
+	"toolchainRequirements": {
+		"frontend": ">=2.097"
+	},
+	"stringImportPaths": ["fixtures", "golden"],
+	"subPackages": ["./examples/berlin"]
+}

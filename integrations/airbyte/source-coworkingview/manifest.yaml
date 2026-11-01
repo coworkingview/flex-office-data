@@ -1,0 +1,465 @@
+version: "7.39.1"
+
+type: DeclarativeSource
+
+description: >-
+  CoworkingView source. Reads the public CoworkingView API
+  (https://api.coworkingview.com) for one city: coworking listings
+  (properties) and the CoworkingView Price Index (market_rates). No API key.
+  Listings are full refresh, paged with page and pageSize. The Price Index is
+  one response, CC BY 4.0, and each row keeps the attribution that came with
+  it. Photos, logos and listing descriptions are not synced.
+
+check:
+  type: CheckStream
+  stream_names:
+    - market_rates
+
+streams:
+  - type: DeclarativeStream
+    name: properties
+    primary_key:
+      - slug
+    retriever:
+      type: SimpleRetriever
+      requester:
+        type: HttpRequester
+        url: https://api.coworkingview.com/v1/properties
+        http_method: GET
+        request_headers:
+          Accept: application/json
+          User-Agent: airbyte-source-coworkingview/0.0.1 (+https://github.com/coworkingview/flex-office-data)
+        request_parameters:
+          locale: "{{ config['locale'] or 'en' }}"
+          city: "{{ config['city'] or 'berlin' }}"
+          sortBy: date-desc
+        error_handler:
+          type: DefaultErrorHandler
+          max_retries: 5
+          response_filters:
+            - type: HttpResponseFilter
+              action: RETRY
+              http_codes:
+                - 429
+                - 500
+                - 502
+                - 503
+                - 504
+              failure_type: transient_error
+            - type: HttpResponseFilter
+              action: FAIL
+              http_codes:
+                - 400
+                - 404
+              failure_type: config_error
+              error_message: >-
+                CoworkingView rejected the request. Use a city slug such as
+                berlin and a locale of en, de or es.
+          backoff_strategies:
+            - type: WaitTimeFromHeader
+              header: Retry-After
+            - type: ExponentialBackoffStrategy
+              factor: 2
+      paginator:
+        type: DefaultPaginator
+        page_size_option:
+          type: RequestOption
+          inject_into: request_parameter
+          field_name: pageSize
+        page_token_option:
+          type: RequestOption
+          inject_into: request_parameter
+          field_name: page
+        pagination_strategy:
+          type: PageIncrement
+          page_size: 50
+          start_from_page: 1
+          inject_on_first_request: true
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path: []
+          record_expander:
+            type: RecordExpander
+            expand_records_from_field:
+              - data
+            on_no_records: skip
+            parent_fields:
+              - type: ParentFieldPath
+                parent_path:
+                  - meta
+                  - citation
+                record_path:
+                  - citation
+              - type: ParentFieldPath
+                parent_path:
+                  - meta
+                  - catalogueNotice
+                record_path:
+                  - catalogueNotice
+    transformations:
+      - type: RemoveFields
+        field_pointers:
+          - - images
+          - - excerpt
+          - - operator
+            - logo
+    schema_loader:
+      type: InlineSchemaLoader
+      schema:
+        type: object
+        $schema: http://json-schema.org/draft-07/schema#
+        additionalProperties: true
+        required:
+          - slug
+          - title
+        properties:
+          slug:
+            type: string
+          title:
+            type: string
+          countryCode:
+            type: string
+          city:
+            type: object
+            additionalProperties: true
+            properties:
+              slug:
+                type: string
+              name:
+                type: string
+          zone:
+            type: object
+            additionalProperties: true
+            properties:
+              slug:
+                type: string
+              name:
+                type: string
+          operator:
+            type: object
+            additionalProperties: true
+            properties:
+              slug:
+                type: string
+              name:
+                type: string
+          coordinates:
+            type: object
+            additionalProperties: true
+            properties:
+              lat:
+                type: number
+              lng:
+                type: number
+          fromPrice: &money
+            type: object
+            additionalProperties: true
+            properties:
+              amount:
+                type: number
+              currency:
+                type: string
+          fromBillingPeriod:
+            type: string
+          featured:
+            type: boolean
+          updatedAt:
+            type: string
+            format: date-time
+          amenities:
+            type: array
+            items:
+              type: string
+          capacity:
+            type: integer
+          marketPosition:
+            type: object
+            additionalProperties: true
+            properties:
+              verdict:
+                type: string
+              median: *money
+              sampleSize:
+                type: integer
+          citation:
+            type: object
+            additionalProperties: true
+            properties:
+              source:
+                type: string
+              title:
+                type: string
+              url:
+                type: string
+              accessed:
+                type: string
+              text:
+                type: string
+          catalogueNotice:
+            type: string
+
+  - type: DeclarativeStream
+    name: market_rates
+    primary_key:
+      - city_slug
+    transformations:
+      - type: AddFields
+        fields:
+          - type: AddedFieldDefinition
+            path:
+              - city_slug
+            value: "{{ record['city']['slug'] }}"
+            value_type: string
+    retriever:
+      type: SimpleRetriever
+      requester:
+        type: HttpRequester
+        url: https://api.coworkingview.com/v1/market/rates
+        http_method: GET
+        request_headers:
+          Accept: application/json
+          User-Agent: airbyte-source-coworkingview/0.0.1 (+https://github.com/coworkingview/flex-office-data)
+        request_parameters:
+          locale: "{{ config['locale'] or 'en' }}"
+          city: "{{ config['city'] or 'berlin' }}"
+        error_handler:
+          type: DefaultErrorHandler
+          max_retries: 5
+          response_filters:
+            - type: HttpResponseFilter
+              action: RETRY
+              http_codes:
+                - 429
+                - 500
+                - 502
+                - 503
+                - 504
+              failure_type: transient_error
+            - type: HttpResponseFilter
+              action: FAIL
+              http_codes:
+                - 400
+                - 404
+              failure_type: config_error
+              error_message: >-
+                CoworkingView rejected the request. Use a city slug such as
+                berlin and a locale of en, de or es.
+          backoff_strategies:
+            - type: WaitTimeFromHeader
+              header: Retry-After
+            - type: ExponentialBackoffStrategy
+              factor: 2
+      record_selector:
+        type: RecordSelector
+        extractor:
+          type: DpathExtractor
+          field_path:
+            - data
+          record_expander:
+            type: RecordExpander
+            expand_records_from_field:
+              - cities
+            on_no_records: skip
+            parent_fields:
+              - type: ParentFieldPath
+                parent_path:
+                  - attribution
+                record_path:
+                  - attribution
+              - type: ParentFieldPath
+                parent_path:
+                  - license
+                record_path:
+                  - license
+              - type: ParentFieldPath
+                parent_path:
+                  - licenseUrl
+                record_path:
+                  - licenseUrl
+              - type: ParentFieldPath
+                parent_path:
+                  - asOf
+                record_path:
+                  - asOf
+              - type: ParentFieldPath
+                parent_path:
+                  - scope
+                record_path:
+                  - scope
+              - type: ParentFieldPath
+                parent_path:
+                  - copyright
+                record_path:
+                  - copyright
+    schema_loader:
+      type: InlineSchemaLoader
+      schema:
+        type: object
+        $schema: http://json-schema.org/draft-07/schema#
+        additionalProperties: true
+        required:
+          - city_slug
+          - city
+          - countryCode
+          - currency
+          - attribution
+          - license
+          - licenseUrl
+          - asOf
+        properties:
+          city_slug:
+            type: string
+            description: Copy of city.slug. The runtime rejects a nested primary key.
+          city:
+            type: object
+            additionalProperties: true
+            properties:
+              slug:
+                type: string
+              name:
+                type: string
+          countryCode:
+            type: string
+          currency:
+            type: string
+          byType:
+            type: array
+            items:
+              type: object
+              additionalProperties: true
+              properties:
+                optionType:
+                  type: string
+                median: *money
+                min: *money
+                max: *money
+                sampleSize:
+                  type: integer
+          figures:
+            type: array
+            items:
+              type: object
+              additionalProperties: true
+              properties:
+                optionType:
+                  type: string
+                median: *money
+                p25: &money_or_null
+                  type:
+                    - object
+                    - "null"
+                  additionalProperties: true
+                  properties:
+                    amount:
+                      type: number
+                    currency:
+                      type: string
+                p75: *money_or_null
+                sampleSize:
+                  type: integer
+                propertyCount:
+                  type: integer
+                operatorCount:
+                  type: integer
+                insufficientData:
+                  type: boolean
+          dayPass:
+            type: object
+            additionalProperties: true
+            properties:
+              median: *money
+              sampleSize:
+                type: integer
+              propertyCount:
+                type: integer
+              operatorCount:
+                type: integer
+              insufficientData:
+                type: boolean
+          meetingRoom:
+            type: object
+            additionalProperties: true
+            properties:
+              median: *money
+              sampleSize:
+                type: integer
+              propertyCount:
+                type: integer
+              operatorCount:
+                type: integer
+              insufficientData:
+                type: boolean
+          buildings:
+            type: array
+            items:
+              type: object
+              additionalProperties: true
+              properties:
+                price: *money
+                name:
+                  type: string
+                slug:
+                  type: string
+                operatorName:
+                  type: string
+                operatorSlug:
+                  type: string
+          propertyCount:
+            type: integer
+          operatorCount:
+            type: integer
+          insufficientData:
+            type: boolean
+          p25: *money_or_null
+          p75: *money_or_null
+          min: *money
+          max: *money
+          entryMedian: *money
+          entryMin: *money
+          entryMax: *money
+          sampleSize:
+            type: integer
+          attribution:
+            type: string
+          license:
+            type: string
+          licenseUrl:
+            type: string
+          asOf:
+            type: string
+            format: date-time
+          scope:
+            type: string
+          copyright:
+            type: string
+
+spec:
+  type: Spec
+  connection_specification:
+    type: object
+    $schema: http://json-schema.org/draft-07/schema#
+    additionalProperties: true
+    properties:
+      city:
+        type: string
+        title: City
+        description: >-
+          City slug sent as the city query parameter, for example berlin.
+          Both streams are limited to this city.
+        default: berlin
+        order: 0
+        examples:
+          - berlin
+      locale:
+        type: string
+        title: Locale
+        description: >-
+          Language for names the API returns. The API requires one of en, de or es.
+        default: en
+        enum:
+          - en
+          - de
+          - es
+        order: 1

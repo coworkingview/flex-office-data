@@ -115,6 +115,7 @@ python/             coworkingview on PyPI / conda-forge
 r/                  coworkingview on CRAN
 rust/               cwv CLI and the coworkingview crate (crates.io, Docker)
 integrations/java/  coworkingview on Maven Central
+integrations/matomo/CoworkingView/  Matomo 5 dashboard widget
 packaging/          AUR, Chocolatey and Snap manifests for cwv
 ```
 

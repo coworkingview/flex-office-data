@@ -1,0 +1,36 @@
+.coworkingview-widget {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.coworkingview-widget table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 8px;
+}
+
+.coworkingview-widget th,
+.coworkingview-widget td {
+    text-align: left;
+    padding: 4px 6px;
+    border-bottom: 1px solid currentColor;
+    opacity: 1;
+    vertical-align: top;
+}
+
+.coworkingview-widget th {
+    font-weight: 600;
+}
+
+.coworkingview-widget .coworkingview-city {
+    margin: 0 0 8px;
+}
+
+.coworkingview-widget .coworkingview-error {
+    margin: 0 0 8px;
+}
+
+.coworkingview-widget .coworkingview-note {
+    margin: 8px 0 0;
+    opacity: 0.85;
+}

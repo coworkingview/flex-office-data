@@ -1,0 +1,33 @@
+{
+  "name": "lms-plugin-coworkingview-workspace-prices",
+  "version": "1.0.0",
+  "description": "LM Studio tools for CoworkingView flexible workspace prices and listings.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "lms dev",
+    "push": "lms push",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.typecheck.json --noEmit",
+    "test": "vitest run",
+    "build": "tsc"
+  },
+  "author": "CoworkingView (https://coworkingview.com)",
+  "license": "MIT",
+  "homepage": "https://coworkingview.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coworkingview/flex-office-data.git",
+    "directory": "integrations/lmstudio"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@lmstudio/sdk": "2.1.0",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.8",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}

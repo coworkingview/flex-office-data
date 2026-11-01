@@ -559,3 +559,25 @@ jobs:
           JOOMLA_DB_PASS: joomla
           JOOMLA_DB_NAME: joomla
           JOOMLA_DB_PREFIX: jci_
+
+  lmstudio:
+    name: LM Studio plugin (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["20", "22"]
+    defaults:
+      run:
+        working-directory: integrations/lmstudio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: integrations/lmstudio/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build

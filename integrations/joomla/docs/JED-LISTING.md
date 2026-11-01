@@ -53,6 +53,7 @@ Maps & Weather is a weaker fit. That category is for map, geotag, and weather wi
 | Download | https://github.com/coworkingview/flex-office-data/releases/download/joomla-v1.0.0/mod_coworkingview-1.0.0.zip |
 | Support | https://github.com/coworkingview/flex-office-data/issues |
 | Licence | GNU General Public License version 2 or later (GPLv2+) |
+| License page | https://github.com/coworkingview/flex-office-data/blob/main/integrations/joomla/mod_coworkingview/LICENSE.txt |
 
 The download file is the asset on the `joomla-v1.0.0` release. The update server in the manifest is the raw file `integrations/joomla/updates/mod_coworkingview.xml` on `main`, and it points at the same download URL.
 
@@ -70,3 +71,19 @@ Regenerate with `./tools/capture.sh` from `integrations/joomla`. The script exit
 ## Licence field
 
 GPLv2+. The package contains `LICENSE.txt` (GNU General Public License version 2). The manifest carries both `<license>` and `<licence>` with the version 2 or later notice. There is no paid edition.
+
+License page URL: https://github.com/coworkingview/flex-office-data/blob/main/integrations/joomla/mod_coworkingview/LICENSE.txt
+
+## Logo
+
+`docs/jed-logo-1200x525.png` is 1200×525. Off-white background, the repository's black serif CV mark with the gold dot, and the words CoworkingView Workspace Prices. It does not use the Joomla logo.
+
+## JED Checker
+
+`docs/jed-checker-report-1.0.0.html` is the report from JED Checker 2.4.4 on Joomla 5.4.10 for `mod_coworkingview-1.0.0.zip`. The counters and the rule HTML in that file are what the installed component returned.
+
+Totals: errors=0, warnings=0, compatibility=0, notices=1, info=1, passed=7. No version bump.
+
+The notice is from xmlmanifest, on `/mod_coworkingview.xml`: `Node <extension> contains unknown <licence> element` and `Node <extension> contains unknown <php_minimum> element`. `<licence>` is the British spelling the license rule reads; `<php_minimum>` is the Joomla minimum-PHP tag. Both are notices, not errors.
+
+The info item is from xmlinfo, on the same file: the name tag is CoworkingView Workspace Prices, the version tag is 1.0.0, and the creationDate tag is 2026-11.

@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>JED Checker report</title><style>body{font-family:Georgia,serif;max-width:960px;margin:2rem auto;color:#1c1c1c}pre{white-space:pre-wrap}.alert{border:1px solid #ccc;padding:.6rem .8rem;margin:.4rem 0}</style></head><body><p>JED Checker 2.4.4 on Joomla 5.4.10, PHP 8.3.6. Package: mod_coworkingview-1.0.0.zip. Extracted to tmp/jed_checker/unzipped/mod_coworkingview-1.0.0.zip by Joomla\Archive\Archive, then each installed rule class check() was called. The sections below are the HTML returned by JEDcheckerReport::getHTML(). The preformatted block is the same report object: one line of counters per rule, then each issue text as stored.</p><pre>xmlinfo errors=0 warnings=0 compatibility=0 notices=0 info=1 passed=0
+xmllicense errors=0 warnings=0 compatibility=0 notices=0 info=0 passed=0
+xmlmanifest errors=0 warnings=0 compatibility=0 notices=1 info=0 passed=0
+xmlfiles errors=0 warnings=0 compatibility=0 notices=0 info=0 passed=0
+xmlupdateserver errors=0 warnings=0 compatibility=0 notices=0 info=0 passed=1
+gpl errors=0 warnings=0 compatibility=0 notices=0 info=0 passed=6
+jexec errors=0 warnings=0 compatibility=0 notices=0 info=0 passed=0
+framework errors=0 warnings=0 compatibility=0 notices=0 info=0 passed=0
+errorreporting errors=0 warnings=0 compatibility=0 notices=0 info=0 passed=0
+encoding errors=0 warnings=0 compatibility=0 notices=0 info=0 passed=0
+jamss errors=0 warnings=0 compatibility=0 notices=0 info=0 passed=0
+language errors=0 warnings=0 compatibility=0 notices=0 info=0 passed=0
+
+TOTAL errors=0 warnings=0 compatibility=0 notices=1 info=1 passed=7
+
+INFO xmlinfo /mod_coworkingview.xml
+The name tag in this file is: <b>CoworkingView Workspace Prices</b><br />Version tag has the value: 1.0.0<br />The creationDate tag has the value: 2026-11
+
+NOTICE xmlmanifest /mod_coworkingview.xml
+Node &lt;extension&gt; contains unknown &lt;licence&gt; element<br />Node &lt;extension&gt; contains unknown &lt;php_minimum&gt; element
+
+PASSED US1 xmlupdateserver /mod_coworkingview.xml
+The Update Server link in this XML file is: https://raw.githubusercontent.com/coworkingview/flex-office-data/main/integrations/joomla/updates/mod_coworkingview.xml
+
+PASSED PH1 gpl /services/provider.php line 8
+GPL license was found
+
+PASSED PH1 gpl /src/Dispatcher/Dispatcher.php line 8
+GPL license was found
+
+PASSED PH1 gpl /src/Helper/CoworkingViewHelper.php line 8
+GPL license was found
+
+PASSED PH1 gpl /src/Helper/RatesParser.php line 8
+GPL license was found
+
+PASSED PH1 gpl /src/Helper/Retry.php line 8
+GPL license was found
+
+PASSED PH1 gpl /tmpl/default.php line 8
+GPL license was found
+</pre><section id="xmlinfo"><h2>xmlinfo</h2><div class="alert alert-info" data-level="INFO"><strong>#001</strong> /mod_coworkingview.xml<br /><small>The name tag in this file is: <b>CoworkingView Workspace Prices</b><br />Version tag has the value: 1.0.0<br />The creationDate tag has the value: 2026-11</small></div></section><section id="xmllicense"><h2>xmllicense</h2><div class="alert alert-success">Congratulations, everything seems to be fine with that rule!</div></section><section id="xmlmanifest"><h2>xmlmanifest</h2><div class="alert alert-info" data-level="NOTICE"><strong>#001</strong> /mod_coworkingview.xml<br /><small>Node &lt;extension&gt; contains unknown &lt;licence&gt; element<br />Node &lt;extension&gt; contains unknown &lt;php_minimum&gt; element</small></div></section><section id="xmlfiles"><h2>xmlfiles</h2><div class="alert alert-success">Congratulations, everything seems to be fine with that rule!</div></section><section id="xmlupdateserver"><h2>xmlupdateserver</h2><div class="alert alert-info" data-level="PASSED: US1"><strong>#001</strong> /mod_coworkingview.xml<br /><small>The Update Server link in this XML file is: https://raw.githubusercontent.com/coworkingview/flex-office-data/main/integrations/joomla/updates/mod_coworkingview.xml</small></div></section><section id="gpl"><h2>gpl</h2><div class="alert alert-info" data-level="PASSED: PH1"><strong>#001</strong> /services/provider.php in line: <strong>8</strong><br /><small>GPL license was found<pre> @license     GNU General Public License version 2 or later; see LICENSE.txt</pre></small></div><div class="alert alert-info" data-level="PASSED: PH1"><strong>#002</strong> /src/Dispatcher/Dispatcher.php in line: <strong>8</strong><br /><small>GPL license was found<pre> @license     GNU General Public License version 2 or later; see LICENSE.txt</pre></small></div><div class="alert alert-info" data-level="PASSED: PH1"><strong>#003</strong> /src/Helper/CoworkingViewHelper.php in line: <strong>8</strong><br /><small>GPL license was found<pre> @license     GNU General Public License version 2 or later; see LICENSE.txt</pre></small></div><div class="alert alert-info" data-level="PASSED: PH1"><strong>#004</strong> /src/Helper/RatesParser.php in line: <strong>8</strong><br /><small>GPL license was found<pre> @license     GNU General Public License version 2 or later; see LICENSE.txt</pre></small></div><div class="alert alert-info" data-level="PASSED: PH1"><strong>#005</strong> /src/Helper/Retry.php in line: <strong>8</strong><br /><small>GPL license was found<pre> @license     GNU General Public License version 2 or later; see LICENSE.txt</pre></small></div><div class="alert alert-info" data-level="PASSED: PH1"><strong>#006</strong> /tmpl/default.php in line: <strong>8</strong><br /><small>GPL license was found<pre> @license     GNU General Public License version 2 or later; see LICENSE.txt</pre></small></div></section><section id="jexec"><h2>jexec</h2><div class="alert alert-success">Congratulations, everything seems to be fine with that rule!</div></section><section id="framework"><h2>framework</h2><div class="alert alert-success">Congratulations, everything seems to be fine with that rule!</div></section><section id="errorreporting"><h2>errorreporting</h2><div class="alert alert-success">Congratulations, everything seems to be fine with that rule!</div></section><section id="encoding"><h2>encoding</h2><div class="alert alert-success">Congratulations, everything seems to be fine with that rule!</div></section><section id="jamss"><h2>jamss</h2><div class="alert alert-success">Congratulations, everything seems to be fine with that rule!</div></section><section id="language"><h2>language</h2><div class="alert alert-success">Congratulations, everything seems to be fine with that rule!</div></section></body></html>

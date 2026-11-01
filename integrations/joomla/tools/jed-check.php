@@ -4,9 +4,9 @@
  * Checks the module against the JED Checker rules that apply to this package.
  *
  * The expressions for the GPL header and the _JEXEC guard match
- * joomla-extensions/jedchecker (GplRule and JexecRule). The full JED Checker
- * component runs inside a Joomla site; this script covers the same rules for
- * a site module without installing one.
+ * joomla-extensions/jedchecker (GplRule and JexecRule). This script does not
+ * replace the component. The official run is tools/official-jedchecker.sh,
+ * which installs JED Checker 2.4.4 into Joomla 5 and calls its rule classes.
  *
  * This file is not part of the installable module.
  */

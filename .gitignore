@@ -25,3 +25,5 @@ integrations/java/dist/
 .DS_Store
 # Docs (mkdocs build output)
 site/
+# LibreOffice extension build
+integrations/libreoffice/dist/

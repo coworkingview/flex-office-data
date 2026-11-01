@@ -1,0 +1,26 @@
+#ifndef __com_coworkingview_calc_XCoworkingView_idl__
+#define __com_coworkingview_calc_XCoworkingView_idl__
+
+module com { module coworkingview { module calc {
+
+interface XCoworkingView {
+    any CWV_SPACES([in] any City);
+    any CWV_PRICE([in] any City, [in] string Product);
+    any CWV_RATE([in] any City, [in] string Product, [in] string Stat);
+    string CWV_CURRENCY([in] any City);
+    any CWV_SAMPLE([in] any City, [in] string Product);
+    string CWV_ASOF([in] any City);
+    string CWV_SOURCE();
+    string CWV_ATTRIBUTION([in] any City);
+};
+
+service CoworkingView {
+    interface XCoworkingView;
+    interface com::sun::star::sheet::XAddIn;
+    interface com::sun::star::lang::XServiceName;
+    interface com::sun::star::lang::XServiceInfo;
+};
+
+}; }; };
+
+#endif

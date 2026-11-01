@@ -1,0 +1,5 @@
+target-version = "py38"
+
+[lint]
+# LibreOffice 7 ships Python 3.8. Keep the add-in on that syntax.
+extend-select = []

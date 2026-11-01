@@ -16,11 +16,11 @@ Maintained by [CoworkingView](https://coworkingview.com). The API is described a
 
 Eclipse 2024-12 (4.34) or newer. Those packages run on Java 21. The plug-in bytecode is Java 17.
 
-The update site is published when a tag `eclipse-v*` is built. The planned URL is:
+The update site is:
 
 `https://coworkingview.github.io/flex-office-data/eclipse/updates/`
 
-This repository had no GitHub Pages site when the plug-in was added. The tag workflow publishes that path and does not replace other Pages content. Until the first tag has been built, install from a p2 repository you built locally (see below).
+GitHub Actions publishes it when [`.github/workflows/eclipse.yml`](../../.github/workflows/eclipse.yml) runs on `main`. The repository's `github-pages` environment accepts deploys from that branch only, so a tag push does not publish Pages. The site root is the workflow artifact: `eclipse/updates/` (the p2 repository) and a `.nojekyll` file.
 
 1. **Help → Install New Software…**
 2. **Add…** Name: `CoworkingView`. Location: the update site URL above.
@@ -29,7 +29,7 @@ This repository had no GitHub Pages site when the plug-in was added. The tag wor
 
 The feature id is `com.coworkingview.eclipse.feature`. The provider is CoworkingView.
 
-If GitHub Pages is not available, the same tag attaches `coworkingview-eclipse-p2.zip` to the GitHub Release. Add this location instead (the `eclipse-v0.1.0` segment matches the tag):
+A tag `eclipse-v*` also builds that repository and attaches `coworkingview-eclipse-p2.zip` to the GitHub Release. A run on `main` attaches the zip when the newest `eclipse-v*` release does not have it yet. Add this location instead if you cannot use Pages (the `eclipse-v0.1.0` segment matches the tag):
 
 ```text
 jar:https://github.com/coworkingview/flex-office-data/releases/download/eclipse-v0.1.0/coworkingview-eclipse-p2.zip!/
@@ -85,7 +85,7 @@ Screenshots:
 
 Icons are `tools/render_icons.py` (serif “CV”, gold dot, off-white). Regenerate them with Pillow if you change the script.
 
-GitHub Actions workflow [`.github/workflows/eclipse.yml`](../../.github/workflows/eclipse.yml) runs `mvn -B verify` on pull requests. A tag `eclipse-v*` publishes the repository to GitHub Pages at `/eclipse/updates/` and uploads the zip to the GitHub Release.
+GitHub Actions workflow [`.github/workflows/eclipse.yml`](../../.github/workflows/eclipse.yml) runs `mvn -B verify` on pull requests, on `main`, and on tags `eclipse-v*`. A push to `main` publishes the p2 repository to GitHub Pages at `/eclipse/updates/`. A tag `eclipse-v*` uploads `coworkingview-eclipse-p2.zip` to that GitHub Release.
 
 ## Licence
 

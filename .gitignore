@@ -50,3 +50,6 @@ integrations/thunderbird/dist/
 # Joomla module build and PHP_CodeSniffer
 integrations/joomla/dist/
 integrations/joomla/vendor/
+# LM Studio plugin
+integrations/lmstudio/node_modules/
+integrations/lmstudio/dist/

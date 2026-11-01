@@ -25,6 +25,8 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 
 [Joomla](integrations/joomla/) (`mod_coworkingview`, CoworkingView Workspace Prices) shows the same Price Index on a site page. That module is GPL-2.0-or-later.
 
+[LM Studio](integrations/lmstudio/) (`coworkingview/coworkingview-workspace-prices`) gives a local model tools for the same prices and a short catalogue search. That plugin is published with `lms push`.
+
 The Python, R, Java and command-line packages read the same public API, follow
 the same [specification](spec/SPEC.md) and are tested against the same
 [fixtures and expected outputs](spec/), so a number is the same whichever of
@@ -166,6 +168,7 @@ integrations/backstage/  Backstage frontend plugin
 integrations/nuxt/  `@coworkingview/nuxt` module (`useCoworkingProperties`, `useCoworkingRates`)
 integrations/thunderbird/  Thunderbird MailExtension (CoworkingView prices)
 integrations/joomla/   Joomla 4/5 site module (CoworkingView Workspace Prices)
+integrations/lmstudio/  LM Studio tools-provider plugin (coworkingview-workspace-prices)
 packaging/          AUR, Chocolatey and Snap manifests for cwv
 ```
 

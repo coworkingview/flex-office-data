@@ -1,0 +1,7 @@
+{
+  "type": "plugin",
+  "runner": "node",
+  "owner": "coworkingview",
+  "name": "coworkingview-workspace-prices",
+  "revision": 1
+}

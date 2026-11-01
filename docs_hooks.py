@@ -19,6 +19,7 @@ _SOURCES: dict[str, str] = {
     "python.md": "python/README.md",
     "r.md": "r/README.md",
     "cli.md": "rust/README.md",
+    "ocaml.md": "clients/ocaml/README.md",
     "spec.md": "spec/SPEC.md",
 }
 
@@ -28,12 +29,18 @@ _LINK_REWRITES: dict[str, dict[str, str]] = {
         "python/": "python.md",
         "r/": "r.md",
         "rust/": "cli.md",
+        "clients/ocaml/": "ocaml.md",
         "spec/SPEC.md": "spec.md",
         "spec/": f"{_REPO}/tree/main/spec",
         "CONTRIBUTING.md": f"{_REPO}/blob/main/CONTRIBUTING.md",
     },
     "rust/README.md": {
         "LICENSE": f"{_REPO}/blob/main/rust/LICENSE",
+    },
+    "clients/ocaml/README.md": {
+        "LICENSE": f"{_REPO}/blob/main/clients/ocaml/LICENSE",
+        "CHANGES.md": f"{_REPO}/blob/main/clients/ocaml/CHANGES.md",
+        "../../docs/OPAM-CHECKLIST.md": "OPAM-CHECKLIST.md",
     },
 }
 

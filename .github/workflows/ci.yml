@@ -126,3 +126,22 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+
+  joplin:
+    name: Joplin plugin
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/joplin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: integrations/joplin/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run dist
+      - run: test -f publish/com.coworkingview.joplin.jpl
+      - run: test -f publish/com.coworkingview.joplin.json

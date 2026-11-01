@@ -1,0 +1,74 @@
+{
+    "$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+    "UUID": "com.coworkingview.prices",
+    "Name": "Coworking Prices",
+    "Version": "1.0.0.0",
+    "Author": "CoworkingView",
+    "Description": "Shows live CoworkingView figures on a Stream Deck key. Workspace Count is how many coworking spaces the chosen city lists. Market Rate is a Price Index median, such as the monthly flex desk rate. Press a key to open coworkingview.com in your browser. Requires Stream Deck 7.1 or later, macOS 12 or Windows 10, and an internet connection. No account or API key. Figures refresh about every 30 minutes from the public API. Price Index medians are CC BY 4.0. Support and the website are https://coworkingview.com.",
+    "URL": "https://coworkingview.com",
+    "SupportURL": "https://coworkingview.com",
+    "Icon": "imgs/plugin/marketplace",
+    "Category": "Coworking Prices",
+    "CategoryIcon": "imgs/plugin/category-icon",
+    "CodePath": "bin/plugin.js",
+    "SDKVersion": 3,
+    "Software": {
+        "MinimumVersion": "7.1"
+    },
+    "Nodejs": {
+        "Version": "24",
+        "Debug": "enabled"
+    },
+    "OS": [
+        {
+            "Platform": "mac",
+            "MinimumVersion": "12"
+        },
+        {
+            "Platform": "windows",
+            "MinimumVersion": "10"
+        }
+    ],
+    "Actions": [
+        {
+            "Name": "Workspace Count",
+            "UUID": "com.coworkingview.prices.workspace-count",
+            "Icon": "imgs/actions/workspace-count/icon",
+            "Tooltip": "Shows how many coworking spaces are listed in a city. Press to open CoworkingView.",
+            "PropertyInspectorPath": "ui/workspace-count.html",
+            "Controllers": [
+                "Keypad"
+            ],
+            "UserTitleEnabled": false,
+            "States": [
+                {
+                    "Image": "imgs/actions/workspace-count/key",
+                    "TitleAlignment": "bottom",
+                    "TitleColor": "#1C1917",
+                    "FontSize": 11,
+                    "ShowTitle": true
+                }
+            ]
+        },
+        {
+            "Name": "Market Rate",
+            "UUID": "com.coworkingview.prices.market-rate",
+            "Icon": "imgs/actions/market-rate/icon",
+            "Tooltip": "Shows a CoworkingView Price Index median for a city. Press to open CoworkingView.",
+            "PropertyInspectorPath": "ui/market-rate.html",
+            "Controllers": [
+                "Keypad"
+            ],
+            "UserTitleEnabled": false,
+            "States": [
+                {
+                    "Image": "imgs/actions/market-rate/key",
+                    "TitleAlignment": "bottom",
+                    "TitleColor": "#1C1917",
+                    "FontSize": 9,
+                    "ShowTitle": true
+                }
+            ]
+        }
+    ]
+}

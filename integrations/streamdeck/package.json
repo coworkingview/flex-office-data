@@ -1,0 +1,39 @@
+{
+    "name": "coworkingview-streamdeck",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "description": "Stream Deck plugin that shows CoworkingView workspace counts and Price Index rates.",
+    "license": "MIT",
+    "author": "CoworkingView",
+    "homepage": "https://coworkingview.com",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/coworkingview/flex-office-data.git",
+        "directory": "integrations/streamdeck"
+    },
+    "engines": {
+        "node": ">=24"
+    },
+    "scripts": {
+        "build": "rolldown -c rolldown.config.ts",
+        "lint": "tsc --noEmit && prettier --check .",
+        "test": "node --experimental-strip-types --test src/**/*.test.ts",
+        "validate": "streamdeck validate com.coworkingview.prices.sdPlugin --no-update-check",
+        "pack": "streamdeck pack com.coworkingview.prices.sdPlugin --force --no-update-check --output .",
+        "icons": "python3 scripts/make-icons.py"
+    },
+    "prettier": "@elgato/prettier-config",
+    "dependencies": {
+        "@elgato/streamdeck": "^3.0.4"
+    },
+    "devDependencies": {
+        "@elgato/cli": "^1.10.4",
+        "@elgato/prettier-config": "^0.3.3",
+        "@tsconfig/node24": "^24.0.5",
+        "@types/node": "^24.10.1",
+        "prettier": "^3.9.10",
+        "rolldown": "^1.0.0",
+        "typescript": "^5.9.3"
+    }
+}

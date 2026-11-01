@@ -1,0 +1,5 @@
+node_modules/
+com.coworkingview.prices.sdPlugin/bin/plugin.js
+com.coworkingview.prices.sdPlugin/bin/plugin.js.map
+com.coworkingview.prices.sdPlugin/logs/
+*.streamDeckPlugin

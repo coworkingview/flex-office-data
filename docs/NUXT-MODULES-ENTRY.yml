@@ -1,0 +1,16 @@
+name: coworkingview
+description: Coworking listings and Price Index rates from the public CoworkingView API.
+repo: coworkingview/flex-office-data#main/integrations/nuxt
+npm: '@coworkingview/nuxt'
+icon: ''
+github: https://github.com/coworkingview/flex-office-data
+website: https://coworkingview.com
+learn_more: ''
+category: API & Data Fetching
+type: 3rd-party
+maintainers:
+  - name: CoworkingView
+    github: coworkingview
+compatibility:
+  nuxt: '>=3.0.0'
+  requires: {}

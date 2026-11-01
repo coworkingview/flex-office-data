@@ -366,9 +366,12 @@ jobs:
       - name: opam lint
         run: |
           set -euo pipefail
-          out=$(opam lint coworkingview.opam opam-repository/packages/coworkingview/coworkingview.0.1.0/opam)
+          # A clean run prints "<file>: Passed." (with colour when OPAMCOLOR=always).
+          # Anything else is a warning or an error.
+          out=$(opam lint coworkingview.opam opam-repository/packages/coworkingview/coworkingview.0.1.0/opam | sed -E 's/\x1b\[[0-9;]*m//g')
           printf '%s\n' "$out"
-          test -z "$out"
+          bad=$(printf '%s\n' "$out" | grep -Ev ': Passed\.$' || true)
+          test -z "$bad"
       - name: opam-dune-lint
         if: matrix.ocaml == '5.3'
         run: |

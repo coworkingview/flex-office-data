@@ -467,3 +467,32 @@ jobs:
           name: coworkingview-workspace-prices-0.1.0.xpi
           path: integrations/thunderbird/dist/coworkingview-workspace-prices-0.1.0.xpi
           if-no-files-found: error
+
+  joomla:
+    name: Joomla module (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["8.1", "8.2", "8.3"]
+    defaults:
+      run:
+        working-directory: integrations/joomla
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer
+      - run: composer install --no-interaction --prefer-dist
+      - run: bash check.sh
+      - run: vendor/bin/phpcs --standard=phpcs.xml.dist -n
+      - run: ./build.sh
+        if: matrix.php == '8.2'
+      - uses: actions/upload-artifact@v4
+        if: matrix.php == '8.2'
+        with:
+          name: mod_coworkingview-1.0.0.zip
+          path: integrations/joomla/dist/mod_coworkingview-1.0.0.zip
+          if-no-files-found: error

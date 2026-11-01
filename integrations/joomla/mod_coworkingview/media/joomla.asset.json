@@ -1,0 +1,15 @@
+{
+    "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+    "name": "mod_coworkingview",
+    "version": "1.0.0",
+    "description": "CoworkingView Workspace Prices",
+    "license": "GPL-2.0-or-later",
+    "assets": [
+        {
+            "name": "mod_coworkingview",
+            "type": "style",
+            "uri": "mod_coworkingview/css/mod_coworkingview.css",
+            "version": "1.0.0"
+        }
+    ]
+}

@@ -22,6 +22,8 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 
 [Thunderbird](integrations/thunderbird/) adds a “CoworkingView prices” button to the message and compose windows and looks up the same Price Index.
 
+[Joomla](integrations/joomla/) (`mod_coworkingview`, CoworkingView Workspace Prices) shows the same Price Index on a site page. That module is GPL-2.0-or-later.
+
 The Python, R, Java and command-line packages read the same public API, follow
 the same [specification](spec/SPEC.md) and are tested against the same
 [fixtures and expected outputs](spec/), so a number is the same whichever of
@@ -111,7 +113,7 @@ Price Index appear in `rates()` without a package update.
 
 ## Licence and attribution
 
-- **Code:** MIT (each package's `LICENSE`).
+- **Code:** MIT (each package's `LICENSE`). The Joomla module in `integrations/joomla/` is GPL-2.0-or-later, the licence the Joomla Extensions Directory requires for a listing.
 - **Price Index data** (`rates()`, `cities()`): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
   Credit *CoworkingView Price Index* with a link to
   <https://coworkingview.com/en/tools/price-index>. Every result carries the
@@ -151,6 +153,7 @@ integrations/libreoffice/  Calc add-in (CWV_SPACES, CWV_PRICE)
 integrations/backstage/  Backstage frontend plugin
 integrations/nuxt/  `@coworkingview/nuxt` module (`useCoworkingProperties`, `useCoworkingRates`)
 integrations/thunderbird/  Thunderbird MailExtension (CoworkingView prices)
+integrations/joomla/   Joomla 4/5 site module (CoworkingView Workspace Prices)
 packaging/          AUR, Chocolatey and Snap manifests for cwv
 ```
 

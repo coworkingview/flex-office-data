@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+    <update>
+        <name>CoworkingView Workspace Prices</name>
+        <description>Indicative flexible-workspace prices for one city from the public CoworkingView Price Index.</description>
+        <element>mod_coworkingview</element>
+        <type>module</type>
+        <client>site</client>
+        <client_id>0</client_id>
+        <version>1.0.0</version>
+        <infourl title="CoworkingView Workspace Prices">https://github.com/coworkingview/flex-office-data/blob/main/integrations/joomla/README.md</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/coworkingview/flex-office-data/releases/download/joomla-v1.0.0/mod_coworkingview-1.0.0.zip</downloadurl>
+        </downloads>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <maintainer>CoworkingView</maintainer>
+        <maintainerurl>https://coworkingview.com</maintainerurl>
+        <targetplatform name="joomla" version="(4|5)\.[0-9]+"/>
+        <php_minimum>8.1.0</php_minimum>
+    </update>
+</updates>

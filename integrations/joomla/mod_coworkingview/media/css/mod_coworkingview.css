@@ -1,0 +1,128 @@
+.mod-coworkingview {
+    box-sizing: border-box;
+    max-width: 100%;
+    padding: 1rem 1rem 0.85rem;
+    border: 1px solid #e4dccf;
+    border-top: 3px solid #b0893e;
+    border-radius: 6px;
+    background: #fff;
+    color: #1c1c1c;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.mod-coworkingview *,
+.mod-coworkingview *::before,
+.mod-coworkingview *::after {
+    box-sizing: border-box;
+}
+
+.mod-coworkingview__mast {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 0.85rem;
+}
+
+.mod-coworkingview__mark {
+    display: flex;
+    flex: 0 0 auto;
+    line-height: 0;
+}
+
+.mod-coworkingview__mark img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.mod-coworkingview__title {
+    margin: 0;
+    color: #1c1c1c;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.mod-coworkingview__kicker {
+    margin: 0.15rem 0 0;
+    color: #5c5348;
+    font-size: 0.82rem;
+}
+
+.mod-coworkingview__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.mod-coworkingview__table caption {
+    margin-bottom: 0.4rem;
+    caption-side: top;
+    color: #5c5348;
+    font-size: 0.78rem;
+    text-align: left;
+}
+
+.mod-coworkingview__table th,
+.mod-coworkingview__table td {
+    padding: 0.4rem 0.35rem;
+    border-bottom: 1px solid #eee6da;
+    text-align: left;
+    vertical-align: top;
+}
+
+.mod-coworkingview__table thead th {
+    color: #5c5348;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.mod-coworkingview__unit,
+.mod-coworkingview__low {
+    display: block;
+    margin-top: 0.1rem;
+    color: #5c5348;
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.mod-coworkingview__low {
+    color: #8a6a2f;
+}
+
+.mod-coworkingview__message,
+.mod-coworkingview__detail,
+.mod-coworkingview__asof,
+.mod-coworkingview__note,
+.mod-coworkingview__credit {
+    margin: 0.45rem 0 0;
+}
+
+.mod-coworkingview__detail,
+.mod-coworkingview__note,
+.mod-coworkingview__asof {
+    color: #5c5348;
+    font-size: 0.78rem;
+}
+
+.mod-coworkingview__foot {
+    margin-top: 0.75rem;
+}
+
+.mod-coworkingview__credit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.8rem;
+    font-size: 0.82rem;
+}
+
+.mod-coworkingview a {
+    color: #1c1c1c;
+}
+
+.mod-coworkingview__credit a {
+    text-underline-offset: 0.15em;
+}

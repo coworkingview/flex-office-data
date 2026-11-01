@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ruleset name="mod_coworkingview">
+    <description>Joomla coding standard for CoworkingView Workspace Prices.</description>
+    <arg name="extensions" value="php"/>
+    <arg value="p"/>
+    <file>mod_coworkingview</file>
+    <exclude-pattern>*/media/*</exclude-pattern>
+    <config name="php_version" value="80100"/>
+    <rule ref="Joomla"/>
+    <!-- Layout files use Joomla's alternative if/foreach syntax. Those sniffs expect braces. -->
+    <rule ref="Joomla.ControlStructures.ControlStructuresBrackets">
+        <exclude-pattern>*/tmpl/*</exclude-pattern>
+    </rule>
+    <rule ref="Joomla.ControlStructures.WhiteSpaceBefore">
+        <exclude-pattern>*/tmpl/*</exclude-pattern>
+    </rule>
+</ruleset>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>CoworkingView Workspace Prices</name>
+    <author>CoworkingView</author>
+    <creationDate>2026-11</creationDate>
+    <copyright>(C) 2026 CoworkingView</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <licence>GNU General Public Licence version 2 or later; see LICENSE.txt</licence>
+    <authorEmail>info@coworkingview.com</authorEmail>
+    <authorUrl>https://coworkingview.com</authorUrl>
+    <version>1.0.0</version>
+    <description>MOD_COWORKINGVIEW_XML_DESCRIPTION</description>
+    <namespace path="src">CoworkingView\Module\CoworkingView</namespace>
+    <php_minimum>8.1.0</php_minimum>
+    <files>
+        <folder module="mod_coworkingview">services</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+        <folder>language</folder>
+        <filename>LICENSE.txt</filename>
+    </files>
+    <media folder="media" destination="mod_coworkingview">
+        <folder>css</folder>
+        <filename>joomla.asset.json</filename>
+        <folder>images</folder>
+    </media>
+    <languages>
+        <language tag="en-GB">language/en-GB/mod_coworkingview.ini</language>
+        <language tag="en-GB">language/en-GB/mod_coworkingview.sys.ini</language>
+        <language tag="de-DE">language/de-DE/mod_coworkingview.ini</language>
+        <language tag="de-DE">language/de-DE/mod_coworkingview.sys.ini</language>
+        <language tag="es-ES">language/es-ES/mod_coworkingview.ini</language>
+        <language tag="es-ES">language/es-ES/mod_coworkingview.sys.ini</language>
+    </languages>
+    <updateservers>
+        <server type="extension" priority="1" name="CoworkingView Workspace Prices">https://raw.githubusercontent.com/coworkingview/flex-office-data/main/integrations/joomla/updates/mod_coworkingview.xml</server>
+    </updateservers>
+    <changelogurl>https://raw.githubusercontent.com/coworkingview/flex-office-data/main/integrations/joomla/updates/changelog.xml</changelogurl>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="city"
+                    type="text"
+                    label="MOD_COWORKINGVIEW_FIELD_CITY_LABEL"
+                    description="MOD_COWORKINGVIEW_FIELD_CITY_DESC"
+                    default="berlin"
+                    maxlength="64"
+                    required="true"
+                />
+                <field
+                    name="product"
+                    type="list"
+                    label="MOD_COWORKINGVIEW_FIELD_PRODUCT_LABEL"
+                    description="MOD_COWORKINGVIEW_FIELD_PRODUCT_DESC"
+                    default=""
+                >
+                    <option value="">MOD_COWORKINGVIEW_PRODUCT_ALL</option>
+                    <option value="flex_desk">MOD_COWORKINGVIEW_PRODUCT_FLEX_DESK</option>
+                    <option value="fix_desk">MOD_COWORKINGVIEW_PRODUCT_FIX_DESK</option>
+                    <option value="private_office">MOD_COWORKINGVIEW_PRODUCT_PRIVATE_OFFICE</option>
+                    <option value="exclusive_bereich">MOD_COWORKINGVIEW_PRODUCT_EXCLUSIVE_BEREICH</option>
+                    <option value="day_pass">MOD_COWORKINGVIEW_PRODUCT_DAY_PASS</option>
+                    <option value="meeting_room">MOD_COWORKINGVIEW_PRODUCT_MEETING_ROOM</option>
+                    <option value="event_space">MOD_COWORKINGVIEW_PRODUCT_EVENT_SPACE</option>
+                    <option value="virtual_office">MOD_COWORKINGVIEW_PRODUCT_VIRTUAL_OFFICE</option>
+                    <option value="membership">MOD_COWORKINGVIEW_PRODUCT_MEMBERSHIP</option>
+                </field>
+                <field
+                    name="language"
+                    type="list"
+                    label="MOD_COWORKINGVIEW_FIELD_LANGUAGE_LABEL"
+                    description="MOD_COWORKINGVIEW_FIELD_LANGUAGE_DESC"
+                    default="en"
+                >
+                    <option value="en">MOD_COWORKINGVIEW_LANGUAGE_EN</option>
+                    <option value="de">MOD_COWORKINGVIEW_LANGUAGE_DE</option>
+                    <option value="es">MOD_COWORKINGVIEW_LANGUAGE_ES</option>
+                </field>
+                <field
+                    name="count"
+                    type="number"
+                    label="MOD_COWORKINGVIEW_FIELD_COUNT_LABEL"
+                    description="MOD_COWORKINGVIEW_FIELD_COUNT_DESC"
+                    default="6"
+                    min="1"
+                    max="12"
+                    filter="integer"
+                />
+                <field
+                    name="cache_time"
+                    type="number"
+                    label="MOD_COWORKINGVIEW_FIELD_CACHE_LABEL"
+                    description="MOD_COWORKINGVIEW_FIELD_CACHE_DESC"
+                    default="60"
+                    min="10"
+                    max="1440"
+                    filter="integer"
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

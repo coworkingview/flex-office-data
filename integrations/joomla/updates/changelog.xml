@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelogs>
+    <changelog>
+        <element>mod_coworkingview</element>
+        <type>module</type>
+        <version>1.0.0</version>
+        <note>
+            <item>First release. Indicative Price Index figures for one city from the public CoworkingView API.</item>
+        </note>
+    </changelog>
+</changelogs>

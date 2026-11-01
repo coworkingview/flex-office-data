@@ -1,0 +1,125 @@
+{
+    "data": {
+        "cities": [
+            {
+                "city": {
+                    "slug": "berlin",
+                    "name": "Berlin"
+                },
+                "countryCode": "DE",
+                "currency": "EUR",
+                "byType": [
+                    {
+                        "optionType": "flex_desk",
+                        "median": {
+                            "amount": 1,
+                            "currency": "EUR"
+                        },
+                        "sampleSize": 1
+                    }
+                ],
+                "figures": [
+                    {
+                        "optionType": "fix_desk",
+                        "median": {
+                            "amount": 310,
+                            "currency": "EUR"
+                        },
+                        "p25": {
+                            "amount": 290,
+                            "currency": "EUR"
+                        },
+                        "p75": {
+                            "amount": 421,
+                            "currency": "EUR"
+                        },
+                        "sampleSize": 60
+                    },
+                    {
+                        "optionType": "private_office",
+                        "median": {
+                            "amount": 480,
+                            "currency": "EUR"
+                        },
+                        "p25": {
+                            "amount": 399,
+                            "currency": "EUR"
+                        },
+                        "p75": {
+                            "amount": 550,
+                            "currency": "EUR"
+                        },
+                        "sampleSize": 59
+                    },
+                    {
+                        "optionType": "flex_desk",
+                        "median": {
+                            "amount": 214,
+                            "currency": "EUR"
+                        },
+                        "p25": {
+                            "amount": 199,
+                            "currency": "EUR"
+                        },
+                        "p75": {
+                            "amount": 292,
+                            "currency": "EUR"
+                        },
+                        "sampleSize": 72
+                    }
+                ],
+                "dayPass": {
+                    "median": {
+                        "amount": 35,
+                        "currency": "EUR"
+                    },
+                    "sampleSize": 59
+                },
+                "meetingRoom": {
+                    "median": {
+                        "amount": 32,
+                        "currency": "EUR"
+                    },
+                    "sampleSize": 79
+                },
+                "propertyCount": 85,
+                "entryMedian": {
+                    "amount": 265,
+                    "currency": "EUR"
+                },
+                "buildings": [
+                    {
+                        "price": {
+                            "amount": 80,
+                            "currency": "EUR"
+                        }
+                    }
+                ],
+                "sampleSize": 85
+            },
+            {
+                "city": {
+                    "slug": "madrid",
+                    "name": "Madrid"
+                },
+                "countryCode": "ES",
+                "currency": "EUR",
+                "figures": [
+                    {
+                        "optionType": "flex_desk",
+                        "median": {
+                            "amount": 175,
+                            "currency": "EUR"
+                        },
+                        "sampleSize": 13
+                    }
+                ]
+            }
+        ],
+        "asOf": "2026-11-01T00:00:00.000Z",
+        "attribution": "Source: CoworkingView Price Index (https://coworkingview.com/en/tools/price-index)."
+    },
+    "meta": {
+        "contractVersion": "1.0.0"
+    }
+}

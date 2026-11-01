@@ -160,3 +160,101 @@ jobs:
       - run: npm run dist
       - run: test -f publish/com.coworkingview.joplin.jpl
       - run: test -f publish/com.coworkingview.joplin.json
+
+  matomo:
+    name: Matomo plugin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+      - name: PHP syntax
+        working-directory: integrations/matomo/CoworkingView
+        run: |
+          set -euo pipefail
+          mapfile -d '' files < <(find . -name '*.php' -print0)
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "no PHP files found" >&2
+            exit 1
+          fi
+          for file in "${files[@]}"; do
+            php -l "$file"
+          done
+      - name: plugin.json and parser
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("integrations/matomo/CoworkingView")
+          plugin = json.loads((root / "plugin.json").read_text())
+          required = [
+              "name",
+              "description",
+              "version",
+              "theme",
+              "license",
+              "keywords",
+              "homepage",
+              "authors",
+              "support",
+              "require",
+          ]
+          missing = [key for key in required if key not in plugin]
+          if missing:
+              raise SystemExit("plugin.json missing " + ", ".join(missing))
+          if plugin["name"] != "CoworkingView":
+              raise SystemExit("unexpected plugin name")
+          lowered = plugin["name"].lower()
+          for banned in ("matomo", "analytics", "plugin"):
+              if banned in lowered:
+                  raise SystemExit("plugin name contains " + banned)
+          if not isinstance(plugin["description"], str) or not plugin["description"]:
+              raise SystemExit("description must be a non-empty string")
+          if len(plugin["description"]) > 150:
+              raise SystemExit("description is longer than 150 characters")
+          if plugin["version"] != "0.1.0":
+              raise SystemExit("unexpected version")
+          if plugin["theme"] is not False:
+              raise SystemExit("theme must be false")
+          if plugin["license"] != "GPL-3.0+":
+              raise SystemExit("unexpected license")
+          if plugin["homepage"] != "https://coworkingview.com":
+              raise SystemExit("unexpected homepage")
+          if plugin["require"].get("matomo") != ">=5.0.0-b1,<6.0.0-b1":
+              raise SystemExit("unexpected matomo requirement")
+          if not plugin["keywords"]:
+              raise SystemExit("keywords are required")
+          for keyword in plugin["keywords"]:
+              if not isinstance(keyword, str) or not keyword.replace("-", "").replace(".", "").isalnum():
+                  raise SystemExit("invalid keyword: " + repr(keyword))
+          authors = plugin["authors"]
+          if not authors or authors[0].get("name") != "CoworkingView":
+              raise SystemExit("unexpected authors")
+          if authors[0].get("email") != "info@coworkingview.com":
+              raise SystemExit("unexpected author email")
+          if authors[0].get("homepage") != "https://coworkingview.com":
+              raise SystemExit("unexpected author homepage")
+          issues = plugin["support"].get("issues")
+          if issues != "https://github.com/coworkingview/flex-office-data/issues":
+              raise SystemExit("unexpected support.issues")
+          for path in root.rglob("*.json"):
+              json.loads(path.read_text())
+          readme = (root / "README.md").read_text()
+          if "https://coworkingview.com" not in readme:
+              raise SystemExit("README must link to https://coworkingview.com")
+          if "www.coworkingview.com" in readme:
+              raise SystemExit("README must not use www.coworkingview.com")
+          if "api.coworkingview.com" not in readme:
+              raise SystemExit("README must name the external API")
+          if "No visitor data is sent" not in readme:
+              raise SystemExit("README must include the privacy notice")
+          license_text = (root / "LICENSE").read_text()
+          if "GNU GENERAL PUBLIC LICENSE" not in license_text:
+              raise SystemExit("LICENSE is missing the GPL text")
+          print("plugin.json ok")
+          PY
+          php integrations/matomo/CoworkingView/tests/parser.php

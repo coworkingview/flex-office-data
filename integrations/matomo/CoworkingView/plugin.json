@@ -1,0 +1,26 @@
+{
+    "name": "CoworkingView",
+    "description": "Flexible office price medians for one city from the CoworkingView Price Index.",
+    "version": "0.1.0",
+    "theme": false,
+    "license": "GPL-3.0+",
+    "keywords": ["coworking", "flexible-office", "price-index", "office-prices"],
+    "homepage": "https://coworkingview.com",
+    "authors": [
+        {
+            "name": "CoworkingView",
+            "email": "info@coworkingview.com",
+            "homepage": "https://coworkingview.com"
+        }
+    ],
+    "support": {
+        "email": "info@coworkingview.com",
+        "issues": "https://github.com/coworkingview/flex-office-data/issues",
+        "source": "https://github.com/coworkingview/flex-office-data/tree/main/integrations/matomo/CoworkingView",
+        "docs": "https://coworkingview.com"
+    },
+    "require": {
+        "matomo": ">=5.0.0-b1,<6.0.0-b1"
+    },
+    "category": "insights"
+}

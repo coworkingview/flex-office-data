@@ -1,0 +1,55 @@
+<div class="coworkingview-widget">
+    {% if cityName or citySlug %}
+        <p class="coworkingview-city">
+            <strong>{{ cityName ? cityName : citySlug }}</strong>{% if countryCode %} ({{ countryCode }}){% endif %}
+        </p>
+    {% endif %}
+
+    {% if ratesError %}
+        <p class="coworkingview-error">{{ ratesError }}</p>
+    {% elseif rows is empty %}
+        <p>{{ 'CoworkingView_NoRates'|translate }}</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ 'CoworkingView_Product'|translate }}</th>
+                    <th>{{ 'CoworkingView_Median'|translate }}</th>
+                    <th>{{ 'CoworkingView_P25'|translate }}</th>
+                    <th>{{ 'CoworkingView_P75'|translate }}</th>
+                    <th>{{ 'CoworkingView_Unit'|translate }}</th>
+                    <th>{{ 'CoworkingView_SampleSize'|translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                    <tr>
+                        <td>{{ row.label }}</td>
+                        <td>{{ row.median }}</td>
+                        <td>{{ row.p25 }}</td>
+                        <td>{{ row.p75 }}</td>
+                        <td>{{ row.unit }}</td>
+                        <td>{{ row.sampleSize }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% if propertiesError %}
+        <p class="coworkingview-error">{{ propertiesError }}</p>
+    {% elseif workspaceCount is not null %}
+        <p>{{ 'CoworkingView_WorkspaceCount'|translate(workspaceCount) }}</p>
+    {% endif %}
+
+    {% if asOf %}
+        <p class="coworkingview-note">{{ 'CoworkingView_AsOf'|translate(asOf) }}</p>
+    {% endif %}
+    {% if attribution %}
+        <p class="coworkingview-note">{{ attribution }}</p>
+    {% endif %}
+    <p class="coworkingview-note">
+        <a href="https://coworkingview.com" target="_blank" rel="noreferrer noopener">{{ 'CoworkingView_DataBy'|translate }}</a>
+    </p>
+    <p class="coworkingview-note">{{ 'CoworkingView_PrivacyFooter'|translate }}</p>
+</div>

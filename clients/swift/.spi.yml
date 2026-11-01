@@ -1,0 +1,6 @@
+version: 1
+builder:
+  configs:
+    - documentation_targets: [CoworkingView]
+external_links:
+  documentation: https://coworkingview.com/en/api

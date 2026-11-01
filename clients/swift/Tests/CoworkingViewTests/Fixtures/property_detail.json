@@ -1,0 +1,128 @@
+{
+  "data": {
+    "slug": "sankt-oberholz-rosenthaler-berlin",
+    "title": "St. Oberholz Coworking Berlin Mitte – Rosenthaler Straße",
+    "countryCode": "DE",
+    "city": {
+      "slug": "berlin",
+      "name": "Berlin"
+    },
+    "zone": {
+      "slug": "mitte",
+      "name": "Mitte"
+    },
+    "operator": {
+      "slug": "sankt-oberholz",
+      "name": "St. Oberholz",
+      "logo": {
+        "url": "https://example.com/logo.png",
+        "width": 200,
+        "height": 100,
+        "alt": "St. Oberholz"
+      }
+    },
+    "coordinates": {
+      "lat": 52.5294539,
+      "lng": 13.4018374
+    },
+    "fromPrice": {
+      "amount": 69,
+      "currency": "EUR"
+    },
+    "fromBillingPeriod": "month",
+    "featured": true,
+    "updatedAt": "2026-10-19T16:27:57.522Z",
+    "description": "Example description used as a test fixture.",
+    "address": "Rosenthaler Straße 72a, 10119 Berlin, Germany",
+    "images": [
+      {
+        "url": "https://example.com/image.webp",
+        "width": 1200,
+        "height": 800,
+        "alt": "St. Oberholz Coworking Berlin Mitte – Rosenthaler Straße"
+      }
+    ],
+    "amenities": [
+      "reception",
+      "wifi",
+      "power_outlets",
+      "meeting_rooms",
+      "kitchenette",
+      "free_coffee_tea",
+      "lounge_area",
+      "phone_booths",
+      "natural_light"
+    ],
+    "pricingOptions": [
+      {
+        "optionType": "flex_desk",
+        "title": "Coworking Membership – Flex Desk",
+        "price": {
+          "amount": 209,
+          "currency": "EUR"
+        },
+        "priceOnRequest": false,
+        "billingPeriod": "month"
+      },
+      {
+        "optionType": "fix_desk",
+        "title": "Fixed Desk",
+        "priceOnRequest": true,
+        "billingPeriod": "month"
+      },
+      {
+        "optionType": "private_office",
+        "title": "Private Team Room",
+        "priceOnRequest": true,
+        "billingPeriod": "month"
+      },
+      {
+        "optionType": "meeting_room",
+        "title": "Meeting & Workshop Room",
+        "priceOnRequest": true,
+        "billingPeriod": "once"
+      },
+      {
+        "optionType": "virtual_office",
+        "title": "Virtual Office with St.Dropscan",
+        "price": {
+          "amount": 69,
+          "currency": "EUR"
+        },
+        "priceOnRequest": false,
+        "billingPeriod": "month"
+      }
+    ],
+    "marketPosition": {
+      "verdict": "around",
+      "median": {
+        "amount": 214,
+        "currency": "EUR"
+      },
+      "sampleSize": 72
+    },
+    "webUrl": "https://coworkingview.com/en/workspace/sankt-oberholz-rosenthaler-berlin",
+    "indexabilityCompleteness": {
+      "score": 39,
+      "hasAddress": true,
+      "hasGeo": true,
+      "hasVerifiedPriceOrOnRequest": true,
+      "priceVerifiedAt": "2026-09-28",
+      "verifiedProviderPhotoCount": null,
+      "uniqueWordCount": 289,
+      "productCount": 5
+    },
+    "indexabilityState": null
+  },
+  "meta": {
+    "contractVersion": "1.0.0",
+    "citation": {
+      "source": "CoworkingView",
+      "title": "St. Oberholz Coworking Berlin Mitte – Rosenthaler Straße",
+      "url": "https://coworkingview.com/en/workspace/sankt-oberholz-rosenthaler-berlin",
+      "accessed": "2026-10-27",
+      "text": "Source: CoworkingView — St. Oberholz Coworking Berlin Mitte – Rosenthaler Straße, https://coworkingview.com/en/workspace/sankt-oberholz-rosenthaler-berlin."
+    },
+    "catalogueNotice": "Catalogue content (descriptions, images, logos, names and prices) belongs to the respective operators and rights holders. No licence to reuse it is granted. You may link to listing pages. Systematic extraction or re-use of the catalogue database is not permitted."
+  }
+}

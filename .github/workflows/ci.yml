@@ -362,3 +362,65 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+
+  ocaml:
+    name: OCaml ${{ matrix.ocaml }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ocaml: ["4.14", "5.3"]
+    defaults:
+      run:
+        working-directory: clients/ocaml
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: ${{ matrix.ocaml }}
+      - name: Install dependencies
+        run: opam install . --deps-only --with-test --with-doc --yes
+      - name: Build, test and documentation
+        run: opam exec -- dune build @install @runtest @doc
+      - name: opam lint
+        run: |
+          set -euo pipefail
+          # A clean run prints "<file>: Passed." (with colour when OPAMCOLOR=always).
+          # Anything else is a warning or an error.
+          out=$(opam lint coworkingview.opam opam-repository/packages/coworkingview/coworkingview.0.1.0/opam | sed -E 's/\x1b\[[0-9;]*m//g')
+          printf '%s\n' "$out"
+          bad=$(printf '%s\n' "$out" | grep -Ev ': Passed\.$' || true)
+          test -z "$bad"
+      - name: opam-dune-lint
+        if: matrix.ocaml == '5.3'
+        run: |
+          opam install opam-dune-lint --yes
+          opam exec -- opam-dune-lint
+
+  swift:
+    name: Swift
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: swift build and test
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/src" \
+            -w /src/clients/swift \
+            swift:5.9 \
+            sh -c "swift build && swift test"
+
+  cocoapods:
+    name: CocoaPods lib lint
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: clients/swift
+    steps:
+      - uses: actions/checkout@v4
+      - name: pod lib lint
+        run: |
+          if ! command -v pod >/dev/null 2>&1; then
+            sudo gem install cocoapods -N
+          fi
+          pod lib lint --allow-warnings

@@ -10,15 +10,19 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 | Python | [`coworkingview`](python/) | `pip install coworkingview` · `conda install -c conda-forge coworkingview` |
 | R | [`coworkingview`](r/) | `install.packages("coworkingview")` |
 | Java | [`coworkingview`](integrations/java/) | Maven Central `io.github.coworkingview:coworkingview` |
+| OCaml | [`coworkingview`](clients/ocaml/) | `opam install coworkingview` |
+| Swift | [`CoworkingView`](clients/swift/) | Swift Package Manager · CocoaPods `pod 'CoworkingView'` |
 | Command line | [`cwv`](rust/) (Rust) | `cargo install coworkingview` · `docker run --rm coworkingview/cwv` · AUR · Chocolatey · Snap |
 
 [LibreOffice Calc](integrations/libreoffice/) uses the same public API as spreadsheet functions (`CWV_SPACES`, `CWV_PRICE`, and the others in that README).
 
 [Backstage](integrations/backstage/) (`@coworkingview/backstage-plugin-coworkingview`) shows the same prices and spaces on a portal page.
 
-The packages read the same public API, follow the same [specification](spec/SPEC.md)
-and are tested against the same [fixtures and expected outputs](spec/), so a
-number is the same whichever tool you use.
+The Python, R, Java and command-line packages read the same public API, follow
+the same [specification](spec/SPEC.md) and are tested against the same
+[fixtures and expected outputs](spec/), so a number is the same whichever of
+those tools you use. The OCaml and Swift packages are typed clients for the Price Index
+and catalogue search on that API, tested against the recorded API fixtures.
 
 ## Why
 
@@ -61,6 +65,23 @@ import io.github.coworkingview.RatesQuery;
 
 Client client = Client.create();
 client.rates(new RatesQuery().city("berlin"));
+```
+
+**OCaml**
+
+```ocaml
+let client = Coworkingview.make () in
+Coworkingview.market_rates client ~city:"berlin" ()
+```
+
+**Swift**
+
+```swift
+import CoworkingView
+
+let client = try Client()
+let berlin = try await client.rates(city: "berlin")
+print(berlin.attribution ?? "")
 ```
 
 **Command line**
@@ -119,6 +140,8 @@ python/             coworkingview on PyPI / conda-forge
 r/                  coworkingview on CRAN
 rust/               cwv CLI and the coworkingview crate (crates.io, Docker)
 integrations/java/  coworkingview on Maven Central
+clients/ocaml/      coworkingview OCaml client (opam)
+clients/swift/      CoworkingView Swift package (Swift Package Index, CocoaPods)
 integrations/matomo/CoworkingView/  Matomo 5 dashboard widget
 integrations/libreoffice/  Calc add-in (CWV_SPACES, CWV_PRICE)
 integrations/backstage/  Backstage frontend plugin

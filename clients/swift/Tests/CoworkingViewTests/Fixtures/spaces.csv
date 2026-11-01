@@ -1,0 +1,4 @@
+slug,title,city_slug,zone_slug,operator_slug,operator_name,country_code,lat,lng,featured,market_verdict,market_median,market_sample_size,url,updated_at
+sankt-oberholz-rosenthaler-berlin,St. Oberholz Coworking Berlin Mitte – Rosenthaler Straße,berlin,mitte,sankt-oberholz,St. Oberholz,DE,52.5294539,13.4018374,true,around,214,72,https://coworkingview.com/en/workspace/sankt-oberholz-rosenthaler-berlin,2026-10-19T16:27:57.522Z
+smartspaces-berlin-spandau,smartspaces Coworking Berlin-Spandau,berlin,spandau,smartspaces,smartspaces,DE,52.5476944,13.2194038,false,around,214,72,https://coworkingview.com/en/workspace/smartspaces-berlin-spandau,2026-10-19T16:29:40.269Z
+regus-charlottenburg-berlin,Regus Charlottenburg,berlin,charlottenburg-wilmersdorf,regus,Regus,DE,52.501028,13.318559,false,,,,https://coworkingview.com/en/workspace/regus-charlottenburg-berlin,2026-10-19T16:28:51.449Z

@@ -3,13 +3,19 @@ name: Eclipse
 on:
   pull_request:
   push:
+    branches:
+      - main
     tags:
       - "eclipse-v*"
 
-# This repository had no GitHub Pages site when the workflow was added
-# (GET /repos/coworkingview/flex-office-data/pages returned 404). The tag job
-# publishes a new site and only writes /eclipse/updates/ plus a .nojekyll file.
-# It does not touch any other Pages content because none is published today.
+# The github-pages environment allows deploys from refs/heads/main only
+# (a tag push is rejected: "not allowed to deploy to github-pages due to
+# environment protection rules"). Pages therefore runs on main. The artifact
+# is the site root: eclipse/updates/ (the p2 repository), .nojekyll, and
+# coworkingview-eclipse-p2.zip. A tag eclipse-v* attaches that zip to the
+# GitHub Release. A main run attaches it too when the newest eclipse-v* release
+# does not have the asset yet, so the first publish does not depend on moving
+# an existing tag.
 
 permissions:
   contents: read
@@ -65,8 +71,11 @@ jobs:
   pages:
     name: Publish update site to GitHub Pages
     needs: build
-    if: startsWith(github.ref, 'refs/tags/eclipse-v')
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    concurrency:
+      group: eclipse-pages
+      cancel-in-progress: false
     permissions:
       contents: read
       pages: write
@@ -88,11 +97,15 @@ jobs:
   release:
     name: Attach p2 zip to the GitHub Release
     needs: build
-    if: startsWith(github.ref, 'refs/tags/eclipse-v')
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/eclipse-v')
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
       - uses: actions/download-artifact@v4
         with:
           name: eclipse-update-site
@@ -100,8 +113,22 @@ jobs:
       - name: Upload the zipped p2 repository
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
           set -eu
+          if [[ "$GITHUB_REF" == refs/tags/eclipse-v* ]]; then
+            tag="$GITHUB_REF_NAME"
+          else
+            tag=$(git tag -l 'eclipse-v*' --sort=-creatordate | head -n 1)
+            if [[ -z "$tag" ]]; then
+              echo "No eclipse-v* tag; skipping the release upload."
+              exit 0
+            fi
+            if gh release view "$tag" --json assets --jq '.assets[].name' 2>/dev/null | grep -qx 'coworkingview-eclipse-p2.zip'; then
+              echo "Release $tag already has coworkingview-eclipse-p2.zip."
+              exit 0
+            fi
+          fi
           notes=$(cat <<EOF
           Eclipse p2 repository for CoworkingView Workspace Prices.
 
@@ -109,8 +136,8 @@ jobs:
 
           Zipped repository, if Pages is unavailable:
 
-          \`jar:https://github.com/coworkingview/flex-office-data/releases/download/${GITHUB_REF_NAME}/coworkingview-eclipse-p2.zip!/\`
+          \`jar:https://github.com/coworkingview/flex-office-data/releases/download/${tag}/coworkingview-eclipse-p2.zip!/\`
           EOF
           )
-          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes "$notes"
-          gh release upload "$GITHUB_REF_NAME" dist/coworkingview-eclipse-p2.zip --clobber
+          gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --title "$tag" --notes "$notes"
+          gh release upload "$tag" dist/coworkingview-eclipse-p2.zip --clobber

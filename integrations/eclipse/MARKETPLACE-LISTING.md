@@ -18,7 +18,7 @@ How this listing follows those rules:
 - The update site URL and the feature id are the two fields the Quickstart says the Marketplace Client requires.
 - Nothing in the text asks for a higher rank or compares this plug-in with another listing.
 
-Do not submit the listing until the tag `eclipse-v0.1.0` has published the update site. A moderator checks that the install works.
+Do not submit the listing until https://coworkingview.github.io/flex-office-data/eclipse/updates/ is serving the p2 repository. A moderator checks that the install works. Pages is published from `main`, not from the tag, because the `github-pages` environment only allows that branch.
 
 ## Fields
 

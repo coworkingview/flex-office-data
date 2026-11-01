@@ -1,0 +1,12 @@
+app:
+  title: CoworkingView
+  baseUrl: http://localhost:3000
+
+organization:
+  name: CoworkingView
+
+backend:
+  baseUrl: http://localhost:7007
+
+coworkingview:
+  defaultCity: berlin

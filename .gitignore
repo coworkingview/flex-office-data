@@ -27,3 +27,9 @@ integrations/java/dist/
 site/
 # LibreOffice extension build
 integrations/libreoffice/dist/
+# Backstage plugin
+integrations/backstage/node_modules/
+integrations/backstage/dist/
+integrations/backstage/dist-types/
+integrations/backstage/*.tsbuildinfo
+integrations/backstage/coverage/

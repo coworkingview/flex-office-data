@@ -1,0 +1,7 @@
+(library
+ (name coworkingview)
+ (public_name coworkingview)
+ (wrapped false)
+ (libraries yojson lwt lwt.unix uri cohttp cohttp-lwt cohttp-lwt-unix)
+ (flags
+  (:standard -w +A-4-41-42-70 -warn-error +A-4-41-42-70)))

@@ -1,0 +1,11 @@
+(test
+ (name test_client)
+ (libraries coworkingview alcotest yojson uri)
+ (flags
+  (:standard -w -70))
+ (deps
+  (file fixtures/market_rates.json)
+  (file fixtures/market_rates_berlin_usd.json)
+  (file fixtures/properties_berlin.json)
+  (file fixtures/properties_empty.json)
+  (file fixtures/error_validation.json)))

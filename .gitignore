@@ -24,6 +24,9 @@ integrations/java/dist/
 # Swift
 .build/
 .swiftpm/
+# OCaml
+_build/
+*.install
 # OS
 .DS_Store
 # Docs (mkdocs build output)

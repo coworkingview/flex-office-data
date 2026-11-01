@@ -344,6 +344,40 @@ jobs:
           name: coworkingview-calc-0.1.0.oxt
           path: integrations/libreoffice/dist/coworkingview-calc-0.1.0.oxt
 
+  ocaml:
+    name: OCaml ${{ matrix.ocaml }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ocaml: ["4.14", "5.3"]
+    defaults:
+      run:
+        working-directory: clients/ocaml
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: ${{ matrix.ocaml }}
+      - name: Install dependencies
+        run: opam install . --deps-only --with-test --with-doc --yes
+      - name: Build, test and documentation
+        run: opam exec -- dune build @install @runtest @doc
+      - name: opam lint
+        run: |
+          set -euo pipefail
+          # A clean run prints "<file>: Passed." (with colour when OPAMCOLOR=always).
+          # Anything else is a warning or an error.
+          out=$(opam lint coworkingview.opam opam-repository/packages/coworkingview/coworkingview.0.1.0/opam | sed -E 's/\x1b\[[0-9;]*m//g')
+          printf '%s\n' "$out"
+          bad=$(printf '%s\n' "$out" | grep -Ev ': Passed\.$' || true)
+          test -z "$bad"
+      - name: opam-dune-lint
+        if: matrix.ocaml == '5.3'
+        run: |
+          opam install opam-dune-lint --yes
+          opam exec -- opam-dune-lint
+
   swift:
     name: Swift
     runs-on: ubuntu-latest

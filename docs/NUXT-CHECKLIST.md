@@ -73,7 +73,7 @@ npm run prepack
 npm publish --access public
 ```
 
-`publishConfig.access` is already `public`. `prepack` runs `nuxt-module-build build`, and `npm publish` runs `prepack` again. Version `0.1.0` is the first release. Do not run `npm run release` for this publish: that script also runs changelogen, publishes, and pushes git tags.
+`publishConfig.access` is already `public`. `prepack` runs `nuxt-module-build prepare` and then `nuxt-module-build build`, and `npm publish` runs `prepack` again. Version `0.1.0` is the first release. Do not run `npm run release` for this publish: that script also runs changelogen, publishes, and pushes git tags.
 
 Confirm `https://www.npmjs.com/package/@coworkingview/nuxt` serves `dist/module.mjs` and `dist/module.json` with `configKey` `coworkingview` and `compatibility.nuxt` `>=3.0.0`.
 

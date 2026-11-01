@@ -1,0 +1,231 @@
+{
+  "extensionName": {
+    "message": "CoworkingView – Arbeitsplatzpreise",
+    "description": "Name der Erweiterung in der Add-ons-Verwaltung."
+  },
+  "extensionDescription": {
+    "message": "Flexible Arbeitsplatzpreise nach Stadt, im Nachrichten- oder Verfassen-Fenster. Sendet den Stadt-Slug an api.coworkingview.com. Liest keine Nachrichten.",
+    "description": "Kurzbeschreibung in der Add-ons-Verwaltung."
+  },
+  "buttonLabel": {
+    "message": "CoworkingView-Preise",
+    "description": "Beschriftung und Tooltip der Schaltfläche im Nachrichten- und Verfassen-Fenster."
+  },
+  "popupTitle": {
+    "message": "CoworkingView-Preise",
+    "description": "Überschrift des Popups."
+  },
+  "cityLabel": {
+    "message": "Stadt",
+    "description": "Beschriftung der Stadtauswahl."
+  },
+  "refresh": {
+    "message": "Aktualisieren",
+    "description": "Lädt die Preise der gewählten Stadt neu."
+  },
+  "colProduct": {
+    "message": "Produkt",
+    "description": "Tabellenspalte."
+  },
+  "colMedian": {
+    "message": "Median",
+    "description": "Tabellenspalte für den Median."
+  },
+  "colP25": {
+    "message": "25. Perzentil",
+    "description": "Tabellenspalte für das 25. Perzentil."
+  },
+  "colP75": {
+    "message": "75. Perzentil",
+    "description": "Tabellenspalte für das 75. Perzentil."
+  },
+  "colSample": {
+    "message": "Stichprobe",
+    "description": "Tabellenspalte für die Anzahl der Beobachtungen."
+  },
+  "loading": {
+    "message": "Preise werden geladen…",
+    "description": "Status während einer Anfrage."
+  },
+  "workspaceCount": {
+    "message": "$COUNT$ Arbeitsplatzangebote in dieser Stadt",
+    "description": "Kataloggröße aus meta.pagination.total. Nicht propertyCount des Preisindex.",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "143"
+      }
+    }
+  },
+  "workspaceUnavailable": {
+    "message": "Die Anzahl der Angebote konnte nicht geladen werden.",
+    "description": "GET /v1/properties ist fehlgeschlagen, die Preistabelle bleibt sichtbar."
+  },
+  "asOf": {
+    "message": "Stand: $DATE$ ($RAW$).",
+    "description": "Zeitstempel des Preisindex. RAW ist der asOf-Text der API, unverändert.",
+    "placeholders": {
+      "date": {
+        "content": "$1",
+        "example": "30. Okt. 2026, 13:21"
+      },
+      "raw": {
+        "content": "$2",
+        "example": "2026-10-30T13:21:31.959Z"
+      }
+    }
+  },
+  "licenseLink": {
+    "message": "CC BY 4.0",
+    "description": "Linktext für data.licenseUrl."
+  },
+  "homeLink": {
+    "message": "coworkingview.com",
+    "description": "Link zur Website des Herausgebers."
+  },
+  "optionsLink": {
+    "message": "Standardstadt",
+    "description": "Öffnet die Einstellungen."
+  },
+  "lowConfidence": {
+    "message": "weniger als 10 Beobachtungen",
+    "description": "Wird gezeigt, wenn sampleSize unter 10 liegt."
+  },
+  "notPublished": {
+    "message": "—",
+    "description": "Ein Perzentil fehlt. Keine Null."
+  },
+  "errorUnknownCity": {
+    "message": "Diese Stadt ist nicht im veröffentlichten Preisindex.",
+    "description": "Der Slug stand nicht in data.cities."
+  },
+  "errorBadCity": {
+    "message": "Bitte einen Stadt-Slug eingeben, zum Beispiel berlin.",
+    "description": "Der Slug ist ungültig."
+  },
+  "errorBadResponse": {
+    "message": "Die API-Antwort konnte nicht gelesen werden.",
+    "description": "Kein JSON oder ein fehlendes Pflichtfeld."
+  },
+  "errorRateLimit": {
+    "message": "Die API begrenzt gerade die Anfragen. Bitte kurz warten.",
+    "description": "HTTP 429 nach dem einen Wiederholungsversuch."
+  },
+  "errorApi": {
+    "message": "Die API hat einen Fehler gemeldet: $DETAIL$",
+    "description": "detail aus der Problem-JSON, unverändert.",
+    "placeholders": {
+      "detail": {
+        "content": "$1"
+      }
+    }
+  },
+  "errorNetwork": {
+    "message": "api.coworkingview.com ist nicht erreichbar.",
+    "description": "Verbindungsfehler."
+  },
+  "attributionMissing": {
+    "message": "Die Antwort enthielt keinen CC-BY-4.0-Namensnennungstext.",
+    "description": "Nur wenn data.attribution fehlt."
+  },
+  "product_flex_desk": {
+    "message": "Flex Desk",
+    "description": "optionType flex_desk."
+  },
+  "product_fix_desk": {
+    "message": "Fester Schreibtisch",
+    "description": "optionType fix_desk."
+  },
+  "product_private_office": {
+    "message": "Privates Büro",
+    "description": "optionType private_office."
+  },
+  "product_exclusive_bereich": {
+    "message": "Exklusiver Bereich",
+    "description": "optionType exclusive_bereich."
+  },
+  "product_day_pass": {
+    "message": "Tagespass",
+    "description": "Aggregat dayPass."
+  },
+  "product_meeting_room": {
+    "message": "Meetingraum",
+    "description": "Aggregat meetingRoom."
+  },
+  "product_event_space": {
+    "message": "Eventfläche",
+    "description": "Aggregat eventSpace, sobald die API es liefert."
+  },
+  "product_virtual_office": {
+    "message": "Virtuelles Büro",
+    "description": "Aggregat virtualOffice, sobald die API es liefert."
+  },
+  "product_membership": {
+    "message": "Mitgliedschaft",
+    "description": "optionType membership."
+  },
+  "unit_month": {
+    "message": "pro Monat",
+    "description": "Einheit monatlicher Produkte."
+  },
+  "unit_day": {
+    "message": "pro Tag",
+    "description": "Einheit eines Tagespasses."
+  },
+  "unit_hour": {
+    "message": "pro Stunde",
+    "description": "Einheit für Meetingraum oder Eventfläche."
+  },
+  "optionsTitle": {
+    "message": "CoworkingView-Preise",
+    "description": "Titel der Einstellungsseite."
+  },
+  "optionsIntro": {
+    "message": "Wählen Sie die Stadt, mit der die Preisschaltfläche startet. Im Popup können Sie die Stadt wechseln.",
+    "description": "Einleitung der Einstellungsseite."
+  },
+  "optionsCityLabel": {
+    "message": "Standard-Stadt-Slug",
+    "description": "Beschriftung der gespeicherten Stadt."
+  },
+  "optionsCityPlaceholder": {
+    "message": "berlin",
+    "description": "Beispiel-Slug."
+  },
+  "optionsCityHelp": {
+    "message": "Ein Katalog-Slug, zum Beispiel berlin oder bad-homburg. Der Wert wird auf diesem Computer gespeichert und als Parameter city an api.coworkingview.com gesendet.",
+    "description": "Erklärt, was gespeichert und gesendet wird."
+  },
+  "optionsCitiesLabel": {
+    "message": "Veröffentlichte Städte",
+    "description": "Liste aus GET /v1/market/rates."
+  },
+  "optionsSave": {
+    "message": "Speichern",
+    "description": "Speichert die Standardstadt."
+  },
+  "optionsSaved": {
+    "message": "Gespeichert.",
+    "description": "Bestätigung nach storage.local.set."
+  },
+  "optionsPrivacyTitle": {
+    "message": "Was gesendet wird",
+    "description": "Überschrift des Datenschutzabschnitts."
+  },
+  "optionsPrivacyBody": {
+    "message": "Die Standardstadt wird nur in Thunderbird auf diesem Computer gespeichert. Sie wird nicht synchronisiert. Die Preisschaltfläche sendet diesen Stadt-Slug und die Oberflächensprache (en, de oder es) an https://api.coworkingview.com als GET /v1/market/rates und GET /v1/properties (Seite 1, Seitengröße 1). Die Städteliste nutzt GET /v1/market/rates nur mit der Sprache. Es werden keine Nachrichten-, Kontakt- oder Kontodaten gelesen oder gesendet. Die Erweiterung setzt kein Cookie.",
+    "description": "Datenschutzhinweis der Erweiterung auf der Einstellungsseite."
+  },
+  "optionsSitePrivacy": {
+    "message": "Datenschutzerklärung der Website CoworkingView",
+    "description": "Link zu https://coworkingview.com/en/privacy."
+  },
+  "cityPage": {
+    "message": "Stadtseite",
+    "description": "Link auf meta.citation.url."
+  },
+  "citiesUnavailable": {
+    "message": "Die Städteliste konnte nicht geladen werden. Sie können trotzdem einen Slug eingeben.",
+    "description": "Einstellungsseite, wenn GET /v1/market/rates fehlschlägt."
+  }
+}

@@ -39,3 +39,6 @@ integrations/backstage/dist/
 integrations/backstage/dist-types/
 integrations/backstage/*.tsbuildinfo
 integrations/backstage/coverage/
+# Thunderbird add-on
+integrations/thunderbird/node_modules/
+integrations/thunderbird/dist/

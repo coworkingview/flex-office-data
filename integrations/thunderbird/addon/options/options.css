@@ -1,0 +1,84 @@
+:root {
+  color-scheme: light dark;
+  --ink: #1a1814;
+  --paper: #f6f3ec;
+  --gold: #8c6e24;
+  --line: #e4dccb;
+  --muted: #5c564c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f6f3ec;
+    --paper: #1c1a17;
+    --gold: #d4af37;
+    --line: #3a342c;
+    --muted: #c8bfb0;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 15px/1.45 "Segoe UI", "Liberation Sans", sans-serif;
+}
+
+main {
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+}
+
+h1,
+h2 {
+  font-family: "Noto Serif", "Liberation Serif", "Times New Roman", serif;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 24px 0 8px;
+}
+
+form {
+  display: grid;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+label {
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+input,
+select,
+button {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 6px 8px;
+}
+
+button {
+  justify-self: start;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.help,
+#saved {
+  margin: 0;
+  color: var(--muted);
+}
+
+a {
+  color: var(--ink);
+}

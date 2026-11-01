@@ -1,0 +1,28 @@
+{
+  "name": "coworkingview-thunderbird",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Thunderbird MailExtension that shows CoworkingView workspace prices for a city.",
+  "license": "MIT",
+  "author": "CoworkingView",
+  "homepage": "https://coworkingview.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coworkingview/flex-office-data.git",
+    "directory": "integrations/thunderbird"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test",
+    "lint": "node tools/lint.js",
+    "build": "sh build.sh",
+    "icons": "python3 tools/render_icons.py"
+  },
+  "devDependencies": {
+    "addons-linter": "^9.3.0",
+    "jsdom": "^26.1.0"
+  }
+}

@@ -1,0 +1,164 @@
+:root {
+  color-scheme: light dark;
+  --ink: #1a1814;
+  --paper: #f6f3ec;
+  --gold: #8c6e24;
+  --line: #e4dccb;
+  --muted: #5c564c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f6f3ec;
+    --paper: #1c1a17;
+    --gold: #d4af37;
+    --line: #3a342c;
+    --muted: #c8bfb0;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  width: 400px;
+  margin: 0;
+  padding: 12px 14px 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 13px/1.4 "Segoe UI", "Liberation Sans", sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Noto Serif", "Liberation Serif", "Times New Roman", serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+label {
+  font-weight: 600;
+}
+
+select,
+button,
+input {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+select,
+input {
+  padding: 4px 6px;
+}
+
+select {
+  flex: 1;
+  min-width: 0;
+}
+
+button {
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+#status {
+  margin: 0 0 8px;
+  padding-left: 8px;
+  border-left: 3px solid var(--gold);
+}
+
+#summary {
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+}
+
+th,
+td {
+  padding: 4px 4px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+th.num,
+td.num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.product-name {
+  display: block;
+}
+
+.product-unit,
+.low-confidence,
+#asof,
+#attribution,
+#citation,
+#license,
+#workspaces {
+  color: var(--muted);
+}
+
+.product-unit,
+.low-confidence {
+  display: block;
+  font-size: 11px;
+}
+
+#attribution,
+#citation,
+#workspaces,
+#asof,
+#license {
+  margin: 0 0 6px;
+}
+
+a {
+  color: var(--ink);
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+footer button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+}

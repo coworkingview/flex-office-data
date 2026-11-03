@@ -53,6 +53,8 @@ integrations/joomla/vendor/
 # LM Studio plugin
 integrations/lmstudio/node_modules/
 integrations/lmstudio/dist/
+# Leaflet plugin
+integrations/leaflet/node_modules/
 # Airflow provider build
 integrations/airflow/dist/
 integrations/airflow/*.egg-info/

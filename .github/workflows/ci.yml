@@ -602,7 +602,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ${{ matrix.package }} python3-venv zip
           python3 -m venv /tmp/vint-venv
-          /tmp/vint-venv/bin/pip install vim-vint
+          # vint imports pkg_resources. setuptools 81 removed it, and Ubuntu
+          # 24.04 venvs do not ship it.
+          /tmp/vint-venv/bin/pip install 'setuptools<81' vim-vint
           echo /tmp/vint-venv/bin >> "$GITHUB_PATH"
       - name: Lint
         run: vint integrations/vim/plugin integrations/vim/autoload

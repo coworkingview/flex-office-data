@@ -1,0 +1,210 @@
+CREATE EXTENSION coworkingview;
+SET TIME ZONE 'UTC';
+SET datestyle = iso;
+SELECT coworkingview_attribution();
+                                                                                                                       coworkingview_attribution                                                                                                                       
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Source: CoworkingView Price Index (https://coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied.
+(1 row)
+
+SELECT license, license_url, as_of, length(scope) AS scope_length
+FROM coworkingview_about;
+  license  |                 license_url                  |           as_of            | scope_length 
+-----------+----------------------------------------------+----------------------------+--------------
+ CC-BY-4.0 | https://creativecommons.org/licenses/by/4.0/ | 2026-10-27 21:06:48.313+00 |          529
+(1 row)
+
+SELECT count(*) AS price_rows FROM coworkingview_price_index;
+ price_rows 
+------------
+         13
+(1 row)
+
+SELECT count(*) AS city_rows FROM coworkingview_cities;
+ city_rows 
+-----------
+         4
+(1 row)
+
+SELECT count(*) AS view_rows FROM coworkingview_rates;
+ view_rows 
+-----------
+        13
+(1 row)
+
+SELECT count(*) AS confidence_mismatches
+FROM coworkingview_price_index
+WHERE low_confidence IS DISTINCT FROM (sample_size < 10);
+ confidence_mismatches 
+-----------------------
+                     0
+(1 row)
+
+SELECT coworkingview_rate('berlin');
+ coworkingview_rate 
+--------------------
+                214
+(1 row)
+
+SELECT coworkingview_rate('Berlin');
+ coworkingview_rate 
+--------------------
+                214
+(1 row)
+
+SELECT coworkingview_rate(' berlin ');
+ coworkingview_rate 
+--------------------
+                214
+(1 row)
+
+SELECT coworkingview_rate('madrid', 'private_office');
+ coworkingview_rate 
+--------------------
+                385
+(1 row)
+
+SELECT coworkingview_rate('MADRID', 'DAY_PASS');
+ coworkingview_rate 
+--------------------
+                 22
+(1 row)
+
+SELECT coworkingview_rate('abu-dhabi', 'flex_desk');
+ coworkingview_rate 
+--------------------
+               1400
+(1 row)
+
+SELECT coworkingview_rate('example-town');
+ coworkingview_rate 
+--------------------
+                   
+(1 row)
+
+SELECT coworkingview_rate('no-such-city');
+ coworkingview_rate 
+--------------------
+                   
+(1 row)
+
+SELECT coworkingview_rate('berlin', 'nope');
+ coworkingview_rate 
+--------------------
+                   
+(1 row)
+
+SELECT coworkingview_rate(NULL::text) IS NULL AS null_city;
+ null_city 
+-----------
+ t
+(1 row)
+
+SELECT coworkingview_rate('berlin', NULL::text) IS NULL AS null_product;
+ null_product 
+--------------
+ t
+(1 row)
+
+SELECT city_slug, product, unit, median, p25, p75, sample_size,
+       property_count, operator_count, low_confidence
+FROM coworkingview_price_index
+ORDER BY city_slug,
+    CASE product
+        WHEN 'flex_desk' THEN 1
+        WHEN 'fix_desk' THEN 2
+        WHEN 'private_office' THEN 3
+        WHEN 'exclusive_bereich' THEN 4
+        WHEN 'day_pass' THEN 5
+        WHEN 'meeting_room' THEN 6
+        WHEN 'event_space' THEN 7
+        WHEN 'virtual_office' THEN 8
+        WHEN 'membership' THEN 9
+        ELSE 10
+    END,
+    product;
+ city_slug |    product     | unit  | median | p25  | p75  | sample_size | property_count | operator_count | low_confidence 
+-----------+----------------+-------+--------+------+------+-------------+----------------+----------------+----------------
+ abu-dhabi | flex_desk      | month |   1400 | 1400 | 1800 |           3 |              2 |              1 | t
+ abu-dhabi | fix_desk       | month |   1800 | 1800 | 1800 |           2 |              2 |              1 | t
+ abu-dhabi | private_office | month |   2057 | 1486 | 2629 |           2 |              2 |              1 | t
+ berlin    | flex_desk      | month |    214 |  199 |  292 |          72 |             66 |             38 | f
+ berlin    | fix_desk       | month |    310 |  290 |  421 |          60 |             56 |             37 | f
+ berlin    | private_office | month |    480 |  399 |  550 |          59 |             38 |             20 | f
+ berlin    | day_pass       | day   |     35 |      |      |          59 |             55 |             27 | f
+ berlin    | meeting_room   | hour  |     32 |      |      |          79 |             51 |             25 | f
+ madrid    | flex_desk      | month |    175 |  130 |  199 |          13 |              6 |              4 | f
+ madrid    | fix_desk       | month |    260 |  249 |  280 |           9 |              7 |              5 | t
+ madrid    | private_office | month |    385 |  275 |  449 |           9 |              7 |              3 | t
+ madrid    | day_pass       | day   |     22 |      |      |          11 |              7 |              4 | f
+ madrid    | meeting_room   | hour  |     28 |      |      |           8 |              6 |              3 | t
+(13 rows)
+
+SELECT city_slug, city_name, country_code, currency, published,
+       property_count, operator_count, entry_median, entry_min, entry_max,
+       p25, p75, sample_size
+FROM coworkingview_cities
+ORDER BY published DESC, city_slug;
+  city_slug   |  city_name   | country_code | currency | published | property_count | operator_count | entry_median | entry_min | entry_max | p25  | p75  | sample_size 
+--------------+--------------+--------------+----------+-----------+----------------+----------------+--------------+-----------+-----------+------+------+-------------
+ abu-dhabi    | Abu Dhabi    | AE           | AED      | t         |              2 |              1 |         1453 |      1069 |      7535 | 1400 | 2200 |           2
+ berlin       | Berlin       | DE           | EUR      | t         |             85 |             48 |          265 |        80 |      2100 |  219 |  450 |          85
+ madrid       | Madrid       | ES           | EUR      | t         |             10 |              6 |          325 |        85 |      1980 |  195 |  349 |          10
+ example-town | Example Town |              |          | f         |                |                |              |           |           |      |      |            
+(4 rows)
+
+SELECT city_slug, product, median, license,
+       attribution = (SELECT attribution FROM coworkingview_about) AS attribution_matches
+FROM coworkingview_rates
+WHERE city_slug = 'berlin' AND product = 'flex_desk';
+ city_slug |  product  | median |  license  | attribution_matches 
+-----------+-----------+--------+-----------+---------------------
+ berlin    | flex_desk |    214 | CC-BY-4.0 | t
+(1 row)
+
+SELECT published,
+       entry_median IS NULL AS entry_median_is_null,
+       currency IS NULL AS currency_is_null
+FROM coworkingview_cities
+WHERE city_slug = 'example-town';
+ published | entry_median_is_null | currency_is_null 
+-----------+----------------------+------------------
+ f         | t                    | t
+(1 row)
+
+SELECT p25 IS NULL AS p25_is_null, p75 IS NULL AS p75_is_null
+FROM coworkingview_price_index
+WHERE city_slug = 'berlin' AND product = 'day_pass';
+ p25_is_null | p75_is_null 
+-------------+-------------
+ t           | t
+(1 row)
+
+CREATE SCHEMA cvtest;
+ALTER EXTENSION coworkingview SET SCHEMA cvtest;
+SELECT cvtest.coworkingview_rate('berlin');
+ coworkingview_rate 
+--------------------
+                214
+(1 row)
+
+SELECT cvtest.coworkingview_rate('madrid', 'meeting_room');
+ coworkingview_rate 
+--------------------
+                 28
+(1 row)
+
+SELECT cvtest.coworkingview_attribution();
+                                                                                                                       coworkingview_attribution                                                                                                                       
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Source: CoworkingView Price Index (https://coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied.
+(1 row)
+
+SELECT count(*) AS moved_rows FROM cvtest.coworkingview_rates;
+ moved_rows 
+------------
+         13
+(1 row)
+
+ALTER EXTENSION coworkingview SET SCHEMA public;
+DROP SCHEMA cvtest;

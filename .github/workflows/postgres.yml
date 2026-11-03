@@ -1,0 +1,66 @@
+name: PostgreSQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    name: Snapshot matches the open dataset
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 integrations/postgres/tools/build_sql.py --check
+
+  bundle:
+    name: PGXN bundle
+    runs-on: ubuntu-latest
+    container: pgxn/pgxn-tools
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate META.json and build the PGXN bundle
+        run: |
+          set -euo pipefail
+          stage="$(mktemp -d)"
+          cp -a integrations/postgres/. "$stage/"
+          rm -rf "$stage/results" "$stage/log" "$stage/regression.diffs" \
+            "$stage/regression.out" "$stage/tools/__pycache__"
+          (
+            cd "$stage"
+            pgxn-bundle
+          )
+          shopt -s nullglob
+          zips=("$stage"/coworkingview-*.zip)
+          if [ "${#zips[@]}" -ne 1 ]; then
+            printf 'expected one bundle, found %s\n' "${#zips[@]}" >&2
+            exit 1
+          fi
+          unzip -l "${zips[0]}" > "$stage/listing.txt"
+          grep -q 'coworkingview-0.1.0/META.json' "$stage/listing.txt"
+          grep -q 'coworkingview-0.1.0/sql/coworkingview--0.1.0.sql' "$stage/listing.txt"
+          if grep -q 'coworkingview-0.1.0/python/' "$stage/listing.txt"; then
+            echo 'bundle contains files outside the extension' >&2
+            exit 1
+          fi
+          (cd "$stage" && validate_pgxn_meta META.json)
+          (cd "$stage" && pgxn validate-meta META.json)
+
+  test:
+    name: PostgreSQL ${{ matrix.pg }}
+    runs-on: ubuntu-latest
+    container: pgxn/pgxn-tools
+    strategy:
+      fail-fast: false
+      matrix:
+        pg: [17, 16, 15, 14]
+    steps:
+      - name: Start PostgreSQL ${{ matrix.pg }}
+        run: pg-start ${{ matrix.pg }}
+      - uses: actions/checkout@v4
+      - name: Build and test
+        working-directory: integrations/postgres
+        run: pg-build-test

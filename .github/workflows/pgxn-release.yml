@@ -1,0 +1,54 @@
+name: PGXN release
+
+on:
+  push:
+    tags:
+      - "pgxn-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Release on PGXN and GitHub
+    runs-on: ubuntu-latest
+    container: pgxn/pgxn-tools
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Bundle the release
+        id: bundle
+        run: |
+          set -euo pipefail
+          stage="$(mktemp -d)"
+          cp -a integrations/postgres/. "$stage/"
+          rm -rf "$stage/results" "$stage/log" "$stage/regression.diffs" \
+            "$stage/regression.out" "$stage/tools/__pycache__"
+          (
+            cd "$stage"
+            pgxn-bundle
+          )
+          shopt -s nullglob
+          zips=("$stage"/coworkingview-*.zip)
+          if [ "${#zips[@]}" -ne 1 ]; then
+            printf 'expected one bundle, found %s\n' "${#zips[@]}" >&2
+            exit 1
+          fi
+          base="$(basename "${zips[0]}")"
+          mv "${zips[0]}" "$GITHUB_WORKSPACE/$base"
+          echo "bundle=$base" >> "$GITHUB_OUTPUT"
+
+      - name: Release on PGXN
+        env:
+          PGXN_USERNAME: ${{ secrets.PGXN_USERNAME }}
+          PGXN_PASSWORD: ${{ secrets.PGXN_PASSWORD }}
+        run: pgxn-release "$GITHUB_WORKSPACE/${{ steps.bundle.outputs.bundle }}"
+
+      - name: Upload the bundle to the GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.bundle.outputs.bundle }}
+          name: ${{ github.ref_name }}
+          body: |
+            PostgreSQL extension coworkingview. The attached zip is the PGXN bundle built by pgxn-bundle.

@@ -1,0 +1,5 @@
+comment = 'CoworkingView flexible-office price index'
+default_version = '0.1.0'
+relocatable = true
+superuser = false
+trusted = true

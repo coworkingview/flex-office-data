@@ -1,0 +1,47 @@
+{
+  "name": "coworkingview",
+  "abstract": "Snapshot of the CoworkingView flexible-office price index",
+  "description": "Pure SQL PostgreSQL extension that installs a snapshot of the CoworkingView Price Index, the open dataset of median flexible-office prices by city and product. The snapshot covers flex desks, fixed desks, private offices, day passes and meeting rooms, and provides coworkingview_rate(city) plus a view over the rows. Price Index figures are CC BY 4.0. The extension code is MIT.",
+  "version": "0.1.0",
+  "maintainer": "CoworkingView <info@coworkingview.com>",
+  "license": "mit",
+  "provides": {
+    "coworkingview": {
+      "abstract": "Snapshot of the CoworkingView flexible-office price index",
+      "file": "sql/coworkingview--0.1.0.sql",
+      "docfile": "README.md",
+      "version": "0.1.0"
+    }
+  },
+  "prereqs": {
+    "runtime": {
+      "requires": {
+        "PostgreSQL": ">= 14.0.0"
+      }
+    }
+  },
+  "release_status": "stable",
+  "resources": {
+    "homepage": "https://coworkingview.com",
+    "bugtracker": {
+      "web": "https://github.com/coworkingview/flex-office-data/issues"
+    },
+    "repository": {
+      "url": "https://github.com/coworkingview/flex-office-data",
+      "web": "https://github.com/coworkingview/flex-office-data",
+      "type": "git"
+    }
+  },
+  "generated_by": "CoworkingView",
+  "meta-spec": {
+    "version": "1.0.0",
+    "url": "https://pgxn.org/meta/spec.txt"
+  },
+  "tags": [
+    "coworking",
+    "price-index",
+    "flexible-office",
+    "open-data",
+    "sql"
+  ]
+}

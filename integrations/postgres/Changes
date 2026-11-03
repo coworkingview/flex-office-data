@@ -1,0 +1,6 @@
+Changes for coworkingview
+
+0.1.0 2026-11-03
+  * Initial release. Snapshot of the CoworkingView Price Index recorded in
+    spec/fixtures/market_rates.json (as of 2026-10-27T21:06:48.313Z), loaded
+    from spec/golden/rates.csv and spec/golden/cities.csv.

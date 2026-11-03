@@ -1,0 +1,50 @@
+name: Release Airflow provider
+
+# Pushing a tag `airflow-v<version>` builds the sdist and wheel under
+# integrations/airflow and publishes them to PyPI with Trusted Publishing.
+# workflow_dispatch publishes the same artifacts. Do not create the tag here.
+
+on:
+  push:
+    tags: ["airflow-v*"]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Build and publish to PyPI
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      # id-token is required for PyPI Trusted Publishing. Setting any
+      # permission clears the rest, so contents: read is set for checkout.
+      id-token: write
+      contents: read
+    defaults:
+      run:
+        working-directory: integrations/airflow
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build the sdist and wheel
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install build
+          if [[ "$GITHUB_REF" == refs/tags/airflow-v* ]]; then
+            version=$(sed -n 's/^version = "\(.*\)"/\1/p' pyproject.toml | head -1)
+            tag="${GITHUB_REF_NAME#airflow-v}"
+            if [[ "$tag" != "$version" ]]; then
+              echo "::error::tag airflow-v${tag} does not match integrations/airflow/pyproject.toml version ${version}"
+              exit 1
+            fi
+          fi
+          python -m build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: integrations/airflow/dist/

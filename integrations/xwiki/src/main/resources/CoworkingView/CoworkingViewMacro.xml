@@ -1,0 +1,853 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+CoworkingView Prices wiki macro.
+Copyright (c) 2026 CoworkingView
+SPDX-License-Identifier: MIT
+The embedded WikiMacroClass and WikiMacroParameterClass field lists match an
+XWiki 16.10.11 export of those standard classes.
+-->
+
+<xwikidoc version="1.5" reference="CoworkingView.CoworkingViewMacro" locale="">
+  <web>CoworkingView</web>
+  <name>CoworkingViewMacro</name>
+  <language />
+  <defaultLanguage />
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <parent>CoworkingView.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <version>1.1</version>
+  <title>CoworkingView Prices</title>
+  <comment />
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>= CoworkingView Prices =
+
+Macro id: coworkingview. Extension id: com.coworkingview:coworkingview-macro.
+
+{{{
+{{coworkingview city="berlin"/}}
+}}}
+
+{{{
+{{coworkingview city="berlin" limit="3"/}}
+}}}
+
+The macro sends one GET to [[https://api.coworkingview.com/v1/market/rates?locale=en&amp;city=berlin]] (the city slug replaces berlin). It prints a table, the attribution string from the response, and a link to [[https://coworkingview.com]].
+
+Parameters: city (required slug) and limit (optional, 1 to 50, display only).
+
+Programming rights are required. See [[CoworkingView.WebHome]].
+</content>
+  <object>
+    <name>CoworkingView.CoworkingViewMacro</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroClass</className>
+    <guid>7c2a1e4b-9f6d-4a3e-8c1b-2d5e6f708192</guid>
+    <class>
+      <name>XWiki.WikiMacroClass</name>
+      <customClass />
+      <customMapping />
+      <defaultViewSheet />
+      <defaultEditSheet />
+      <defaultWeb />
+      <nameField />
+      <validationScript />
+      <async_cached>
+        <defaultValue>0</defaultValue>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType />
+        <name>async_cached</name>
+        <number>13</number>
+        <prettyName>Cached</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </async_cached>
+      <async_context>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>1</multiSelect>
+        <name>async_context</name>
+        <number>14</number>
+        <prettyName>Context elements</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>, </separator>
+        <separators>|, </separators>
+        <size>5</size>
+        <unmodifiable>0</unmodifiable>
+        <values>action=Action|doc.reference=Document|icon.theme=Icon theme|locale=Language|rendering.defaultsyntax=Default syntax|rendering.restricted=Restricted|rendering.targetsyntax=Target syntax|request.base=Request base URL|request.cookies|request.parameters=Request parameters|request.url=Request URL|request.wiki=Request wiki|user=User|wiki=Wiki</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </async_context>
+      <async_enabled>
+        <defaultValue>0</defaultValue>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType />
+        <name>async_enabled</name>
+        <number>12</number>
+        <prettyName>Asynchronous rendering</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </async_enabled>
+      <code>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>code</name>
+        <number>10</number>
+        <prettyName>Macro code</prettyName>
+        <rows>20</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentDescription>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>contentDescription</name>
+        <number>9</number>
+        <prettyName>Content description (Not applicable for "No content" type)</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </contentDescription>
+      <contentJavaType>
+        <cache>0</cache>
+        <defaultValue>Unknown</defaultValue>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <freeText>allowed</freeText>
+        <largeStorage>1</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>contentJavaType</name>
+        <number>8</number>
+        <picker>1</picker>
+        <prettyName>Macro content type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>Unknown|Wiki</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentJavaType>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>7</number>
+        <prettyName>Macro content availability</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>Optional|Mandatory|No content</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <defaultCategories>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>1</multiSelect>
+        <name>defaultCategories</name>
+        <number>4</number>
+        <prettyName>Default categories</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values />
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </defaultCategories>
+      <description>
+        <contenttype>PureText</contenttype>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>description</name>
+        <number>3</number>
+        <prettyName>Macro description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <id>
+        <disabled>0</disabled>
+        <name>id</name>
+        <number>1</number>
+        <prettyName>Macro id</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </id>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <prettyName>Macro name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <priority>
+        <disabled>0</disabled>
+        <name>priority</name>
+        <number>11</number>
+        <numberType>integer</numberType>
+        <prettyName>Priority</prettyName>
+        <size>10</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </priority>
+      <supportsInlineMode>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>supportsInlineMode</name>
+        <number>5</number>
+        <prettyName>Supports inline mode</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </supportsInlineMode>
+      <visibility>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <freeText>forbidden</freeText>
+        <largeStorage>0</largeStorage>
+        <multiSelect>0</multiSelect>
+        <name>visibility</name>
+        <number>6</number>
+        <prettyName>Macro visibility</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>Current User|Current Wiki|Global</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </visibility>
+    </class>
+    <property>
+      <async_cached>0</async_cached>
+    </property>
+    <property>
+      <async_context />
+    </property>
+    <property>
+      <async_enabled>0</async_enabled>
+    </property>
+    <property>
+      <code>{{velocity}}
+## CoworkingView Prices. One GET /v1/market/rates. No other CoworkingView endpoint.
+#macro(cwvCell $text)
+#set($cwvSafe = $escapetool.xml("$!text").replace('{', '&amp;#123;').replace('}', '&amp;#125;'))
+&lt;td&gt;$cwvSafe&lt;/td&gt;
+#end
+#macro(cwvText $text)
+#set($cwvSafe = $escapetool.xml("$!text").replace('{', '&amp;#123;').replace('}', '&amp;#125;'))
+$cwvSafe
+#end
+#set($params = $NULL)
+#if("$!wikimacro" != "")
+#if($wikimacro.parameters)
+#set($params = $wikimacro.parameters)
+#end
+#end
+#if(!$params &amp;&amp; $xcontext.macro &amp;&amp; $xcontext.macro.params)
+#set($params = $xcontext.macro.params)
+#end
+#set($error = "")
+#set($city = "")
+#set($limit = 0)
+#if(!$params)
+#set($error = "The macro parameters are not available.")
+#else
+#set($city = "$!params.city".trim().toLowerCase())
+#if($city == "")
+#set($error = "The city parameter is required. Use a slug such as berlin.")
+#elseif(!$city.matches('^[a-z0-9][a-z0-9._-]*$'))
+#set($error = "The city parameter must be a slug such as berlin or abu-dhabi.")
+#end
+#if($error == "")
+#set($limitRaw = "$!params.limit".trim())
+#if($limitRaw != "")
+#if(!$limitRaw.matches('^[0-9]+$') || $limitRaw.length() &gt; 2)
+#set($error = "The limit parameter must be a whole number from 1 to 50.")
+#else
+#set($limit = $mathtool.toInteger($limitRaw))
+#if($limit &lt; 1 || $limit &gt; 50)
+#set($error = "The limit parameter must be a whole number from 1 to 50.")
+#end
+#end
+#end
+#end
+#end
+#set($rows = $jsontool.fromString('[]'))
+#set($productOrder = $jsontool.fromString('["flex_desk","fix_desk","private_office","exclusive_bereich","day_pass","meeting_room","event_space","virtual_office","membership"]'))
+#set($statUnits = $jsontool.fromString('{"day_pass":"day","meeting_room":"hour","event_space":"hour","virtual_office":"month"}'))
+#set($attribution = "")
+#set($asOf = "")
+#set($unpublishedHit = false)
+#set($sorted = $jsontool.fromString('[]'))
+#if($error == "")
+#set($encoded = $escapetool.url($city))
+#set($api = "https://api.coworkingview.com/v1/market/rates?locale=en&amp;city=${encoded}")
+#set($body = "$!xwiki.getURLContent($api, 20000)".trim())
+#if($body == "")
+#set($error = "The Price Index could not be loaded. The macro sends one GET to https://api.coworkingview.com/v1/market/rates and needs Programming rights.")
+#else
+#set($payload = $jsontool.fromString($body))
+#if(!$payload)
+#set($error = "The Price Index response was not JSON.")
+#else
+#set($payloadSer = $jsontool.serialize($payload))
+#if(!$payloadSer || !$payloadSer.startsWith('{'))
+#set($error = "The Price Index response was not a JSON object.")
+#else
+#set($data = $payload.get('data'))
+#set($dataSer = "")
+#if($data)
+#set($dataSer = $jsontool.serialize($data))
+#end
+#if(!$dataSer || !$dataSer.startsWith('{'))
+#set($detail = "")
+#if("$!payload.get('detail')" != "")
+#set($detailSer = $jsontool.serialize($payload.get('detail')))
+#if($detailSer &amp;&amp; $detailSer.startsWith('"'))
+#set($detail = "$!payload.get('detail')")
+#end
+#end
+#if($detail != "")
+#set($error = $detail)
+#else
+#set($error = "The Price Index response has no data object.")
+#end
+#else
+#set($attrNode = $data.get('attribution'))
+#if($attrNode)
+#set($attrSer = $jsontool.serialize($attrNode))
+#if($attrSer &amp;&amp; $attrSer.startsWith('"'))
+#set($attribution = "$attrNode")
+#end
+#end
+#set($asNode = $data.get('asOf'))
+#if($asNode)
+#set($asSer = $jsontool.serialize($asNode))
+#if($asSer &amp;&amp; $asSer.startsWith('"'))
+#set($asOf = "$asNode")
+#end
+#end
+#set($cities = $data.get('cities'))
+#set($citiesSer = "")
+#if($cities)
+#set($citiesSer = $jsontool.serialize($cities))
+#end
+#if($citiesSer &amp;&amp; $citiesSer.startsWith('['))
+#foreach($cityObject in $cities)
+#if($cityObject)
+#set($citySer = $jsontool.serialize($cityObject))
+#if($citySer &amp;&amp; $citySer.startsWith('{'))
+#set($cityNode = $cityObject.get('city'))
+#set($citySlug = "")
+#set($cityName = "")
+#if($cityNode)
+#set($cityNodeSer = $jsontool.serialize($cityNode))
+#if($cityNodeSer &amp;&amp; $cityNodeSer.startsWith('{'))
+#set($citySlug = "$!cityNode.get('slug')".trim())
+#set($cityName = "$!cityNode.get('name')".trim())
+#end
+#end
+#if($cityName == "")
+#set($cityName = $citySlug)
+#end
+#set($currency = "")
+#set($currencyNode = $cityObject.get('currency'))
+#if($currencyNode)
+#set($currencySer = $jsontool.serialize($currencyNode))
+#if($currencySer &amp;&amp; $currencySer.startsWith('"'))
+#set($currency = "$currencyNode")
+#end
+#end
+#if($citySlug == $city)
+#set($figures = $cityObject.get('figures'))
+#set($useFigures = false)
+#if($figures)
+#set($figuresSer = $jsontool.serialize($figures))
+#if($figuresSer &amp;&amp; $figuresSer.startsWith('[') &amp;&amp; $figures.size() &gt; 0)
+#set($useFigures = true)
+#end
+#end
+#set($sourceList = $jsontool.fromString('[]'))
+#set($sourceUnit = "month")
+#if($useFigures)
+#set($sourceList = $figures)
+#else
+#set($byType = $cityObject.get('byType'))
+#if($byType)
+#set($bySer = $jsontool.serialize($byType))
+#if($bySer &amp;&amp; $bySer.startsWith('['))
+#set($sourceList = $byType)
+#end
+#end
+#end
+#foreach($item in $sourceList)
+#if($item)
+#set($itemSer = $jsontool.serialize($item))
+#if($itemSer &amp;&amp; $itemSer.startsWith('{'))
+#set($product = "$!item.get('optionType')".trim())
+#set($medianText = "")
+#set($medianNode = $item.get('median'))
+#if($medianNode)
+#set($medianSer = $jsontool.serialize($medianNode))
+#if($medianSer &amp;&amp; $medianSer.startsWith('{') &amp;&amp; "$!medianNode.get('amount')" != "")
+#set($medianText = "$!medianNode.get('amount')")
+#end
+#end
+#set($p25Text = "")
+#set($p25Node = $item.get('p25'))
+#if($p25Node)
+#set($p25Ser = $jsontool.serialize($p25Node))
+#if($p25Ser &amp;&amp; $p25Ser.startsWith('{') &amp;&amp; "$!p25Node.get('amount')" != "")
+#set($p25Text = "$!p25Node.get('amount')")
+#end
+#end
+#set($p75Text = "")
+#set($p75Node = $item.get('p75'))
+#if($p75Node)
+#set($p75Ser = $jsontool.serialize($p75Node))
+#if($p75Ser &amp;&amp; $p75Ser.startsWith('{') &amp;&amp; "$!p75Node.get('amount')" != "")
+#set($p75Text = "$!p75Node.get('amount')")
+#end
+#end
+#set($sampleText = "")
+#if("$!item.get('sampleSize')" != "")
+#set($sampleText = "$!item.get('sampleSize')")
+#end
+#if($product != "" &amp;&amp; $medianText != "" &amp;&amp; $sampleText != "")
+#set($rank = $productOrder.indexOf($product))
+#if($rank &lt; 0)
+#set($rank = 100)
+#end
+#set($rankPad = "00${rank}")
+#set($rankPad = $rankPad.substring($rankPad.length() - 3))
+#set($sortKey = "${citySlug}|${rankPad}|${product}")
+#set($lowText = "")
+#if($sampleText.matches('^[0-9]+$') &amp;&amp; $sampleText.length() &lt; 10 &amp;&amp; $mathtool.toInteger($sampleText) &lt; 10)
+#set($lowText = "yes")
+#end
+#set($one = $jsontool.fromString('[]'))
+#set($discard = $one.add($sortKey))
+#set($discard = $one.add($cityName))
+#set($discard = $one.add($product))
+#set($discard = $one.add($sourceUnit))
+#set($discard = $one.add($currency))
+#set($discard = $one.add($medianText))
+#set($discard = $one.add($p25Text))
+#set($discard = $one.add($p75Text))
+#set($discard = $one.add($sampleText))
+#set($discard = $one.add($lowText))
+#set($discard = $rows.add($one))
+#end
+#end
+#end
+#end
+#foreach($key in $cityObject.keySet())
+#set($value = $cityObject.get($key))
+#if($value)
+#set($valueSer = $jsontool.serialize($value))
+#if($valueSer &amp;&amp; $valueSer.startsWith('{'))
+#set($valueMedian = $value.get('median'))
+#set($valueSample = $value.get('sampleSize'))
+#if($valueMedian &amp;&amp; "$!valueSample" != "")
+#set($valueMedianSer = $jsontool.serialize($valueMedian))
+#if($valueMedianSer &amp;&amp; $valueMedianSer.startsWith('{') &amp;&amp; "$!valueMedian.get('amount')" != "")
+#set($product = "")
+#set($chars = $key.toCharArray())
+#set($charIndex = 0)
+#foreach($ch in $chars)
+#set($letter = "$ch")
+#if($charIndex &gt; 0 &amp;&amp; $letter.matches('[A-Z]'))
+#set($product = "${product}_")
+#end
+#set($product = "${product}$letter.toLowerCase()")
+#set($charIndex = $charIndex + 1)
+#end
+#set($unit = "")
+#if($statUnits.get($product))
+#set($unit = $statUnits.get($product))
+#end
+#set($medianText = "$!valueMedian.get('amount')")
+#set($p25Text = "")
+#set($p25Node = $value.get('p25'))
+#if($p25Node)
+#set($p25Ser = $jsontool.serialize($p25Node))
+#if($p25Ser &amp;&amp; $p25Ser.startsWith('{') &amp;&amp; "$!p25Node.get('amount')" != "")
+#set($p25Text = "$!p25Node.get('amount')")
+#end
+#end
+#set($p75Text = "")
+#set($p75Node = $value.get('p75'))
+#if($p75Node)
+#set($p75Ser = $jsontool.serialize($p75Node))
+#if($p75Ser &amp;&amp; $p75Ser.startsWith('{') &amp;&amp; "$!p75Node.get('amount')" != "")
+#set($p75Text = "$!p75Node.get('amount')")
+#end
+#end
+#set($sampleText = "$!valueSample")
+#set($rank = $productOrder.indexOf($product))
+#if($rank &lt; 0)
+#set($rank = 100)
+#end
+#set($rankPad = "00${rank}")
+#set($rankPad = $rankPad.substring($rankPad.length() - 3))
+#set($sortKey = "${citySlug}|${rankPad}|${product}")
+#set($lowText = "")
+#if($sampleText.matches('^[0-9]+$') &amp;&amp; $sampleText.length() &lt; 10 &amp;&amp; $mathtool.toInteger($sampleText) &lt; 10)
+#set($lowText = "yes")
+#end
+#set($one = $jsontool.fromString('[]'))
+#set($discard = $one.add($sortKey))
+#set($discard = $one.add($cityName))
+#set($discard = $one.add($product))
+#set($discard = $one.add($unit))
+#set($discard = $one.add($currency))
+#set($discard = $one.add($medianText))
+#set($discard = $one.add($p25Text))
+#set($discard = $one.add($p75Text))
+#set($discard = $one.add($sampleText))
+#set($discard = $one.add($lowText))
+#set($discard = $rows.add($one))
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#set($unpublished = $data.get('unpublished'))
+#if($unpublished &amp;&amp; $rows.size() == 0)
+#set($unpubSer = $jsontool.serialize($unpublished))
+#if($unpubSer &amp;&amp; $unpubSer.startsWith('['))
+#foreach($entry in $unpublished)
+#if($entry)
+#set($entrySer = $jsontool.serialize($entry))
+#if($entrySer &amp;&amp; $entrySer.startsWith('{'))
+#set($entryCity = $entry.get('city'))
+#if($entryCity)
+#set($entryCitySer = $jsontool.serialize($entryCity))
+#if($entryCitySer &amp;&amp; $entryCitySer.startsWith('{') &amp;&amp; "$!entryCity.get('slug')".trim() == $city)
+#set($unpublishedHit = true)
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#end
+#foreach($row in $rows)
+#set($placed = false)
+#set($next = $jsontool.fromString('[]'))
+#foreach($existing in $sorted)
+#if(!$placed &amp;&amp; $row.get(0).compareTo($existing.get(0)) &lt; 0)
+#set($discard = $next.add($row))
+#set($placed = true)
+#end
+#set($discard = $next.add($existing))
+#end
+#if(!$placed)
+#set($discard = $next.add($row))
+#end
+#set($sorted = $next)
+#end
+#if($error != "")
+{{html wiki="false" clean="true"}}
+&lt;p&gt;#cwvText($error)&lt;/p&gt;
+&lt;p&gt;Data: &lt;a href="https://coworkingview.com"&gt;https://coworkingview.com&lt;/a&gt;&lt;/p&gt;
+{{/html}}
+#elseif($sorted.size() == 0)
+#set($emptyMessage = "No published Price Index figures for this city.")
+#if($unpublishedHit)
+#set($emptyMessage = "This city is not in the published Price Index.")
+#end
+{{html wiki="false" clean="true"}}
+&lt;p&gt;#cwvText($emptyMessage)&lt;/p&gt;
+#if($attribution != "")
+&lt;p&gt;#cwvText($attribution)&lt;/p&gt;
+#end
+#if($asOf != "")
+&lt;p&gt;As of #cwvText($asOf)&lt;/p&gt;
+#end
+&lt;p&gt;Data: &lt;a href="https://coworkingview.com"&gt;https://coworkingview.com&lt;/a&gt;&lt;/p&gt;
+{{/html}}
+#else
+#set($caption = "CoworkingView Price Index for $sorted.get(0).get(1)")
+#set($shown = 0)
+{{html wiki="false" clean="true"}}
+&lt;table class="table"&gt;
+&lt;caption&gt;#cwvText($caption)&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col"&gt;City&lt;/th&gt;
+&lt;th scope="col"&gt;Product&lt;/th&gt;
+&lt;th scope="col"&gt;Unit&lt;/th&gt;
+&lt;th scope="col"&gt;Currency&lt;/th&gt;
+&lt;th scope="col"&gt;Median&lt;/th&gt;
+&lt;th scope="col"&gt;P25&lt;/th&gt;
+&lt;th scope="col"&gt;P75&lt;/th&gt;
+&lt;th scope="col"&gt;Sample size&lt;/th&gt;
+&lt;th scope="col"&gt;Low confidence&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+#foreach($row in $sorted)
+#set($includeRow = false)
+#if($limit == 0)
+#set($includeRow = true)
+#elseif($shown &lt; $limit)
+#set($includeRow = true)
+#end
+#if($includeRow)
+&lt;tr&gt;
+#cwvCell($row.get(1))
+#cwvCell($row.get(2))
+#cwvCell($row.get(3))
+#cwvCell($row.get(4))
+#cwvCell($row.get(5))
+#cwvCell($row.get(6))
+#cwvCell($row.get(7))
+#cwvCell($row.get(8))
+#cwvCell($row.get(9))
+&lt;/tr&gt;
+#set($shown = $shown + 1)
+#end
+#end
+&lt;/tbody&gt;
+&lt;/table&gt;
+#if($limit &gt; 0 &amp;&amp; $sorted.size() &gt; $limit)
+&lt;p&gt;Showing $shown of $sorted.size() products.&lt;/p&gt;
+#end
+#if($attribution != "")
+&lt;p&gt;#cwvText($attribution)&lt;/p&gt;
+#end
+#if($asOf != "")
+&lt;p&gt;As of #cwvText($asOf)&lt;/p&gt;
+#end
+&lt;p&gt;Data: &lt;a href="https://coworkingview.com"&gt;https://coworkingview.com&lt;/a&gt;&lt;/p&gt;
+{{/html}}
+#end
+{{/velocity}}
+</code>
+    </property>
+    <property>
+      <contentDescription />
+    </property>
+    <property>
+      <contentJavaType>Unknown</contentJavaType>
+    </property>
+    <property>
+      <contentType>No content</contentType>
+    </property>
+    <property>
+      <defaultCategories>Content</defaultCategories>
+    </property>
+    <property>
+      <description>Shows CoworkingView Price Index figures for one city.</description>
+    </property>
+    <property>
+      <id>coworkingview</id>
+    </property>
+    <property>
+      <name>CoworkingView Prices</name>
+    </property>
+    <property>
+      <priority />
+    </property>
+    <property>
+      <supportsInlineMode>0</supportsInlineMode>
+    </property>
+    <property>
+      <visibility>Global</visibility>
+    </property>
+  </object>
+  <object>
+    <name>CoworkingView.CoworkingViewMacro</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>a4e8c0d2-6b17-4f5a-9c33-1d2e3f4a5b6c</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass />
+      <customMapping />
+      <defaultViewSheet />
+      <defaultEditSheet />
+      <defaultWeb />
+      <nameField />
+      <validationScript />
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <type>
+        <disabled>0</disabled>
+        <name>type</name>
+        <number>5</number>
+        <prettyName>Parameter type</prettyName>
+        <size>60</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </type>
+    </class>
+    <property>
+      <defaultValue />
+    </property>
+    <property>
+      <description>City slug, for example berlin. Lowercased and sent as the city query parameter of GET /v1/market/rates.</description>
+    </property>
+    <property>
+      <mandatory>1</mandatory>
+    </property>
+    <property>
+      <name>city</name>
+    </property>
+    <property>
+      <type>java.lang.String</type>
+    </property>
+  </object>
+  <object>
+    <name>CoworkingView.CoworkingViewMacro</name>
+    <number>1</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>b5f9d1e3-7c28-405b-8d44-2e3f4a5b6c7d</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass />
+      <customMapping />
+      <defaultViewSheet />
+      <defaultEditSheet />
+      <defaultWeb />
+      <nameField />
+      <validationScript />
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <type>
+        <disabled>0</disabled>
+        <name>type</name>
+        <number>5</number>
+        <prettyName>Parameter type</prettyName>
+        <size>60</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </type>
+    </class>
+    <property>
+      <defaultValue />
+    </property>
+    <property>
+      <description>Maximum number of product rows to show, from 1 to 50. Omit it to show every published product. Not sent to the API.</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>limit</name>
+    </property>
+    <property>
+      <type>java.lang.String</type>
+    </property>
+  </object>
+</xwikidoc>

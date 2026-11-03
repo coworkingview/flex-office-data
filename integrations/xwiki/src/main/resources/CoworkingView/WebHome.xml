@@ -1,0 +1,69 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<!--
+CoworkingView Prices wiki macro.
+Copyright (c) 2026 CoworkingView
+SPDX-License-Identifier: MIT
+The embedded WikiMacroClass and WikiMacroParameterClass field lists match an
+XWiki 16.10.11 export of those standard classes.
+-->
+
+<xwikidoc version="1.5" reference="CoworkingView.WebHome" locale="">
+  <web>CoworkingView</web>
+  <name>WebHome</name>
+  <language />
+  <defaultLanguage />
+  <translation>0</translation>
+  <creator>xwiki:XWiki.Admin</creator>
+  <parent>Main.WebHome</parent>
+  <author>xwiki:XWiki.Admin</author>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <version>1.1</version>
+  <title>CoworkingView Prices</title>
+  <comment />
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>= CoworkingView Prices =
+
+Wiki macro for the public CoworkingView Price Index. Homepage: [[https://coworkingview.com]].
+
+== Usage ==
+
+{{{
+{{coworkingview city="berlin"/}}
+}}}
+
+{{{
+{{coworkingview city="berlin" limit="3"/}}
+}}}
+
+The first line shows every published product for that city. The second shows at most 3 rows.
+
+== Parameters ==
+
+* city (required): city slug, for example berlin. The macro lowercases it and sends it as the city query parameter.
+* limit (optional): whole number from 1 to 50. Maximum number of rows. It is not sent to the API. Omit it to show every published product.
+
+== Request ==
+
+One GET [[https://api.coworkingview.com/v1/market/rates]] with locale=en and the city slug. For berlin the URL is [[https://api.coworkingview.com/v1/market/rates?locale=en&amp;city=berlin]]. The macro does not call another CoworkingView endpoint.
+
+The call is XWiki's getURLContent API with a 20 second timeout, so the author of this macro page needs Programming rights. Visibility is Global, which also requires Programming rights.
+
+== Attribution ==
+
+Under the table, the macro prints the attribution string from the response when that string is present, then a link to [[https://coworkingview.com]].
+
+== Install ==
+
+* Extension Manager: extension id com.coworkingview:coworkingview-macro, version 0.1.0, from a repository that contains this XAR.
+* Import: Administration, Content, Import, and upload coworkingview-macro-0.1.0.xar.
+
+The macro definition is on [[CoworkingView.CoworkingViewMacro]].
+
+== Licence ==
+
+The macro is under the MIT license. Price Index figures are not. This repository's specification states that the Price Index is CC BY 4.0. The macro prints the attribution string and does not replace it.
+</content>
+</xwikidoc>

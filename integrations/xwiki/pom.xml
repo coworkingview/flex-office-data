@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.coworkingview</groupId>
+  <artifactId>coworkingview-macro</artifactId>
+  <version>0.1.0</version>
+  <packaging>xar</packaging>
+  <name>CoworkingView Prices</name>
+  <description>Wiki macro that shows CoworkingView Price Index figures for one city.</description>
+  <url>https://coworkingview.com</url>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://github.com/coworkingview/flex-office-data/blob/main/integrations/xwiki/LICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>coworkingview</id>
+      <name>CoworkingView</name>
+      <email>info@coworkingview.com</email>
+      <url>https://coworkingview.com</url>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/coworkingview/flex-office-data.git</connection>
+    <developerConnection>scm:git:https://github.com/coworkingview/flex-office-data.git</developerConnection>
+    <url>https://github.com/coworkingview/flex-office-data/tree/main/integrations/xwiki</url>
+  </scm>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/coworkingview/flex-office-data/issues</url>
+  </issueManagement>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <xwiki.version>16.10.19</xwiki.version>
+    <xwiki.extension.name>CoworkingView Prices</xwiki.extension.name>
+    <xwiki.extension.summary>Wiki macro that shows CoworkingView Price Index figures for one city.</xwiki.extension.summary>
+    <xwiki.extension.website>https://coworkingview.com</xwiki.extension.website>
+    <xwiki.extension.category>macro</xwiki.extension.category>
+  </properties>
+  <repositories>
+    <repository>
+      <id>xwiki-public</id>
+      <name>XWiki public group</name>
+      <url>https://nexus.xwiki.org/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>xwiki-public</id>
+      <name>XWiki public group</name>
+      <url>https://nexus.xwiki.org/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+  <build>
+    <extensions>
+      <extension>
+        <groupId>org.xwiki.commons</groupId>
+        <artifactId>xwiki-commons-tool-xar-handlers</artifactId>
+        <version>${xwiki.version}</version>
+      </extension>
+    </extensions>
+    <plugins>
+      <plugin>
+        <groupId>org.xwiki.commons</groupId>
+        <artifactId>xwiki-commons-tool-xar-plugin</artifactId>
+        <version>${xwiki.version}</version>
+        <configuration>
+          <!-- Application home: technical, visible, default language empty. -->
+          <visibleTechnicalPages>
+            <visibleTechnicalPage>.*CoworkingView/WebHome\.xml</visibleTechnicalPage>
+          </visibleTechnicalPages>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

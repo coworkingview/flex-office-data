@@ -1,0 +1,82 @@
+name: XWiki
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  xar:
+    name: CoworkingView Prices XAR
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/xwiki
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+          cache-dependency-path: integrations/xwiki/pom.xml
+      - name: Build the XAR
+        # Dependencies come from the XWiki public group declared in pom.xml:
+        # https://nexus.xwiki.org/nexus/content/groups/public
+        run: mvn -B package
+      - name: Check the archive
+        run: |
+          set -eu
+          xar=target/coworkingview-macro-0.1.0.xar
+          test -f "$xar"
+          unzip -p "$xar" package.xml > /tmp/cwv-package.xml
+          python3 - << 'PY'
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+          root = ET.parse("/tmp/cwv-package.xml").getroot()
+          text = Path("/tmp/cwv-package.xml").read_text(encoding="utf-8")
+          for needle in (
+              "com.coworkingview:coworkingview-macro",
+              "0.1.0",
+              "CoworkingView Prices",
+          ):
+              if needle not in text:
+                  raise SystemExit("package.xml missing " + needle)
+          page = ET.parse("target/classes/CoworkingView/CoworkingViewMacro.xml")
+          code = None
+          for obj in page.getroot().findall("object"):
+              if obj.findtext("className") != "XWiki.WikiMacroClass":
+                  continue
+              for prop in obj.findall("property"):
+                  for child in list(prop):
+                      if child.tag == "code":
+                          code = child.text or ""
+          if not code:
+              raise SystemExit("macro code is empty")
+          if "/v1/properties" in code or "/v1/geo/" in code:
+              raise SystemExit("macro code calls an endpoint this macro does not use")
+          if "https://api.coworkingview.com/v1/market/rates" not in code:
+              raise SystemExit("macro code does not call /v1/market/rates")
+          if "https://coworkingview.com" not in code:
+              raise SystemExit("macro code has no attribution link")
+          stack = []
+          for i, line in enumerate(code.splitlines(), 1):
+              s = line.strip()
+              if s.startswith("#macro") or s.startswith("#foreach") or s.startswith("#if"):
+                  stack.append(i)
+              elif s.startswith("#end"):
+                  if not stack:
+                      raise SystemExit("extra #end at line " + str(i))
+                  stack.pop()
+          if stack:
+              raise SystemExit("unclosed directive opened at " + ", ".join(map(str, stack)))
+          print("xar ok")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coworkingview-macro-0.1.0.xar
+          path: integrations/xwiki/target/coworkingview-macro-0.1.0.xar
+          if-no-files-found: error

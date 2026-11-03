@@ -1,0 +1,110 @@
+*coworkingview.txt*  Median prices from the CoworkingView Price Index
+
+Author:  CoworkingView <info@coworkingview.com>
+License: MIT (plugin). Price Index data is CC BY 4.0.
+Version: 0.1.0
+
+==============================================================================
+CONTENTS                                                     *coworkingview*
+
+1. Introduction ............ |coworkingview-introduction|
+2. Requirements ............ |coworkingview-requirements|
+3. Install ................. |coworkingview-install|
+4. Commands ................ |coworkingview-commands|
+5. Options ................. |coworkingview-options|
+6. Attribution ............. |coworkingview-attribution|
+7. License ................. |coworkingview-license|
+
+==============================================================================
+1. Introduction                                  *coworkingview-introduction*
+
+:CoworkingRate {city} opens a scratch buffer with the median price of each
+product the CoworkingView Price Index publishes for that city. The figures
+come from one public request:
+
+  GET https://api.coworkingview.com/v1/market/rates?locale=en
+
+There is no API key. The plugin does not contact the network when it loads.
+
+Website: https://coworkingview.com
+Source:  https://github.com/coworkingview/flex-office-data
+
+==============================================================================
+2. Requirements                                 *coworkingview-requirements*
+
+Vim 8.2 or newer, or Neovim. `curl` must be on $PATH. The plugin is pure
+Vimscript. It does not use Python, Ruby, Perl, or Lua.
+
+==============================================================================
+3. Install                                           *coworkingview-install*
+
+Unzip the release archive so that plugin/, autoload/ and doc/ sit inside
+your runtime directory (~/.vim on Unix, ~/vimfiles on Windows). Then:
+
+  :helptags ~/.vim/doc
+
+From this repository, with vim-plug:
+
+  Plug 'coworkingview/flex-office-data', {'rtp': 'integrations/vim'}
+
+==============================================================================
+4. Commands                                         *coworkingview-commands*
+
+                                                              *:CoworkingRate*
+:CoworkingRate {city}
+		Fetch the Price Index and show median prices for {city}.
+		{city} is a city slug (`berlin`) or a city name (`Berlin`,
+		`Bad Homburg`). Press <Tab> to complete a slug. Completion
+		uses the cities in the same API response. Names that are not
+		published yet are not offered.
+
+		The scratch buffer is named coworkingview://rates. It lists
+		the API fields product, unit, median, sample_size and
+		low_confidence.
+		unit is month for a monthly product, day for a day pass and
+		hour for a meeting room. low_confidence is true when
+		sample_size is below 10. The last line is the CC BY 4.0
+		attribution string from the response (`attribution`).
+
+		A response is kept in memory for ten minutes, so completion
+		does not repeat the request. |g:coworkingview_cache_seconds|
+		changes that. On HTTP 429 or 5xx the plugin waits and tries
+		once more.
+
+==============================================================================
+5. Options                                           *coworkingview-options*
+
+g:coworkingview_api_url *g:coworkingview_api_url*
+		Base URL instead of https://api.coworkingview.com. A trailing
+		slash is removed. $COWORKINGVIEW_API_URL is used when this is
+		unset. The client requests /v1/market/rates and always sends a
+		locale (see |g:coworkingview_locale|).
+
+g:coworkingview_locale *g:coworkingview_locale*
+		Query parameter `locale`. Default "en". The API accepts en,
+		de and es.
+
+g:coworkingview_cache_seconds *g:coworkingview_cache_seconds*
+		How long a successful response stays in memory. Default 600,
+		which matches the API Cache-Control max-age. 0 refetches every
+		time.
+
+g:coworkingview_curl *g:coworkingview_curl*
+		curl executable. Default "curl".
+
+==============================================================================
+6. Attribution                                    *coworkingview-attribution*
+
+The Price Index is CC BY 4.0. The scratch buffer ends with the attribution
+text returned by the API. Keep that line when you copy the figures. Photos,
+logos and descriptions are not part of this plugin.
+
+https://creativecommons.org/licenses/by/4.0/
+
+==============================================================================
+7. License                                           *coworkingview-license*
+
+The plugin code is MIT. See LICENSE next to this file. The Price Index data
+is not covered by that licence.
+
+vim:tw=78:ts=8:ft=help:norl:

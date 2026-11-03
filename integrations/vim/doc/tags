@@ -1,0 +1,14 @@
+:CoworkingRate	coworkingview.txt	/*:CoworkingRate*
+coworkingview	coworkingview.txt	/*coworkingview*
+coworkingview-attribution	coworkingview.txt	/*coworkingview-attribution*
+coworkingview-commands	coworkingview.txt	/*coworkingview-commands*
+coworkingview-install	coworkingview.txt	/*coworkingview-install*
+coworkingview-introduction	coworkingview.txt	/*coworkingview-introduction*
+coworkingview-license	coworkingview.txt	/*coworkingview-license*
+coworkingview-options	coworkingview.txt	/*coworkingview-options*
+coworkingview-requirements	coworkingview.txt	/*coworkingview-requirements*
+coworkingview.txt	coworkingview.txt	/*coworkingview.txt*
+g:coworkingview_api_url	coworkingview.txt	/*g:coworkingview_api_url*
+g:coworkingview_cache_seconds	coworkingview.txt	/*g:coworkingview_cache_seconds*
+g:coworkingview_curl	coworkingview.txt	/*g:coworkingview_curl*
+g:coworkingview_locale	coworkingview.txt	/*g:coworkingview_locale*

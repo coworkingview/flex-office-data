@@ -1,0 +1,91 @@
+name: Airflow provider
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "integrations/airflow/**"
+      - ".github/workflows/airflow-provider.yml"
+  pull_request:
+    paths:
+      - "integrations/airflow/**"
+      - ".github/workflows/airflow-provider.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: airflow-provider-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-build:
+    name: Test, sdist and wheel
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: integrations/airflow
+    env:
+      AIRFLOW_HOME: /tmp/airflow-coworkingview-ci
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      AIRFLOW__CORE__UNIT_TEST_MODE: "True"
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: integrations/airflow/pyproject.toml
+      - name: Install Airflow 2.10.5 and the provider
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "apache-airflow==2.10.5" \
+            --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.12.txt"
+          python -m pip install -e ".[dev]"
+      - name: Lint
+        run: |
+          python -m ruff check .
+          python -m ruff format --check .
+      - name: Test
+        run: python -m pytest
+      - name: Build the sdist and wheel
+        run: python -m build
+      - name: Install the wheel and read the provider entry point
+        run: |
+          python -m pip install --force-reinstall --no-deps dist/*.whl
+          python - <<'PY'
+          import zipfile
+          from importlib.metadata import distribution
+          from pathlib import Path
+
+          dist = distribution("airflow-provider-coworkingview")
+          assert dist.version == "0.1.0"
+          urls = dist.metadata.get_all("Project-URL") or []
+          assert any(item.startswith("Homepage, https://coworkingview.com") for item in urls), urls
+          assert any(
+              item.startswith("Source, https://github.com/coworkingview/flex-office-data")
+              for item in urls
+          ), urls
+          found = [ep for ep in dist.entry_points if ep.group == "apache_airflow_provider"]
+          assert len(found) == 1, found
+          assert found[0].value == "coworkingview_provider.get_provider_info:get_provider_info"
+          info = found[0].load()()
+          assert info["package-name"] == "airflow-provider-coworkingview"
+          assert info["connection-types"][0]["hook-class-name"].endswith("CoworkingViewHook")
+
+          wheel = next(Path("dist").glob("*.whl"))
+          sdist = next(Path("dist").glob("*.tar.gz"))
+          names = zipfile.ZipFile(wheel).namelist()
+          assert any(name.startswith("coworkingview_provider/") for name in names)
+          assert not any(name.startswith("tests/") for name in names)
+          print(f"wheel={wheel}")
+          print(f"sdist={sdist}")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: airflow-provider-coworkingview-dist
+          path: integrations/airflow/dist/*
+          retention-days: 7
+          if-no-files-found: error

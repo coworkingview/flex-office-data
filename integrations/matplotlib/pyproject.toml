@@ -1,0 +1,78 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mpl-coworkingview"
+version = "0.1.0"
+description = "Matplotlib bar charts of the CoworkingView Price Index (flexible-office rates, CC BY 4.0)."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [{ name = "CoworkingView", email = "info@coworkingview.com" }]
+maintainers = [{ name = "CoworkingView", email = "info@coworkingview.com" }]
+keywords = [
+    "matplotlib",
+    "coworking",
+    "flexible office",
+    "price index",
+    "open data",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Matplotlib",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+dependencies = ["matplotlib>=3.8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.urls]
+Homepage = "https://coworkingview.com"
+Documentation = "https://github.com/coworkingview/flex-office-data/tree/main/integrations/matplotlib#readme"
+Source = "https://github.com/coworkingview/flex-office-data"
+Issues = "https://github.com/coworkingview/flex-office-data/issues"
+"Price Index" = "https://coworkingview.com/en/tools/price-index"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mpl_coworkingview"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/mpl_coworkingview",
+    "tests",
+    "tools",
+    "docs",
+    "README.md",
+    "LICENSE",
+    "MPL-THIRD-PARTY-ENTRY.md",
+    "pyproject.toml",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = ["live: hits the real API; opt in with COWORKINGVIEW_LIVE_TESTS=1"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+src = ["src", "tests", "tools"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["mpl_coworkingview"]

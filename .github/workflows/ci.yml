@@ -629,3 +629,54 @@ jobs:
           assert "Framework :: Matplotlib" in classifiers, classifiers
           print(f"version={dist.version}")
           PY
+
+  vim:
+    name: Vim plugin (${{ matrix.editor }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            editor: vim
+            package: vim-nox
+          - os: ubuntu-latest
+            editor: nvim
+            package: neovim
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Vim or Neovim, Vint, and zip tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ${{ matrix.package }} python3-venv zip
+          python3 -m venv /tmp/vint-venv
+          # vint imports pkg_resources. setuptools 81 removed it, and Ubuntu
+          # 24.04 venvs do not ship it.
+          /tmp/vint-venv/bin/pip install 'setuptools<81' vim-vint
+          echo /tmp/vint-venv/bin >> "$GITHUB_PATH"
+      - name: Lint
+        run: vint integrations/vim/plugin integrations/vim/autoload
+      - name: Test
+        run: bash integrations/vim/test/run.sh
+        env:
+          VIM_BIN: ${{ matrix.editor }}
+      - name: Help tags match the committed file
+        run: |
+          dir="$(mktemp -d)"
+          cp integrations/vim/doc/coworkingview.txt "$dir/"
+          if [ "${{ matrix.editor }}" = "nvim" ]; then
+            nvim --headless -Nu NONE -n -c "helptags ${dir}" -c "qa"
+          else
+            vim -Nu NONE -n --not-a-term -c "helptags ${dir}" -c "qa"
+          fi
+          diff -u integrations/vim/doc/tags "$dir/tags"
+      - name: Build the vim.org zip
+        run: bash integrations/vim/build.sh
+      - name: Committed zip matches the build
+        run: git diff --exit-code -- integrations/vim/dist/coworkingview-vim-0.1.0.zip
+      - uses: actions/upload-artifact@v4
+        if: matrix.editor == 'vim'
+        with:
+          name: coworkingview-vim-0.1.0.zip
+          path: integrations/vim/dist/coworkingview-vim-0.1.0.zip
+          if-no-files-found: error

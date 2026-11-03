@@ -1,0 +1,87 @@
+#!/bin/sh
+# Stand-in for curl. Prints a fixture body and an HTTP status so the plugin
+# can be tested without the network. See integrations/vim/test/rates.vader.
+set -eu
+
+log=${COWORKINGVIEW_CURL_LOG:-}
+if [ -n "$log" ]; then
+  printf '%s\n' "$@" >> "$log"
+  printf -- '---\n' >> "$log"
+fi
+
+header_file=
+body_file=
+prev=
+for arg in "$@"; do
+  case "$prev" in
+    -D) header_file=$arg; prev=; continue ;;
+    -o) body_file=$arg; prev=; continue ;;
+    -A|-H|-w|--max-time|--stderr) prev=; continue ;;
+  esac
+  case "$arg" in
+    -D|-o|-A|-H|-w|--max-time|--stderr)
+      prev=$arg
+      continue
+      ;;
+    --)
+      continue
+      ;;
+    -*)
+      continue
+      ;;
+    *)
+      ;;
+  esac
+done
+
+count_file=${COWORKINGVIEW_CURL_COUNT:-}
+n=0
+if [ -n "$count_file" ] && [ -f "$count_file" ]; then
+  n=$(cat "$count_file" 2>/dev/null || printf '0')
+fi
+case "$n" in
+  ''|*[!0-9]*) n=0 ;;
+esac
+n=$((n + 1))
+if [ -n "$count_file" ]; then
+  printf '%s\n' "$n" > "$count_file"
+fi
+
+status=${COWORKINGVIEW_HTTP_STATUS:-200}
+if [ -n "${COWORKINGVIEW_FAIL_FIRST:-}" ] && [ "$n" -eq 1 ]; then
+  status=429
+fi
+
+if [ "$status" = "000" ]; then
+  printf '%s\n' 'curl: (7) Failed to connect' >&2
+  exit 7
+fi
+
+if [ -n "$body_file" ]; then
+  if [ "$status" = "429" ] && [ -n "${COWORKINGVIEW_FAIL_FIRST:-}" ]; then
+    printf '%s\n' '{"title":"Too Many Requests","status":429,"code":"RATE_LIMITED","detail":"slow down"}' > "$body_file"
+  elif [ -n "${COWORKINGVIEW_BODY:-}" ]; then
+    printf '%s' "$COWORKINGVIEW_BODY" > "$body_file"
+  elif [ -n "${COWORKINGVIEW_FIXTURE:-}" ]; then
+    cp "$COWORKINGVIEW_FIXTURE" "$body_file"
+  else
+    : > "$body_file"
+  fi
+fi
+
+if [ -n "$header_file" ]; then
+  {
+    printf 'HTTP/1.1 %s\r\n' "$status"
+    if [ -n "${COWORKINGVIEW_RETRY_AFTER:-}" ]; then
+      printf 'Retry-After: %s\r\n' "$COWORKINGVIEW_RETRY_AFTER"
+    fi
+    if [ -n "${COWORKINGVIEW_RATELIMIT_RESET:-}" ]; then
+      printf 'RateLimit-Reset: %s\r\n' "$COWORKINGVIEW_RATELIMIT_RESET"
+    fi
+    printf 'Content-Type: application/json\r\n'
+    printf '\r\n'
+  } > "$header_file"
+fi
+
+printf '%s' "$status"
+exit 0

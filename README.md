@@ -32,6 +32,8 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 
 [XWiki](integrations/xwiki/) (`com.coworkingview:coworkingview-macro`, CoworkingView Prices) is a wiki macro, `{{coworkingview city="berlin"/}}`, for the same Price Index. The macro code is MIT.
 
+[PostgreSQL](integrations/postgres/) (`coworkingview`) installs a snapshot of the same Price Index with `CREATE EXTENSION coworkingview`. The extension is pure SQL, MIT, and packaged for [PGXN](https://pgxn.org/).
+
 The Python, R, Java, Ruby and command-line packages read the same public API, follow
 the same [specification](spec/SPEC.md) and are tested against the same
 [fixtures and expected outputs](spec/), so a number is the same whichever of
@@ -185,6 +187,7 @@ integrations/thunderbird/  Thunderbird MailExtension (CoworkingView prices)
 integrations/joomla/   Joomla 4/5 site module (CoworkingView Workspace Prices)
 integrations/lmstudio/  LM Studio tools-provider plugin (coworkingview-workspace-prices)
 integrations/eclipse/  Eclipse view (CoworkingView Workspace Prices) and p2 update site
+integrations/postgres/  coworkingview extension for PostgreSQL (PGXN)
 packaging/          AUR, Chocolatey and Snap manifests for cwv
 ```
 

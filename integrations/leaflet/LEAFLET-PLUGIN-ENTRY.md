@@ -10,7 +10,9 @@ Checked against Leaflet `main` on 2026-11-03:
 - `docs/_includes/plugin_category_table.html`: category `data-providers`, repo link, description body, V1/V2 checkmarks, a Demo link only when `demo` is non-blank, maintainer link from `author-url`.
 - Merged plugin PRs used as the current shape: [#10514](https://github.com/Leaflet/Leaflet/pull/10514) (`docs/_plugins/mouse-coordinates/location-picker.md`), [#10328](https://github.com/Leaflet/Leaflet/pull/10328) (`docs/_plugins/synthetic-overlays/leaflet-india-boundary.md`), [#10388](https://github.com/Leaflet/Leaflet/pull/10388) (`docs/_plugins/synthetic-overlays/leaflet-daynight.md`). Each uses the front matter below, with `compatible-v0` empty, `compatible-v1: true`, and `compatible-v2: false`.
 
-`template.md` labels `demo` as required, and PLUGIN-GUIDE calls a hosted demo essential (GitHub Pages is the suggested host). The table template still renders when `demo` is empty: the Demo cell is blank. This repo has a local demo at `integrations/leaflet/index.html` and no public demo URL. GitHub Pages was not enabled. The `demo` field is therefore empty. A Leaflet maintainer may ask for a URL before listing the plugin.
+`template.md` labels `demo` as required, and PLUGIN-GUIDE calls a hosted demo essential. The demo is published on the repository's existing GitHub Pages site:
+
+https://coworkingview.github.io/flex-office-data/leaflet/
 
 ## File path
 
@@ -25,7 +27,7 @@ category: data-providers
 repo: https://github.com/coworkingview/flex-office-data/tree/main/integrations/leaflet
 author: CoworkingView
 author-url: https://coworkingview.com
-demo:
+demo: https://coworkingview.github.io/flex-office-data/leaflet/
 compatible-v0:
 compatible-v1: true
 compatible-v2: false
@@ -53,5 +55,7 @@ Affiliation: this plugin and the Price Index are published by CoworkingView (htt
 
 AI assistance: this submission was prepared with AI assistance.
 
-`docs/_plugins/template.md` marks `demo` as required. There is no hosted demo URL (GitHub Pages is not enabled for this repo). A local demo is `index.html` in the plugin directory, so `demo` is left empty. `docs/_includes/plugin_category_table.html` omits the Demo link when that field is blank. `compatible-v1` is true (Leaflet 1.9) and `compatible-v2` is false.
+Demo: https://coworkingview.github.io/flex-office-data/leaflet/
+
+`compatible-v1` is true (Leaflet 1.9) and `compatible-v2` is false.
 ```

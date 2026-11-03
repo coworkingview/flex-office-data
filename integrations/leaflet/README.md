@@ -12,9 +12,9 @@ The Price Index is [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Ad
 
 ## Demo
 
-Open [`index.html`](index.html) from this directory (the UMD build is `dist/leaflet-coworkingview.js`). The page draws an OpenStreetMap base map and the Price Index layer.
+[https://coworkingview.github.io/flex-office-data/leaflet/](https://coworkingview.github.io/flex-office-data/leaflet/)
 
-On 2026-11-03 the rates API responded to browser `Origin` values other than `https://coworkingview.com` without `Access-Control-Allow-Origin`. A page on another origin, including a local file, cannot read the response. Serve the demo from `https://coworkingview.com`, or pass `url` pointing at a same-origin proxy of `GET /v1/market/rates`. The layer fires `error` when the request fails. There is no hosted demo URL.
+The page is [`index.html`](index.html). It loads Leaflet from the CDN and `dist/leaflet-coworkingview.js` from the same directory. It requests the live rates API, then, if that request fails (the API allows browser calls from `https://coworkingview.com`), loads `market_rates.json` beside the page. The published copy of that file is `spec/fixtures/market_rates.json`. GitHub Pages publishes this directory from the same artifact as the Eclipse update site, under `leaflet/`, so `eclipse/updates/` stays on the site.
 
 ## Install
 

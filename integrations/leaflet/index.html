@@ -28,24 +28,40 @@
   <script src="dist/leaflet-coworkingview.js"></script>
   <script>
     var statusNode = document.getElementById('status');
+    var LIVE = 'https://api.coworkingview.com/v1/market/rates';
+    var usedFixture = false;
+
+    function fetchRatesOrFixture(url, init) {
+      var target = String(url);
+      if (target.indexOf(LIVE) !== 0) return fetch(url, init);
+      return fetch(url, init).then(function (response) {
+        if (response.ok) return response;
+        usedFixture = true;
+        return fetch('market_rates.json');
+      }, function () {
+        usedFixture = true;
+        return fetch('market_rates.json');
+      });
+    }
+
     var map = L.map('map').setView([50, 10], 4);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    var prices = L.coworkingView.layer({ fitBounds: true });
+    var prices = L.coworkingView.layer({ fitBounds: true, fetch: fetchRatesOrFixture });
     prices.on('load', function (event) {
       var skipped = event.unlocated.length
         ? ' Skipped without coordinates: ' + event.unlocated.join(', ') + '.'
         : '';
-      statusNode.textContent = event.cities + ' cities. ' + (event.attribution || '') + skipped;
+      var source = usedFixture
+        ? 'Recorded fixture, because the live API did not allow this page origin. '
+        : 'Live API. ';
+      statusNode.textContent = source + event.cities + ' cities. ' + (event.attribution || '') + skipped;
     });
     prices.on('error', function (event) {
-      statusNode.textContent = 'Could not load the Price Index (' + event.error.code + '). ' +
-        'The API allows browser requests from https://coworkingview.com. ' +
-        'On another origin, serve this page there or point the layer url option at a same-origin proxy. ' +
-        event.error.message;
+      statusNode.textContent = 'Could not load the Price Index (' + event.error.code + '). ' + event.error.message;
     });
     prices.addTo(map);
   </script>

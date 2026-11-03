@@ -66,6 +66,8 @@ An unpublished city, or a slug with no published rates, raises `CoworkingViewErr
 
 ## Develop
 
+CI for this package is the `mpl-coworkingview` job in `.github/workflows/ci.yml`.
+
 From `integrations/matplotlib`, with the repository checkout so the tests can read `spec/fixtures`:
 
 ```bash

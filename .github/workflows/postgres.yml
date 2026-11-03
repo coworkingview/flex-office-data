@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate META.json and build the PGXN bundle
         run: |
-          set -euo pipefail
+          set -eu
           stage="$(mktemp -d)"
           cp -a integrations/postgres/. "$stage/"
           rm -rf "$stage/results" "$stage/log" "$stage/regression.diffs" \
@@ -33,13 +33,13 @@ jobs:
             cd "$stage"
             pgxn-bundle
           )
-          shopt -s nullglob
-          zips=("$stage"/coworkingview-*.zip)
-          if [ "${#zips[@]}" -ne 1 ]; then
-            printf 'expected one bundle, found %s\n' "${#zips[@]}" >&2
+          # The pgxn-tools image runs this step with /bin/sh (dash), which has no shopt.
+          set -- "$stage"/coworkingview-*.zip
+          if [ "$#" -ne 1 ] || [ ! -f "$1" ]; then
+            printf 'expected one bundle, found %s\n' "$#" >&2
             exit 1
           fi
-          unzip -l "${zips[0]}" > "$stage/listing.txt"
+          unzip -l "$1" > "$stage/listing.txt"
           grep -q 'coworkingview-0.1.0/META.json' "$stage/listing.txt"
           grep -q 'coworkingview-0.1.0/sql/coworkingview--0.1.0.sql' "$stage/listing.txt"
           if grep -q 'coworkingview-0.1.0/python/' "$stage/listing.txt"; then

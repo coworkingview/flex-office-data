@@ -20,7 +20,7 @@ jobs:
       - name: Bundle the release
         id: bundle
         run: |
-          set -euo pipefail
+          set -eu
           stage="$(mktemp -d)"
           cp -a integrations/postgres/. "$stage/"
           rm -rf "$stage/results" "$stage/log" "$stage/regression.diffs" \
@@ -29,14 +29,14 @@ jobs:
             cd "$stage"
             pgxn-bundle
           )
-          shopt -s nullglob
-          zips=("$stage"/coworkingview-*.zip)
-          if [ "${#zips[@]}" -ne 1 ]; then
-            printf 'expected one bundle, found %s\n' "${#zips[@]}" >&2
+          # The pgxn-tools image runs this step with /bin/sh (dash), which has no shopt.
+          set -- "$stage"/coworkingview-*.zip
+          if [ "$#" -ne 1 ] || [ ! -f "$1" ]; then
+            printf 'expected one bundle, found %s\n' "$#" >&2
             exit 1
           fi
-          base="$(basename "${zips[0]}")"
-          mv "${zips[0]}" "$GITHUB_WORKSPACE/$base"
+          base="$(basename "$1")"
+          mv "$1" "$GITHUB_WORKSPACE/$base"
           echo "bundle=$base" >> "$GITHUB_OUTPUT"
 
       - name: Release on PGXN

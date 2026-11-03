@@ -582,6 +582,24 @@ jobs:
       - run: npm test
       - run: npm run build
 
+  leaflet:
+    name: Leaflet plugin
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/leaflet
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: integrations/leaflet/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: git diff --exit-code -- dist
+
   mpl-coworkingview:
     name: mpl-coworkingview
     runs-on: ubuntu-latest

@@ -11,11 +11,16 @@ on:
 # The github-pages environment allows deploys from refs/heads/main only
 # (a tag push is rejected: "not allowed to deploy to github-pages due to
 # environment protection rules"). Pages therefore runs on main. The artifact
-# is the site root: eclipse/updates/ (the p2 repository), .nojekyll, and
-# coworkingview-eclipse-p2.zip. A tag eclipse-v* attaches that zip to the
+# is the site root: eclipse/updates/ (the p2 repository) and
+# coworkingview-eclipse-p2.zip. upload-artifact drops .nojekyll, so the
+# Pages job writes it again. A tag eclipse-v* attaches that zip to the
 # GitHub Release. A main run attaches it too when the newest eclipse-v* release
 # does not have the asset yet, so the first publish does not depend on moving
 # an existing tag.
+#
+# GitHub Pages replaces the whole site on every deploy. The Leaflet demo is
+# copied into this same artifact (leaflet/) at publish time, after the p2 zip
+# is already packed, so the update site and the zip stay on the site.
 
 permissions:
   contents: read
@@ -84,10 +89,57 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: eclipse-update-site
           path: public
+      - name: Add the Leaflet demo beside the update site
+        run: |
+          set -eu
+          missing=0
+          for path in \
+            public/eclipse/updates \
+            public/eclipse/updates/content.jar \
+            public/eclipse/updates/index.html \
+            public/coworkingview-eclipse-p2.zip \
+            integrations/leaflet/index.html \
+            integrations/leaflet/dist/leaflet-coworkingview.js \
+            spec/fixtures/market_rates.json
+          do
+            if [ ! -e "$path" ]; then
+              echo "missing $path"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            find public -maxdepth 2 -print
+            exit 1
+          fi
+          # upload-artifact leaves out dotfiles, so the .nojekyll written
+          # while packing the update site is not in this download. Put it
+          # back for Pages only; the p2 zip is already packed.
+          touch public/.nojekyll
+          mkdir -p public/leaflet/dist
+          cp integrations/leaflet/index.html public/leaflet/index.html
+          cp integrations/leaflet/dist/leaflet-coworkingview.js public/leaflet/dist/leaflet-coworkingview.js
+          cp spec/fixtures/market_rates.json public/leaflet/market_rates.json
+          cat > public/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>CoworkingView flex-office-data</title>
+          </head>
+          <body>
+            <h1>CoworkingView flex-office-data</h1>
+            <ul>
+              <li><a href="eclipse/updates/">Eclipse update site</a></li>
+              <li><a href="leaflet/">Leaflet Price Index demo</a></li>
+            </ul>
+          </body>
+          </html>
+          EOF
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public

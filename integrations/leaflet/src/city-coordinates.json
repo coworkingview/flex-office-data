@@ -1,0 +1,2195 @@
+{
+  "source": {
+    "name": "GeoNames",
+    "url": "https://www.geonames.org/",
+    "dump": "https://download.geonames.org/export/dump/",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "retrieved": "2026-11-03",
+    "ratesRetrieved": "2026-11-03",
+    "ratesUrl": "https://api.coworkingview.com/v1/market/rates?locale=en",
+    "note": "One centroid per city slug returned by that rates response, and only when a single GeoNames populated place in the same country matched the city name, its ASCII name, or an alternate name. Ambiguous slugs are listed in omitted and are not given coordinates."
+  },
+  "omitted": [
+    {
+      "slug": "ashford",
+      "name": "Ashford",
+      "countryCode": "GB",
+      "reason": "ambiguous"
+    },
+    {
+      "slug": "casalecchio",
+      "name": "Casalecchio",
+      "countryCode": "IT",
+      "reason": "ambiguous"
+    },
+    {
+      "slug": "coleshill",
+      "name": "Coleshill",
+      "countryCode": "GB",
+      "reason": "ambiguous"
+    }
+  ],
+  "cities": {
+    "aberdeen": {
+      "lat": 57.14369,
+      "lng": -2.09814,
+      "geonameId": 2657832,
+      "name": "Aberdeen",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "abu-dhabi": {
+      "lat": 24.45118,
+      "lng": 54.39696,
+      "geonameId": 292968,
+      "name": "Abu Dhabi",
+      "countryCode": "AE",
+      "featureCode": "PPLC"
+    },
+    "ajman": {
+      "lat": 25.40177,
+      "lng": 55.47878,
+      "geonameId": 292932,
+      "name": "Ajman",
+      "countryCode": "AE",
+      "featureCode": "PPLA"
+    },
+    "alicante": {
+      "lat": 38.34517,
+      "lng": -0.48149,
+      "geonameId": 2521978,
+      "name": "Alicante",
+      "countryCode": "ES",
+      "featureCode": "PPLA2"
+    },
+    "altrincham": {
+      "lat": 53.38752,
+      "lng": -2.34848,
+      "geonameId": 2657402,
+      "name": "Altrincham",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "amersham": {
+      "lat": 51.66667,
+      "lng": -0.61667,
+      "geonameId": 2657356,
+      "name": "Amersham",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "amsterdam": {
+      "lat": 52.37403,
+      "lng": 4.88969,
+      "geonameId": 2759794,
+      "name": "Amsterdam",
+      "countryCode": "NL",
+      "featureCode": "PPLC"
+    },
+    "assago": {
+      "lat": 45.40887,
+      "lng": 9.12565,
+      "geonameId": 6534466,
+      "name": "Assago",
+      "countryCode": "IT",
+      "featureCode": "PPLA3"
+    },
+    "augsburg": {
+      "lat": 48.37154,
+      "lng": 10.89851,
+      "geonameId": 2954172,
+      "name": "Augsburg",
+      "countryCode": "DE",
+      "featureCode": "PPLA2"
+    },
+    "aylesbury": {
+      "lat": 51.81665,
+      "lng": -0.81458,
+      "geonameId": 2656719,
+      "name": "Aylesbury",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "bad-homburg": {
+      "lat": 50.22683,
+      "lng": 8.61816,
+      "geonameId": 2953436,
+      "name": "Bad Homburg vor der Höhe",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "banbridge": {
+      "lat": 54.35,
+      "lng": -6.28333,
+      "geonameId": 2656407,
+      "name": "Banbridge",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "barcelona": {
+      "lat": 41.38879,
+      "lng": 2.15899,
+      "geonameId": 3128760,
+      "name": "Barcelona",
+      "countryCode": "ES",
+      "featureCode": "PPLA"
+    },
+    "bari": {
+      "lat": 41.12066,
+      "lng": 16.86982,
+      "geonameId": 3182351,
+      "name": "Bari",
+      "countryCode": "IT",
+      "featureCode": "PPLA"
+    },
+    "barnsley": {
+      "lat": 53.55,
+      "lng": -1.48333,
+      "geonameId": 2656284,
+      "name": "Barnsley",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "bath": {
+      "lat": 51.3751,
+      "lng": -2.36172,
+      "geonameId": 2656173,
+      "name": "Bath",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "belfast": {
+      "lat": 54.59682,
+      "lng": -5.92541,
+      "geonameId": 2655984,
+      "name": "Belfast",
+      "countryCode": "GB",
+      "featureCode": "PPLA"
+    },
+    "bergamo": {
+      "lat": 45.69601,
+      "lng": 9.66721,
+      "geonameId": 3182164,
+      "name": "Bergamo",
+      "countryCode": "IT",
+      "featureCode": "PPLA2"
+    },
+    "berlin": {
+      "lat": 52.52437,
+      "lng": 13.41053,
+      "geonameId": 2950159,
+      "name": "Berlin",
+      "countryCode": "DE",
+      "featureCode": "PPLC"
+    },
+    "bilbao": {
+      "lat": 43.26271,
+      "lng": -2.92528,
+      "geonameId": 3128026,
+      "name": "Bilbao",
+      "countryCode": "ES",
+      "featureCode": "PPLA2"
+    },
+    "birkenhead": {
+      "lat": 53.39337,
+      "lng": -3.01479,
+      "geonameId": 2655613,
+      "name": "Birkenhead",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "birmingham": {
+      "lat": 52.48142,
+      "lng": -1.89983,
+      "geonameId": 2655603,
+      "name": "Birmingham",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "bishops-cleeve": {
+      "lat": 51.94749,
+      "lng": -2.06277,
+      "geonameId": 2655570,
+      "name": "Bishops Cleeve",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "blackburn": {
+      "lat": 53.75,
+      "lng": -2.48333,
+      "geonameId": 2655524,
+      "name": "Blackburn",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "bologna": {
+      "lat": 44.49381,
+      "lng": 11.33875,
+      "geonameId": 3181928,
+      "name": "Bologna",
+      "countryCode": "IT",
+      "featureCode": "PPLA"
+    },
+    "bolton": {
+      "lat": 53.58333,
+      "lng": -2.43333,
+      "geonameId": 2655237,
+      "name": "Bolton",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "bonn": {
+      "lat": 50.73438,
+      "lng": 7.09549,
+      "geonameId": 2946447,
+      "name": "Bonn",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "borehamwood": {
+      "lat": 51.65468,
+      "lng": -0.27762,
+      "geonameId": 2655186,
+      "name": "Borehamwood",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "bournemouth": {
+      "lat": 50.72048,
+      "lng": -1.8795,
+      "geonameId": 2655095,
+      "name": "Bournemouth",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "bracknell": {
+      "lat": 51.41363,
+      "lng": -0.75054,
+      "geonameId": 2655009,
+      "name": "Bracknell",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "braga": {
+      "lat": 41.5514,
+      "lng": -8.42311,
+      "geonameId": 2742032,
+      "name": "Braga",
+      "countryCode": "PT",
+      "featureCode": "PPLA"
+    },
+    "bremen": {
+      "lat": 53.07582,
+      "lng": 8.80717,
+      "geonameId": 2944388,
+      "name": "Bremen",
+      "countryCode": "DE",
+      "featureCode": "PPLA"
+    },
+    "brentwood": {
+      "lat": 51.62127,
+      "lng": 0.30556,
+      "geonameId": 2654782,
+      "name": "Brentwood",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "brescia": {
+      "lat": 45.53558,
+      "lng": 10.21472,
+      "geonameId": 3181554,
+      "name": "Brescia",
+      "countryCode": "IT",
+      "featureCode": "PPLA2"
+    },
+    "brighton": {
+      "lat": 50.82838,
+      "lng": -0.13947,
+      "geonameId": 2654710,
+      "name": "Brighton",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "bristol": {
+      "lat": 51.45523,
+      "lng": -2.59665,
+      "geonameId": 2654675,
+      "name": "Bristol",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "brussels": {
+      "lat": 50.85045,
+      "lng": 4.34878,
+      "geonameId": 2800866,
+      "name": "Brussels",
+      "countryCode": "BE",
+      "featureCode": "PPLC"
+    },
+    "cagliari": {
+      "lat": 39.23054,
+      "lng": 9.11917,
+      "geonameId": 2525473,
+      "name": "Cagliari",
+      "countryCode": "IT",
+      "featureCode": "PPLA"
+    },
+    "cambridge": {
+      "lat": 52.2,
+      "lng": 0.11667,
+      "geonameId": 2653941,
+      "name": "Cambridge",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "cambrils": {
+      "lat": 41.06997,
+      "lng": 1.05949,
+      "geonameId": 3126888,
+      "name": "Cambrils",
+      "countryCode": "ES",
+      "featureCode": "PPLA3"
+    },
+    "cannock": {
+      "lat": 52.69045,
+      "lng": -2.03085,
+      "geonameId": 2653883,
+      "name": "Cannock",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "canterbury": {
+      "lat": 51.27904,
+      "lng": 1.07992,
+      "geonameId": 2653877,
+      "name": "Canterbury",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "cardiff": {
+      "lat": 51.48,
+      "lng": -3.18,
+      "geonameId": 2653822,
+      "name": "Cardiff",
+      "countryCode": "GB",
+      "featureCode": "PPLA"
+    },
+    "castle-donington": {
+      "lat": 52.84291,
+      "lng": -1.34188,
+      "geonameId": 2653591,
+      "name": "Castle Donington",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "chelmsford": {
+      "lat": 51.73575,
+      "lng": 0.46958,
+      "geonameId": 2653266,
+      "name": "Chelmsford",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "cheltenham": {
+      "lat": 51.90006,
+      "lng": -2.07972,
+      "geonameId": 2653261,
+      "name": "Cheltenham",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "chemnitz": {
+      "lat": 50.8357,
+      "lng": 12.92922,
+      "geonameId": 2940132,
+      "name": "Chemnitz",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "chepstow": {
+      "lat": 51.64087,
+      "lng": -2.67683,
+      "geonameId": 2653256,
+      "name": "Chepstow",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "chester": {
+      "lat": 53.1905,
+      "lng": -2.89189,
+      "geonameId": 2653228,
+      "name": "Chester",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "chippenham": {
+      "lat": 51.46,
+      "lng": -2.12472,
+      "geonameId": 2653144,
+      "name": "Chippenham",
+      "countryCode": "GB",
+      "featureCode": "PPLA3"
+    },
+    "clonakilty": {
+      "lat": 51.62306,
+      "lng": -8.87056,
+      "geonameId": 2965402,
+      "name": "Clonakilty",
+      "countryCode": "IE",
+      "featureCode": "PPL"
+    },
+    "clonmel": {
+      "lat": 52.355,
+      "lng": -7.70389,
+      "geonameId": 2965353,
+      "name": "Cluain Meala",
+      "countryCode": "IE",
+      "featureCode": "PPLA2"
+    },
+    "colchester": {
+      "lat": 51.88921,
+      "lng": 0.90421,
+      "geonameId": 2652618,
+      "name": "Colchester",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "coleraine": {
+      "lat": 55.13333,
+      "lng": -6.66667,
+      "geonameId": 2652586,
+      "name": "Coleraine",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "cologne": {
+      "lat": 50.93333,
+      "lng": 6.95,
+      "geonameId": 2886242,
+      "name": "Köln",
+      "countryCode": "DE",
+      "featureCode": "PPLA2"
+    },
+    "como": {
+      "lat": 45.80819,
+      "lng": 9.0832,
+      "geonameId": 3178229,
+      "name": "Como",
+      "countryCode": "IT",
+      "featureCode": "PPLA2"
+    },
+    "congleton": {
+      "lat": 53.16314,
+      "lng": -2.21253,
+      "geonameId": 2652464,
+      "name": "Congleton",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "cork": {
+      "lat": 51.89797,
+      "lng": -8.47061,
+      "geonameId": 2965140,
+      "name": "Cork",
+      "countryCode": "IE",
+      "featureCode": "PPLA2"
+    },
+    "coventry": {
+      "lat": 52.40656,
+      "lng": -1.51217,
+      "geonameId": 2652221,
+      "name": "Coventry",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "crawley": {
+      "lat": 51.11303,
+      "lng": -0.18312,
+      "geonameId": 2652053,
+      "name": "Crawley",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "crewe": {
+      "lat": 53.09787,
+      "lng": -2.44161,
+      "geonameId": 2652002,
+      "name": "Crewe",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "darmstadt": {
+      "lat": 49.87167,
+      "lng": 8.65027,
+      "geonameId": 2938913,
+      "name": "Darmstadt",
+      "countryCode": "DE",
+      "featureCode": "PPLA2"
+    },
+    "dartford": {
+      "lat": 51.44657,
+      "lng": 0.21423,
+      "geonameId": 2651500,
+      "name": "Dartford",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "derby": {
+      "lat": 52.92277,
+      "lng": -1.47663,
+      "geonameId": 2651347,
+      "name": "Derby",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "didcot": {
+      "lat": 51.60928,
+      "lng": -1.24214,
+      "geonameId": 2651269,
+      "name": "Didcot",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "dorking": {
+      "lat": 51.23228,
+      "lng": -0.3338,
+      "geonameId": 2651095,
+      "name": "Dorking",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "dortmund": {
+      "lat": 51.51494,
+      "lng": 7.466,
+      "geonameId": 2935517,
+      "name": "Dortmund",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "dresden": {
+      "lat": 51.05089,
+      "lng": 13.73832,
+      "geonameId": 2935022,
+      "name": "Dresden",
+      "countryCode": "DE",
+      "featureCode": "PPLA"
+    },
+    "drogheda": {
+      "lat": 53.71889,
+      "lng": -6.34778,
+      "geonameId": 2964661,
+      "name": "Drogheda",
+      "countryCode": "IE",
+      "featureCode": "PPL"
+    },
+    "dubai": {
+      "lat": 25.07725,
+      "lng": 55.30927,
+      "geonameId": 292223,
+      "name": "Dubai",
+      "countryCode": "AE",
+      "featureCode": "PPLA"
+    },
+    "dublin": {
+      "lat": 53.33306,
+      "lng": -6.24889,
+      "geonameId": 2964574,
+      "name": "Dublin",
+      "countryCode": "IE",
+      "featureCode": "PPLC"
+    },
+    "dunfermline": {
+      "lat": 56.07156,
+      "lng": -3.45887,
+      "geonameId": 2650732,
+      "name": "Dunfermline",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "durham": {
+      "lat": 54.77676,
+      "lng": -1.57566,
+      "geonameId": 2650628,
+      "name": "Durham",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "dusseldorf": {
+      "lat": 51.22319,
+      "lng": 6.77927,
+      "geonameId": 2934246,
+      "name": "Düsseldorf",
+      "countryCode": "DE",
+      "featureCode": "PPLA"
+    },
+    "edinburgh": {
+      "lat": 55.95206,
+      "lng": -3.19648,
+      "geonameId": 2650225,
+      "name": "Edinburgh",
+      "countryCode": "GB",
+      "featureCode": "PPLA"
+    },
+    "enniskillen": {
+      "lat": 54.34615,
+      "lng": -7.64133,
+      "geonameId": 2649984,
+      "name": "Enniskillen",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "epping": {
+      "lat": 51.69815,
+      "lng": 0.11055,
+      "geonameId": 2649963,
+      "name": "Epping",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "erfurt": {
+      "lat": 50.97734,
+      "lng": 11.03536,
+      "geonameId": 2929670,
+      "name": "Erfurt",
+      "countryCode": "DE",
+      "featureCode": "PPLA"
+    },
+    "escaldes-engordany": {
+      "lat": 42.50729,
+      "lng": 1.53414,
+      "geonameId": 3040051,
+      "name": "les Escaldes",
+      "countryCode": "AD",
+      "featureCode": "PPLA"
+    },
+    "eschborn": {
+      "lat": 50.14328,
+      "lng": 8.57111,
+      "geonameId": 2929134,
+      "name": "Eschborn",
+      "countryCode": "DE",
+      "featureCode": "PPL"
+    },
+    "essen": {
+      "lat": 51.45657,
+      "lng": 7.01228,
+      "geonameId": 2928810,
+      "name": "Essen",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "exeter": {
+      "lat": 50.7236,
+      "lng": -3.52751,
+      "geonameId": 2649808,
+      "name": "Exeter",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "falkirk": {
+      "lat": 56.0021,
+      "lng": -3.78535,
+      "geonameId": 2649723,
+      "name": "Falkirk",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "fareham": {
+      "lat": 50.85162,
+      "lng": -1.17929,
+      "geonameId": 2649692,
+      "name": "Fareham",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "farnborough": {
+      "lat": 51.29424,
+      "lng": -0.75565,
+      "geonameId": 2649672,
+      "name": "Farnborough",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "fleet": {
+      "lat": 51.28333,
+      "lng": -0.83333,
+      "geonameId": 2649322,
+      "name": "Fleet",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "florence": {
+      "lat": 43.77925,
+      "lng": 11.24626,
+      "geonameId": 3176959,
+      "name": "Florence",
+      "countryCode": "IT",
+      "featureCode": "PPLA"
+    },
+    "forli": {
+      "lat": 44.22177,
+      "lng": 12.04144,
+      "geonameId": 3176746,
+      "name": "Forlì",
+      "countryCode": "IT",
+      "featureCode": "PPLA2"
+    },
+    "frankfurt": {
+      "lat": 50.11552,
+      "lng": 8.68417,
+      "geonameId": 2925533,
+      "name": "Frankfurt am Main",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "frankfurt-oder": {
+      "lat": 52.34714,
+      "lng": 14.55062,
+      "geonameId": 2925535,
+      "name": "Frankfurt (Oder)",
+      "countryCode": "DE",
+      "featureCode": "PPL"
+    },
+    "frimley": {
+      "lat": 51.31667,
+      "lng": -0.74544,
+      "geonameId": 2649052,
+      "name": "Frimley",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "gateshead": {
+      "lat": 54.96209,
+      "lng": -1.60168,
+      "geonameId": 2648773,
+      "name": "Gateshead",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "gelsenkirchen": {
+      "lat": 51.50508,
+      "lng": 7.09654,
+      "geonameId": 2921466,
+      "name": "Gelsenkirchen",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "genoa": {
+      "lat": 44.40478,
+      "lng": 8.94439,
+      "geonameId": 3176219,
+      "name": "Genoa",
+      "countryCode": "IT",
+      "featureCode": "PPLA"
+    },
+    "gerrards-cross": {
+      "lat": 51.5861,
+      "lng": -0.55543,
+      "geonameId": 6620444,
+      "name": "Gerrards Cross",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "gibraltar": {
+      "lat": 36.14474,
+      "lng": -5.35257,
+      "geonameId": 2411585,
+      "name": "Gibraltar",
+      "countryCode": "GI",
+      "featureCode": "PPLC"
+    },
+    "gijon": {
+      "lat": 43.53573,
+      "lng": -5.66152,
+      "geonameId": 3121424,
+      "name": "Gijón",
+      "countryCode": "ES",
+      "featureCode": "PPLA3"
+    },
+    "gilching": {
+      "lat": 48.10755,
+      "lng": 11.2936,
+      "geonameId": 2920433,
+      "name": "Gilching",
+      "countryCode": "DE",
+      "featureCode": "PPLA4"
+    },
+    "glasgow": {
+      "lat": 55.86515,
+      "lng": -4.25763,
+      "geonameId": 2648579,
+      "name": "Glasgow",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "gloucester": {
+      "lat": 51.86568,
+      "lng": -2.2431,
+      "geonameId": 2648404,
+      "name": "Gloucester",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "great-yarmouth": {
+      "lat": 52.60831,
+      "lng": 1.73052,
+      "geonameId": 2647984,
+      "name": "Great Yarmouth",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "guildford": {
+      "lat": 51.23536,
+      "lng": -0.57427,
+      "geonameId": 2647793,
+      "name": "Guildford",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "hamburg": {
+      "lat": 53.55073,
+      "lng": 9.99302,
+      "geonameId": 2911298,
+      "name": "Hamburg",
+      "countryCode": "DE",
+      "featureCode": "PPLA"
+    },
+    "hanover": {
+      "lat": 52.37052,
+      "lng": 9.73322,
+      "geonameId": 2910831,
+      "name": "Hannover",
+      "countryCode": "DE",
+      "featureCode": "PPLA"
+    },
+    "harpenden": {
+      "lat": 51.81684,
+      "lng": -0.35706,
+      "geonameId": 2647451,
+      "name": "Harpenden",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "hatfield": {
+      "lat": 51.76338,
+      "lng": -0.22419,
+      "geonameId": 2647349,
+      "name": "Hatfield",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "heidelberg": {
+      "lat": 49.40768,
+      "lng": 8.69079,
+      "geonameId": 2907911,
+      "name": "Heidelberg",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "hemel-hempstead": {
+      "lat": 51.75368,
+      "lng": -0.44975,
+      "geonameId": 2647138,
+      "name": "Hemel Hempstead",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "henley-on-thames": {
+      "lat": 51.53333,
+      "lng": -0.9,
+      "geonameId": 2647101,
+      "name": "Henley-on-Thames",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "hereford": {
+      "lat": 52.05684,
+      "lng": -2.71482,
+      "geonameId": 2647074,
+      "name": "Hereford",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "hertford": {
+      "lat": 51.79588,
+      "lng": -0.07854,
+      "geonameId": 2647044,
+      "name": "Hertford",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "high-wycombe": {
+      "lat": 51.62907,
+      "lng": -0.74934,
+      "geonameId": 2646914,
+      "name": "High Wycombe",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "hitchin": {
+      "lat": 51.94924,
+      "lng": -0.28496,
+      "geonameId": 2646826,
+      "name": "Hitchin",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "horsham": {
+      "lat": 51.06314,
+      "lng": -0.32757,
+      "geonameId": 2646557,
+      "name": "Horsham",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "huddersfield": {
+      "lat": 53.64904,
+      "lng": -1.78416,
+      "geonameId": 2646458,
+      "name": "Huddersfield",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "hull": {
+      "lat": 53.7446,
+      "lng": -0.33525,
+      "geonameId": 2645425,
+      "name": "Kingston upon Hull",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "huntingdon": {
+      "lat": 52.33049,
+      "lng": -0.18651,
+      "geonameId": 2646393,
+      "name": "Huntingdon",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "imola": {
+      "lat": 44.35916,
+      "lng": 11.7132,
+      "geonameId": 3175537,
+      "name": "Imola",
+      "countryCode": "IT",
+      "featureCode": "PPLA3"
+    },
+    "ipswich": {
+      "lat": 52.05917,
+      "lng": 1.15545,
+      "geonameId": 2646057,
+      "name": "Ipswich",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "iserlohn": {
+      "lat": 51.37547,
+      "lng": 7.70281,
+      "geonameId": 2895669,
+      "name": "Iserlohn",
+      "countryCode": "DE",
+      "featureCode": "PPL"
+    },
+    "ismaning": {
+      "lat": 48.23333,
+      "lng": 11.68333,
+      "geonameId": 2895643,
+      "name": "Ismaning",
+      "countryCode": "DE",
+      "featureCode": "PPLA4"
+    },
+    "kaiserslautern": {
+      "lat": 49.443,
+      "lng": 7.77161,
+      "geonameId": 2894003,
+      "name": "Kaiserslautern",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "karlsruhe": {
+      "lat": 49.00937,
+      "lng": 8.40444,
+      "geonameId": 2892794,
+      "name": "Karlsruhe",
+      "countryCode": "DE",
+      "featureCode": "PPLA2"
+    },
+    "kettering": {
+      "lat": 52.39836,
+      "lng": -0.72571,
+      "geonameId": 2645753,
+      "name": "Kettering",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "kidderminster": {
+      "lat": 52.38819,
+      "lng": -2.25,
+      "geonameId": 2645724,
+      "name": "Kidderminster",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "kiel": {
+      "lat": 54.32133,
+      "lng": 10.13489,
+      "geonameId": 2891122,
+      "name": "Kiel",
+      "countryCode": "DE",
+      "featureCode": "PPLA"
+    },
+    "kilkenny": {
+      "lat": 52.65417,
+      "lng": -7.25222,
+      "geonameId": 2963398,
+      "name": "Kilkenny",
+      "countryCode": "IE",
+      "featureCode": "PPLA2"
+    },
+    "kings-langley": {
+      "lat": 51.71395,
+      "lng": -0.45044,
+      "geonameId": 2645460,
+      "name": "Kings Langley",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "kirkcaldy": {
+      "lat": 56.11683,
+      "lng": -3.15999,
+      "geonameId": 2645298,
+      "name": "Kirkcaldy",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "konstanz": {
+      "lat": 47.66033,
+      "lng": 9.17582,
+      "geonameId": 2885679,
+      "name": "Konstanz",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "l-hospitalet-de-llobregat": {
+      "lat": 41.35967,
+      "lng": 2.10028,
+      "geonameId": 3120619,
+      "name": "L'Hospitalet de Llobregat",
+      "countryCode": "ES",
+      "featureCode": "PPL"
+    },
+    "las-palmas-de-gran-canaria": {
+      "lat": 28.10178,
+      "lng": -15.41573,
+      "geonameId": 2515270,
+      "name": "Las Palmas de Gran Canaria",
+      "countryCode": "ES",
+      "featureCode": "PPLA"
+    },
+    "leamington-spa": {
+      "lat": 52.2852,
+      "lng": -1.52,
+      "geonameId": 2644737,
+      "name": "Royal Leamington Spa",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "leatherhead": {
+      "lat": 51.29652,
+      "lng": -0.3338,
+      "geonameId": 2644726,
+      "name": "Leatherhead",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "leeds": {
+      "lat": 53.79648,
+      "lng": -1.54785,
+      "geonameId": 2644688,
+      "name": "Leeds",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "leicester": {
+      "lat": 52.6386,
+      "lng": -1.13169,
+      "geonameId": 2644668,
+      "name": "Leicester",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "leipzig": {
+      "lat": 51.33962,
+      "lng": 12.37129,
+      "geonameId": 2879139,
+      "name": "Leipzig",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "leverkusen": {
+      "lat": 51.0303,
+      "lng": 6.98432,
+      "geonameId": 2878234,
+      "name": "Leverkusen",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "limerick": {
+      "lat": 52.66472,
+      "lng": -8.62306,
+      "geonameId": 2962943,
+      "name": "Limerick",
+      "countryCode": "IE",
+      "featureCode": "PPLA2"
+    },
+    "lincoln": {
+      "lat": 53.22683,
+      "lng": -0.53792,
+      "geonameId": 2644487,
+      "name": "Lincoln",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "linlithgow": {
+      "lat": 55.97639,
+      "lng": -3.60364,
+      "geonameId": 2644444,
+      "name": "Linlithgow",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "lisboa": {
+      "lat": 38.72509,
+      "lng": -9.1498,
+      "geonameId": 2267057,
+      "name": "Lisbon",
+      "countryCode": "PT",
+      "featureCode": "PPLC"
+    },
+    "lisburn": {
+      "lat": 54.52337,
+      "lng": -6.03527,
+      "geonameId": 2644411,
+      "name": "Lisburn",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "liverpool": {
+      "lat": 53.41058,
+      "lng": -2.97794,
+      "geonameId": 2644210,
+      "name": "Liverpool",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "livingston": {
+      "lat": 55.90288,
+      "lng": -3.52261,
+      "geonameId": 2644204,
+      "name": "Livingston",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "logrono": {
+      "lat": 42.46615,
+      "lng": -2.45115,
+      "geonameId": 3118150,
+      "name": "Logroño",
+      "countryCode": "ES",
+      "featureCode": "PPLA"
+    },
+    "london": {
+      "lat": 51.50853,
+      "lng": -0.12574,
+      "geonameId": 2643743,
+      "name": "London",
+      "countryCode": "GB",
+      "featureCode": "PPLC"
+    },
+    "loule": {
+      "lat": 37.13772,
+      "lng": -8.01968,
+      "geonameId": 2266988,
+      "name": "Loulé",
+      "countryCode": "PT",
+      "featureCode": "PPLA2"
+    },
+    "luebeck": {
+      "lat": 53.86893,
+      "lng": 10.68729,
+      "geonameId": 2875601,
+      "name": "Lübeck",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "luton": {
+      "lat": 51.87967,
+      "lng": -0.41748,
+      "geonameId": 2643339,
+      "name": "Luton",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "lydney": {
+      "lat": 51.72598,
+      "lng": -2.52605,
+      "geonameId": 2643318,
+      "name": "Lydney",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "madrid": {
+      "lat": 40.4165,
+      "lng": -3.70256,
+      "geonameId": 3117735,
+      "name": "Madrid",
+      "countryCode": "ES",
+      "featureCode": "PPLC"
+    },
+    "maidenhead": {
+      "lat": 51.52279,
+      "lng": -0.71986,
+      "geonameId": 2643186,
+      "name": "Maidenhead",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "maidstone": {
+      "lat": 51.26667,
+      "lng": 0.51667,
+      "geonameId": 2643179,
+      "name": "Maidstone",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "malaga": {
+      "lat": 36.72016,
+      "lng": -4.42034,
+      "geonameId": 2514256,
+      "name": "Málaga",
+      "countryCode": "ES",
+      "featureCode": "PPLA2"
+    },
+    "manchester": {
+      "lat": 53.48095,
+      "lng": -2.23743,
+      "geonameId": 2643123,
+      "name": "Manchester",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "mannheim": {
+      "lat": 49.4891,
+      "lng": 8.46694,
+      "geonameId": 2873891,
+      "name": "Mannheim",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "marbella": {
+      "lat": 36.51543,
+      "lng": -4.88583,
+      "geonameId": 2514169,
+      "name": "Marbella",
+      "countryCode": "ES",
+      "featureCode": "PPLA3"
+    },
+    "margate": {
+      "lat": 51.38132,
+      "lng": 1.38617,
+      "geonameId": 2643044,
+      "name": "Margate",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "marlow": {
+      "lat": 51.56933,
+      "lng": -0.77415,
+      "geonameId": 2643003,
+      "name": "Marlow",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "metzingen": {
+      "lat": 48.53695,
+      "lng": 9.2833,
+      "geonameId": 2871486,
+      "name": "Metzingen",
+      "countryCode": "DE",
+      "featureCode": "PPL"
+    },
+    "middlesbrough": {
+      "lat": 54.57623,
+      "lng": -1.23483,
+      "geonameId": 2642607,
+      "name": "Middlesbrough",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "milan": {
+      "lat": 45.46427,
+      "lng": 9.18951,
+      "geonameId": 3173435,
+      "name": "Milan",
+      "countryCode": "IT",
+      "featureCode": "PPLA"
+    },
+    "milton-keynes": {
+      "lat": 52.04172,
+      "lng": -0.75583,
+      "geonameId": 2642465,
+      "name": "Milton Keynes",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "moenchengladbach": {
+      "lat": 51.18539,
+      "lng": 6.44172,
+      "geonameId": 2869894,
+      "name": "Mönchengladbach",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "molesey": {
+      "lat": 51.39985,
+      "lng": -0.37997,
+      "geonameId": 2634340,
+      "name": "West Molesey",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "monheim-am-rhein": {
+      "lat": 51.09162,
+      "lng": 6.89217,
+      "geonameId": 2869791,
+      "name": "Monheim am Rhein",
+      "countryCode": "DE",
+      "featureCode": "PPL"
+    },
+    "monza": {
+      "lat": 45.58005,
+      "lng": 9.27246,
+      "geonameId": 3172629,
+      "name": "Monza",
+      "countryCode": "IT",
+      "featureCode": "PPLA2"
+    },
+    "munich": {
+      "lat": 48.13743,
+      "lng": 11.57549,
+      "geonameId": 2867714,
+      "name": "Munich",
+      "countryCode": "DE",
+      "featureCode": "PPLA"
+    },
+    "murcia": {
+      "lat": 37.98704,
+      "lng": -1.13004,
+      "geonameId": 2513416,
+      "name": "Murcia",
+      "countryCode": "ES",
+      "featureCode": "PPLA"
+    },
+    "naples": {
+      "lat": 40.85216,
+      "lng": 14.26811,
+      "geonameId": 3172394,
+      "name": "Naples",
+      "countryCode": "IT",
+      "featureCode": "PPLA"
+    },
+    "neu-isenburg": {
+      "lat": 50.04832,
+      "lng": 8.69406,
+      "geonameId": 2864820,
+      "name": "Neu-Isenburg",
+      "countryCode": "DE",
+      "featureCode": "PPL"
+    },
+    "neuss": {
+      "lat": 51.19807,
+      "lng": 6.68504,
+      "geonameId": 2864118,
+      "name": "Neuss",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "neustadt-an-der-weinstrasse": {
+      "lat": 49.35009,
+      "lng": 8.13886,
+      "geonameId": 2864054,
+      "name": "Neustadt an der Weinstraße",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "newbury": {
+      "lat": 51.40148,
+      "lng": -1.32471,
+      "geonameId": 2641689,
+      "name": "Newbury",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "newcastle-upon-tyne": {
+      "lat": 54.97328,
+      "lng": -1.61396,
+      "geonameId": 2641673,
+      "name": "Newcastle upon Tyne",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "newry": {
+      "lat": 54.17841,
+      "lng": -6.33739,
+      "geonameId": 2641581,
+      "name": "Newry",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "northampton": {
+      "lat": 52.25,
+      "lng": -0.88333,
+      "geonameId": 2641430,
+      "name": "Northampton",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "norwich": {
+      "lat": 52.62783,
+      "lng": 1.29834,
+      "geonameId": 2641181,
+      "name": "Norwich",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "nottingham": {
+      "lat": 52.9536,
+      "lng": -1.15047,
+      "geonameId": 2641170,
+      "name": "Nottingham",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "nuremberg": {
+      "lat": 49.45421,
+      "lng": 11.07752,
+      "geonameId": 2861650,
+      "name": "Nuremberg",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "oberhausen": {
+      "lat": 51.47805,
+      "lng": 6.8625,
+      "geonameId": 2860410,
+      "name": "Oberhausen",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "oldenburg": {
+      "lat": 53.14039,
+      "lng": 8.21479,
+      "geonameId": 2857458,
+      "name": "Oldenburg",
+      "countryCode": "DE",
+      "featureCode": "PPLA3"
+    },
+    "oldham": {
+      "lat": 53.54051,
+      "lng": -2.1183,
+      "geonameId": 2641022,
+      "name": "Oldham",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "omagh": {
+      "lat": 54.6,
+      "lng": -7.3,
+      "geonameId": 2640967,
+      "name": "Omagh",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "oviedo": {
+      "lat": 43.36029,
+      "lng": -5.84476,
+      "geonameId": 3114711,
+      "name": "Oviedo",
+      "countryCode": "ES",
+      "featureCode": "PPLA"
+    },
+    "oxford": {
+      "lat": 51.75222,
+      "lng": -1.25596,
+      "geonameId": 2640729,
+      "name": "Oxford",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "padua": {
+      "lat": 45.40797,
+      "lng": 11.88586,
+      "geonameId": 3171728,
+      "name": "Padua",
+      "countryCode": "IT",
+      "featureCode": "PPLA2"
+    },
+    "palermo": {
+      "lat": 38.1166,
+      "lng": 13.3636,
+      "geonameId": 2523920,
+      "name": "Palermo",
+      "countryCode": "IT",
+      "featureCode": "PPLA"
+    },
+    "palma": {
+      "lat": 39.56939,
+      "lng": 2.65024,
+      "geonameId": 2512989,
+      "name": "Palma",
+      "countryCode": "ES",
+      "featureCode": "PPLA"
+    },
+    "paris": {
+      "lat": 48.85341,
+      "lng": 2.3488,
+      "geonameId": 2988507,
+      "name": "Paris",
+      "countryCode": "FR",
+      "featureCode": "PPLC"
+    },
+    "parma": {
+      "lat": 44.79935,
+      "lng": 10.32618,
+      "geonameId": 3171457,
+      "name": "Parma",
+      "countryCode": "IT",
+      "featureCode": "PPLA2"
+    },
+    "piacenza": {
+      "lat": 45.05242,
+      "lng": 9.69342,
+      "geonameId": 3171058,
+      "name": "Piacenza",
+      "countryCode": "IT",
+      "featureCode": "PPLA2"
+    },
+    "plymouth": {
+      "lat": 50.37153,
+      "lng": -4.14305,
+      "geonameId": 2640194,
+      "name": "Plymouth",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "portimao": {
+      "lat": 37.13856,
+      "lng": -8.53775,
+      "geonameId": 2264456,
+      "name": "Portimão",
+      "countryCode": "PT",
+      "featureCode": "PPL"
+    },
+    "porto": {
+      "lat": 41.1485,
+      "lng": -8.61097,
+      "geonameId": 2735943,
+      "name": "Porto",
+      "countryCode": "PT",
+      "featureCode": "PPLA"
+    },
+    "portsmouth": {
+      "lat": 50.79899,
+      "lng": -1.09125,
+      "geonameId": 2639996,
+      "name": "Portsmouth",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "potters-bar": {
+      "lat": 51.69353,
+      "lng": -0.17835,
+      "geonameId": 2639970,
+      "name": "Potters Bar",
+      "countryCode": "GB",
+      "featureCode": "PPLA4"
+    },
+    "preston": {
+      "lat": 53.76282,
+      "lng": -2.70452,
+      "geonameId": 2639912,
+      "name": "Preston",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "ras-al-khaimah": {
+      "lat": 25.78953,
+      "lng": 55.9432,
+      "geonameId": 291074,
+      "name": "Ras Al Khaimah",
+      "countryCode": "AE",
+      "featureCode": "PPLA"
+    },
+    "ratingen": {
+      "lat": 51.29724,
+      "lng": 6.84929,
+      "geonameId": 2850174,
+      "name": "Ratingen",
+      "countryCode": "DE",
+      "featureCode": "PPLA4"
+    },
+    "reading": {
+      "lat": 51.45625,
+      "lng": -0.97113,
+      "geonameId": 2639577,
+      "name": "Reading",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "redhill": {
+      "lat": 51.24048,
+      "lng": -0.17044,
+      "geonameId": 2639545,
+      "name": "Redhill",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "regensburg": {
+      "lat": 49.01513,
+      "lng": 12.10161,
+      "geonameId": 2849483,
+      "name": "Regensburg",
+      "countryCode": "DE",
+      "featureCode": "PPLA2"
+    },
+    "reggio-calabria": {
+      "lat": 38.11047,
+      "lng": 15.66129,
+      "geonameId": 2523630,
+      "name": "Reggio Calabria",
+      "countryCode": "IT",
+      "featureCode": "PPLA2"
+    },
+    "reigate": {
+      "lat": 51.23736,
+      "lng": -0.20582,
+      "geonameId": 2639506,
+      "name": "Reigate",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "rickmansworth": {
+      "lat": 51.63898,
+      "lng": -0.47718,
+      "geonameId": 2639381,
+      "name": "Rickmansworth",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "rome": {
+      "lat": 41.89193,
+      "lng": 12.51133,
+      "geonameId": 3169070,
+      "name": "Rome",
+      "countryCode": "IT",
+      "featureCode": "PPLC"
+    },
+    "sabadell": {
+      "lat": 41.54329,
+      "lng": 2.10942,
+      "geonameId": 3111199,
+      "name": "Sabadell",
+      "countryCode": "ES",
+      "featureCode": "PPLA3"
+    },
+    "salerno": {
+      "lat": 40.67545,
+      "lng": 14.79328,
+      "geonameId": 3168673,
+      "name": "Salerno",
+      "countryCode": "IT",
+      "featureCode": "PPLA2"
+    },
+    "salisbury": {
+      "lat": 51.06931,
+      "lng": -1.79569,
+      "geonameId": 2638664,
+      "name": "Salisbury",
+      "countryCode": "GB",
+      "featureCode": "PPLA3"
+    },
+    "san-sebastian": {
+      "lat": 43.31283,
+      "lng": -1.97499,
+      "geonameId": 3110044,
+      "name": "Donostia / San Sebastián",
+      "countryCode": "ES",
+      "featureCode": "PPLA2"
+    },
+    "santander": {
+      "lat": 43.46589,
+      "lng": -3.80493,
+      "geonameId": 3109718,
+      "name": "Santander",
+      "countryCode": "ES",
+      "featureCode": "PPLA"
+    },
+    "sao-joao-da-madeira": {
+      "lat": 40.9007,
+      "lng": -8.4902,
+      "geonameId": 2734484,
+      "name": "São João da Madeira",
+      "countryCode": "PT",
+      "featureCode": "PPL"
+    },
+    "schwetzingen": {
+      "lat": 49.38217,
+      "lng": 8.5823,
+      "geonameId": 2834240,
+      "name": "Schwetzingen",
+      "countryCode": "DE",
+      "featureCode": "PPL"
+    },
+    "segrate": {
+      "lat": 45.49185,
+      "lng": 9.29812,
+      "geonameId": 3166808,
+      "name": "Segrate",
+      "countryCode": "IT",
+      "featureCode": "PPLA3"
+    },
+    "sevilla": {
+      "lat": 37.38283,
+      "lng": -5.97317,
+      "geonameId": 2510911,
+      "name": "Sevilla",
+      "countryCode": "ES",
+      "featureCode": "PPLA"
+    },
+    "sharjah": {
+      "lat": 25.3342,
+      "lng": 55.41221,
+      "geonameId": 292672,
+      "name": "Sharjah",
+      "countryCode": "AE",
+      "featureCode": "PPLA"
+    },
+    "sheffield": {
+      "lat": 53.38297,
+      "lng": -1.4659,
+      "geonameId": 2638077,
+      "name": "Sheffield",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "shipley": {
+      "lat": 53.83333,
+      "lng": -1.76667,
+      "geonameId": 2637958,
+      "name": "Shipley",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "shrewsbury": {
+      "lat": 52.71009,
+      "lng": -2.75208,
+      "geonameId": 2637891,
+      "name": "Shrewsbury",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "slough": {
+      "lat": 51.50949,
+      "lng": -0.59541,
+      "geonameId": 2637627,
+      "name": "Slough",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "solihull": {
+      "lat": 52.41426,
+      "lng": -1.78094,
+      "geonameId": 2637546,
+      "name": "Solihull",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "southampton": {
+      "lat": 50.90395,
+      "lng": -1.40428,
+      "geonameId": 2637487,
+      "name": "Southampton",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "southend-on-sea": {
+      "lat": 51.53782,
+      "lng": 0.71433,
+      "geonameId": 2637433,
+      "name": "Southend-on-Sea",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "st-albans": {
+      "lat": 51.75,
+      "lng": -0.33333,
+      "geonameId": 2638867,
+      "name": "St Albans",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "st-neots": {
+      "lat": 52.21667,
+      "lng": -0.26667,
+      "geonameId": 2638717,
+      "name": "Saint Neots",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "staines-upon-thames": {
+      "lat": 51.43092,
+      "lng": -0.50606,
+      "geonameId": 2637126,
+      "name": "Staines",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "stansted": {
+      "lat": 51.9,
+      "lng": 0.2,
+      "geonameId": 2637052,
+      "name": "Stansted Mountfitchet",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "stratford-upon-avon": {
+      "lat": 52.19166,
+      "lng": -1.70734,
+      "geonameId": 2636713,
+      "name": "Stratford-upon-Avon",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "stuttgart": {
+      "lat": 48.78232,
+      "lng": 9.17702,
+      "geonameId": 2825297,
+      "name": "Stuttgart",
+      "countryCode": "DE",
+      "featureCode": "PPLA"
+    },
+    "sunderland": {
+      "lat": 54.90465,
+      "lng": -1.38222,
+      "geonameId": 2636531,
+      "name": "Sunderland",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "swansea": {
+      "lat": 51.62079,
+      "lng": -3.94323,
+      "geonameId": 2636432,
+      "name": "Swansea",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "swindon": {
+      "lat": 51.55797,
+      "lng": -1.78116,
+      "geonameId": 2636389,
+      "name": "Swindon",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "taunton": {
+      "lat": 51.01494,
+      "lng": -3.10293,
+      "geonameId": 2636177,
+      "name": "Taunton",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "teltow": {
+      "lat": 52.39719,
+      "lng": 13.2762,
+      "geonameId": 2823567,
+      "name": "Teltow",
+      "countryCode": "DE",
+      "featureCode": "PPLA4"
+    },
+    "thornaby": {
+      "lat": 54.53333,
+      "lng": -1.3,
+      "geonameId": 2636005,
+      "name": "Thornaby-on-Tees",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "toledo": {
+      "lat": 39.8581,
+      "lng": -4.02263,
+      "geonameId": 2510409,
+      "name": "Toledo",
+      "countryCode": "ES",
+      "featureCode": "PPLA"
+    },
+    "trieste": {
+      "lat": 45.64953,
+      "lng": 13.77678,
+      "geonameId": 3165185,
+      "name": "Trieste",
+      "countryCode": "IT",
+      "featureCode": "PPLA"
+    },
+    "tunbridge-wells": {
+      "lat": 51.13321,
+      "lng": 0.26256,
+      "geonameId": 2639022,
+      "name": "Royal Tunbridge Wells",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "turin": {
+      "lat": 45.07049,
+      "lng": 7.68682,
+      "geonameId": 3165524,
+      "name": "Turin",
+      "countryCode": "IT",
+      "featureCode": "PPLA"
+    },
+    "unterfoehring": {
+      "lat": 48.19253,
+      "lng": 11.64293,
+      "geonameId": 2819568,
+      "name": "Unterföhring",
+      "countryCode": "DE",
+      "featureCode": "PPLA4"
+    },
+    "utrecht": {
+      "lat": 52.09083,
+      "lng": 5.12222,
+      "geonameId": 2745912,
+      "name": "Utrecht",
+      "countryCode": "NL",
+      "featureCode": "PPLA"
+    },
+    "valencia": {
+      "lat": 39.47391,
+      "lng": -0.37966,
+      "geonameId": 2509954,
+      "name": "Valencia",
+      "countryCode": "ES",
+      "featureCode": "PPLA"
+    },
+    "vera": {
+      "lat": 37.24345,
+      "lng": -1.85905,
+      "geonameId": 2509693,
+      "name": "Vera",
+      "countryCode": "ES",
+      "featureCode": "PPLA3"
+    },
+    "verona": {
+      "lat": 45.43854,
+      "lng": 10.9938,
+      "geonameId": 3164527,
+      "name": "Verona",
+      "countryCode": "IT",
+      "featureCode": "PPLA2"
+    },
+    "vienna": {
+      "lat": 48.20849,
+      "lng": 16.37208,
+      "geonameId": 2761369,
+      "name": "Vienna",
+      "countryCode": "AT",
+      "featureCode": "PPLC"
+    },
+    "vila-nova-de-famalicao": {
+      "lat": 41.40797,
+      "lng": -8.51978,
+      "geonameId": 2732547,
+      "name": "Vila Nova de Famalicão",
+      "countryCode": "PT",
+      "featureCode": "PPLA2"
+    },
+    "wakefield": {
+      "lat": 53.68331,
+      "lng": -1.49768,
+      "geonameId": 2634910,
+      "name": "Wakefield",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "wallasey": {
+      "lat": 53.42324,
+      "lng": -3.06497,
+      "geonameId": 2634873,
+      "name": "Wallasey",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "walldorf": {
+      "lat": 49.30637,
+      "lng": 8.64236,
+      "geonameId": 2814670,
+      "name": "Walldorf",
+      "countryCode": "DE",
+      "featureCode": "PPL"
+    },
+    "walton-on-thames": {
+      "lat": 51.38678,
+      "lng": -0.41319,
+      "geonameId": 2634825,
+      "name": "Walton-on-Thames",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "warrington": {
+      "lat": 53.39254,
+      "lng": -2.58024,
+      "geonameId": 2634739,
+      "name": "Warrington",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "waterford": {
+      "lat": 52.25833,
+      "lng": -7.11194,
+      "geonameId": 2960992,
+      "name": "Waterford",
+      "countryCode": "IE",
+      "featureCode": "PPLA2"
+    },
+    "watford": {
+      "lat": 51.65531,
+      "lng": -0.39602,
+      "geonameId": 2634677,
+      "name": "Watford",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "watlington": {
+      "lat": 51.64327,
+      "lng": -1.00448,
+      "geonameId": 2634671,
+      "name": "Watlington",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "welwyn-garden-city": {
+      "lat": 51.80174,
+      "lng": -0.20691,
+      "geonameId": 2634552,
+      "name": "Welwyn Garden City",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "wexford": {
+      "lat": 52.33417,
+      "lng": -6.4575,
+      "geonameId": 2960964,
+      "name": "Wexford",
+      "countryCode": "IE",
+      "featureCode": "PPLA2"
+    },
+    "wiesbaden": {
+      "lat": 50.08601,
+      "lng": 8.24435,
+      "geonameId": 2809346,
+      "name": "Wiesbaden",
+      "countryCode": "DE",
+      "featureCode": "PPLA"
+    },
+    "wigan": {
+      "lat": 53.54296,
+      "lng": -2.63706,
+      "geonameId": 2633948,
+      "name": "Wigan",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "wilmslow": {
+      "lat": 53.32803,
+      "lng": -2.23148,
+      "geonameId": 2633883,
+      "name": "Wilmslow",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "winchester": {
+      "lat": 51.06513,
+      "lng": -1.3187,
+      "geonameId": 2633858,
+      "name": "Winchester",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "windsor": {
+      "lat": 51.48333,
+      "lng": -0.6,
+      "geonameId": 2633842,
+      "name": "Windsor",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "woking": {
+      "lat": 51.31903,
+      "lng": -0.55893,
+      "geonameId": 2633709,
+      "name": "Woking",
+      "countryCode": "GB",
+      "featureCode": "PPL"
+    },
+    "wokingham": {
+      "lat": 51.4112,
+      "lng": -0.83565,
+      "geonameId": 2633708,
+      "name": "Wokingham",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "wolverhampton": {
+      "lat": 52.58547,
+      "lng": -2.12296,
+      "geonameId": 2633691,
+      "name": "Wolverhampton",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "worcester": {
+      "lat": 52.18935,
+      "lng": -2.22001,
+      "geonameId": 2633563,
+      "name": "Worcester",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "york": {
+      "lat": 53.95763,
+      "lng": -1.08271,
+      "geonameId": 2633352,
+      "name": "York",
+      "countryCode": "GB",
+      "featureCode": "PPLA2"
+    },
+    "zaragoza": {
+      "lat": 41.65606,
+      "lng": -0.87734,
+      "geonameId": 3104324,
+      "name": "Zaragoza",
+      "countryCode": "ES",
+      "featureCode": "PPLA"
+    },
+    "zurich": {
+      "lat": 47.36667,
+      "lng": 8.55,
+      "geonameId": 2657896,
+      "name": "Zürich",
+      "countryCode": "CH",
+      "featureCode": "PPLA"
+    }
+  }
+}

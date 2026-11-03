@@ -1,0 +1,54 @@
+{
+  "name": "leaflet-coworkingview",
+  "version": "0.1.0",
+  "description": "Leaflet layer for the CoworkingView Price Index: one marker per city with the median.",
+  "homepage": "https://coworkingview.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coworkingview/flex-office-data.git",
+    "directory": "integrations/leaflet"
+  },
+  "bugs": {
+    "url": "https://github.com/coworkingview/flex-office-data/issues"
+  },
+  "author": "CoworkingView (https://coworkingview.com)",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/leaflet-coworkingview.js",
+  "module": "./src/index.js",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./dist/leaflet-coworkingview.js",
+      "default": "./src/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "dist",
+    "index.html",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "leaflet",
+    "leaflet-plugin",
+    "coworkingview",
+    "price-index"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "pretest": "node build.mjs",
+    "test": "vitest run",
+    "prepublishOnly": "node -e \"console.error('leaflet-coworkingview is not published to npm'); process.exit(1)\""
+  },
+  "peerDependencies": {
+    "leaflet": "^1.9.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.10",
+    "jsdom": "^26.1.0",
+    "leaflet": "^1.9.4",
+    "vitest": "^3.2.4"
+  }
+}

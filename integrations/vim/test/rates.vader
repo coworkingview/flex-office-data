@@ -1,0 +1,190 @@
+" Vader tests for coworkingview.vim. Run from the repository root via test/run.sh.
+
+Before:
+  let $COWORKINGVIEW_HTTP_STATUS = '200'
+  let $COWORKINGVIEW_FIXTURE = 'spec/fixtures/market_rates.json'
+  let $COWORKINGVIEW_BODY = ''
+  let $COWORKINGVIEW_FAIL_FIRST = ''
+  let $COWORKINGVIEW_RETRY_AFTER = ''
+  let $COWORKINGVIEW_RATELIMIT_RESET = ''
+  let $COWORKINGVIEW_CURL_LOG = tempname()
+  let $COWORKINGVIEW_CURL_COUNT = tempname()
+  unlet! g:coworkingview_api_url
+  unlet! g:coworkingview_cache_seconds
+  call coworkingview#reset()
+  let nr = bufnr('^coworkingview://rates$')
+  if nr != -1
+    execute 'bwipeout!' nr
+  endif
+
+After:
+  let $COWORKINGVIEW_HTTP_STATUS = '200'
+  let $COWORKINGVIEW_BODY = ''
+  let $COWORKINGVIEW_FAIL_FIRST = ''
+  let $COWORKINGVIEW_RETRY_AFTER = ''
+  unlet! g:coworkingview_api_url
+  unlet! g:coworkingview_cache_seconds
+  let nr = bufnr('^coworkingview://rates$')
+  if nr != -1
+    execute 'bwipeout!' nr
+  endif
+
+Execute (loading the plugin does not call curl):
+  if exists('g:coworkingview_test_startup_log')
+    Assert !filereadable(g:coworkingview_test_startup_log)
+  endif
+  Assert exists(':CoworkingRate') == 2
+
+Execute (fixture rows match the Price Index columns):
+  let payload = json_decode(join(readfile('spec/fixtures/market_rates.json'), "\n"))
+  let rows = coworkingview#rows(payload.data)
+  AssertEqual 13, len(rows)
+  let got = []
+  for row in rows
+    Assert row.city_slug !=# 'example-town'
+    if row.city_slug ==# 'berlin'
+      call add(got, row.product . '|' . row.unit . '|' . printf('%.0f', row.median + 0.0) . '|' . printf('%d', float2nr(row.sample_size + 0.0)) . '|' . (row.low_confidence ? 'true' : 'false'))
+    endif
+  endfor
+  AssertEqual ['flex_desk|month|214|72|false', 'fix_desk|month|310|60|false', 'private_office|month|480|59|false', 'day_pass|day|35|59|false', 'meeting_room|hour|32|79|false'], got
+
+Execute (figures win over byType, and eventSpace becomes event_space):
+  let data = {'asOf': '2026-01-01T00:00:00.000Z', 'attribution': 'Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).', 'licenseUrl': 'https://creativecommons.org/licenses/by/4.0/', 'cities': [{'city': {'slug': 'test-city', 'name': 'Test City'}, 'countryCode': 'DE', 'currency': 'EUR', 'figures': [{'optionType': 'flex_desk', 'median': {'amount': 10, 'currency': 'EUR'}, 'sampleSize': 12}], 'byType': [{'optionType': 'flex_desk', 'median': {'amount': 99, 'currency': 'EUR'}, 'sampleSize': 1}], 'eventSpace': {'median': {'amount': 80, 'currency': 'EUR'}, 'sampleSize': 3}}]}
+  let lines = coworkingview#lines('Test City', data)
+  let text = join(lines, "\n")
+  Assert match(text, 'flex_desk') >= 0
+  Assert match(text, '10 EUR') >= 0
+  Assert match(text, '99 EUR') < 0
+  Assert match(text, 'event_space') >= 0
+  Assert match(text, 'hour') >= 0
+  Assert match(text, '80 EUR') >= 0
+  Assert match(text, 'low_confidence') >= 0
+  AssertEqual data.attribution, lines[len(lines) - 1]
+  let flex_at = match(text, 'flex_desk')
+  let event_at = match(text, 'event_space')
+  Assert flex_at >= 0
+  Assert event_at > flex_at
+
+Execute (empty figures fall back to byType):
+  let data = {'asOf': '2026-01-01T00:00:00.000Z', 'cities': [{'city': {'slug': 'test-city', 'name': 'Test City'}, 'countryCode': 'DE', 'currency': 'EUR', 'figures': [], 'byType': [{'optionType': 'fix_desk', 'median': {'amount': 12.5, 'currency': 'EUR'}, 'sampleSize': 4}]}]}
+  let lines = coworkingview#lines('test-city', data)
+  let text = join(lines, "\n")
+  Assert match(text, 'fix_desk') >= 0
+  Assert match(text, '12.5 EUR') >= 0
+  Assert match(text, 'month') >= 0
+  Assert match(lines[len(lines) - 1], 'CC BY 4.0') >= 0
+  Assert match(lines[len(lines) - 1], 'https://creativecommons.org/licenses/by/4.0/') >= 0
+
+Execute (retry wait is capped at 10 seconds):
+  AssertEqual '0', printf('%.0f', coworkingview#retry_wait({'retry-after': '0'}))
+  AssertEqual '3', printf('%.0f', coworkingview#retry_wait({'Retry-After': '3'}))
+  AssertEqual '10', printf('%.0f', coworkingview#retry_wait({'ratelimit-reset': '60'}))
+  AssertEqual '2', printf('%.0f', coworkingview#retry_wait({}))
+  AssertEqual '4', printf('%.0f', coworkingview#retry_wait({'retry-after': 'nope', 'ratelimit-reset': '4'}))
+
+Execute (completion lists published city slugs):
+  let all = coworkingview#complete('', ':CoworkingRate ', 16)
+  AssertEqual ['abu-dhabi', 'berlin', 'madrid'], all
+  AssertEqual ['madrid'], coworkingview#complete('mad', ':CoworkingRate mad', 19)
+  AssertEqual ['berlin'], coworkingview#complete('Ber', ':CoworkingRate Ber', 19)
+  AssertEqual ['abu-dhabi'], coworkingview#complete('Abu', ':CoworkingRate Abu', 19)
+  AssertEqual [], coworkingview#complete('exam', ':CoworkingRate exam', 20)
+
+Execute (:CoworkingRate shows medians and the CC BY 4.0 attribution):
+  CoworkingRate berlin
+  let payload = json_decode(join(readfile('spec/fixtures/market_rates.json'), "\n"))
+  AssertEqual 'Berlin (berlin)', getline(1)
+  Assert match(getline(2), 'country_code: DE') >= 0
+  Assert match(getline(2), 'currency: EUR') >= 0
+  Assert match(getline(3), 'as_of: ' . payload.data.asOf) >= 0
+  let text = join(getline(1, '$'), "\n")
+  Assert match(text, 'flex_desk') >= 0
+  Assert match(text, '214 EUR') >= 0
+  Assert match(text, 'meeting_room') >= 0
+  AssertEqual payload.data.attribution, getline('$')
+  Assert match(getline('$'), 'CC BY 4.0') >= 0
+  let log = join(readfile($COWORKINGVIEW_CURL_LOG), "\n")
+  Assert match(log, 'https://api.coworkingview.com/v1/market/rates?locale=en') >= 0
+  Assert match(log, 'coworkingview-vim/0.1.0 (+https://github.com/coworkingview/flex-office-data)') >= 0
+  Assert match(log, 'Accept: application/json') >= 0
+
+Execute (a city name resolves to the same slug):
+  call coworkingview#reset()
+  CoworkingRate Berlin
+  AssertEqual 'Berlin (berlin)', getline(1)
+
+Execute (one response is reused for a second city):
+  call writefile(['0'], $COWORKINGVIEW_CURL_COUNT)
+  call coworkingview#reset()
+  call coworkingview#rate('berlin')
+  call coworkingview#rate('madrid')
+  AssertEqual 1, str2nr(readfile($COWORKINGVIEW_CURL_COUNT)[0])
+  Assert match(join(getline(1, '$'), "\n"), '260 EUR') >= 0
+
+Execute (cache seconds 0 refetches):
+  let g:coworkingview_cache_seconds = 0
+  call writefile(['0'], $COWORKINGVIEW_CURL_COUNT)
+  call coworkingview#reset()
+  call coworkingview#rate('berlin')
+  call coworkingview#rate('berlin')
+  AssertEqual 2, str2nr(readfile($COWORKINGVIEW_CURL_COUNT)[0])
+
+Execute (g:coworkingview_api_url is appended with the rates path):
+  let g:coworkingview_api_url = 'https://example.test/base/'
+  call coworkingview#reset()
+  call writefile([], $COWORKINGVIEW_CURL_LOG)
+  call coworkingview#rate('abu-dhabi')
+  let log = join(readfile($COWORKINGVIEW_CURL_LOG), "\n")
+  Assert match(log, 'https://example.test/base/v1/market/rates?locale=en') >= 0
+  Assert match(log, '/v1/market/rates/v1/') < 0
+  Assert match(getline(1), 'Abu Dhabi (abu-dhabi)') >= 0
+  Assert match(join(getline(1, '$'), "\n"), '1400 AED') >= 0
+
+Execute (an unpublished city is an error and does not open the buffer):
+  let out = execute('CoworkingRate example-town')
+  Assert match(out, 'no published rates') >= 0
+  Assert bufnr('^coworkingview://rates$') == -1
+
+Execute (HTTP 400 is the problem document and is not retried):
+  let $COWORKINGVIEW_HTTP_STATUS = '400'
+  let $COWORKINGVIEW_FIXTURE = 'spec/fixtures/error_validation.json'
+  call writefile(['0'], $COWORKINGVIEW_CURL_COUNT)
+  call coworkingview#reset()
+  AssertThrows call coworkingview#rate('berlin')
+  Assert match(g:vader_exception, '400') >= 0
+  Assert match(g:vader_exception, 'VALIDATION_FAILED') >= 0
+  Assert match(g:vader_exception, 'Validation failed') >= 0
+  AssertEqual 1, str2nr(readfile($COWORKINGVIEW_CURL_COUNT)[0])
+
+Execute (HTTP 503 is tried once more):
+  let $COWORKINGVIEW_HTTP_STATUS = '503'
+  let $COWORKINGVIEW_RETRY_AFTER = '0'
+  call writefile(['0'], $COWORKINGVIEW_CURL_COUNT)
+  call coworkingview#reset()
+  AssertThrows call coworkingview#rate('berlin')
+  Assert match(g:vader_exception, '503') >= 0
+  AssertEqual 2, str2nr(readfile($COWORKINGVIEW_CURL_COUNT)[0])
+
+Execute (HTTP 429 retries once and then shows the rates):
+  let $COWORKINGVIEW_FAIL_FIRST = '1'
+  let $COWORKINGVIEW_RETRY_AFTER = '0'
+  call writefile(['0'], $COWORKINGVIEW_CURL_COUNT)
+  call coworkingview#reset()
+  call coworkingview#rate('berlin')
+  AssertEqual 2, str2nr(readfile($COWORKINGVIEW_CURL_COUNT)[0])
+  AssertEqual 'Berlin (berlin)', getline(1)
+  Assert match(getline('$'), 'CC BY 4.0') >= 0
+
+Execute (a non-JSON body is BAD_RESPONSE):
+  let $COWORKINGVIEW_HTTP_STATUS = '200'
+  let $COWORKINGVIEW_BODY = 'not-json'
+  call coworkingview#reset()
+  AssertThrows call coworkingview#rate('berlin')
+  Assert match(g:vader_exception, 'BAD_RESPONSE') >= 0
+
+Execute (a connection failure is CONNECTION):
+  let $COWORKINGVIEW_HTTP_STATUS = '000'
+  call coworkingview#reset()
+  AssertThrows call coworkingview#rate('berlin')
+  Assert match(g:vader_exception, 'CONNECTION') >= 0
+  Assert match(g:vader_exception, '0 CONNECTION') >= 0

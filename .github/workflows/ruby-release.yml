@@ -1,0 +1,98 @@
+name: Release Ruby gem
+
+# Publishes integrations/ruby to rubygems.org with Trusted Publishing.
+# No API key and no GitHub environment: the pending publisher is bound to
+# workflow ruby-release.yml with an empty environment.
+#
+# rubygems/configure-rubygems-credentials v2.1.0
+# (dc5a8d8553e6ee01fc26761a49e99e733d17954a) and rubygems/release-gem v1.4.1
+# post only {jwt}. RubyGems rejects the first push of a gem unless the
+# exchange names the owning account. This workflow does that exchange and
+# passes owner 255507, the immutable id of the coworkingview account.
+
+on:
+  push:
+    tags: ["ruby-v*"]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  push:
+    name: Push coworkingview to RubyGems
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/ruby
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+
+      - name: Configure RubyGems trusted publishing credentials
+        working-directory: ${{ github.workspace }}
+        env:
+          RUBYGEMS_OWNER: "255507"
+        run: |
+          ruby <<'RUBY'
+          require "fileutils"
+          require "json"
+          require "net/http"
+          require "uri"
+
+          def https(uri, req)
+            Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
+          end
+
+          request_url = ENV.fetch("ACTIONS_ID_TOKEN_REQUEST_URL")
+          separator = request_url.include?("?") ? "&" : "?"
+          oidc_uri = URI("#{request_url}#{separator}audience=rubygems.org")
+          oidc_req = Net::HTTP::Get.new(oidc_uri)
+          oidc_req["Authorization"] = "bearer #{ENV.fetch("ACTIONS_ID_TOKEN_REQUEST_TOKEN")}"
+          oidc_res = https(oidc_uri, oidc_req)
+          abort "GitHub OIDC token request failed: HTTP #{oidc_res.code}" unless oidc_res.is_a?(Net::HTTPSuccess)
+          jwt = JSON.parse(oidc_res.body).fetch("value")
+
+          exchange_uri = URI("https://rubygems.org/api/v1/oidc/trusted_publisher/exchange_token")
+          exchange_req = Net::HTTP::Post.new(exchange_uri)
+          exchange_req["Content-Type"] = "application/json"
+          exchange_req["Accept"] = "application/json"
+          exchange_req.body = JSON.generate(jwt: jwt, owner: ENV.fetch("RUBYGEMS_OWNER"))
+          exchange_res = https(exchange_uri, exchange_req)
+          begin
+            body = JSON.parse(exchange_res.body)
+          rescue JSON::ParserError
+            body = {"raw" => exchange_res.body}
+          end
+          body = {} unless body.is_a?(Hash)
+          unless exchange_res.code == "201"
+            body.delete("rubygems_api_key")
+            abort "RubyGems token exchange failed: HTTP #{exchange_res.code} #{JSON.generate(body)}"
+          end
+
+          key = body.fetch("rubygems_api_key")
+          puts "::add-mask::#{key}"
+          puts "Asserted RubyGems owner: #{body["owner"]}"
+
+          dir = File.expand_path("~/.gem")
+          FileUtils.mkdir_p(dir)
+          path = File.join(dir, "credentials")
+          File.write(path, "---\n:rubygems_api_key: #{key}\n")
+          File.chmod(0o600, path)
+
+          File.open(ENV.fetch("GITHUB_ENV"), "a") do |file|
+            file.puts "GEM_HOST_API_KEY<<EOF"
+            file.puts key
+            file.puts "EOF"
+          end
+          RUBY
+
+      - name: Build the gem
+        run: gem build coworkingview.gemspec
+
+      - name: Push the gem
+        run: gem push coworkingview-0.1.0.gem

@@ -1,0 +1,86 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "airflow-provider-coworkingview"
+version = "0.1.0"
+description = "Apache Airflow provider for the CoworkingView Price Index: flexible-office rates for a city, from the public API, into XCom or a JSON file."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "CoworkingView", email = "info@coworkingview.com" }]
+maintainers = [{ name = "CoworkingView", email = "info@coworkingview.com" }]
+keywords = [
+    "airflow",
+    "airflow-provider",
+    "coworking",
+    "flexible office",
+    "price index",
+    "open data",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Apache Airflow",
+    "Framework :: Apache Airflow :: Provider",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business",
+]
+dependencies = ["apache-airflow>=2.10.0"]
+
+[project.optional-dependencies]
+# pytest is pinned to the version in Airflow 2.10.5's constraint file so a
+# dev install does not upgrade Airflow's pluggy. ruff is pinned to the
+# version this tree was formatted with.
+dev = ["pytest==8.3.4", "ruff==0.17.3", "build>=1.2"]
+
+[project.urls]
+Homepage = "https://coworkingview.com"
+Documentation = "https://github.com/coworkingview/flex-office-data/tree/main/integrations/airflow#readme"
+Source = "https://github.com/coworkingview/flex-office-data"
+Issues = "https://github.com/coworkingview/flex-office-data/issues"
+"Price Index" = "https://coworkingview.com/en/tools/price-index"
+
+# Airflow discovers the provider through this entry point. The callable
+# returns the metadata dictionary; it does not import the hook.
+[project.entry-points.apache_airflow_provider]
+provider_info = "coworkingview_provider.get_provider_info:get_provider_info"
+
+[tool.hatch.build.targets.wheel]
+packages = ["coworkingview_provider"]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["/.gitignore"]
+include = [
+    "coworkingview_provider",
+    "tests",
+    "example_dags",
+    "README.md",
+    "LICENSE",
+    "ECOSYSTEM-ENTRY.md",
+    "pyproject.toml",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["coworkingview_provider", "tests", "example_dags"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["coworkingview_provider", "tests"]

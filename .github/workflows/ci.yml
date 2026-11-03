@@ -600,6 +600,54 @@ jobs:
       - run: npm run build
       - run: git diff --exit-code -- dist
 
+  mpl-coworkingview:
+    name: mpl-coworkingview
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/matplotlib
+    env:
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: integrations/matplotlib/pyproject.toml
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+          python -m pip install build
+      - name: Lint
+        run: |
+          python -m ruff check .
+          python -m ruff format --check .
+      - name: Test
+        run: python -m pytest
+      - name: Build the sdist and wheel
+        run: python -m build
+      - name: Check wheel metadata
+        run: |
+          python -m pip install --force-reinstall --no-deps dist/*.whl
+          python - <<'PY'
+          from importlib.metadata import distribution
+
+          dist = distribution("mpl-coworkingview")
+          assert dist.version == "0.1.0", dist.version
+          urls = dist.metadata.get_all("Project-URL") or []
+          assert "Homepage, https://coworkingview.com" in urls, urls
+          assert "Source, https://github.com/coworkingview/flex-office-data" in urls, urls
+          assert (
+              "Documentation, https://github.com/coworkingview/flex-office-data/tree/main/integrations/matplotlib#readme"
+              in urls
+          ), urls
+          classifiers = dist.metadata.get_all("Classifier") or []
+          assert "Framework :: Matplotlib" in classifiers, classifiers
+          print(f"version={dist.version}")
+          PY
+
   vim:
     name: Vim plugin (${{ matrix.editor }})
     runs-on: ${{ matrix.os }}

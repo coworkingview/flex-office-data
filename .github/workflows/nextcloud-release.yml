@@ -1,0 +1,72 @@
+name: Release Nextcloud app
+
+# Pushing a tag `nextcloud-v<version>` builds the App Store tarball and
+# attaches coworkingview.tar.gz to the GitHub release for that tag.
+# workflow_dispatch builds and checks the same archive without publishing
+# unless the ref is a nextcloud-v* tag.
+
+on:
+  push:
+    tags: ["nextcloud-v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish coworkingview.tar.gz
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/nextcloud/coworkingview
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: integrations/nextcloud/coworkingview/package-lock.json
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Stage the App Store tarball
+        run: |
+          set -euo pipefail
+          rm -rf build
+          mkdir -p build/coworkingview
+          cp -a appinfo lib css img l10n js LICENSE README.md CHANGELOG.md build/coworkingview/
+          find build/coworkingview -name '*.map' -delete
+          tar -czf coworkingview.tar.gz -C build coworkingview
+          python3 bin/check-tarball.py coworkingview.tar.gz
+
+      - name: Create GitHub release
+        if: startsWith(github.ref, 'refs/tags/nextcloud-v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#nextcloud-v}"
+          info=$(sed -n 's:.*<version>\(.*\)</version>.*:\1:p' appinfo/info.xml | head -1)
+          if [[ "$info" != "$version" ]]; then
+            echo "::error::tag nextcloud-v${version} does not match appinfo/info.xml version ${info}"
+            exit 1
+          fi
+          awk -v v="$version" '
+            $0 ~ "^## " v "$" { on = 1; next }
+            on && /^## / { exit }
+            on { print }
+          ' CHANGELOG.md > "$RUNNER_TEMP/notes.md"
+          if ! grep -q '[^[:space:]]' "$RUNNER_TEMP/notes.md"; then
+            echo "CoworkingView Nextcloud app ${version}." > "$RUNNER_TEMP/notes.md"
+          fi
+          printf '\nDownload: https://github.com/%s/releases/download/%s/coworkingview.tar.gz\n' \
+            "$GITHUB_REPOSITORY" "$GITHUB_REF_NAME" >> "$RUNNER_TEMP/notes.md"
+          gh release create "$GITHUB_REF_NAME" coworkingview.tar.gz \
+            --title "Nextcloud app ${version}" \
+            --notes-file "$RUNNER_TEMP/notes.md" \
+            --verify-tag

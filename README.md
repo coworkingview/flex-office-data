@@ -10,6 +10,7 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 | Python | [`coworkingview`](python/) | `pip install coworkingview` · `conda install -c conda-forge coworkingview` |
 | R | [`coworkingview`](r/) | `install.packages("coworkingview")` |
 | Java | [`coworkingview`](integrations/java/) | Maven Central `io.github.coworkingview:coworkingview` |
+| Ruby | [`coworkingview`](integrations/ruby/) | Build from `integrations/ruby` (not on RubyGems) |
 | OCaml | [`coworkingview`](clients/ocaml/) | `opam install coworkingview` |
 | Swift | [`CoworkingView`](clients/swift/) | Swift Package Manager · CocoaPods `pod 'CoworkingView'` |
 | D | [`coworkingview`](clients/d/) | `dub add coworkingview` |
@@ -29,7 +30,7 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 
 [Eclipse](integrations/eclipse/) (`com.coworkingview.eclipse.feature`) adds a view, CoworkingView Workspace Prices, for the same Price Index. Install it from the p2 update site. The plug-in code is MIT.
 
-The Python, R, Java and command-line packages read the same public API, follow
+The Python, R, Java, Ruby and command-line packages read the same public API, follow
 the same [specification](spec/SPEC.md) and are tested against the same
 [fixtures and expected outputs](spec/), so a number is the same whichever of
 those tools you use. The OCaml, Swift and D packages are typed clients for the Price Index
@@ -76,6 +77,16 @@ import io.github.coworkingview.RatesQuery;
 
 Client client = Client.create();
 client.rates(new RatesQuery().city("berlin"));
+```
+
+**Ruby**
+
+```ruby
+require "coworkingview"
+
+client = CoworkingView::Client.new
+berlin = client.rates(city: "berlin")
+puts berlin.attribution
 ```
 
 **OCaml**

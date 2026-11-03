@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+gemspec
+
+# Transitive via addressable. 7.x needs Ruby 3.2; keep 6.x so Ruby 3.0 can run the tests.
+gem "public_suffix", "~> 6.0"

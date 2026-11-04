@@ -1,0 +1,64 @@
+name: COPR
+
+on:
+  pull_request:
+    paths:
+      - "integrations/copr/**"
+      - ".github/workflows/copr-release.yml"
+  push:
+    tags:
+      - "copr-v*"
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: rpmbuild --rebuild (Fedora)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    steps:
+      - name: Install git
+        run: dnf -y install git
+
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Build the SRPM and rebuild it
+        run: bash integrations/copr/ci-srpm.sh
+
+  release:
+    name: Publish the SRPM
+    if: startsWith(github.ref, 'refs/tags/copr-v')
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    permissions:
+      contents: write
+    steps:
+      - name: Install git
+        run: dnf -y install git
+
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Build the SRPM and rebuild it
+        run: bash integrations/copr/ci-srpm.sh "${GITHUB_WORKSPACE}/copr-output"
+
+      - name: Attach the SRPM to the GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          dnf -y install gh
+          shopt -s nullglob
+          srpm=("${GITHUB_WORKSPACE}/copr-output"/*.src.rpm)
+          if [[ ${#srpm[@]} -ne 1 ]]; then
+            echo "expected one SRPM, found ${#srpm[@]}" >&2
+            exit 1
+          fi
+          gh release create "${GITHUB_REF_NAME}" \
+            --repo "${GITHUB_REPOSITORY}" \
+            --title "${GITHUB_REF_NAME}" \
+            --notes "Source RPM for cwv (${GITHUB_REF_NAME}), built from the coworkingview 0.1.0 crate. Submit it to the Fedora COPR chroots listed in integrations/copr/README.md." \
+            "${srpm[0]}"

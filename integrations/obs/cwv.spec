@@ -88,7 +88,13 @@ install -D -m 0644 completions/cwv.fish %{buildroot}%{_datadir}/fish/vendor_comp
 %{_bindir}/cwv
 %{_mandir}/man1/cwv.1*
 %{_datadir}/bash-completion/completions/cwv
+# Nothing else owns these directories on openSUSE. The Build Service
+# rejects a package that installs files into an unowned directory.
+%dir %{_datadir}/zsh
+%dir %{_datadir}/zsh/site-functions
 %{_datadir}/zsh/site-functions/_cwv
+%dir %{_datadir}/fish
+%dir %{_datadir}/fish/vendor_completions.d
 %{_datadir}/fish/vendor_completions.d/cwv.fish
 
 # cwv.changes is the Build Service changelog. The same entry is repeated

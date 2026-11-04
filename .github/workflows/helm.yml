@@ -60,48 +60,6 @@ jobs:
           grep -q -- '- "cities"' "$RUNNER_TEMP/cities.yaml"
           grep -q -- '- "DE"' "$RUNNER_TEMP/cities.yaml"
 
-      - name: Which Docker Hub secrets are set
-        if: github.event_name == 'pull_request'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-          DOCKERHUB_ACCESS_TOKEN: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
-          DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          DOCKERIO_USERNAME: ${{ secrets.DOCKERIO_USERNAME }}
-          DOCKERIO_TOKEN: ${{ secrets.DOCKERIO_TOKEN }}
-          DOCKERIO_PASSWORD: ${{ secrets.DOCKERIO_PASSWORD }}
-          CWV_DOCKERHUB_USERNAME: ${{ secrets.CWV_DOCKERHUB_USERNAME }}
-          CWV_DOCKERHUB_TOKEN: ${{ secrets.CWV_DOCKERHUB_TOKEN }}
-          CWV_DOCKER_USERNAME: ${{ secrets.CWV_DOCKER_USERNAME }}
-          CWV_DOCKER_TOKEN: ${{ secrets.CWV_DOCKER_TOKEN }}
-          COWORKINGVIEW_DOCKERHUB_USERNAME: ${{ secrets.COWORKINGVIEW_DOCKERHUB_USERNAME }}
-          COWORKINGVIEW_DOCKERHUB_TOKEN: ${{ secrets.COWORKINGVIEW_DOCKERHUB_TOKEN }}
-          COWORKINGVIEW_DOCKER_USERNAME: ${{ secrets.COWORKINGVIEW_DOCKER_USERNAME }}
-          COWORKINGVIEW_DOCKER_TOKEN: ${{ secrets.COWORKINGVIEW_DOCKER_TOKEN }}
-          HUB_USERNAME: ${{ secrets.HUB_USERNAME }}
-          HUB_TOKEN: ${{ secrets.HUB_TOKEN }}
-          HUB_PASSWORD: ${{ secrets.HUB_PASSWORD }}
-        run: |
-          set -euo pipefail
-          echo "secret name list:"
-          gh api "repos/${GITHUB_REPOSITORY}/actions/secrets" --jq '.secrets[].name' || true
-          gh api "orgs/${GITHUB_REPOSITORY_OWNER}/actions/secrets" --jq '.secrets[].name' || true
-          for name in DOCKERHUB_USERNAME DOCKERHUB_TOKEN DOCKERHUB_PASSWORD DOCKER_USERNAME DOCKER_PASSWORD DOCKER_TOKEN DOCKERHUB_ACCESS_TOKEN DOCKER_HUB_USERNAME DOCKER_HUB_TOKEN DOCKER_HUB_PASSWORD DOCKERIO_USERNAME DOCKERIO_TOKEN DOCKERIO_PASSWORD CWV_DOCKERHUB_USERNAME CWV_DOCKERHUB_TOKEN CWV_DOCKER_USERNAME CWV_DOCKER_TOKEN COWORKINGVIEW_DOCKERHUB_USERNAME COWORKINGVIEW_DOCKERHUB_TOKEN COWORKINGVIEW_DOCKER_USERNAME COWORKINGVIEW_DOCKER_TOKEN HUB_USERNAME HUB_TOKEN HUB_PASSWORD; do
-            val="${!name}"
-            if [[ -n "$val" ]]; then
-              echo "$name=set"
-            else
-              echo "$name=unset"
-            fi
-          done
-
   publish:
     name: Publish the OCI chart
     if: startsWith(github.ref, 'refs/tags/helm-v')
@@ -217,7 +175,7 @@ jobs:
             done
           fi
           if [[ -z "$user" || -z "$pass" ]]; then
-            echo "::error::No Docker Hub username/token secrets are set. Checked DOCKERHUB_*, DOCKER_*, DOCKER_HUB_*, and DOCKERIO_*."
+            echo "::error::No Docker Hub username/token secrets are set. The cwv image workflow only builds locally; it does not log in. Expected DOCKERHUB_USERNAME plus DOCKERHUB_TOKEN (or DOCKERHUB_PASSWORD)."
             exit 1
           fi
           echo "Using Docker Hub credentials from ${pair}."

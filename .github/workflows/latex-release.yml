@@ -40,6 +40,9 @@ jobs:
         working-directory: ${{ github.workspace }}
         run: |
           set -eu
+          # checkout records safe.directory in a temporary HOME, so a later
+          # git command in this container otherwise dies with "dubious ownership".
+          git -C /tmp config --global --add safe.directory "${GITHUB_WORKSPACE}"
           kind=$(git cat-file -t "$GITHUB_REF")
           if [ "$kind" != "tag" ]; then
             echo "::error::latex-v* must be an annotated tag (got $kind)."

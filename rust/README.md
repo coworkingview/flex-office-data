@@ -28,6 +28,7 @@ This crate is also a Rust library (`coworkingview`) — see
 | Windows (Chocolatey) | `choco install cwv` |
 | Linux (Snap) | `sudo snap install coworkingview` (command `coworkingview.cwv`; optional `sudo snap alias coworkingview.cwv cwv`) |
 | Docker | `docker run --rm coworkingview/cwv rates --city berlin` |
+| openSUSE | [integrations/obs](../integrations/obs) (`home:coworkingview`) |
 | Binaries | [GitHub releases](https://github.com/coworkingview/flex-office-data/releases) (Linux static, macOS, Windows) |
 
 The binary is self-contained: TLS is rustls with bundled Mozilla roots, so it

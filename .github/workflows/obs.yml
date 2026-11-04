@@ -1,0 +1,30 @@
+name: openSUSE RPM
+
+on:
+  pull_request:
+    paths:
+      - "integrations/obs/**"
+      - "rust/**"
+      - ".github/workflows/obs.yml"
+  push:
+    branches: [main]
+    paths:
+      - "integrations/obs/**"
+      - "rust/**"
+      - ".github/workflows/obs.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  rpm:
+    name: rpmbuild and rpmlint (Tumbleweed)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the RPM in openSUSE Tumbleweed
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/src:ro" \
+            opensuse/tumbleweed \
+            bash /src/integrations/obs/ci-rpmbuild.sh

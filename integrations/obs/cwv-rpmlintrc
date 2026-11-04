@@ -1,0 +1,11 @@
+# False positives from a vendored Rust package.
+# Loaded by CI (`rpmlint -r`) and by the Build Service when this file
+# sits next to cwv.spec.
+
+# Source1 is vendor.tar.zst, produced by cargo_vendor and committed to
+# OBS. It has no upstream URL.
+addFilter("invalid-url Source1")
+
+# find-debuginfo splits symbols into these packages.
+addFilter("cwv-debuginfo.*unstripped-binary-or-object")
+addFilter("cwv-debugsource.*no-binary")

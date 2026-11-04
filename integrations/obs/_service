@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  mode="manual": OBS does not run these on the server. The packager runs
+  `osc service manualrun` (obs-service-cargo, package obs-service-cargo)
+  and commits the results. vendor.tar.zst is large and is not stored in
+  git; it is committed to the cwv package on OBS. See README.md.
+-->
+<services>
+  <service name="download_files" mode="manual"/>
+  <service name="cargo_vendor" mode="manual">
+    <param name="src">coworkingview-*.crate</param>
+    <param name="compression">zst</param>
+    <param name="update">false</param>
+    <param name="respect-lockfile">true</param>
+    <param name="method">vendor</param>
+  </service>
+</services>

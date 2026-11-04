@@ -1,0 +1,8 @@
+# Append this entry to _data/developer.yml.
+coworkingview:
+    name: CoworkingView
+    description: Coworking and flex-office directory
+    image: https://avatars.githubusercontent.com/u/322605674
+    homepage: https://coworkingview.com
+    github: https://github.com/coworkingview
+    email: info@coworkingview.com

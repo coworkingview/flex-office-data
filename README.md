@@ -34,6 +34,8 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 
 [Redmine](integrations/redmine/redmine_coworkingview/) (`redmine_coworkingview`, CoworkingView Prices) adds the wiki macros `{{coworking_rate(berlin)}}` and `{{coworking_rates(berlin)}}` for the same Price Index. The plugin code is MIT.
 
+[Kimai](kimai-plugin/) (`CoworkingViewBundle`, CoworkingView Workplace) adds a workplace field (home, office, coworking) to timesheets and projects, and a report of hours by workplace. The plugin code is MIT. It does not include prices.
+
 [PostgreSQL](integrations/postgres/) (`coworkingview`) installs a snapshot of the same Price Index with `CREATE EXTENSION coworkingview`. The extension is pure SQL, MIT, and packaged for [PGXN](https://pgxn.org/).
 
 The Python, R, Java, Ruby and command-line packages read the same public API, follow

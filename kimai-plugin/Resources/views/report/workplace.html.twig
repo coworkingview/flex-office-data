@@ -1,0 +1,37 @@
+{% extends 'reporting/layout.html.twig' %}
+{% import "macros/widgets.html.twig" as widgets %}
+
+{% block report %}
+    <div class="card">
+        <div class="card-body">
+            <p class="text-secondary">{{ 'coworkingview.report_intro'|trans }}</p>
+            <div class="table-responsive">
+                <table class="table table-vcenter card-table">
+                    <thead>
+                        <tr>
+                            <th>{{ 'coworkingview.workplace'|trans }}</th>
+                            <th class="text-end">{{ 'coworkingview.entries'|trans }}</th>
+                            <th class="text-end">{{ 'coworkingview.duration'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in rows %}
+                            <tr>
+                                <td>{{ row.label|trans }}</td>
+                                <td class="text-end">{{ row.entries }}</td>
+                                <td class="text-end">{{ widgets.duration_seconds(row.seconds, {}) }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>{{ 'coworkingview.total'|trans }}</th>
+                            <th class="text-end">{{ total_entries }}</th>
+                            <th class="text-end">{{ widgets.duration_seconds(total_seconds, {}) }}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

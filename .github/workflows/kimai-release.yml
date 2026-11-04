@@ -1,0 +1,118 @@
+name: Release Kimai plugin
+
+# Pushing a tag `kimai-v<version>` builds CoworkingViewBundle-<version>.zip
+# and attaches it to the GitHub release for that tag.
+# The archive has one top-level directory, CoworkingViewBundle/, which is the
+# directory Kimai expects under var/plugins/. This workflow does not create the tag.
+
+on:
+  push:
+    tags: ["kimai-v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Publish CoworkingViewBundle zip
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: kimai-plugin
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+          tools: composer:v2
+
+      - name: Lint and bundle structure
+        run: |
+          composer install --no-interaction --prefer-dist
+          composer lint
+          composer test
+
+      - name: Stage the plugin archive
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#kimai-v}"
+          info=$(php -r 'echo json_decode(file_get_contents("composer.json"), true)["version"];')
+          if [[ "$info" != "$version" ]]; then
+            echo "::error::tag kimai-v${version} does not match composer.json version ${info}"
+            exit 1
+          fi
+          rm -rf build
+          mkdir -p build/CoworkingViewBundle
+          cp -a \
+            CoworkingViewBundle.php \
+            DependencyInjection \
+            EventSubscriber \
+            Controller \
+            Form \
+            Model \
+            Reporting \
+            Resources \
+            composer.json \
+            LICENSE \
+            README.md \
+            CHANGELOG.md \
+            build/CoworkingViewBundle/
+          ( cd build && zip -r "../CoworkingViewBundle-${version}.zip" CoworkingViewBundle )
+          VERSION="$version" php -r '
+            $version = getenv("VERSION");
+            $zip = new ZipArchive();
+            $file = "CoworkingViewBundle-" . $version . ".zip";
+            if ($zip->open($file) !== true) {
+                fwrite(STDERR, "cannot open zip\n");
+                exit(1);
+            }
+            $names = [];
+            for ($i = 0; $i < $zip->numFiles; $i++) {
+                $names[] = $zip->getNameIndex($i);
+            }
+            $zip->close();
+            $need = [
+                "CoworkingViewBundle/CoworkingViewBundle.php",
+                "CoworkingViewBundle/composer.json",
+                "CoworkingViewBundle/Resources/config/services.yaml",
+                "CoworkingViewBundle/Resources/config/routes.yaml",
+                "CoworkingViewBundle/Resources/translations/messages.en.xlf",
+            ];
+            foreach ($need as $entry) {
+                if (!in_array($entry, $names, true)) {
+                    fwrite(STDERR, "zip missing {$entry}\n");
+                    exit(1);
+                }
+            }
+            foreach ($names as $entry) {
+                if (str_contains($entry, "store-listing/") || str_contains($entry, "/tests/") || str_contains($entry, "/vendor/")) {
+                    fwrite(STDERR, "zip contains {$entry}\n");
+                    exit(1);
+                }
+            }
+          '
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#kimai-v}"
+          # The env passed to the previous step included the tag ref, not the version.
+          # Rebuild is unnecessary: the zip name uses the composer version, checked above.
+          awk -v v="$version" '
+            $0 ~ "^## " v "$" { on = 1; next }
+            on && /^## / { exit }
+            on { print }
+          ' CHANGELOG.md > "$RUNNER_TEMP/notes.md"
+          if ! grep -q '[^[:space:]]' "$RUNNER_TEMP/notes.md"; then
+            echo "CoworkingView Workplace ${version}." > "$RUNNER_TEMP/notes.md"
+          fi
+          printf '\nDownload: https://github.com/%s/releases/download/%s/CoworkingViewBundle-%s.zip\n' \
+            "$GITHUB_REPOSITORY" "$GITHUB_REF_NAME" "$version" >> "$RUNNER_TEMP/notes.md"
+          gh release create "$GITHUB_REF_NAME" "CoworkingViewBundle-${version}.zip" \
+            --title "Kimai plugin ${version}" \
+            --notes-file "$RUNNER_TEMP/notes.md" \
+            --verify-tag

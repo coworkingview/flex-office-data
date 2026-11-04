@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="messages.en.xlf">
+        <body>
+            <trans-unit id="coworkingview.workplace">
+                <source>coworkingview.workplace</source>
+                <target>Workplace</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.help_timesheet">
+                <source>coworkingview.help_timesheet</source>
+                <target>Where this time was worked. If you leave it empty, the report uses the project workplace.</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.help_project">
+                <source>coworkingview.help_project</source>
+                <target>Default workplace for time recorded on this project.</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.home">
+                <source>coworkingview.home</source>
+                <target>Home</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.office">
+                <source>coworkingview.office</source>
+                <target>Office</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.coworking">
+                <source>coworkingview.coworking</source>
+                <target>Coworking</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.unset">
+                <source>coworkingview.unset</source>
+                <target>Not set</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.report_title">
+                <source>coworkingview.report_title</source>
+                <target>Hours by workplace</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.report_intro">
+                <source>coworkingview.report_intro</source>
+                <target>Hours recorded at home, in an office, or in a coworking space. A timesheet without a workplace uses the workplace of its project.</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.entries">
+                <source>coworkingview.entries</source>
+                <target>Entries</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.duration">
+                <source>coworkingview.duration</source>
+                <target>Duration</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.total">
+                <source>coworkingview.total</source>
+                <target>Total</target>
+            </trans-unit>
+            <trans-unit id="coworkingview.all_users">
+                <source>coworkingview.all_users</source>
+                <target>All users</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

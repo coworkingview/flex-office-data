@@ -1,0 +1,49 @@
+name: Kimai
+
+on:
+  pull_request:
+    paths:
+      - "kimai-plugin/**"
+      - ".github/workflows/kimai.yml"
+      - ".github/workflows/kimai-release.yml"
+  push:
+    branches: [main]
+    paths:
+      - "kimai-plugin/**"
+      - ".github/workflows/kimai.yml"
+      - ".github/workflows/kimai-release.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  plugin:
+    name: PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["8.2", "8.4"]
+    defaults:
+      run:
+        working-directory: kimai-plugin
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate composer.json
+        run: composer validate --strict --no-check-version --no-check-publish
+
+      - name: Install
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Lint and bundle structure
+        run: composer lint
+
+      - name: Unit tests
+        run: composer test

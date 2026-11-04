@@ -1,0 +1,6 @@
+# Merge the items entry into _data/en/store.yml. Title and intro live here,
+# not in the product metadata and not in the wrapper front matter.
+items:
+    coworkingview-workplace:
+        title: Workplace
+        intro: Tag timesheets and projects with home, office, or coworking, and report hours by workplace.

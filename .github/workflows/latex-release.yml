@@ -45,7 +45,7 @@ jobs:
           # It also rewrites refs/tags/<name> to the peeled commit, so fetch
           # the tag object again before testing that it is annotated.
           git -C /tmp config --global --add safe.directory "${GITHUB_WORKSPACE}"
-          git fetch origin "refs/tags/${GITHUB_REF_NAME}:refs/tags/${GITHUB_REF_NAME}"
+          git fetch origin "+refs/tags/${GITHUB_REF_NAME}:refs/tags/${GITHUB_REF_NAME}"
           kind=$(git cat-file -t "refs/tags/${GITHUB_REF_NAME}")
           if [ "$kind" != "tag" ]; then
             echo "::error::latex-v* must be an annotated tag (got $kind)."

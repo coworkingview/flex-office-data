@@ -1,0 +1,175 @@
+name: Helm
+
+# helm lint and helm template on every pull request and on main.
+# A tag helm-v<chart version> packages the chart and pushes it to
+# oci://ghcr.io/coworkingview/charts/cwv, then pushes artifacthub-repo.yml
+# to ghcr.io/coworkingview/charts/cwv:artifacthub.io.
+
+on:
+  push:
+    branches: [main]
+    tags: ["helm-v*"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: helm lint and template
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/setup-helm@v4
+        with:
+          version: v3.22.1
+
+      - name: Lint
+        run: helm lint integrations/helm/cwv
+
+      - name: Template the defaults
+        run: |
+          set -euo pipefail
+          helm template cwv integrations/helm/cwv > "$RUNNER_TEMP/cwv.yaml"
+          grep -q 'image: "docker.io/coworkingview/cwv:0.1.0"' "$RUNNER_TEMP/cwv.yaml"
+          grep -q 'readOnlyRootFilesystem: true' "$RUNNER_TEMP/cwv.yaml"
+          grep -q -- '- "rates"' "$RUNNER_TEMP/cwv.yaml"
+
+      - name: Template a Berlin CSV schedule
+        run: |
+          set -euo pipefail
+          helm template cwv integrations/helm/cwv \
+            --set city=berlin \
+            --set format=csv \
+            --set locale=de \
+            --set currency=EUR \
+            --set 'products={flex_desk,private_office}' \
+            > "$RUNNER_TEMP/berlin.yaml"
+          grep -q -- '- --city' "$RUNNER_TEMP/berlin.yaml"
+          grep -q -- '- "berlin"' "$RUNNER_TEMP/berlin.yaml"
+          grep -q -- '- "flex_desk,private_office"' "$RUNNER_TEMP/berlin.yaml"
+
+      - name: Template cities
+        run: |
+          set -euo pipefail
+          helm template cwv integrations/helm/cwv --set command=cities --set country=DE \
+            > "$RUNNER_TEMP/cities.yaml"
+          grep -q -- '- "cities"' "$RUNNER_TEMP/cities.yaml"
+          grep -q -- '- "DE"' "$RUNNER_TEMP/cities.yaml"
+
+  publish:
+    name: Publish the OCI chart
+    if: startsWith(github.ref, 'refs/tags/helm-v')
+    needs: lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/setup-helm@v4
+        with:
+          version: v3.22.1
+
+      - name: Install oras
+        run: |
+          set -euo pipefail
+          version=1.2.2
+          curl -fsSL -o /tmp/oras.tar.gz \
+            "https://github.com/oras-project/oras/releases/download/v${version}/oras_${version}_linux_amd64.tar.gz"
+          tar -C /tmp -xzf /tmp/oras.tar.gz oras
+          sudo mv /tmp/oras /usr/local/bin/oras
+          oras version
+
+      - name: Package
+        id: package
+        run: |
+          set -euo pipefail
+          chart=integrations/helm/cwv
+          version=$(sed -n 's/^version: *//p' "$chart/Chart.yaml" | head -1 | tr -d '"')
+          tag="${GITHUB_REF_NAME#helm-v}"
+          if [[ "$tag" != "$version" ]]; then
+            echo "::error::tag helm-v${tag} does not match Chart.yaml version ${version}"
+            exit 1
+          fi
+          helm lint "$chart"
+          helm package "$chart" --destination "$RUNNER_TEMP"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "chart=${RUNNER_TEMP}/cwv-${version}.tgz" >> "$GITHUB_OUTPUT"
+
+      - name: Push the chart to GHCR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          echo "$GITHUB_TOKEN" | helm registry login ghcr.io \
+            --username "${GITHUB_ACTOR}" --password-stdin
+          helm push "${{ steps.package.outputs.chart }}" oci://ghcr.io/coworkingview/charts
+
+      - name: Push artifacthub-repo.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          echo "$GITHUB_TOKEN" | oras login ghcr.io \
+            --username "${GITHUB_ACTOR}" --password-stdin
+          # Media types are the ones Artifact Hub documents for the artifacthub.io tag.
+          oras push ghcr.io/coworkingview/charts/cwv:artifacthub.io \
+            --config /dev/null:application/vnd.cncf.artifacthub.config.v1+yaml \
+            integrations/helm/cwv/artifacthub-repo.yml:application/vnd.cncf.artifacthub.repository-metadata.layer.v1.yaml
+
+      - name: Make the GHCR package public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          url="https://api.github.com/orgs/${GITHUB_REPOSITORY_OWNER}/packages/container/charts%2Fcwv"
+          visibility="unknown"
+          for i in 1 2 3 4 5 6 7 8; do
+            status=$(curl -sS -o "$RUNNER_TEMP/pkg.json" -w '%{http_code}' -X PATCH \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "$url" \
+              -d '{"visibility":"public"}')
+            echo "PATCH attempt ${i}: HTTP ${status}"
+            if [[ "$status" == "200" ]]; then
+              visibility=$(python3 -c 'import json; print(json.load(open("'"$RUNNER_TEMP"'/pkg.json")).get("visibility","unknown"))')
+              break
+            fi
+            sleep 5
+          done
+          echo "Package visibility: ${visibility}"
+          {
+            echo "### GHCR package visibility"
+            echo ""
+            echo "\`ghcr.io/coworkingview/charts/cwv\` visibility: \`${visibility}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [[ "$visibility" != "public" ]]; then
+            echo "::warning::GITHUB_TOKEN could not make ghcr.io/coworkingview/charts/cwv public (last response in the log, visibility=${visibility}). The chart was still pushed. An owner must set the package to public; Actions cannot always change package visibility."
+          fi
+
+      - name: Pull the chart back
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          version="${{ steps.package.outputs.version }}"
+          mkdir -p "$RUNNER_TEMP/pull"
+          echo "$GITHUB_TOKEN" | helm registry login ghcr.io \
+            --username "${GITHUB_ACTOR}" --password-stdin
+          helm pull "oci://ghcr.io/coworkingview/charts/cwv" \
+            --version "$version" --destination "$RUNNER_TEMP/pull"
+          tar -tzf "$RUNNER_TEMP/pull/cwv-${version}.tgz" | grep -q 'cwv/Chart.yaml'
+          # Anonymous pull uses a separate Helm config with no credentials.
+          mkdir -p "$RUNNER_TEMP/anon"
+          printf '%s\n' '{}' > "$RUNNER_TEMP/anon/config.json"
+          if HELM_REGISTRY_CONFIG="$RUNNER_TEMP/anon/config.json" \
+            helm pull "oci://ghcr.io/coworkingview/charts/cwv" \
+              --version "$version" --destination "$RUNNER_TEMP/anon"; then
+            echo "Anonymous helm pull succeeded."
+          else
+            echo "::warning::Anonymous helm pull of oci://ghcr.io/coworkingview/charts/cwv version ${version} failed. The package is probably still private."
+          fi

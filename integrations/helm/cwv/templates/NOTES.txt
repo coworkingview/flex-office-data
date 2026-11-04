@@ -1,0 +1,15 @@
+CoworkingView Price Index CronJob {{ include "cwv.fullname" . }} is installed.
+
+It runs `cwv {{ .Values.command }}` from {{ .Values.image.repository }}:{{ .Values.image.tag }}
+on schedule {{ .Values.schedule | quote }}. Output is the job log. JSON includes the
+attribution string; table and CSV print it on stderr.
+
+Price Index data is CC BY 4.0. Credit CoworkingView Price Index and keep the
+attribution the CLI prints with any figure you republish.
+https://coworkingview.com/en/tools/price-index
+https://creativecommons.org/licenses/by/4.0/
+
+The chart and the cwv binary are MIT. The image is FROM scratch and runs as uid 65534.
+
+  kubectl get cronjob -l app.kubernetes.io/instance={{ .Release.Name }}
+  kubectl create job --from=cronjob/{{ include "cwv.fullname" . | trunc 52 | trimSuffix "-" }} {{ include "cwv.fullname" . | trunc 52 | trimSuffix "-" }}-once

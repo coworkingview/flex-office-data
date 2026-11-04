@@ -190,6 +190,7 @@ integrations/joomla/   Joomla 4/5 site module (CoworkingView Workspace Prices)
 integrations/lmstudio/  LM Studio tools-provider plugin (coworkingview-workspace-prices)
 integrations/eclipse/  Eclipse view (CoworkingView Workspace Prices) and p2 update site
 integrations/postgres/  coworkingview extension for PostgreSQL (PGXN)
+integrations/helm/cwv/  Helm chart: CronJob for the cwv CLI (OCI on GHCR)
 integrations/redmine/redmine_coworkingview/  Redmine wiki macros (CoworkingView Prices)
 packaging/          AUR, Chocolatey and Snap manifests for cwv
 ```

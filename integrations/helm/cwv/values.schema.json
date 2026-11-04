@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": ["rates", "cities"]
+    },
+    "city": { "type": "string" },
+    "country": { "type": "string" },
+    "currency": {
+      "type": "string",
+      "pattern": "^$|^[A-Za-z]{3}$"
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "flex_desk",
+          "fix_desk",
+          "private_office",
+          "exclusive_bereich",
+          "day_pass",
+          "meeting_room",
+          "event_space",
+          "virtual_office",
+          "membership"
+        ]
+      }
+    },
+    "format": {
+      "type": "string",
+      "enum": ["table", "csv", "json"]
+    },
+    "locale": {
+      "type": "string",
+      "enum": ["en", "es", "de"]
+    },
+    "noColor": { "type": "boolean" },
+    "apiUrl": { "type": "string" },
+    "extraArgs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "schedule": { "type": "string", "minLength": 1 },
+    "concurrencyPolicy": {
+      "type": "string",
+      "enum": ["Allow", "Forbid", "Replace"]
+    },
+    "suspend": { "type": "boolean" },
+    "successfulJobsHistoryLimit": { "type": "integer", "minimum": 0 },
+    "failedJobsHistoryLimit": { "type": "integer", "minimum": 0 },
+    "backoffLimit": { "type": "integer", "minimum": 0 },
+    "activeDeadlineSeconds": { "type": "integer", "minimum": 1 },
+    "ttlSecondsAfterFinished": { "type": "integer", "minimum": 0 },
+    "restartPolicy": {
+      "type": "string",
+      "enum": ["OnFailure", "Never"]
+    }
+  },
+  "required": ["command", "format", "locale", "schedule"]
+}

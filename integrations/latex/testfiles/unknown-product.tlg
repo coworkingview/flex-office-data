@@ -1,0 +1,20 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+! Package coworkingview Error: Unknown product 'yacht' for Berlin. Available
+(coworkingview)                products: flex_desk, fix_desk,
+(coworkingview)                private_office, day_pass, meeting_room.
+For immediate help type H <return>.
+ ...                                              
+l. ...\cwvrate [product=yacht] {berlin}
+The product is a code such as flex_desk, or the same words with spaces or
+hyphens. The default is flex_desk.
+RESULT: 
+! Package coworkingview Error: Unknown product 'day_pass' for Abu Dhabi.
+(coworkingview)                Available products: flex_desk, fix_desk,
+(coworkingview)                private_office.
+For immediate help type H <return>.
+ ...                                              
+l. ...\cwvrate [product=day_pass] {abu-dhabi}
+The product is a code such as flex_desk, or the same words with spaces or
+hyphens. The default is flex_desk.
+RESULT: 

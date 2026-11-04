@@ -1,0 +1,71 @@
+name: LaTeX
+
+# TeX Live from Ubuntu 24.04, in a clean container, so l3build's
+# test logs match the .tlg files committed from that same release
+# (TeX Live 2023, l3build 2024-01-18).
+
+on:
+  pull_request:
+    paths:
+      - "integrations/latex/**"
+      - "spec/golden/rates.csv"
+      - "spec/golden/cities.csv"
+      - "spec/fixtures/market_rates.json"
+      - ".github/workflows/latex-ci.yml"
+      - ".github/workflows/latex-release.yml"
+  push:
+    branches: [main]
+    paths:
+      - "integrations/latex/**"
+      - "spec/golden/rates.csv"
+      - "spec/golden/cities.csv"
+      - "spec/fixtures/market_rates.json"
+      - ".github/workflows/latex-ci.yml"
+      - ".github/workflows/latex-release.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  ctan:
+    name: l3build check and ctan
+    runs-on: ubuntu-24.04
+    container:
+      image: ubuntu:24.04
+    defaults:
+      run:
+        working-directory: integrations/latex
+    steps:
+      - name: Install TeX Live
+        working-directory: /
+        run: |
+          set -eu
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates \
+            git \
+            python3 \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended
+          l3build --version
+          pdflatex --version
+
+      - uses: actions/checkout@v4
+
+      - name: Check the rates snapshot
+        run: python3 tools/build_snapshot.py --check
+
+      - name: l3build check and ctan
+        run: |
+          set -eu
+          l3build check
+          l3build ctan
+          python3 tools/check_ctan_zip.py coworkingview.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coworkingview-ctan
+          path: integrations/latex/coworkingview.zip
+          if-no-files-found: error

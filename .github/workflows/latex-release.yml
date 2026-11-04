@@ -1,0 +1,86 @@
+name: LaTeX CTAN release
+
+# An annotated tag latex-v* builds the CTAN zip and attaches it to a
+# GitHub release. This workflow does not create the tag.
+
+on:
+  push:
+    tags: ["latex-v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  ctan:
+    name: Build the CTAN zip
+    runs-on: ubuntu-24.04
+    container:
+      image: ubuntu:24.04
+    defaults:
+      run:
+        working-directory: integrations/latex
+    steps:
+      - name: Install TeX Live
+        working-directory: /
+        run: |
+          set -eu
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates \
+            git \
+            python3 \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Require an annotated tag
+        working-directory: ${{ github.workspace }}
+        run: |
+          set -eu
+          kind=$(git cat-file -t "$GITHUB_REF")
+          if [ "$kind" != "tag" ]; then
+            echo "::error::latex-v* must be an annotated tag (got $kind)."
+            exit 1
+          fi
+      - name: Check the snapshot and build the zip
+        run: |
+          set -eu
+          python3 tools/build_snapshot.py --check
+          l3build check
+          l3build ctan
+          python3 tools/check_ctan_zip.py coworkingview.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coworkingview-ctan
+          path: integrations/latex/coworkingview.zip
+          if-no-files-found: error
+
+  release:
+    name: Attach the zip to the GitHub release
+    needs: ctan
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: coworkingview-ctan
+          path: dist
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          tag="$GITHUB_REF_NAME"
+          notes=$(cat <<EOF
+          CTAN upload archive for the coworkingview LaTeX package (${tag}).
+
+          The zip has a single top-level directory, coworkingview/, for https://ctan.org/upload.
+          Code is LPPL 1.3c. coworkingview-rates.csv is CC BY 4.0.
+          EOF
+          )
+          gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --title "$tag" --notes "$notes"
+          gh release upload "$tag" dist/coworkingview.zip --clobber

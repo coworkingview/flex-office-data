@@ -1,0 +1,29 @@
+id: com.coworkingview.Rates
+runtime: org.gnome.Platform
+runtime-version: "51"
+sdk: org.gnome.Sdk
+command: com.coworkingview.Rates
+finish-args:
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --share=ipc
+  - --device=dri
+modules:
+  - name: coworkingview-rates
+    buildsystem: simple
+    build-commands:
+      - install -Dm0755 flathub/src/com.coworkingview.Rates ${FLATPAK_DEST}/bin/com.coworkingview.Rates
+      - install -Dm0644 flathub/com.coworkingview.Rates.desktop ${FLATPAK_DEST}/share/applications/com.coworkingview.Rates.desktop
+      - install -Dm0644 flathub/com.coworkingview.Rates.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.coworkingview.Rates.metainfo.xml
+      - install -Dm0644 flathub/com.coworkingview.Rates.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/com.coworkingview.Rates.svg
+      - install -Dm0644 flathub/src/coworkingview_rates/__init__.py ${FLATPAK_DEST}/share/com.coworkingview.Rates/coworkingview_rates/__init__.py
+      - install -Dm0644 flathub/src/coworkingview_rates/__main__.py ${FLATPAK_DEST}/share/com.coworkingview.Rates/coworkingview_rates/__main__.py
+      - install -Dm0644 flathub/src/coworkingview_rates/app.py ${FLATPAK_DEST}/share/com.coworkingview.Rates/coworkingview_rates/app.py
+      - install -Dm0644 flathub/src/coworkingview_rates/index.py ${FLATPAK_DEST}/share/com.coworkingview.Rates/coworkingview_rates/index.py
+      - install -Dm0644 LICENSE ${FLATPAK_DEST}/share/licenses/com.coworkingview.Rates/LICENSE
+    sources:
+      - type: git
+        url: https://github.com/coworkingview/flex-office-data.git
+        tag: flatpak-v0.1.0
+        commit: ed36919deefd893aed73c23d6723b7b6e6601e3d

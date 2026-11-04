@@ -1,0 +1,37 @@
+name: Flatpak
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    name: Rates unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run unit tests
+        run: PYTHONPATH=flathub/src python3 -m unittest discover -s flathub/tests -v
+
+  flatpak:
+    name: Flatpak build
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-51
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the builder linter
+        run: |
+          flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+          flatpak install --user -y --noninteractive flathub org.flatpak.Builder
+      - name: Lint manifest and MetaInfo
+        run: |
+          flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest flathub/com.coworkingview.Rates.yml
+          flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream flathub/com.coworkingview.Rates.metainfo.xml
+      - name: Build and install
+        run: flatpak-builder --user --install --disable-rofiles-fuse --force-clean build-dir flathub/com.coworkingview.Rates.yml

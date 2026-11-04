@@ -1,0 +1,60 @@
+{
+  "data": {
+    "cities": [
+      {
+        "city": {
+          "slug": "Example",
+          "name": "Example City"
+        },
+        "countryCode": "EX",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "flex_desk",
+            "median": { "amount": 9, "currency": "EUR" },
+            "sampleSize": 1
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "private_office",
+            "median": { "amount": 4, "currency": "EUR" },
+            "p25": { "amount": 3, "currency": "EUR" },
+            "p75": { "amount": 5, "currency": "EUR" },
+            "sampleSize": 12
+          },
+          {
+            "optionType": "flex_desk",
+            "median": { "amount": 2.5, "currency": "EUR" },
+            "sampleSize": 3
+          }
+        ],
+        "dayPass": {
+          "median": { "amount": 1, "currency": "EUR" },
+          "sampleSize": 4
+        },
+        "meetingRoom": {
+          "median": { "amount": 6, "currency": "EUR" },
+          "p25": { "amount": 5, "currency": "EUR" },
+          "sampleSize": 11
+        },
+        "eventSpace": {
+          "median": { "amount": "7.50", "currency": "EUR" },
+          "sampleSize": 8
+        }
+      }
+    ],
+    "unpublished": [
+      {
+        "city": {
+          "slug": "hidden",
+          "name": "Hidden City"
+        }
+      }
+    ],
+    "asOf": "2026-01-02T03:04:05Z",
+    "license": "CC-BY-4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "Source: Example Index (https://coworkingview.com)."
+  }
+}

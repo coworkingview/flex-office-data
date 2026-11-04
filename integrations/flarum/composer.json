@@ -1,0 +1,51 @@
+{
+    "name": "coworkingview/flarum-coworkingview",
+    "description": "Show CoworkingView coworking price-index figures for a city in Flarum posts and the forum sidebar.",
+    "type": "flarum-extension",
+    "keywords": [
+        "flarum",
+        "coworking",
+        "price-index"
+    ],
+    "license": "MIT",
+    "homepage": "https://coworkingview.com",
+    "authors": [
+        {
+            "name": "CoworkingView",
+            "homepage": "https://coworkingview.com",
+            "email": "info@coworkingview.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/coworkingview/flarum-coworkingview/issues",
+        "source": "https://github.com/coworkingview/flarum-coworkingview"
+    },
+    "require": {
+        "php": ">=8.1",
+        "flarum/core": "^1.8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CoworkingView\\CoworkingPrices\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "CoworkingView Coworking Prices",
+            "category": "feature",
+            "icon": {
+                "name": "fas fa-city",
+                "backgroundColor": "#16324f",
+                "color": "#fff"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "@php tests/run.php"
+    }
+}

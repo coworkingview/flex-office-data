@@ -24,10 +24,10 @@ entries:
           url: https://github.com/coworkingview/flex-office-data
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-11-04T12:46:34.773204608Z"
+    created: "2026-11-04T12:52:55.741332176Z"
     description: CronJob that runs the cwv CLI and prints CoworkingView Price Index
       rates.
-    digest: 1d042695d6aa5a7fa5a6a1a212d4cb131c86c140ed71db6d2305ab85e5a0dc12
+    digest: f22c94d03ccb9847131cab0305e74883d7fbd30e78417eb5d219a1317c0b5feb
     home: https://coworkingview.com/en/tools/price-index
     icon: https://raw.githubusercontent.com/coworkingview/flex-office-data/main/power-platform-connector/icon.png
     keywords:
@@ -46,4 +46,4 @@ entries:
     urls:
     - https://github.com/coworkingview/flex-office-data/releases/download/helm-v0.1.1/cwv-0.1.1.tgz
     version: 0.1.1
-generated: "2026-11-04T12:46:34.772622573Z"
+generated: "2026-11-04T12:52:55.740682317Z"

@@ -1,0 +1,79 @@
+# docker.io/coworkingview/cwv:0.1.0 is the published image (linux/amd64 and
+# linux/arm64). The Dockerfile entrypoint is the cwv binary. This chart only
+# sets container args.
+image:
+  repository: docker.io/coworkingview/cwv
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# Price Index commands the binary accepts: rates (one row per city and product)
+# or cities (one row per city). Catalogue search is not a chart command.
+command: rates
+
+# Optional filters. Empty means the CLI default (every published city).
+city: ""
+country: ""
+# Empty keeps the API currency. cwv accepts EUR, GBP, USD, CHF, AED, and any
+# other three-letter code, which it uppercases and passes through.
+currency: ""
+# Only used for command "rates". CLI product names.
+products: []
+
+# table, csv, or json. JSON includes the CC BY 4.0 attribution in the object.
+format: json
+# en, es, or de. The CLI default is English.
+locale: en
+noColor: true
+# Overrides the API base URL (https://api.coworkingview.com) via --api-url.
+apiUrl: ""
+# Extra args appended as-is. The image is FROM scratch: there is no shell.
+extraArgs: []
+
+schedule: "0 6 * * *"
+concurrencyPolicy: Forbid
+suspend: false
+successfulJobsHistoryLimit: 3
+failedJobsHistoryLimit: 1
+backoffLimit: 2
+# One rates or cities call. The CLI's own request timeout is 20 seconds.
+activeDeadlineSeconds: 180
+ttlSecondsAfterFinished: 86400
+restartPolicy: OnFailure
+
+serviceAccount:
+  create: true
+  name: ""
+  automount: false
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 65534
+  runAsGroup: 65534
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 65534
+  runAsGroup: 65534
+  capabilities:
+    drop:
+      - ALL
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 32Mi
+  limits:
+    cpu: 500m
+    memory: 128Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

@@ -1,0 +1,6 @@
+.DS_Store
+.git/
+.gitignore
+*.tgz
+# Pushed on its own as the OCI artifact ghcr.io/coworkingview/charts/cwv:artifacthub.io
+artifacthub-repo.yml

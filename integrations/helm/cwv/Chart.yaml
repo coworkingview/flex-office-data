@@ -1,0 +1,38 @@
+apiVersion: v2
+name: cwv
+description: CronJob that runs the cwv CLI and prints CoworkingView Price Index rates.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+kubeVersion: ">=1.23.0-0"
+home: https://coworkingview.com/en/tools/price-index
+icon: https://raw.githubusercontent.com/coworkingview/flex-office-data/main/power-platform-connector/icon.png
+keywords:
+  - coworking
+  - price-index
+  - flex-office
+sources:
+  - https://github.com/coworkingview/flex-office-data
+maintainers:
+  - name: CoworkingView
+    email: info@coworkingview.com
+    url: https://coworkingview.com
+annotations:
+  artifacthub.io/license: MIT
+  artifacthub.io/category: analytics
+  artifacthub.io/links: |
+    - name: Price Index
+      url: https://coworkingview.com/en/tools/price-index
+    - name: homepage
+      url: https://coworkingview.com
+    - name: source
+      url: https://github.com/coworkingview/flex-office-data
+  artifacthub.io/images: |
+    - name: cwv
+      image: docker.io/coworkingview/cwv:0.1.0
+      platforms:
+        - linux/amd64
+        - linux/arm64
+  artifacthub.io/changes: |
+    - kind: added
+      description: CronJob that runs docker.io/coworkingview/cwv:0.1.0 and prints Price Index rates.

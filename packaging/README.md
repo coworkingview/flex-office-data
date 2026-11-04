@@ -30,6 +30,7 @@ lists what to fill in.
 | Chocolatey | `chocolatey/cwv.nuspec`, `chocolatey/tools/*` | Downloads the Windows zip from the GitHub release. Fill `checksum64` (and the same value in `VERIFICATION.txt`), then `choco pack` and `choco push cwv.<version>.nupkg --source https://push.chocolatey.org/`. New versions go through Chocolatey moderation. |
 | Snap | `snap/snapcraft.yaml` | Builds from the git tag with the `rust` plugin, `strict` confinement, `network` plug. `snapcraft remote-build` (or `snapcraft` in LXD), then `snapcraft upload --release=stable coworkingview_<version>_amd64.snap` (and arm64). The store name is `coworkingview` (`cwv` is reserved): `sudo snap install coworkingview` exposes `coworkingview.cwv`, with an optional `sudo snap alias coworkingview.cwv cwv`. |
 | Docker | `rust/Dockerfile` | `FROM scratch` image with the static binary. `docker buildx build --platform linux/amd64,linux/arm64 --build-arg VERSION=<version> -t coworkingview/cwv:<version> -t coworkingview/cwv:latest --push rust/` (Docker Hub, namespace `coworkingview`). |
+| Helm | `integrations/helm/cwv` | CronJob chart for that image. Tag `helm-v<version>` pushes `oci://ghcr.io/coworkingview/charts/cwv`. |
 | openSUSE Build Service | `integrations/obs/` | RPM for Tumbleweed and Leap 16.0. `integrations/obs/publish.sh` uploads to `home:coworkingview/cwv` using `~/.config/osc/oscrc`. The vendor tarball is committed to OBS, not to git. |
 
 The homepage is https://coworkingview.com wherever a manifest has one field for

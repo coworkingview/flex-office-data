@@ -1,0 +1,30 @@
+name: Redmine
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  plugin:
+    name: Ruby ${{ matrix.ruby }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ["3.0", "3.2", "3.3"]
+    defaults:
+      run:
+        working-directory: integrations/redmine/redmine_coworkingview
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - name: Syntax
+        run: find . -name '*.rb' -print0 | xargs -0 -n1 ruby -c
+      - name: Unit tests
+        run: ruby -Itest test/run.rb

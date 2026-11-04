@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="cwv" project="home:coworkingview">
+  <title>cwv — CoworkingView Price Index client</title>
+  <description>Command-line client for the CoworkingView Price Index (flexible-office prices by city, CC BY 4.0) and coworking catalogue search. Talks to a public API. No account. The program is MIT.</description>
+  <url>https://coworkingview.com/en/tools/price-index</url>
+</package>

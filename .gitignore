@@ -18,6 +18,11 @@ r/doc/
 r/Meta/
 # Rust
 rust/target/
+# openSUSE Build Service: the crate and vendor.tar.zst are generated and
+# committed to OBS, not to git (vendor.tar.zst is the whole crates.io graph).
+integrations/obs/*.crate
+integrations/obs/vendor.tar.zst
+integrations/obs/vendor.tar
 # Java
 integrations/java/target/
 integrations/java/dist/

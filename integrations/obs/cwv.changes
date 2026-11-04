@@ -1,0 +1,5 @@
+-------------------------------------------------------------------
+Wed Nov  4 03:30:00 UTC 2026 - CoworkingView <info@coworkingview.com>
+
+- Initial package of cwv 0.1.0, the command-line client for the
+  CoworkingView Price Index and coworking catalogue search

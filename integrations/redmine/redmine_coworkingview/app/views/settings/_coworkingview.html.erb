@@ -1,0 +1,27 @@
+<%# locals: settings (Redmine also sets @settings) %>
+<% cfg = {} %>
+<% cfg = settings if defined?(settings) && settings.respond_to?(:each_pair) %>
+<% cfg = @settings if cfg.nil? || (cfg.respond_to?(:empty?) && cfg.empty? && defined?(@settings) && @settings.respond_to?(:each_pair)) %>
+<% values = {} %>
+<% cfg.each_pair { |key, value| values[key.to_s] = value } if cfg.respond_to?(:each_pair) %>
+<% network = (values["network"].nil? || values["network"].to_s.empty?) ? "1" : values["network"].to_s %>
+<% ttl = (values["cache_ttl_hours"].nil? || values["cache_ttl_hours"].to_s.empty?) ? "24" : values["cache_ttl_hours"].to_s %>
+<% locale = (values["locale"].nil? || values["locale"].to_s.empty?) ? "en" : values["locale"].to_s %>
+
+<p>
+  <label for="settings_network">Network</label>
+  <%= select_tag "settings[network]", options_for_select([["On", "1"], ["Off", "0"]], network), :id => "settings_network" %>
+  <em>Off reads the bundled snapshot and does not call the API.</em>
+</p>
+
+<p>
+  <label for="settings_cache_ttl_hours">Cache TTL (hours)</label>
+  <%= text_field_tag "settings[cache_ttl_hours]", ttl, :id => "settings_cache_ttl_hours", :size => 6 %>
+  <em>How long a successful response stays in Rails.cache. A failed request is not cached.</em>
+</p>
+
+<p>
+  <label for="settings_locale">Locale</label>
+  <%= select_tag "settings[locale]", options_for_select([["en", "en"], ["es", "es"], ["de", "de"]], locale), :id => "settings_locale" %>
+  <em>Sent as the <code>locale</code> query parameter. The API rejects a request that omits it.</em>
+</p>

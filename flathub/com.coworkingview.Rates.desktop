@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CoworkingView Rates
+Comment=Browse coworking prices by city
+Exec=com.coworkingview.Rates
+Icon=com.coworkingview.Rates
+Terminal=false
+Categories=Office;
+Keywords=coworking;office;price;desk;
+StartupNotify=true

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.coworkingview.Rates</id>
+  <name>CoworkingView Rates</name>
+  <summary>Browse coworking prices by city</summary>
+  <developer id="com.coworkingview">
+    <name>CoworkingView</name>
+  </developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <launchable type="desktop-id">com.coworkingview.Rates.desktop</launchable>
+  <url type="homepage">https://coworkingview.com</url>
+  <url type="bugtracker">https://github.com/coworkingview/flex-office-data/issues</url>
+  <url type="vcs-browser">https://github.com/coworkingview/flex-office-data</url>
+  <branding>
+    <color type="primary" scheme_preference="light">#c6a15a</color>
+    <color type="primary" scheme_preference="dark">#5c4314</color>
+  </branding>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">none</content_attribute>
+    <content_attribute id="violence-fantasy">none</content_attribute>
+    <content_attribute id="violence-realistic">none</content_attribute>
+    <content_attribute id="violence-bloodshed">none</content_attribute>
+    <content_attribute id="violence-sexual">none</content_attribute>
+    <content_attribute id="violence-desecration">none</content_attribute>
+    <content_attribute id="violence-slavery">none</content_attribute>
+    <content_attribute id="violence-worship">none</content_attribute>
+    <content_attribute id="drugs-alcohol">none</content_attribute>
+    <content_attribute id="drugs-narcotics">none</content_attribute>
+    <content_attribute id="drugs-tobacco">none</content_attribute>
+    <content_attribute id="sex-nudity">none</content_attribute>
+    <content_attribute id="sex-themes">none</content_attribute>
+    <content_attribute id="sex-homosexuality">none</content_attribute>
+    <content_attribute id="sex-prostitution">none</content_attribute>
+    <content_attribute id="sex-adultery">none</content_attribute>
+    <content_attribute id="sex-appearance">none</content_attribute>
+    <content_attribute id="language-profanity">none</content_attribute>
+    <content_attribute id="language-humor">none</content_attribute>
+    <content_attribute id="language-discrimination">none</content_attribute>
+    <content_attribute id="social-chat">none</content_attribute>
+    <content_attribute id="social-info">none</content_attribute>
+    <content_attribute id="social-audio">none</content_attribute>
+    <content_attribute id="social-location">none</content_attribute>
+    <content_attribute id="social-contacts">none</content_attribute>
+    <content_attribute id="money-purchasing">none</content_attribute>
+    <content_attribute id="money-gambling">none</content_attribute>
+  </content_rating>
+  <description>
+    <p>Each published city has median prices for flex desks, fixed desks and private offices, plus day passes and meeting rooms when those are published. The 25th and 75th percentiles are shown next to the median, together with the number of prices, spaces and operators behind the figure.</p>
+    <p>A figure based on fewer than 10 prices is marked so it is not read as a settled median. Cities that do not have enough prices yet stay in the list without figures.</p>
+    <p>Downloads use the public CoworkingView API. There is no account and no API key. If a download fails, the previous successful download stays on disk and the window says that the figures are the saved copy.</p>
+    <p>The Price Index is CC BY 4.0. The attribution sentence returned with each download is shown under the figures.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source" width="990" height="690">https://raw.githubusercontent.com/coworkingview/flex-office-data/flatpak-v0.1.0/flathub/screenshots/city-prices.png</image>
+      <caption>Median prices for a city</caption>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="0.1.0" date="2026-11-04">
+      <description>
+        <p>First version of the city price browser.</p>
+        <ul>
+          <li>Search cities and read median, percentile and sample-size figures</li>
+          <li>Show the last saved download when a newer request fails</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+</component>

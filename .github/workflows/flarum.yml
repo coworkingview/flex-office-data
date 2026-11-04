@@ -38,7 +38,14 @@ jobs:
         run: composer validate --strict --no-check-version --no-check-publish
 
       - name: Unit tests
-        run: composer update --no-interaction --prefer-dist && composer test
+        # Flarum 1.8 requires league/flysystem 1.x. Current Composer will not
+        # install that release because of a security advisory. A forum already
+        # has it in its lockfile; this job only resolves flarum/core so the
+        # extension can be tested beside it.
+        run: |
+          composer config --global policy.advisories.block false
+          composer update --no-interaction --prefer-dist
+          composer test
 
   javascript:
     name: Build admin JS

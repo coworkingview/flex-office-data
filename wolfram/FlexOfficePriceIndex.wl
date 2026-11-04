@@ -29,8 +29,7 @@ cwvEUR[a_Association] := If[NumericQ[a["amount"]], Quantity[a["amount"], "Euros"
 cwvEUR[_] := Missing["NotAvailable"];
 
 cwvFetch[slug_String] := Module[{resp, status, json},
-   resp = URLRead[HTTPRequest["https://api.coworkingview.com/v1/market/rates",
-      <|"Query" -> {"city" -> slug, "locale" -> "en", "currency" -> "EUR"}|>], TimeConstraint -> 30];
+   resp = URLRead[URLBuild["https://api.coworkingview.com/v1/market/rates", {"city" -> slug, "locale" -> "en", "currency" -> "EUR"}], TimeConstraint -> 30];
    If[FailureQ[resp], Return[resp]];
    status = resp["StatusCode"];
    If[status =!= 200,

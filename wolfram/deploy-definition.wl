@@ -5,6 +5,7 @@ Module[{url, nb, reparse, nb2, codes, bad, obj, orig, ctxLeft},
   nb = ToExpression[Import[url, "Text"]];
   reparse[b_] := Module[{s = b //. RowBox[l : {___String}] :> StringJoin[l], r},
     If[! StringQ[s], b,
+      s = StringReplace[s, RegularExpression["HTTPRequest\\[\\s*(\"https://api\\.coworkingview\\.com/v1/market/rates\"),\\s*<\\|\\s*\"Query\"\\s*->\\s*(\\{[^}]*\\})\\s*\\|>\\s*\\]"] -> "URLBuild[$1, $2]"];
       r = Quiet[Block[{$Context = "CWVTMP`", $ContextPath = {"CWVTMP`", "System`"}, h},
         h = ToExpression[s, InputForm, Hold];
         If[h === $Failed, $Failed,
@@ -21,5 +22,5 @@ Module[{url, nb, reparse, nb2, codes, bad, obj, orig, ctxLeft},
   bad = Select[codes, Quiet[ToExpression[#, StandardForm, Hold]] === $Failed &];
   orig = Select[Cases[nb, Cell[BoxData[b_], "Code", ___] :> b, Infinity], Quiet[ToExpression[#, StandardForm, Hold]] === $Failed &];
   obj = CloudDeploy[nb2, "FlexOfficePriceIndex-definition-v5.nb", Permissions -> "Private"];
-  <|"CodeCells" -> Length[codes], "UnparsableCodeCells" -> Length[bad], "OriginalUnparsable" -> Length[orig], "SameAsOriginal" -> Count[MapThread[SameQ, {codes, Cases[nb, Cell[BoxData[b_], "Code", ___] :> b, Infinity]}], True], "ContextPrefixesLeft" -> ctxLeft, "Sample" -> Take[Union[Cases[Cases[nb2, Cell[BoxData[b_], "Code", ___] :> b, Infinity], str_String /; StringContainsQ[str, "`"] && ! StringStartsQ[str, "\""], Infinity]], UpTo[5]], "FetchCell" -> FirstCase[codes, b_ /; ! FreeQ[b, "cwvFetch"] && ! FreeQ[b, "URLRead"], None], "Deployed" -> obj|>
+  <|"CodeCells" -> Length[codes], "UnparsableCodeCells" -> Length[bad], "OriginalUnparsable" -> Length[orig], "SameAsOriginal" -> Count[MapThread[SameQ, {codes, Cases[nb, Cell[BoxData[b_], "Code", ___] :> b, Infinity]}], True], "ContextPrefixesLeft" -> ctxLeft, "Sample" -> Take[Union[Cases[Cases[nb2, Cell[BoxData[b_], "Code", ___] :> b, Infinity], str_String /; StringContainsQ[str, "`"] && ! StringStartsQ[str, "\""], Infinity]], UpTo[5]], "FetchUsesURLBuild" -> ! FreeQ[codes, "URLBuild"], "HTTPRequestLeft" -> ! FreeQ[codes, "HTTPRequest"], "Deployed" -> obj|>
 ]

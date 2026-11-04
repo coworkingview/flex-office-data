@@ -1,4 +1,4 @@
-# Artifact Hub repository metadata for oci://ghcr.io/coworkingview/charts/cwv.
+# Artifact Hub repository metadata for oci://registry-1.docker.io/coworkingview/cwv-helm.
 # Published as the OCI artifact tag artifacthub.io, not inside the chart.
 # Leave repositoryID empty until the repository exists on artifacthub.io and
 # its control-panel ID is known. The owner email is the one that can claim it.

@@ -23,6 +23,11 @@ rust/target/
 integrations/obs/*.crate
 integrations/obs/vendor.tar.zst
 integrations/obs/vendor.tar
+# Fedora COPR: same generated sources, built in CI and published as an SRPM.
+integrations/copr/*.crate
+integrations/copr/vendor.tar.zst
+integrations/copr/vendor.tar
+integrations/copr/copr-output/
 # Java
 integrations/java/target/
 integrations/java/dist/

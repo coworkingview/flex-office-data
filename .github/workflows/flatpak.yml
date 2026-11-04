@@ -31,7 +31,12 @@ jobs:
           flatpak install --user -y --noninteractive flathub org.flatpak.Builder
       - name: Lint manifest and MetaInfo
         run: |
-          flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest flathub/com.coworkingview.Rates.yml
-          flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream flathub/com.coworkingview.Rates.metainfo.xml
+          # flatpak-builder writes .flatpak-builder in the working directory.
+          # The Actions workspace is not writable inside this container.
+          cd /tmp
+          flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest "$GITHUB_WORKSPACE/flathub/com.coworkingview.Rates.yml"
+          flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream "$GITHUB_WORKSPACE/flathub/com.coworkingview.Rates.metainfo.xml"
       - name: Build and install
-        run: flatpak-builder --user --install --disable-rofiles-fuse --force-clean build-dir flathub/com.coworkingview.Rates.yml
+        run: |
+          cd /tmp
+          flatpak-builder --user --install --disable-rofiles-fuse --force-clean /tmp/flatpak-build "$GITHUB_WORKSPACE/flathub/com.coworkingview.Rates.yml"

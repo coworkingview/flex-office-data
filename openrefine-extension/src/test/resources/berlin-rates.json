@@ -1,0 +1,94 @@
+{
+  "data": {
+    "cities": [
+      {
+        "city": {
+          "slug": "berlin",
+          "name": "Berlin"
+        },
+        "countryCode": "DE",
+        "currency": "EUR",
+        "byType": [
+          {
+            "optionType": "fix_desk",
+            "median": {"amount": 310, "currency": "EUR"},
+            "min": {"amount": 160, "currency": "EUR"},
+            "max": {"amount": 680, "currency": "EUR"},
+            "sampleSize": 60
+          },
+          {
+            "optionType": "private_office",
+            "median": {"amount": 480, "currency": "EUR"},
+            "min": {"amount": 70, "currency": "EUR"},
+            "max": {"amount": 1000, "currency": "EUR"},
+            "sampleSize": 59
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {"amount": 214, "currency": "EUR"},
+            "min": {"amount": 80, "currency": "EUR"},
+            "max": {"amount": 750, "currency": "EUR"},
+            "sampleSize": 72
+          }
+        ],
+        "figures": [
+          {
+            "optionType": "fix_desk",
+            "median": {"amount": 310, "currency": "EUR"},
+            "p25": {"amount": 290, "currency": "EUR"},
+            "p75": {"amount": 421, "currency": "EUR"},
+            "sampleSize": 60,
+            "propertyCount": 56,
+            "operatorCount": 37
+          },
+          {
+            "optionType": "private_office",
+            "median": {"amount": 480, "currency": "EUR"},
+            "p25": {"amount": 399, "currency": "EUR"},
+            "p75": {"amount": 550, "currency": "EUR"},
+            "sampleSize": 59,
+            "propertyCount": 38,
+            "operatorCount": 20
+          },
+          {
+            "optionType": "flex_desk",
+            "median": {"amount": 214, "currency": "EUR"},
+            "p25": {"amount": 199, "currency": "EUR"},
+            "p75": {"amount": 292, "currency": "EUR"},
+            "sampleSize": 72,
+            "propertyCount": 66,
+            "operatorCount": 38
+          }
+        ],
+        "dayPass": {
+          "median": {"amount": 35, "currency": "EUR"},
+          "sampleSize": 59,
+          "propertyCount": 55,
+          "operatorCount": 27
+        },
+        "meetingRoom": {
+          "median": {"amount": 32, "currency": "EUR"},
+          "sampleSize": 79,
+          "propertyCount": 51,
+          "operatorCount": 25
+        },
+        "propertyCount": 85,
+        "operatorCount": 48,
+        "p25": {"amount": 219, "currency": "EUR"},
+        "p75": {"amount": 450, "currency": "EUR"},
+        "entryMedian": {"amount": 265, "currency": "EUR"}
+      }
+    ],
+    "unpublished": [
+      {
+        "city": {"slug": "example-town", "name": "Example Town"},
+        "insufficientData": true
+      }
+    ],
+    "asOf": "2026-10-27T21:06:48.313Z",
+    "license": "CC-BY-4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "Source: CoworkingView Price Index (https://coworkingview.com/en/tools/price-index), as of October 2026. Licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Aggregated figures only; no endorsement by CoworkingView or any operator is implied."
+  },
+  "meta": {"contractVersion": "1.0.0"}
+}

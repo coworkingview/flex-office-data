@@ -1,0 +1,99 @@
+name: OpenRefine extension
+
+on:
+  pull_request:
+    paths:
+      - "openrefine-extension/**"
+      - ".github/workflows/openrefine.yml"
+  push:
+    tags: ["openrefine-v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: OpenRefine ${{ matrix.openrefine }}
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - openrefine: "3.8.7"
+            artifact: main
+          - openrefine: "3.9.5"
+            artifact: grel
+          - openrefine: "3.10.1"
+            artifact: grel
+    defaults:
+      run:
+        working-directory: openrefine-extension
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: temurin
+          cache: maven
+
+      - name: Test
+        run: mvn -B test -Dopenrefine.version=${{ matrix.openrefine }} -Dopenrefine.artifact=${{ matrix.artifact }}
+
+  release:
+    name: Publish extension zip
+    if: startsWith(github.ref, 'refs/tags/openrefine-v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: openrefine-extension
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: temurin
+          cache: maven
+
+      - name: Test and package
+        run: mvn -B package
+
+      - name: Check the extension archive
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#openrefine-v}"
+          pom=$(python3 -c 'import xml.etree.ElementTree as t; ns={"m":"http://maven.apache.org/POM/4.0.0"}; print(t.parse("pom.xml").getroot().find("m:version", ns).text)')
+          if [[ "$pom" != "$version" ]]; then
+            echo "::error::tag openrefine-v${version} does not match pom version ${pom}"
+            exit 1
+          fi
+          zip="target/coworkingview-openrefine-${version}.zip"
+          test -f "$zip"
+          root="coworkingview-openrefine-${version}"
+          python3 -c 'import sys, zipfile; z=zipfile.ZipFile(sys.argv[1]); names=set(z.namelist()); root=sys.argv[2]; need=[root+"/module/MOD-INF/module.properties", root+"/module/MOD-INF/controller.js", root+"/module/MOD-INF/lib/coworkingview-openrefine-"+sys.argv[3]+".jar"]; missing=[n for n in need if n not in names]; props=z.read(need[0]).decode();
+          assert not missing, missing
+          assert "name = coworkingview" in props and "author = CoworkingView" in props and "homepage = https://coworkingview.com" in props
+          ' "$zip" "$root" "$version"
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#openrefine-v}"
+          zip="target/coworkingview-openrefine-${version}.zip"
+          cat > "$RUNNER_TEMP/notes.md" <<EOF
+          CoworkingView Price Index ${version} for OpenRefine 3.8, 3.9 and 3.10.
+
+          Unzip into the OpenRefine extensions directory and restart. In GREL, coworkingviewPriceIndex("berlin").median is the flex-desk median.
+
+          The Price Index is CC BY 4.0. The extension returns the attribution string from the public API with every figure. https://coworkingview.com/en/tools/price-index
+          EOF
+          gh release create "$GITHUB_REF_NAME" "$zip" \
+            --title "OpenRefine extension ${version}" \
+            --notes-file "$RUNNER_TEMP/notes.md" \
+            --verify-tag

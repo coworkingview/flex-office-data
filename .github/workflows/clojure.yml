@@ -1,0 +1,40 @@
+name: Clojure
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  clojure:
+    name: Test and build the jar
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/clojure
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: DeLaGuardo/setup-clojure@13.7.0
+        with:
+          cli: 1.12.6.1673
+
+      - name: Check the bundled snapshot
+        run: python3 tools/build_snapshot.py --check
+
+      - name: Run tests
+        run: clojure -M:test
+
+      - name: Build the jar
+        run: clojure -T:build jar
+
+      - name: Check the generated pom
+        run: python3 tools/check_pom.py

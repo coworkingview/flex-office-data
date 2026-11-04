@@ -31,6 +31,9 @@ integrations/copr/copr-output/
 # Java
 integrations/java/target/
 integrations/java/dist/
+openrefine-extension/target/
+openrefine-extension/module/MOD-INF/lib/
+openrefine-extension/module/MOD-INF/classes/
 # Swift
 .build/
 .swiftpm/

@@ -1,0 +1,54 @@
+name: Typst
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    name: Snapshot matches the open dataset
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the bundled JSON and the submission tree
+        run: python3 integrations/typst/tools/build_package.py --check
+
+  compile:
+    name: Compile examples (Typst ${{ matrix.typst }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        typst: ["0.13.1", "0.15.1"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Typst ${{ matrix.typst }}
+        run: |
+          set -eu
+          version="${{ matrix.typst }}"
+          archive="typst-x86_64-unknown-linux-musl.tar.xz"
+          curl -fsSL -o "$archive" \
+            "https://github.com/typst/typst/releases/download/v${version}/${archive}"
+          tar -xJf "$archive"
+          mkdir -p "$HOME/.local/bin"
+          install -m 755 typst-x86_64-unknown-linux-musl/typst "$HOME/.local/bin/typst"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          "$HOME/.local/bin/typst" --version
+      - name: Compile the library and the examples
+        env:
+          XDG_DATA_HOME: ${{ runner.temp }}/typst-data
+        run: |
+          set -eu
+          root="$GITHUB_WORKSPACE/integrations/typst/coworkingview"
+          dest="$XDG_DATA_HOME/typst/packages/preview/coworkingview/0.1.0"
+          mkdir -p "$dest"
+          cp -a "$root"/. "$dest"/
+          typst compile "$root/lib.typ" "$RUNNER_TEMP/coworkingview-lib.pdf"
+          for example in "$root"/examples/*.typ; do
+            name="$(basename "${example%.typ}")"
+            typst compile "$example" "$RUNNER_TEMP/${name}.pdf"
+          done

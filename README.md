@@ -38,6 +38,8 @@ One call returns a tidy table you can analyse, chart or join with your own data.
 
 [Kimai](kimai-plugin/) (`CoworkingViewBundle`, CoworkingView Workplace) adds a workplace field (home, office, coworking) to timesheets and projects, and a report of hours by workplace. The plugin code is MIT. It does not include prices.
 
+[Flarum](flarum/) (`coworkingview/flarum-coworkingview`, CoworkingView) adds the BBCode tag `[coworkingview city="berlin"]`, which renders a link to that city's hub on CoworkingView. The extension code is MIT. It does not include prices.
+
 [PostgreSQL](integrations/postgres/) (`coworkingview`) installs a snapshot of the same Price Index with `CREATE EXTENSION coworkingview`. The extension is pure SQL, MIT, and packaged for [PGXN](https://pgxn.org/).
 
 The Python, R, Java, Ruby and command-line packages read the same public API, follow

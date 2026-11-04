@@ -1,8 +1,6 @@
-# cwv-helm
+# cwv
 
 Helm chart for the [`cwv`](https://github.com/coworkingview/flex-office-data/tree/main/rust) command-line tool. It installs a CronJob that runs the published image [`docker.io/coworkingview/cwv:0.1.0`](https://hub.docker.com/r/coworkingview/cwv) and prints [CoworkingView Price Index](https://coworkingview.com/en/tools/price-index) rates to the job log.
-
-The chart name is `cwv-helm`, not `cwv`. The OCI repository is `docker.io/coworkingview/cwv-helm`. That is a different Docker Hub repository from the `coworkingview/cwv` image, so a chart tag cannot replace image tag `0.1.0`.
 
 The image is the one built from [`rust/Dockerfile`](https://github.com/coworkingview/flex-office-data/blob/main/rust/Dockerfile) and published on Docker Hub as `coworkingview/cwv`. Tags `0.1.0` and `latest` are the same multi-arch index (`linux/amd64` and `linux/arm64`). The chart pins `0.1.0`. The image is `FROM scratch`: one static binary, entrypoint `cwv`, user `65534:65534`. There is no shell. TLS is rustls with bundled roots, so the pod does not need a CA bundle.
 
@@ -12,30 +10,31 @@ The image is the one built from [`rust/Dockerfile`](https://github.com/coworking
 
 Requires Kubernetes 1.23 or newer (CronJob `batch/v1` and `ttlSecondsAfterFinished`) and Helm 3.
 
-From this directory, before the chart is in a registry:
+From this directory:
 
 ```sh
-helm install cwv-helm .
+helm install cwv .
 ```
 
-From the OCI registry this repository publishes on a `helm-v*` tag:
+From the Helm repository this repository publishes on a `helm-v*` tag:
 
 ```sh
-helm install cwv-helm oci://registry-1.docker.io/coworkingview/cwv-helm --version 0.1.1
+helm repo add cwv https://raw.githubusercontent.com/coworkingview/flex-office-data/main/helm-repo
+helm install cwv cwv/cwv --version 0.1.1
 ```
 
 Berlin only, CSV:
 
 ```sh
-helm install cwv-helm oci://registry-1.docker.io/coworkingview/cwv-helm --version 0.1.1 \
+helm install cwv cwv/cwv --version 0.1.1 \
   --set city=berlin --set format=csv
 ```
 
 One run, without waiting for the schedule:
 
 ```sh
-kubectl create job --from=cronjob/cwv-helm cwv-helm-once
-kubectl logs job/cwv-helm-once
+kubectl create job --from=cronjob/cwv cwv-once
+kubectl logs job/cwv-once
 ```
 
 ## Configuration
@@ -71,14 +70,14 @@ The chart and the `cwv` code are [MIT](LICENSE). Price Index data is CC BY 4.0, 
 
 ## Artifact Hub
 
-The release workflow pushes this chart to `oci://registry-1.docker.io/coworkingview/cwv-helm` and pushes [`artifacthub-repo.yml`](artifacthub-repo.yml) to `registry-1.docker.io/coworkingview/cwv-helm:artifacthub.io`.
+A tag `helm-v*` attaches `cwv-<version>.tgz` to the GitHub release and updates [`helm-repo/index.yaml`](https://github.com/coworkingview/flex-office-data/blob/main/helm-repo/index.yaml). The chart packages live on the release. The index and [`helm-repo/artifacthub-repo.yml`](https://github.com/coworkingview/flex-office-data/blob/main/helm-repo/artifacthub-repo.yml) are on `main`.
 
 To list it on [Artifact Hub](https://artifacthub.io):
 
 | Field | Value |
 |---|---|
-| Kind | Helm OCI |
-| URL | `oci://registry-1.docker.io/coworkingview/cwv-helm` |
+| Kind | Helm charts |
+| URL | `https://raw.githubusercontent.com/coworkingview/flex-office-data/main/helm-repo` |
 
 `repositoryID` in `artifacthub-repo.yml` is empty until that repository exists and its control-panel ID is known. The owner is CoworkingView, `info@coworkingview.com`.
 

@@ -1,5 +1,5 @@
-# Artifact Hub repository metadata for oci://registry-1.docker.io/coworkingview/cwv-helm.
-# Published as the OCI artifact tag artifacthub.io, not inside the chart.
+# Artifact Hub repository metadata for the classic Helm repository at
+# https://raw.githubusercontent.com/coworkingview/flex-office-data/main/helm-repo
 # Leave repositoryID empty until the repository exists on artifacthub.io and
 # its control-panel ID is known. The owner email is the one that can claim it.
 repositoryID: ""

@@ -1,5 +1,5 @@
 apiVersion: v2
-name: cwv-helm
+name: cwv
 description: CronJob that runs the cwv CLI and prints CoworkingView Price Index rates.
 type: application
 version: 0.1.1
@@ -35,6 +35,6 @@ annotations:
         - linux/arm64
   artifacthub.io/changes: |
     - kind: changed
-      description: Chart name is cwv-helm 0.1.1 so the OCI push does not use the docker.io/coworkingview/cwv image repository.
+      description: Chart 0.1.1 is published from the HTTPS Helm repository.
     - kind: added
       description: CronJob that runs docker.io/coworkingview/cwv:0.1.0 and prints Price Index rates.

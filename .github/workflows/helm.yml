@@ -1,9 +1,10 @@
 name: Helm
 
 # helm lint and helm template on every pull request and on main.
-# A tag helm-v<chart version> packages the chart and pushes it to
-# oci://ghcr.io/coworkingview/charts/cwv, then pushes artifacthub-repo.yml
-# to ghcr.io/coworkingview/charts/cwv:artifacthub.io.
+# A tag helm-v<chart version> packages cwv-helm and pushes it to
+# oci://registry-1.docker.io/coworkingview/cwv-helm (Docker Hub repo
+# coworkingview/cwv-helm, not the cwv image), then pushes artifacthub-repo.yml
+# to that same repo at the tag artifacthub.io.
 
 on:
   push:
@@ -26,20 +27,21 @@ jobs:
           version: v3.22.1
 
       - name: Lint
-        run: helm lint integrations/helm/cwv
+        run: helm lint integrations/helm/cwv-helm
 
       - name: Template the defaults
         run: |
           set -euo pipefail
-          helm template cwv integrations/helm/cwv > "$RUNNER_TEMP/cwv.yaml"
+          helm template cwv-helm integrations/helm/cwv-helm > "$RUNNER_TEMP/cwv.yaml"
           grep -q 'image: "docker.io/coworkingview/cwv:0.1.0"' "$RUNNER_TEMP/cwv.yaml"
           grep -q 'readOnlyRootFilesystem: true' "$RUNNER_TEMP/cwv.yaml"
           grep -q -- '- "rates"' "$RUNNER_TEMP/cwv.yaml"
+          grep -q 'name: cwv-helm' "$RUNNER_TEMP/cwv.yaml"
 
       - name: Template a Berlin CSV schedule
         run: |
           set -euo pipefail
-          helm template cwv integrations/helm/cwv \
+          helm template cwv-helm integrations/helm/cwv-helm \
             --set city=berlin \
             --set format=csv \
             --set locale=de \
@@ -53,7 +55,7 @@ jobs:
       - name: Template cities
         run: |
           set -euo pipefail
-          helm template cwv integrations/helm/cwv --set command=cities --set country=DE \
+          helm template cwv-helm integrations/helm/cwv-helm --set command=cities --set country=DE \
             > "$RUNNER_TEMP/cities.yaml"
           grep -q -- '- "cities"' "$RUNNER_TEMP/cities.yaml"
           grep -q -- '- "DE"' "$RUNNER_TEMP/cities.yaml"
@@ -63,9 +65,6 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/helm-v')
     needs: lint
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -87,8 +86,15 @@ jobs:
         id: package
         run: |
           set -euo pipefail
-          chart=integrations/helm/cwv
+          chart=integrations/helm/cwv-helm
+          name=$(sed -n 's/^name: *//p' "$chart/Chart.yaml" | head -1 | tr -d '"')
           version=$(sed -n 's/^version: *//p' "$chart/Chart.yaml" | head -1 | tr -d '"')
+          # Helm uses the chart name as the repository name under the registry
+          # path. cwv-helm must never be cwv: that repository is the image.
+          if [[ "$name" != "cwv-helm" ]]; then
+            echo "::error::chart name is ${name}; refusing to push because docker.io/coworkingview/cwv is the image"
+            exit 1
+          fi
           tag="${GITHUB_REF_NAME#helm-v}"
           if [[ "$tag" != "$version" ]]; then
             echo "::error::tag helm-v${tag} does not match Chart.yaml version ${version}"
@@ -96,70 +102,131 @@ jobs:
           fi
           helm lint "$chart"
           helm package "$chart" --destination "$RUNNER_TEMP"
+          tgz="$RUNNER_TEMP/cwv-helm-${version}.tgz"
+          test -f "$tgz"
           echo "version=${version}" >> "$GITHUB_OUTPUT"
-          echo "chart=${RUNNER_TEMP}/cwv-${version}.tgz" >> "$GITHUB_OUTPUT"
+          echo "chart=${tgz}" >> "$GITHUB_OUTPUT"
 
-      - name: Push the chart to GHCR
+      - name: Push the chart to Docker Hub
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+          DOCKERHUB_ACCESS_TOKEN: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+          DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          DOCKERIO_USERNAME: ${{ secrets.DOCKERIO_USERNAME }}
+          DOCKERIO_TOKEN: ${{ secrets.DOCKERIO_TOKEN }}
+          DOCKERIO_PASSWORD: ${{ secrets.DOCKERIO_PASSWORD }}
+          CWV_DOCKERHUB_USERNAME: ${{ secrets.CWV_DOCKERHUB_USERNAME }}
+          CWV_DOCKERHUB_TOKEN: ${{ secrets.CWV_DOCKERHUB_TOKEN }}
+          CWV_DOCKER_USERNAME: ${{ secrets.CWV_DOCKER_USERNAME }}
+          CWV_DOCKER_TOKEN: ${{ secrets.CWV_DOCKER_TOKEN }}
+          COWORKINGVIEW_DOCKERHUB_USERNAME: ${{ secrets.COWORKINGVIEW_DOCKERHUB_USERNAME }}
+          COWORKINGVIEW_DOCKERHUB_TOKEN: ${{ secrets.COWORKINGVIEW_DOCKERHUB_TOKEN }}
+          COWORKINGVIEW_DOCKER_USERNAME: ${{ secrets.COWORKINGVIEW_DOCKER_USERNAME }}
+          COWORKINGVIEW_DOCKER_TOKEN: ${{ secrets.COWORKINGVIEW_DOCKER_TOKEN }}
+          HUB_USERNAME: ${{ secrets.HUB_USERNAME }}
+          HUB_TOKEN: ${{ secrets.HUB_TOKEN }}
+          HUB_PASSWORD: ${{ secrets.HUB_PASSWORD }}
         run: |
           set -euo pipefail
-          echo "$GITHUB_TOKEN" | helm registry login ghcr.io \
-            --username "${GITHUB_ACTOR}" --password-stdin
-          set +e
-          push_out=$(helm push "${{ steps.package.outputs.chart }}" oci://ghcr.io/coworkingview/charts 2>&1)
-          push_status=$?
-          set -e
-          echo "$push_out"
-          if [[ "$push_status" -ne 0 ]]; then
-            if grep -qiE 'already exists|cannot be overwritten' <<<"$push_out"; then
-              echo "Chart version is already in the registry; continuing."
-            else
-              exit "$push_status"
+          user=""
+          pass=""
+          pair=""
+          pick() {
+            local uname_var="$1" pass_var="$2"
+            local u="${!uname_var}" p="${!pass_var}"
+            if [[ -n "$u" && -n "$p" && -z "$user" ]]; then
+              user="$u"
+              pass="$p"
+              pair="${uname_var}+${pass_var}"
             fi
+          }
+          pick DOCKERHUB_USERNAME DOCKERHUB_TOKEN
+          pick DOCKERHUB_USERNAME DOCKERHUB_PASSWORD
+          pick DOCKERHUB_USERNAME DOCKERHUB_ACCESS_TOKEN
+          pick DOCKER_USERNAME DOCKER_PASSWORD
+          pick DOCKER_USERNAME DOCKER_TOKEN
+          pick DOCKER_HUB_USERNAME DOCKER_HUB_TOKEN
+          pick DOCKER_HUB_USERNAME DOCKER_HUB_PASSWORD
+          pick DOCKERIO_USERNAME DOCKERIO_TOKEN
+          pick DOCKERIO_USERNAME DOCKERIO_PASSWORD
+          pick CWV_DOCKERHUB_USERNAME CWV_DOCKERHUB_TOKEN
+          pick CWV_DOCKER_USERNAME CWV_DOCKER_TOKEN
+          pick COWORKINGVIEW_DOCKERHUB_USERNAME COWORKINGVIEW_DOCKERHUB_TOKEN
+          pick COWORKINGVIEW_DOCKER_USERNAME COWORKINGVIEW_DOCKER_TOKEN
+          pick HUB_USERNAME HUB_TOKEN
+          pick HUB_USERNAME HUB_PASSWORD
+          # A token with no username secret: the image publisher is the user coworkingview.
+          if [[ -z "$user" ]]; then
+            for pass_var in DOCKERHUB_TOKEN DOCKERHUB_PASSWORD DOCKERHUB_ACCESS_TOKEN DOCKER_TOKEN DOCKER_PASSWORD DOCKER_HUB_TOKEN DOCKER_HUB_PASSWORD DOCKERIO_TOKEN DOCKERIO_PASSWORD CWV_DOCKERHUB_TOKEN CWV_DOCKER_TOKEN COWORKINGVIEW_DOCKERHUB_TOKEN COWORKINGVIEW_DOCKER_TOKEN HUB_TOKEN HUB_PASSWORD; do
+              p="${!pass_var}"
+              if [[ -n "$p" ]]; then
+                user="coworkingview"
+                pass="$p"
+                pair="literal-coworkingview+${pass_var}"
+                break
+              fi
+            done
           fi
-
-      - name: Push artifacthub-repo.yml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          echo "$GITHUB_TOKEN" | oras login ghcr.io \
-            --username "${GITHUB_ACTOR}" --password-stdin
-          # Media types are the ones Artifact Hub documents for the artifacthub.io tag.
-          oras push ghcr.io/coworkingview/charts/cwv:artifacthub.io \
+          if [[ -z "$user" || -z "$pass" ]]; then
+            echo "::error::No Docker Hub username/token secrets are set. The cwv image workflow only builds locally; it does not log in. Expected DOCKERHUB_USERNAME plus DOCKERHUB_TOKEN (or DOCKERHUB_PASSWORD)."
+            exit 1
+          fi
+          echo "Using Docker Hub credentials from ${pair}."
+          printf '%s' "$pass" | helm registry login registry-1.docker.io --username "$user" --password-stdin
+          push_out=$(helm push "${{ steps.package.outputs.chart }}" oci://registry-1.docker.io/coworkingview)
+          echo "$push_out"
+          grep -q 'coworkingview/cwv-helm:' <<<"$push_out"
+          if grep -E 'coworkingview/cwv:' <<<"$push_out"; then
+            echo "::error::push output names the image repository coworkingview/cwv"
+            exit 1
+          fi
+          printf '%s' "$pass" | oras login registry-1.docker.io --username "$user" --password-stdin
+          oras push registry-1.docker.io/coworkingview/cwv-helm:artifacthub.io \
             --config /dev/null:application/vnd.cncf.artifacthub.config.v1+yaml \
-            integrations/helm/cwv/artifacthub-repo.yml:application/vnd.cncf.artifacthub.repository-metadata.layer.v1.yaml
+            integrations/helm/cwv-helm/artifacthub-repo.yml:application/vnd.cncf.artifacthub.repository-metadata.layer.v1.yaml
 
-      - name: Make the GHCR package public
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Confirm the Docker Hub repository is public
         run: |
           set -euo pipefail
-          python3 .github/workflows/ghcr-visibility.py
+          python3 - <<'PY'
+          import json, time, urllib.error, urllib.request
+          url = "https://hub.docker.com/v2/repositories/coworkingview/cwv-helm/"
+          last = ""
+          for attempt in range(1, 9):
+              try:
+                  with urllib.request.urlopen(url, timeout=30) as resp:
+                      data = json.load(resp)
+              except urllib.error.HTTPError as err:
+                  last = f"HTTP {err.code}"
+                  print(f"attempt {attempt}: {last}")
+                  time.sleep(5)
+                  continue
+              private = data.get("is_private")
+              print(f"attempt {attempt}: name={data.get('name')} is_private={private}")
+              if private is False:
+                  raise SystemExit(0)
+              last = f"is_private={private}"
+              time.sleep(5)
+          raise SystemExit(f"coworkingview/cwv-helm is not public ({last})")
+          PY
 
-      - name: Pull the chart back
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Pull the chart back anonymously
         run: |
           set -euo pipefail
           version="${{ steps.package.outputs.version }}"
-          mkdir -p "$RUNNER_TEMP/pull"
-          echo "$GITHUB_TOKEN" | helm registry login ghcr.io \
-            --username "${GITHUB_ACTOR}" --password-stdin
-          helm pull "oci://ghcr.io/coworkingview/charts/cwv" \
-            --version "$version" --destination "$RUNNER_TEMP/pull"
-          tar -tzf "$RUNNER_TEMP/pull/cwv-${version}.tgz" | grep -q 'cwv/Chart.yaml'
-          # Helm also reads DOCKER_CONFIG, so an empty Helm config is not enough.
-          # Point both at configs with no credentials.
           mkdir -p "$RUNNER_TEMP/docker-empty" "$RUNNER_TEMP/helm-empty" "$RUNNER_TEMP/anon"
           printf '%s\n' '{"auths":{}}' > "$RUNNER_TEMP/docker-empty/config.json"
           printf '%s\n' '{"auths":{}}' > "$RUNNER_TEMP/helm-empty/config.json"
-          if DOCKER_CONFIG="$RUNNER_TEMP/docker-empty" \
+          DOCKER_CONFIG="$RUNNER_TEMP/docker-empty" \
             HELM_REGISTRY_CONFIG="$RUNNER_TEMP/helm-empty/config.json" \
-            helm pull "oci://ghcr.io/coworkingview/charts/cwv" \
-              --version "$version" --destination "$RUNNER_TEMP/anon"; then
-            echo "Anonymous helm pull succeeded."
-          else
-            echo "::warning::Anonymous helm pull of oci://ghcr.io/coworkingview/charts/cwv version ${version} failed. The package is not publicly pullable."
-          fi
+            helm pull "oci://registry-1.docker.io/coworkingview/cwv-helm" \
+              --version "$version" --destination "$RUNNER_TEMP/anon"
+          tar -tzf "$RUNNER_TEMP/anon/cwv-helm-${version}.tgz" | grep -q 'cwv-helm/Chart.yaml'
+          echo "Anonymous helm pull succeeded."

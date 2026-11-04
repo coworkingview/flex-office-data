@@ -1,0 +1,28 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+! Package coworkingview Error: Unknown city 'paris'. Available cities: Abu
+(coworkingview)                Dhabi, Berlin, Madrid.
+For immediate help type H <return>.
+ ...                                              
+l. ...\cwvrate {paris}
+City names and slugs are matched without regard to case. Spaces, hyphens and
+underscores are the same separator. The snapshot has no price row for 'paris'.
+RESULT: 
+! Package coworkingview Error: Unknown city 'example-town'. Available cities:
+(coworkingview)                Abu Dhabi, Berlin, Madrid.
+For immediate help type H <return>.
+ ...                                              
+l. ...\cwvrate {example-town}
+City names and slugs are matched without regard to case. Spaces, hyphens and
+underscores are the same separator. The snapshot has no price row for
+'example-town'.
+RESULT: 
+! Package coworkingview Error: Unknown city 'no-such-city'. Available cities:
+(coworkingview)                Abu Dhabi, Berlin, Madrid.
+For immediate help type H <return>.
+ ...                                              
+l. ...\cwvratestable {no-such-city}
+City names and slugs are matched without regard to case. Spaces, hyphens and
+underscores are the same separator. The snapshot has no price row for
+'no-such-city'.
+RESULT: 

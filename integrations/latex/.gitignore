@@ -1,0 +1,10 @@
+/build/
+/coworkingview.zip
+*.log
+*.aux
+*.toc
+*.out
+*.synctex.gz
+*.hd
+*.fls
+*.fdb_latexmk

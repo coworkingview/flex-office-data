@@ -1,0 +1,187 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{coworkingview}
+\usepackage{hyperref}
+\hypersetup{
+  hidelinks,
+  pdftitle={coworkingview},
+  pdfauthor={CoworkingView},
+}
+
+\newcommand{\cmd}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\meta}[1]{$\langle$\textit{#1}$\rangle$}
+
+\title{coworkingview}
+\author{CoworkingView}
+\date{Version 0.1.0}
+
+\emergencystretch=2em
+
+\begin{document}
+\maketitle
+
+\section{Purpose}
+
+\cmd{coworkingview} prints median prices from a snapshot of the
+CoworkingView Price Index.
+The snapshot is shipped in
+\begin{center}
+\cmd{coworkingview-rates.csv}.
+\end{center}
+The package reads that file from the TeX input path.
+It does not open a network connection and it does not run shell commands.
+
+The code and this document are distributed under the LaTeX Project
+Public License, version 1.3c or later.
+The rates file is not part of that work.
+It is Price Index data under CC BY 4.0
+(\url{https://creativecommons.org/licenses/by/4.0/}).
+Keep \cmd{\cwvattribution} with any figure taken from the snapshot.
+
+\section{Snapshot}
+
+The file records three cities that have a price row:
+Abu Dhabi, Berlin and Madrid.
+The unpublished fixture city \cmd{example-town} is in the project's
+cities table and has no prices, so it is not in this file.
+\cmd{\cwvrate} and \cmd{\cwvratestable} raise a package error for it,
+as they do for any other unknown city.
+
+Each row is copied from the open rates table.
+The median, the percentiles and the sample size are the recorded
+figures, not values computed by the package.
+The snapshot date is the \cmd{as_of} value on those rows:
+
+\begin{quote}
+\cwvsnapshotdate
+\end{quote}
+
+The column \cmd{low_confidence} is kept in the file and is not printed
+by the commands.
+Empty \cmd{p25} and \cmd{p75} cells mean that percentile was not published.
+Day passes and meeting rooms in this snapshot have no percentiles.
+
+The recorded response credits the figures as follows.
+Aggregated figures only; no endorsement by CoworkingView or any
+operator is implied.
+
+\begin{quote}
+Source: CoworkingView Price Index
+(\url{https://coworkingview.com/en/tools/price-index}),
+as of October 2026.
+Licensed under CC BY 4.0
+(\url{https://creativecommons.org/licenses/by/4.0/}).
+Aggregated figures only; no endorsement by CoworkingView or any
+operator is implied.
+\end{quote}
+
+\section{Commands}
+
+The package defines five commands.
+An unknown city is an error whose message lists the cities in the
+snapshot.
+An unknown product is an error whose message lists the products
+recorded for that city.
+
+\subsection{\cmd{\cwvrate}}
+
+\texttt{\string\cwvrate\{\meta{city}\}} prints the median, the currency
+code and the unit for \cmd{flex_desk}.
+\texttt{\string\cwvrate[product=\meta{product}]\{\meta{city}\}} selects
+another product.
+The text is the median as stored, a space, the currency code, a slash
+and the unit, for example \cwvrate{berlin}.
+
+\meta{city} is a slug or a display name.
+Comparison ignores case.
+Spaces, hyphens and underscores are the same separator, so
+\cmd{Abu Dhabi}, \cmd{abu-dhabi} and \cmd{abu_dhabi} are one city.
+
+\meta{product} is \cmd{flex_desk}, \cmd{fix_desk} or
+\cmd{private_office}, or \cmd{day_pass} or \cmd{meeting_room}.
+The same separator rule applies, so \cmd{private office} matches
+\cmd{private_office}.
+\cmd{flex_desk}, \cmd{fix_desk} and \cmd{private_office} are monthly.
+\cmd{day_pass} is daily.
+\cmd{meeting_room} is hourly.
+The unit in the output is the unit from the row.
+
+\begin{quote}
+\small
+\begin{tabular}{@{}ll@{}}
+\texttt{\string\cwvrate\{berlin\}} & \cwvrate{berlin} \\
+\texttt{\string\cwvrate[product=day\_pass]\{Berlin\}} &
+  \cwvrate[product=day_pass]{Berlin} \\
+\texttt{\string\cwvrate[product=private office]\{madrid\}} &
+  \cwvrate[product=private office]{madrid} \\
+\texttt{\string\cwvrate\{Abu Dhabi\}} & \cwvrate{Abu Dhabi} \\
+\end{tabular}
+\end{quote}
+
+\subsection{\cmd{\cwvratestable}}
+
+\texttt{\string\cwvratestable\{\meta{city}\}} prints a \cmd{tabular} with four
+columns: product, median, the interval from the 25th to the 75th
+percentile, and the sample size~$n$.
+Products are ordered \cmd{flex_desk}, \cmd{fix_desk},
+\cmd{private_office}, \cmd{day_pass}, \cmd{meeting_room}.
+A product that is absent for that city is omitted.
+A missing percentile is an em dash.
+The percentiles use the currency shown in the median column.
+
+Berlin:
+
+\medskip
+\cwvratestable{berlin}
+
+\medskip
+Madrid:
+
+\medskip
+\cwvratestable{Madrid}
+
+\medskip
+Abu Dhabi:
+
+\medskip
+\cwvratestable{abu-dhabi}
+
+\subsection{Cities, date and credit}
+
+\cmd{\cwvcities} prints the display names in the order of the file:
+\cwvcities.
+
+\cmd{\cwvsnapshotdate} prints \cwvsnapshotdate.
+
+\cmd{\cwvattribution} prints the credit used next to a figure.
+This document loads \cmd{hyperref}, so the price-index name is a link
+and the visible text is
+``Data: CoworkingView Price Index, CC BY 4.0''.
+Without \cmd{hyperref}, the package does not load it.
+The same words are printed and the URL is added with \cmd{\url}.
+
+\begin{quote}
+\cwvattribution
+\end{quote}
+
+\section{Files}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\cmd{coworkingview.sty} & package \\
+\cmd{coworkingview-rates.csv} & snapshot, CC BY 4.0 \\
+\cmd{coworkingview-doc.tex} & this document \\
+\cmd{coworkingview-doc.pdf} & typeset document \\
+\cmd{README.md} & short description and licence \\
+\cmd{LICENSE} & LPPL 1.3c, and the data licence \\
+\end{tabular}
+\end{center}
+
+\noindent Homepage\par
+\url{https://coworkingview.com/en/tools/price-index}\par
+\noindent Repository\par
+\url{https://github.com/coworkingview/flex-office-data}\par
+\noindent Bug reports\par
+\url{https://github.com/coworkingview/flex-office-data/issues}
+
+\end{document}

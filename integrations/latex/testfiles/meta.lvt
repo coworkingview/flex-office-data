@@ -1,0 +1,18 @@
+\documentclass{article}
+\input{regression-test}
+\usepackage{coworkingview}
+\begin{document}
+\START
+\ExplSyntaxOn
+\cwvcities
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvsnapshotdate
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\tl_set_eq:NN \l_tmpa_tl \g__cwv_result_tl
+\tl_replace_all:Nnn \l_tmpa_tl { - } { . }
+\typeout {DATED:~\tl_to_str:N \l_tmpa_tl}
+\cwvattribution
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\ExplSyntaxOff
+\END
+\end{document}

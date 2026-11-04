@@ -1,0 +1,9 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line ....
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line ....
+RESULT: Product | Median | P25--P75 | n; Flex desk | 214 EUR/month | 199--292 | 72; Fixed desk | 310 EUR/month | 290--421 | 60; Private office | 480 EUR/month | 399--550 | 59; Day pass | 35 EUR/day | --- | 59; Meeting room | 32 EUR/hour | --- | 79
+RESULT: Product | Median | P25--P75 | n; Flex desk | 175 EUR/month | 130--199 | 13; Fixed desk | 260 EUR/month | 249--280 | 9; Private office | 385 EUR/month | 275--449 | 9; Day pass | 22 EUR/day | --- | 11; Meeting room | 28 EUR/hour | --- | 8
+RESULT: Product | Median | P25--P75 | n; Flex desk | 1400 AED/month | 1400--1800 | 3; Fixed desk | 1800 AED/month | 1800--1800 | 2; Private office | 2057 AED/month | 1486--2629 | 2

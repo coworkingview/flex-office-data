@@ -1,0 +1,15 @@
+\documentclass{article}
+\input{regression-test}
+\usepackage{coworkingview}
+\begin{document}
+\START
+\ExplSyntaxOn
+\cwvratestable {berlin}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvratestable {Madrid}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvratestable {abu_dhabi}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\ExplSyntaxOff
+\END
+\end{document}

@@ -1,0 +1,13 @@
+\documentclass{article}
+\input{regression-test}
+\usepackage{coworkingview}
+\begin{document}
+\START
+\ExplSyntaxOn
+\cwvrate [product=yacht] {berlin}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate [product=day_pass] {abu-dhabi}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\ExplSyntaxOff
+\END
+\end{document}

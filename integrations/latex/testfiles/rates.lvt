@@ -1,0 +1,33 @@
+\documentclass{article}
+\input{regression-test}
+\usepackage{coworkingview}
+\begin{document}
+\START
+\ExplSyntaxOn
+\cwvrate {berlin}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate {Berlin}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate { BERLIN }
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate [product=flex_desk] {berlin}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate [product=flex~desk] {berlin}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate [product=day_pass] {berlin}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate [product=private~office] {Berlin}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate [product=meeting-room] {madrid}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate [product=fix_desk] {Abu~Dhabi}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate {abu_dhabi}
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate [product=flex_desk] { abu-dhabi }
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\cwvrate { MADRID }
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\ExplSyntaxOff
+\END
+\end{document}

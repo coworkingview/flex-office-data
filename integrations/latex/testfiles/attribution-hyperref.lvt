@@ -1,0 +1,12 @@
+\documentclass{article}
+\input{regression-test}
+\usepackage{coworkingview}
+\usepackage{hyperref}
+\begin{document}
+\START
+\ExplSyntaxOn
+\cwvattribution
+\typeout {RESULT:~\tl_to_str:N \g__cwv_result_tl}
+\ExplSyntaxOff
+\END
+\end{document}

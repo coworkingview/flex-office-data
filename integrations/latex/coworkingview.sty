@@ -1,0 +1,549 @@
+%% coworkingview.sty
+%% Copyright (C) 2026 CoworkingView
+%%
+%% This work may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License, either version 1.3c of this license
+%% or (at your option) any later version.
+%% The latest version of this license is in
+%%   https://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008 or later.
+%%
+%% This work has the LPPL maintenance status "maintained".
+%% The Current Maintainer of this work is CoworkingView
+%% <info@coworkingview.com>.
+%%
+%% This work consists of the files coworkingview.sty,
+%% coworkingview-doc.tex, README.md and LICENSE,
+%% and the derived file coworkingview-doc.pdf.
+%%
+%% coworkingview-rates.csv is not part of this LPPL work. It is a
+%% snapshot of the CoworkingView Price Index, licensed under CC BY 4.0.
+%%
+%% The package reads that file from the TeX input path. It does not
+%% open a network connection and it does not run shell commands.
+\NeedsTeXFormat{LaTeX2e}[2022-06-01]
+\ProvidesExplPackage {coworkingview} {2026-11-04} {0.1.0}
+  {Median flexible-office prices from a CoworkingView Price Index snapshot}
+
+\msg_new:nnnn {coworkingview} {missing-data}
+  {File~'coworkingview-rates.csv'~was~not~found.}
+  {Install~coworkingview-rates.csv~next~to~coworkingview.sty,~
+   on~the~TeX~input~path.}
+\msg_new:nnn {coworkingview} {bad-snapshot}
+  {Invalid~snapshot:~#1.}
+\msg_new:nnnn {coworkingview} {unknown-city}
+  {Unknown~city~'#1'.~Available~cities:~#2.}
+  {City~names~and~slugs~are~matched~without~regard~to~case.~
+   Spaces,~hyphens~and~underscores~are~the~same~separator.~
+   The~snapshot~has~no~price~row~for~'#1'.}
+\msg_new:nnnn {coworkingview} {unknown-product}
+  {Unknown~product~'#1'~for~#2.}
+  {The~product~is~a~code~such~as~flex_desk,~or~the~same~words~
+   with~spaces~or~hyphens.~The~default~is~flex_desk.}
+
+\cs_generate_variant:Nn \msg_error:nnn { nne }
+\cs_generate_variant:Nn \msg_error:nnnn { nnee }
+\cs_generate_variant:Nn \prop_gput:Nnn { Nee , Nne , NVe }
+\cs_generate_variant:Nn \prop_get:NnNTF { NVNTF }
+\cs_generate_variant:Nn \prop_if_in:NnT { NeT , NVT }
+\cs_generate_variant:Nn \prop_if_in:NnF { NVF }
+\cs_generate_variant:Nn \prop_if_in:NnTF { NVTF }
+\cs_generate_variant:Nn \prop_item:Nn { NV }
+\cs_generate_variant:Nn \str_set:Nn { Ne }
+\cs_generate_variant:Nn \str_lowercase:n { e }
+\cs_generate_variant:Nn \str_if_in:nnTF { eeTF }
+\cs_generate_variant:Nn \prop_gput:Nnn { NVn }
+\cs_generate_variant:Nn \tl_set:Nn { Ne }
+\cs_generate_variant:Nn \tl_gset:Nn { Ne }
+\cs_generate_variant:Nn \tl_put_right:Nn { Ne , NV }
+\cs_generate_variant:Nn \tl_gput_right:Nn { Ne }
+\cs_generate_variant:Nn \tl_trim_spaces:n { e }
+\cs_generate_variant:Nn \tl_if_blank:nT { eT , VT }
+\cs_generate_variant:Nn \tl_if_blank:nTF { VTF , eTF }
+\cs_generate_variant:Nn \tl_if_blank:nF { VF }
+\cs_generate_variant:Nn \seq_gput_right:Nn { Ne , NV }
+\cs_generate_variant:Nn \seq_set_split:Nnn { Nne }
+\cs_generate_variant:Nn \seq_if_in:NnF { NeF , NVF }
+
+\str_const:Nn \c__cwv_header_str
+  {
+    city_slug,city_name,country_code,currency,product,unit,median,p25,p75,sample_size,property_count,operator_count,low_confidence,as_of
+  }
+\seq_const_from_clist:Nn \c__cwv_product_order_seq
+  { flex_desk, fix_desk, private_office, day_pass, meeting_room }
+\int_const:Nn \c__cwv_fields_int { 14 }
+
+\prop_new:N \g__cwv_alias_prop
+\prop_new:N \g__cwv_display_prop
+\prop_new:N \g__cwv_median_prop
+\prop_new:N \g__cwv_low_prop
+\prop_new:N \g__cwv_high_prop
+\prop_new:N \g__cwv_sample_prop
+\prop_new:N \g__cwv_currency_prop
+\prop_new:N \g__cwv_unit_prop
+\prop_new:N \g__cwv_products_prop
+\seq_new:N \g__cwv_city_seq
+\seq_new:N \g__cwv_extra_product_seq
+\prop_new:N \g__cwv_extra_seen_prop
+\tl_new:N \g__cwv_city_list_tl
+\tl_new:N \g__cwv_as_of_tl
+\tl_new:N \g__cwv_result_tl
+
+\tl_new:N \l__cwv_line_tl
+\str_new:N \l__cwv_line_str
+\seq_new:N \l__cwv_field_seq
+\str_new:N \l__cwv_norm_str
+\str_new:N \l__cwv_slug_str
+\str_new:N \l__cwv_name_str
+\str_new:N \l__cwv_name_norm_str
+\str_new:N \l__cwv_product_str
+\str_new:N \l__cwv_key_str
+\tl_new:N \l__cwv_product_tl
+\tl_new:N \l__cwv_body_tl
+\tl_new:N \l__cwv_plain_tl
+\tl_new:N \l__cwv_text_tl
+\int_new:N \l__cwv_line_int
+\bool_new:N \l__cwv_header_bool
+\bool_new:N \l__cwv_space_bool
+
+\cs_new_protected:Npn \__cwv_norm_sep:
+  {
+    \tl_if_empty:NF \l__cwv_text_tl
+      {
+        \bool_if:NF \l__cwv_space_bool
+          {
+            \tl_put_right:Nn \l__cwv_text_tl { ~ }
+            \bool_set_true:N \l__cwv_space_bool
+          }
+      }
+  }
+
+% Lower case, then treat runs of spaces, hyphens and underscores as one space.
+% \str_if_in:Nn cannot search for a space: its string conversion drops them.
+\cs_new_protected:Npn \__cwv_normalize_city:nN #1#2
+  {
+    \str_set:Ne \l__cwv_line_str
+      { \str_lowercase:e { \tl_trim_spaces:e {#1} } }
+    \tl_clear:N \l__cwv_text_tl
+    \bool_set_false:N \l__cwv_space_bool
+    \str_map_inline:Nn \l__cwv_line_str
+      {
+        \str_if_eq:nnTF {##1} { - }
+          { \__cwv_norm_sep: }
+          {
+            \str_if_eq:nnTF {##1} { _ }
+              { \__cwv_norm_sep: }
+              {
+                \str_if_eq:nnTF {##1} { ~ }
+                  { \__cwv_norm_sep: }
+                  {
+                    \bool_set_false:N \l__cwv_space_bool
+                    \tl_put_right:Nn \l__cwv_text_tl {##1}
+                  }
+              }
+          }
+      }
+    \str_set:Ne #2 { \l__cwv_text_tl }
+  }
+
+\cs_new_protected:Npn \__cwv_normalize_product:nN #1#2
+  {
+    \__cwv_normalize_city:nN {#1} #2
+    \str_replace_all:Nnn #2 { ~ } { _ }
+  }
+
+\cs_new:Npn \__cwv_cell:n #1
+  { \tl_trim_spaces:e { \seq_item:Nn \l__cwv_field_seq {#1} } }
+
+\cs_new:Npn \__cwv_product_label:n #1
+  {
+    \str_case:nnF {#1}
+      {
+        { flex_desk } { Flex ~ desk }
+        { fix_desk } { Fixed ~ desk }
+        { private_office } { Private ~ office }
+        { day_pass } { Day ~ pass }
+        { meeting_room } { Meeting ~ room }
+      }
+      {#1}
+  }
+
+\cs_new:Npn \__cwv_amount:nnn #1#2#3
+  {
+    #1 ~ #2
+    \tl_if_blank:nF {#3} { / #3 }
+  }
+
+\cs_new:Npn \__cwv_range:nn #1#2
+  {
+    \tl_if_blank:eTF {#1}
+      { --- }
+      {
+        \tl_if_blank:eTF {#2}
+          { --- }
+          { #1 -- #2 }
+      }
+  }
+
+\cs_new_protected:Npn \__cwv_emit:n #1
+  {
+    \tl_gset:Nn \g__cwv_result_tl {#1}
+    #1
+  }
+\cs_generate_variant:Nn \__cwv_emit:n { V }
+
+\cs_new_protected:Npn \__cwv_reset:
+  { \tl_gclear:N \g__cwv_result_tl }
+
+\cs_new_protected:Npn \__cwv_error_unknown_city:n #1
+  {
+    \msg_error:nnee {coworkingview} {unknown-city}
+      { \tl_to_str:n {#1} }
+      { \g__cwv_city_list_tl }
+  }
+
+\cs_new_protected:Npn \__cwv_resolve_city:nN #1#2
+  {
+    \__cwv_normalize_city:nN {#1} \l__cwv_norm_str
+    \prop_get:NVNTF \g__cwv_alias_prop \l__cwv_norm_str #2
+      { }
+      { \str_clear:N #2 }
+  }
+
+\cs_new_protected:Npn \__cwv_store_field:Nnn #1#2#3
+  { \prop_gput:Nee #1 {#2} {#3} }
+
+\cs_new_protected:Npn \__cwv_read_data_line:
+  {
+    \int_compare:nNnF
+      { \seq_count:N \l__cwv_field_seq } = { \c__cwv_fields_int }
+      {
+        \msg_error:nne {coworkingview} {bad-snapshot}
+          {
+            line~ \int_use:N \l__cwv_line_int \c_space_tl
+            has~ \int_eval:n { \seq_count:N \l__cwv_field_seq } ~
+            fields,~ expected~ \int_use:N \c__cwv_fields_int
+          }
+      }
+    \str_set:Ne \l__cwv_slug_str { \__cwv_cell:n { 1 } }
+    \__cwv_normalize_city:nN { \l__cwv_slug_str } \l__cwv_norm_str
+    \__cwv_normalize_city:nN { \__cwv_cell:n { 2 } } \l__cwv_name_norm_str
+    \__cwv_normalize_product:nN { \__cwv_cell:n { 5 } } \l__cwv_product_str
+    \str_set:Ne \l__cwv_key_str { \l__cwv_norm_str / \l__cwv_product_str }
+    \prop_if_in:NeT \g__cwv_median_prop { \l__cwv_key_str }
+      {
+        \msg_error:nne {coworkingview} {bad-snapshot}
+          { duplicate~row~ \l__cwv_key_str }
+      }
+    \tl_if_blank:eT { \__cwv_cell:n { 7 } }
+      {
+        \msg_error:nne {coworkingview} {bad-snapshot}
+          { empty~median~ on~ line~ \int_use:N \l__cwv_line_int }
+      }
+    \__cwv_store_field:Nnn \g__cwv_median_prop
+      { \l__cwv_key_str } { \__cwv_cell:n { 7 } }
+    \__cwv_store_field:Nnn \g__cwv_low_prop
+      { \l__cwv_key_str } { \__cwv_cell:n { 8 } }
+    \__cwv_store_field:Nnn \g__cwv_high_prop
+      { \l__cwv_key_str } { \__cwv_cell:n { 9 } }
+    \__cwv_store_field:Nnn \g__cwv_sample_prop
+      { \l__cwv_key_str } { \__cwv_cell:n { 10 } }
+    \__cwv_store_field:Nnn \g__cwv_currency_prop
+      { \l__cwv_key_str } { \__cwv_cell:n { 4 } }
+    \__cwv_store_field:Nnn \g__cwv_unit_prop
+      { \l__cwv_key_str } { \__cwv_cell:n { 6 } }
+    \str_set:Ne \l__cwv_name_str { \__cwv_cell:n { 2 } }
+    \prop_if_in:NVF \g__cwv_display_prop \l__cwv_norm_str
+      {
+        \prop_gput:NVV \g__cwv_display_prop \l__cwv_norm_str \l__cwv_name_str
+        \seq_gput_right:Ne \g__cwv_city_seq { \l__cwv_norm_str }
+      }
+    \prop_gput:Nee \g__cwv_alias_prop { \l__cwv_norm_str } { \l__cwv_norm_str }
+    \prop_gput:Nee \g__cwv_alias_prop { \l__cwv_name_norm_str }
+      { \l__cwv_norm_str }
+    % Sequence items keep letter catcodes. The product code is a string,
+    % so compare the detokenized forms.
+    \str_if_in:eeTF
+      { ,flex_desk,fix_desk,private_office,day_pass,meeting_room, }
+      { ,\l__cwv_product_str, }
+      { }
+      {
+        \prop_if_in:NVF \g__cwv_extra_seen_prop \l__cwv_product_str
+          {
+            \prop_gput:NVn \g__cwv_extra_seen_prop \l__cwv_product_str { }
+            \seq_gput_right:NV \g__cwv_extra_product_seq \l__cwv_product_str
+          }
+      }
+    \tl_set:Ne \l__cwv_text_tl { \__cwv_cell:n { 14 } }
+    \tl_if_blank:VT \l__cwv_text_tl
+      {
+        \msg_error:nne {coworkingview} {bad-snapshot}
+          { empty~as_of~ on~ line~ \int_use:N \l__cwv_line_int }
+      }
+    \tl_if_blank:VTF \g__cwv_as_of_tl
+      { \tl_gset_eq:NN \g__cwv_as_of_tl \l__cwv_text_tl }
+      {
+        \tl_if_eq:NNF \g__cwv_as_of_tl \l__cwv_text_tl
+          {
+            \msg_error:nne {coworkingview} {bad-snapshot}
+              { as_of~ differs~ between~ rows }
+          }
+      }
+  }
+
+\cs_new_protected:Npn \__cwv_read_line:n #1
+  {
+    \int_incr:N \l__cwv_line_int
+    \tl_set:Nn \l__cwv_line_tl {#1}
+    \tl_remove_all:Nn \l__cwv_line_tl { \r }
+    \tl_trim_spaces:N \l__cwv_line_tl
+    \tl_if_blank:VF \l__cwv_line_tl
+      {
+        \str_set:Ne \l__cwv_line_str { \l__cwv_line_tl }
+        \str_if_eq:eeTF { \str_head:N \l__cwv_line_str } { \c_hash_str }
+          { }
+          {
+            \bool_if:NTF \l__cwv_header_bool
+              {
+                \seq_set_split:Nne \l__cwv_field_seq { , } { \l__cwv_line_str }
+                \__cwv_read_data_line:
+              }
+              {
+                \str_if_eq:NNTF \l__cwv_line_str \c__cwv_header_str
+                  { \bool_set_true:N \l__cwv_header_bool }
+                  {
+                    \msg_error:nnn {coworkingview} {bad-snapshot}
+                      { header~ is~ not~ the~ rates~ table~ header }
+                  }
+              }
+          }
+      }
+  }
+
+\cs_new_protected:Npn \__cwv_finish:
+  {
+    \bool_if:NF \l__cwv_header_bool
+      {
+        \msg_error:nnn {coworkingview} {bad-snapshot}
+          { missing~ header }
+      }
+    \seq_if_empty:NT \g__cwv_city_seq
+      {
+        \msg_error:nnn {coworkingview} {bad-snapshot}
+          { no~ rate~ rows }
+      }
+    \tl_gclear:N \g__cwv_city_list_tl
+    \seq_map_inline:Nn \g__cwv_city_seq
+      {
+        \tl_if_empty:NF \g__cwv_city_list_tl
+          { \tl_gput_right:Nn \g__cwv_city_list_tl { , ~ } }
+        \tl_gput_right:Ne \g__cwv_city_list_tl
+          { \prop_item:Nn \g__cwv_display_prop {##1} }
+        \tl_clear:N \l__cwv_plain_tl
+        \seq_map_inline:Nn \c__cwv_product_order_seq
+          { \__cwv_note_product:nn {##1} {####1} }
+        \seq_map_inline:Nn \g__cwv_extra_product_seq
+          { \__cwv_note_product:nn {##1} {####1} }
+        \prop_gput:Nne \g__cwv_products_prop {##1}
+          { \exp_not:V \l__cwv_plain_tl }
+      }
+  }
+
+\cs_new_protected:Npn \__cwv_note_product:nn #1#2
+  {
+    \prop_if_in:NeT \g__cwv_median_prop { #1 / #2 }
+      {
+        \tl_if_empty:NF \l__cwv_plain_tl
+          { \tl_put_right:Nn \l__cwv_plain_tl { , ~ } }
+        \tl_put_right:Nn \l__cwv_plain_tl {#2}
+      }
+  }
+
+\cs_new_protected:Npn \__cwv_load:
+  {
+    \file_if_exist:nTF { coworkingview-rates.csv }
+      {
+        \ior_open:Nn \g__cwv_ior { coworkingview-rates.csv }
+        \ior_str_map_inline:Nn \g__cwv_ior
+          { \__cwv_read_line:n {##1} }
+        \ior_close:N \g__cwv_ior
+        \__cwv_finish:
+      }
+      { \msg_error:nn {coworkingview} {missing-data} }
+  }
+
+\ior_new:N \g__cwv_ior
+\__cwv_load:
+
+\keys_define:nn { coworkingview / rate }
+  {
+    product .tl_set:N = \l__cwv_product_tl ,
+  }
+
+\cs_new_protected:Npn \__cwv_rate:nn #1#2
+  {
+    \__cwv_reset:
+    \tl_set:Nn \l__cwv_product_tl { flex_desk }
+    \tl_if_blank:nF {#1}
+      { \keys_set:nn { coworkingview / rate } {#1} }
+    \__cwv_resolve_city:nN {#2} \l__cwv_slug_str
+    \str_if_empty:NTF \l__cwv_slug_str
+      { \__cwv_error_unknown_city:n {#2} }
+      {
+        \__cwv_normalize_product:nN { \l__cwv_product_tl } \l__cwv_product_str
+        \str_set:Ne \l__cwv_key_str
+          { \l__cwv_slug_str / \l__cwv_product_str }
+        \prop_if_in:NVTF \g__cwv_median_prop \l__cwv_key_str
+          {
+            \tl_set:Ne \l__cwv_text_tl
+              {
+                \__cwv_amount:nnn
+                  { \prop_item:NV \g__cwv_median_prop \l__cwv_key_str }
+                  { \prop_item:NV \g__cwv_currency_prop \l__cwv_key_str }
+                  { \prop_item:NV \g__cwv_unit_prop \l__cwv_key_str }
+              }
+            \__cwv_emit:V \l__cwv_text_tl
+          }
+          {
+            \msg_error:nnee {coworkingview} {unknown-product}
+              { \tl_to_str:N \l__cwv_product_tl }
+              {
+                \prop_item:NV \g__cwv_display_prop \l__cwv_slug_str
+                .~ Available~ products:~
+                \prop_item:NV \g__cwv_products_prop \l__cwv_slug_str
+              }
+          }
+      }
+  }
+
+\cs_new_protected:Npn \__cwv_table_add:nn #1#2
+  {
+    \str_set:Ne \l__cwv_key_str { #1 / #2 }
+    \prop_if_in:NVT \g__cwv_median_prop \l__cwv_key_str
+      {
+        \tl_set:Ne \l__cwv_text_tl
+          {
+            \__cwv_product_label:n {#2}
+            &
+            \__cwv_amount:nnn
+              { \prop_item:NV \g__cwv_median_prop \l__cwv_key_str }
+              { \prop_item:NV \g__cwv_currency_prop \l__cwv_key_str }
+              { \prop_item:NV \g__cwv_unit_prop \l__cwv_key_str }
+            &
+            \__cwv_range:nn
+              { \prop_item:NV \g__cwv_low_prop \l__cwv_key_str }
+              { \prop_item:NV \g__cwv_high_prop \l__cwv_key_str }
+            &
+            \prop_item:NV \g__cwv_sample_prop \l__cwv_key_str
+            \exp_not:N \\
+          }
+        \tl_put_right:NV \l__cwv_body_tl \l__cwv_text_tl
+        \tl_put_right:Ne \l__cwv_plain_tl
+          {
+            ; \c_space_tl
+            \__cwv_product_label:n {#2}
+            \c_space_tl | \c_space_tl
+            \__cwv_amount:nnn
+              { \prop_item:NV \g__cwv_median_prop \l__cwv_key_str }
+              { \prop_item:NV \g__cwv_currency_prop \l__cwv_key_str }
+              { \prop_item:NV \g__cwv_unit_prop \l__cwv_key_str }
+            \c_space_tl | \c_space_tl
+            \__cwv_range:nn
+              { \prop_item:NV \g__cwv_low_prop \l__cwv_key_str }
+              { \prop_item:NV \g__cwv_high_prop \l__cwv_key_str }
+            \c_space_tl | \c_space_tl
+            \prop_item:NV \g__cwv_sample_prop \l__cwv_key_str
+          }
+      }
+  }
+\cs_generate_variant:Nn \__cwv_table_add:nn { Vn }
+\cs_generate_variant:Nn \prop_gput:Nnn { NVV }
+
+\cs_new_protected:Npn \__cwv_table_products:N #1
+  {
+    \seq_map_inline:Nn #1
+      { \__cwv_table_add:Vn \l__cwv_slug_str {##1} }
+  }
+
+\cs_new_protected:Npn \__cwv_table:n #1
+  {
+    \__cwv_reset:
+    \__cwv_resolve_city:nN {#1} \l__cwv_slug_str
+    \str_if_empty:NTF \l__cwv_slug_str
+      { \__cwv_error_unknown_city:n {#1} }
+      {
+        \tl_clear:N \l__cwv_body_tl
+        \tl_set:Nn \l__cwv_plain_tl
+          { Product ~ | ~ Median ~ | ~ P25--P75 ~ | ~ n }
+        \__cwv_table_products:N \c__cwv_product_order_seq
+        \__cwv_table_products:N \g__cwv_extra_product_seq
+        \tl_gset_eq:NN \g__cwv_result_tl \l__cwv_plain_tl
+        \begin {tabular} { @{} l r r r @{} }
+          \hline
+          Product & Median & P25--P75 & $n$ \\
+          \hline
+          \l__cwv_body_tl
+          \hline
+        \end {tabular}
+      }
+  }
+
+\cs_new_protected:Npn \__cwv_cities:
+  {
+    \__cwv_reset:
+    \__cwv_emit:V \g__cwv_city_list_tl
+  }
+
+\cs_new_protected:Npn \__cwv_snapshot_date:
+  {
+    \__cwv_reset:
+    \__cwv_emit:V \g__cwv_as_of_tl
+  }
+
+\cs_new_protected:Npn \__cwv_attribution:
+  {
+    \__cwv_reset:
+    \tl_clear:N \l__cwv_text_tl
+    \tl_put_right:Nn \l__cwv_text_tl { Data: ~ }
+    \cs_if_exist:NTF \href
+      {
+        \tl_put_right:Nn \l__cwv_text_tl
+          {
+            \href
+              { https://coworkingview.com/en/tools/price-index }
+              { CoworkingView ~ Price ~ Index }
+          }
+      }
+      {
+        \cs_if_exist:NF \url { \RequirePackage { url } }
+        \tl_put_right:Nn \l__cwv_text_tl
+          {
+            CoworkingView ~ Price ~ Index ~
+            (
+            \url { https://coworkingview.com/en/tools/price-index }
+            )
+          }
+      }
+    \tl_put_right:Nn \l__cwv_text_tl { , ~ CC ~ BY ~ 4.0 }
+    \__cwv_emit:V \l__cwv_text_tl
+  }
+
+\NewDocumentCommand \cwvrate { O { } m }
+  { \__cwv_rate:nn {#1} {#2} }
+\NewDocumentCommand \cwvratestable { m }
+  { \__cwv_table:n {#1} }
+\NewDocumentCommand \cwvcities { }
+  { \__cwv_cities: }
+\NewDocumentCommand \cwvsnapshotdate { }
+  { \__cwv_snapshot_date: }
+\NewDocumentCommand \cwvattribution { }
+  { \__cwv_attribution: }
+
+% hyperref is not loaded here. \cwvattribution uses \href when that
+% command already exists, and otherwise falls back to \url.
+\cs_if_exist:NF \href
+  {
+    \cs_if_exist:NF \url
+      { \RequirePackage { url } }
+  }

@@ -16,7 +16,7 @@ FlexOfficePriceIndex["Berlin", "PrivateOffice"]
 
 [`FlexOfficePriceIndex-definition.nb`](FlexOfficePriceIndex-definition.nb) is the Wolfram Function Repository definition notebook.
 
-[`deploy-definition.wl`](deploy-definition.wl) rebuilds that notebook's code cells in Wolfram Cloud.
+[`deploy-definition.wl`](deploy-definition.wl) rebuilds that notebook's code cells in Wolfram Cloud, deploys `FlexOfficePriceIndex-definition-v6.nb` and checks the deployed copy.
 
 ## Data licence
 

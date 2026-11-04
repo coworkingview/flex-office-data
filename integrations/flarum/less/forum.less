@@ -1,0 +1,93 @@
+.CoworkingViewWidget {
+  margin-top: 16px;
+  padding: 12px;
+  background: @control-bg;
+  color: @text-color;
+  border-radius: 4px;
+}
+
+.CoworkingViewWidget-title {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: @heading-color;
+}
+
+.CoworkingViewCard {
+  margin: 12px 0;
+  padding: 12px 14px;
+  background: @control-bg;
+  color: @text-color;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.CoworkingViewWidget .CoworkingViewCard {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.CoworkingViewCard-city {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.CoworkingViewCard-city a,
+.CoworkingViewCard-credit a {
+  color: @link-color;
+}
+
+.CoworkingViewCard-asof,
+.CoworkingViewCard-attribution,
+.CoworkingViewCard-sample,
+.CoworkingViewCard-spread,
+.CoworkingViewCard-low,
+.CoworkingViewCard-pending,
+.CoworkingViewCard-empty,
+.CoworkingViewCard-error {
+  color: @muted-color;
+  font-size: 12px;
+}
+
+.CoworkingViewCard-asof,
+.CoworkingViewCard-empty,
+.CoworkingViewCard-error,
+.CoworkingViewCard-pending {
+  margin: 0 0 8px;
+}
+
+.CoworkingViewCard-rows {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+}
+
+.CoworkingViewCard-rows:empty {
+  display: none;
+}
+
+.CoworkingViewCard-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  align-items: baseline;
+  padding: 6px 0;
+  border-top: 1px solid @muted-more-color;
+}
+
+.CoworkingViewCard-product {
+  flex: 1 1 8em;
+  font-weight: 600;
+}
+
+.CoworkingViewCard-price {
+  font-variant-numeric: tabular-nums;
+}
+
+.CoworkingViewCard-attribution,
+.CoworkingViewCard-credit {
+  margin: 8px 0 0;
+}

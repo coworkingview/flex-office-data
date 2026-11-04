@@ -1,0 +1,39 @@
+coworkingview-flarum-coworkingview:
+  admin:
+    settings:
+      city_label: Sidebar city
+      city_help: City slug for the sidebar card, for example berlin or abu-dhabi.
+      locale_label: Price Index language
+      locale_help: Language sent to the public Price Index. City names come back in this language.
+      product_label: Sidebar product
+      product_all: All published products
+      widget_label: Show the sidebar card
+      widget_help: Adds the price card to the discussion list and to discussion sidebars.
+  forum:
+    widget_title: Coworking prices
+    as_of: As of {date}
+    sample: Sample {count}
+    low_confidence: Low confidence
+    empty: This city does not publish that product.
+    errors:
+      bad_city: That city slug is not valid.
+      bad_locale: That language is not available.
+      bad_product: That product slug is not valid.
+      unknown_city: That city is not in the Price Index.
+      unpublished: That city is not published in the Price Index.
+      unavailable: Coworking prices are not available right now.
+      bad_response: The Price Index response could not be read.
+    products:
+      flex_desk: Flex desk
+      fix_desk: Fixed desk
+      private_office: Private office
+      exclusive_bereich: Exclusive area
+      day_pass: Day pass
+      meeting_room: Meeting room
+      event_space: Event space
+      virtual_office: Virtual office
+      membership: Membership
+    units:
+      month: month
+      day: day
+      hour: hour

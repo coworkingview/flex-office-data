@@ -23,7 +23,12 @@ php flarum cache:clear
 
 Enable **CoworkingView** in the admin extension list.
 
-This package is not on Packagist yet. Packagist indexes a package only when `composer.json` is at the root of a public repository. This copy lives in [`flarum/`](https://github.com/coworkingview/flex-office-data/tree/main/flarum) of [flex-office-data](https://github.com/coworkingview/flex-office-data). The repository `https://github.com/coworkingview/flarum-coworkingview` still has to be created (this environment cannot create it) and this directory pushed there before `composer require` works from Packagist. Until then, point Composer at this repository with a path or VCS entry.
+Source: [coworkingview/flarum-coworkingview](https://github.com/coworkingview/flarum-coworkingview). `composer.json` is at the root of that repository. This `flarum/` directory is the same package. It has not been submitted to Packagist. Until it is listed there, require it from the Git repository:
+
+```bash
+composer config repositories.coworkingview vcs https://github.com/coworkingview/flarum-coworkingview
+composer require coworkingview/flarum-coworkingview:^0.1.0
+```
 
 ## Usage
 

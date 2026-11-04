@@ -17,8 +17,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/coworkingview/flex-office-data/issues",
-        "source": "https://github.com/coworkingview/flex-office-data"
+        "issues": "https://github.com/coworkingview/flarum-coworkingview/issues",
+        "source": "https://github.com/coworkingview/flarum-coworkingview"
     },
     "require": {
         "flarum/core": "^1.8",

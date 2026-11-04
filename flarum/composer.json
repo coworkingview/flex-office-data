@@ -1,0 +1,63 @@
+{
+    "name": "coworkingview/flarum-coworkingview",
+    "description": "Adds a [coworkingview] BBCode tag that renders a link to a CoworkingView city hub.",
+    "homepage": "https://coworkingview.com",
+    "type": "flarum-extension",
+    "keywords": [
+        "bbcode",
+        "coworking",
+        "flarum"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "CoworkingView",
+            "email": "info@coworkingview.com",
+            "homepage": "https://coworkingview.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/coworkingview/flex-office-data/issues",
+        "source": "https://github.com/coworkingview/flex-office-data"
+    },
+    "require": {
+        "flarum/core": "^1.8",
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5",
+        "s9e/text-formatter": "^2.14"
+    },
+    "autoload": {
+        "psr-4": {
+            "CoworkingView\\Flarum\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CoworkingView\\Flarum\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.1.x-dev"
+        },
+        "flarum-extension": {
+            "title": "CoworkingView",
+            "category": "feature",
+            "icon": {
+                "name": "fas fa-building",
+                "backgroundColor": "#1f6b4a",
+                "color": "#fff"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "phpunit"
+    }
+}

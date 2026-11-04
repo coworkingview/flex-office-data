@@ -1,0 +1,5 @@
+coworkingview-coworkingview:
+  admin:
+    settings:
+      default_locale_label: Default language
+      default_locale_help: Language of the text on a CoworkingView card. The city hub address stays the same.

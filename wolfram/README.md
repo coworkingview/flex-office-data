@@ -18,6 +18,8 @@ FlexOfficePriceIndex["Berlin", "PrivateOffice"]
 
 [`deploy-definition.wl`](deploy-definition.wl) rebuilds that notebook's code cells in Wolfram Cloud, deploys `FlexOfficePriceIndex-definition-v6.nb` and checks the deployed copy.
 
+[`submit-v7.wl`](submit-v7.wl) builds the Function Repository resource in the kernel, without the notebook toolbar. Evaluated in Wolfram Cloud with `Get` on its raw URL, it runs live calls and the verification tests, builds the `ResourceObject` (Related Links and Contributed by included), deploys a private preview page and returns an `Association` with the results. It submits with `ResourceSubmit` only if `cwvDoSubmit = True` was evaluated first.
+
 ## Data licence
 
 Price Index data is [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).

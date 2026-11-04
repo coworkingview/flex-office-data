@@ -184,6 +184,7 @@ jobs:
           export HELM_DATA_HOME="$RUNNER_TEMP/helm-data"
           helm repo add cwv "$repo_url"
           helm repo update cwv
+          mkdir -p "$RUNNER_TEMP/pulled"
           helm pull "cwv/cwv" --version "$version" --destination "$RUNNER_TEMP/pulled"
           tar -tzf "$RUNNER_TEMP/pulled/cwv-${version}.tgz" | grep -q 'cwv/Chart.yaml'
           echo "helm pull cwv/cwv --version ${version} succeeded."

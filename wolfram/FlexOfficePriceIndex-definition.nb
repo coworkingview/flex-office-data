@@ -63,19 +63,24 @@ Cell[
          CellTags -> {"Definition", "Function", "TemplateCellGroup"},
          CellID -> 729890853
         ],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", " ", "//", " ", "ClearAll", ";"}]], "Input", CellID -> 324461738],
-Cell[BoxData[{RowBox[{"FlexOfficePriceIndex", "::", "nocity", " ", "=", " ", "\"No published price data for city `1` (slug \\\"`2`\\\").\"", ";"}], "\n", RowBox[{"FlexOfficePriceIndex", "::", "badprod", " ", "=", " ", "\"Unknown product `1`. Use one of `2`.\"", ";"}], "\n", RowBox[{"FlexOfficePriceIndex", "::", "http", " ", "=", " ", "\"The CoworkingView API returned HTTP status `1`.\"", ";"}]}], "Input", CellID -> 446787777],
-Cell[BoxData[RowBox[{"$cwvProducts", " ", "=", " ", "<|", RowBox[{"\"FlexDesk\"", " ", "->", " ", "\"flex_desk\"", ",", " ", "\"FixedDesk\"", " ", "->", " ", "\"fix_desk\"", ",", " ", "\"PrivateOffice\"", " ", "->", " ", "\"private_office\""}], "|>", ";"}]], "Input", CellID -> 498157942],
-Cell[BoxData[RowBox[{"$cwvAliases", " ", "=", " ", "<|", RowBox[{"\"muenchen\"", " ", "->", " ", "\"munich\"", ",", " ", "\"koeln\"", " ", "->", " ", "\"cologne\"", ",", " ", "\"wien\"", " ", "->", " ", "\"vienna\"", ",", "\n", "   ", "\"lisbon\"", " ", "->", " ", "\"lisboa\"", ",", " ", "\"seville\"", " ", "->", " ", "\"sevilla\"", ",", " ", "\"nuernberg\"", " ", "->", " ", "\"nuremberg\"", ",", "\n", "   ", "\"hannover\"", " ", "->", " ", "\"hanover\"", ",", " ", "\"duesseldorf\"", " ", "->", " ", "\"dusseldorf\"", ",", " ", "\"lubeck\"", " ", "->", " ", "\"luebeck\"", ",", "\n", "   ", "\"milano\"", " ", "->", " ", "\"milan\"", ",", " ", "\"roma\"", " ", "->", " ", "\"rome\"", ",", " ", "\"firenze\"", " ", "->", " ", "\"florence\"", ",", " ", "\"napoli\"", " ", "->", " ", "\"naples\"", ",", "\n", "   ", "\"torino\"", " ", "->", " ", "\"turin\"", ",", " ", "\"zuerich\"", " ", "->", " ", "\"zurich\"", ",", " ", "\"zurich\"", " ", "->", " ", "\"zurich\"", ",", " ", "\"frankfurt-am-main\"", " ", "->", " ", "\"frankfurt\""}], "|>", ";"}]], "Input", CellID -> 635554898],
-Cell[BoxData[{RowBox[{"cwvSlug", "[", "s_String", "]", " ", ":=", " ", "Module", "[", RowBox[{"{", "t", "}", ",", "\n", "   ", "t", " ", "=", " ", "ToLowerCase", "[", RowBox[{"StringTrim", "[", "s", "]"}], "]", ";", "\n", "   ", "t", " ", "=", " ", "StringReplace", "[", RowBox[{"t", ",", " ", "{", RowBox[{"\"\\[ADoubleDot]\"", " ", "->", " ", "\"ae\"", ",", " ", "\"\\[ODoubleDot]\"", " ", "->", " ", "\"oe\"", ",", " ", "\"\\[UDoubleDot]\"", " ", "->", " ", "\"ue\"", ",", " ", "\"\\[SZ]\"", " ", "->", " ", "\"ss\""}], "}"}], "]", ";", "\n", "   ", "t", " ", "=", " ", "RemoveDiacritics", "[", "t", "]", ";", "\n", "   ", "t", " ", "=", " ", "StringReplace", "[", RowBox[{"t", ",", " ", "{", RowBox[{"\"'\"", " ", "->", " ", "\"\"", ",", " ", "\".\"", " ", "->", " ", "\"\""}], "}"}], "]", ";", "\n", "   ", "t", " ", "=", " ", "StringTrim", "[", RowBox[{"StringReplace", "[", RowBox[{"t", ",", " ", "Except", "[", RowBox[{"LetterCharacter", " ", "|", " ", "DigitCharacter"}], "]", " ", "..", " ", "->", " ", "\"-\""}], "]", ",", " ", "\"-\""}], "]", ";", "\n", "   ", "Lookup", "[", RowBox[{"$cwvAliases", ",", " ", "t", ",", " ", "t"}], "]", "\n", "  "}], "]", ";"}], "\n", RowBox[{"cwvSlug", "[", "e_Entity", "]", " ", ":=", " ", "Module", "[", RowBox[{"{", RowBox[{"n", " ", "=", " ", "Quiet", "[", RowBox[{"CommonName", "[", "e", "]"}], "]"}], "}", ",", "\n", "   ", "If", "[", RowBox[{"StringQ", "[", "n", "]", ",", " ", "cwvSlug", "[", "n", "]", ",", " ", "Failure", "[", RowBox[{"\"InvalidCity\"", ",", " ", "<|", RowBox[{"\"MessageTemplate\"", " ", "->", " ", "\"Cannot get a name for `1`.\"", ",", " ", "\"MessageParameters\"", " ", "->", " ", "{", "e", "}"}], "|>"}], "]"}], "]", "\n", "  "}], "]", ";"}], "\n", RowBox[{"cwvSlug", "[", "_", "]", " ", ":=", " ", "$Failed", ";"}]}], "Input", CellID -> 734942636],
-Cell[BoxData[{RowBox[{"cwvEUR", "[", "a_Association", "]", " ", ":=", " ", "If", "[", RowBox[{"NumericQ", "[", RowBox[{"a", "[", "\"amount\"", "]"}], "]", ",", " ", "Quantity", "[", RowBox[{"a", "[", "\"amount\"", "]", ",", " ", "\"Euros\""}], "]", ",", " ", "Missing", "[", "\"NotAvailable\"", "]"}], "]", ";"}], "\n", RowBox[{"cwvEUR", "[", "_", "]", " ", ":=", " ", "Missing", "[", "\"NotAvailable\"", "]", ";"}]}], "Input", CellID -> 121716525],
-Cell[BoxData[RowBox[{"cwvFetch", "[", "slug_String", "]", " ", ":=", " ", "Module", "[", RowBox[{"{", RowBox[{"resp", ",", " ", "status", ",", " ", "json"}], "}", ",", "\n", "   ", "resp", " ", "=", " ", "URLRead", "[", RowBox[{"HTTPRequest", "[", RowBox[{"\"https://api.coworkingview.com/v1/market/rates\"", ",", "\n", "      ", "<|", RowBox[{"\"Query\"", " ", "->", " ", "{", RowBox[{"\"city\"", " ", "->", " ", "slug", ",", " ", "\"locale\"", " ", "->", " ", "\"en\"", ",", " ", "\"currency\"", " ", "->", " ", "\"EUR\""}], "}"}], "|>"}], "]", ",", " ", "TimeConstraint", " ", "->", " ", "30"}], "]", ";", "\n", "   ", "If", "[", RowBox[{"FailureQ", "[", "resp", "]", ",", " ", "Return", "[", "resp", "]"}], "]", ";", "\n", "   ", "status", " ", "=", " ", "resp", "[", "\"StatusCode\"", "]", ";", "\n", "   ", "If", "[", RowBox[{"status", " ", "=!=", " ", "200", ",", "\n", "    ", "Return", "[", RowBox[{"Failure", "[", RowBox[{"\"HTTPError\"", ",", " ", "<|", RowBox[{"\"MessageTemplate\"", " ", ":>", " ", "FlexOfficePriceIndex", "::", "http", ",", " ", "\"MessageParameters\"", " ", "->", " ", "{", "status", "}", ",", " ", "\"StatusCode\"", " ", "->", " ", "status"}], "|>"}], "]"}], "]"}], "]", ";", "\n", "   ", "json", " ", "=", " ", "Quiet", "[", RowBox[{"ImportByteArray", "[", RowBox[{"resp", "[", "\"BodyByteArray\"", "]", ",", " ", "\"RawJSON\""}], "]"}], "]", ";", "\n", "   ", "If", "[", RowBox[{"!", "AssociationQ", "[", "json", "]", ",", " ", "Return", "[", RowBox[{"Failure", "[", RowBox[{"\"BadResponse\"", ",", " ", "<|", RowBox[{"\"MessageTemplate\"", " ", "->", " ", "\"Could not parse the API response.\""}], "|>"}], "]"}], "]"}], "]", ";", "\n", "   ", "json", "\n", "  "}], "]", ";"}]], "Input", CellID -> 344858050],
-Cell[BoxData[RowBox[{"cwvCity", "[", "input_", "]", " ", ":=", " ", "Module", "[", RowBox[{"{", RowBox[{"slug", ",", " ", "json", ",", " ", "cities"}], "}", ",", "\n", "   ", "slug", " ", "=", " ", "cwvSlug", "[", "input", "]", ";", "\n", "   ", "If", "[", RowBox[{"FailureQ", "[", "slug", "]", ",", " ", "Return", "[", "slug", "]"}], "]", ";", "\n", "   ", "If", "[", RowBox[{"!", "StringQ", "[", "slug", "]", " ", "||", " ", "slug", " ", "===", " ", "\"\"", ",", "\n", "    ", "Return", "[", RowBox[{"Failure", "[", RowBox[{"\"InvalidCity\"", ",", " ", "<|", RowBox[{"\"MessageTemplate\"", " ", "->", " ", "\"`1` is not a valid city name.\"", ",", " ", "\"MessageParameters\"", " ", "->", " ", "{", "input", "}"}], "|>"}], "]"}], "]"}], "]", ";", "\n", "   ", "json", " ", "=", " ", "cwvFetch", "[", "slug", "]", ";", "\n", "   ", "If", "[", RowBox[{"FailureQ", "[", "json", "]", ",", " ", "Return", "[", "json", "]"}], "]", ";", "\n", "   ", "cities", " ", "=", " ", "Select", "[", RowBox[{"Lookup", "[", RowBox[{"Lookup", "[", RowBox[{"json", ",", " ", "\"data\"", ",", " ", "<|", "|>"}], "]", ",", " ", "\"cities\"", ",", " ", "{", "}"}], "]", ",", " ", "AssociationQ"}], "]", ";", "\n", "   ", "If", "[", RowBox[{"cities", " ", "===", " ", "{", "}", ",", "\n", "    ", "Return", "[", RowBox[{"Failure", "[", RowBox[{"\"NoData\"", ",", " ", "<|", RowBox[{"\"MessageTemplate\"", " ", ":>", " ", "FlexOfficePriceIndex", "::", "nocity", ",", " ", "\"MessageParameters\"", " ", "->", " ", "{", RowBox[{"input", ",", " ", "slug"}], "}"}], "|>"}], "]"}], "]"}], "]", ";", "\n", "   ", "First", "[", "cities", "]", "\n", "  "}], "]", ";"}]], "Input", CellID -> 515898545],
-Cell[BoxData[RowBox[{"cwvRows", "[", "c_Association", "]", " ", ":=", " ", "Module", "[", RowBox[{"{", RowBox[{"byType", ",", " ", "figs", ",", " ", "row"}], "}", ",", "\n", "   ", "byType", " ", "=", " ", "AssociationMap", "[", RowBox[{"Function", "[", RowBox[{"t", ",", " ", "SelectFirst", "[", RowBox[{"Lookup", "[", RowBox[{"c", ",", " ", "\"byType\"", ",", " ", "{", "}"}], "]", ",", " ", "#", "[", "\"optionType\"", "]", " ", "===", " ", "t", " ", "&", ",", " ", "<|", "|>"}], "]"}], "]", ",", " ", "Values", "[", "$cwvProducts", "]"}], "]", ";", "\n", "   ", "figs", " ", "=", " ", "AssociationMap", "[", RowBox[{"Function", "[", RowBox[{"t", ",", " ", "SelectFirst", "[", RowBox[{"Lookup", "[", RowBox[{"c", ",", " ", "\"figures\"", ",", " ", "{", "}"}], "]", ",", " ", "#", "[", "\"optionType\"", "]", " ", "===", " ", "t", " ", "&", ",", " ", "<|", "|>"}], "]"}], "]", ",", " ", "Values", "[", "$cwvProducts", "]"}], "]", ";", "\n", "   ", "row", "[", "t_", "]", " ", ":=", " ", "<|", RowBox[{"\n", "     ", "\"Median\"", " ", "->", " ", "cwvEUR", "[", RowBox[{"Lookup", "[", RowBox[{"figs", "[", "t", "]", ",", " ", "\"median\"", ",", " ", "Lookup", "[", RowBox[{"byType", "[", "t", "]", ",", " ", "\"median\"", ",", " ", "None"}], "]"}], "]"}], "]", ",", "\n", "     ", "\"P25\"", " ", "->", " ", "cwvEUR", "[", RowBox[{"Lookup", "[", RowBox[{"figs", "[", "t", "]", ",", " ", "\"p25\"", ",", " ", "None"}], "]"}], "]", ",", "\n", "     ", "\"P75\"", " ", "->", " ", "cwvEUR", "[", RowBox[{"Lookup", "[", RowBox[{"figs", "[", "t", "]", ",", " ", "\"p75\"", ",", " ", "None"}], "]"}], "]", ",", "\n", "     ", "\"Min\"", " ", "->", " ", "cwvEUR", "[", RowBox[{"Lookup", "[", RowBox[{"byType", "[", "t", "]", ",", " ", "\"min\"", ",", " ", "None"}], "]"}], "]", ",", "\n", "     ", "\"Max\"", " ", "->", " ", "cwvEUR", "[", RowBox[{"Lookup", "[", RowBox[{"byType", "[", "t", "]", ",", " ", "\"max\"", ",", " ", "None"}], "]"}], "]", ",", "\n", "     ", "\"SampleSize\"", " ", "->", " ", "Lookup", "[", RowBox[{"figs", "[", "t", "]", ",", " ", "\"sampleSize\"", ",", " ", "Lookup", "[", RowBox[{"byType", "[", "t", "]", ",", " ", "\"sampleSize\"", ",", " ", "Missing", "[", "\"NotAvailable\"", "]"}], "]"}], "]", ",", "\n", "     ", "\"InsufficientData\"", " ", "->", " ", "Lookup", "[", RowBox[{"figs", "[", "t", "]", ",", " ", "\"insufficientData\"", ",", " ", "Missing", "[", "\"NotAvailable\"", "]"}], "]"}], "|>", ";", "\n", "   ", "AssociationThread", "[", RowBox[{"Keys", "[", "$cwvProducts", "]", ",", " ", "row", " ", "/@", " ", "Values", "[", "$cwvProducts", "]"}], "]", "\n", "  "}], "]", ";"}]], "Input", CellID -> 106996185],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"city", " ", ":", " ", "(", RowBox[{"_String", " ", "|", " ", "_Entity"}], ")"}], "]", " ", ":=", " ", "Module", "[", RowBox[{"{", RowBox[{"c", " ", "=", " ", "cwvCity", "[", "city", "]"}], "}", ",", "\n", "   ", "If", "[", RowBox[{"FailureQ", "[", "c", "]", ",", " ", "c", ",", " ", "Dataset", "[", RowBox[{"cwvRows", "[", "c", "]"}], "]"}], "]", "\n", "  "}], "]", ";"}]], "Input", CellID -> 797246259],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"city", " ", ":", " ", "(", RowBox[{"_String", " ", "|", " ", "_Entity"}], ")", ",", " ", "product_String"}], "]", " ", ":=", " ", "Module", "[", RowBox[{"{", RowBox[{"key", ",", " ", "c"}], "}", ",", "\n", "   ", "key", " ", "=", " ", "SelectFirst", "[", RowBox[{"Keys", "[", "$cwvProducts", "]", ",", "\n", "     ", "ToLowerCase", "[", RowBox[{"StringDelete", "[", RowBox[{"#", ",", " ", "\" \"", " ", "|", " ", "\"_\"", " ", "|", " ", "\"-\""}], "]"}], "]", " ", "===", " ", "ToLowerCase", "[", RowBox[{"StringDelete", "[", RowBox[{"product", ",", " ", "\" \"", " ", "|", " ", "\"_\"", " ", "|", " ", "\"-\""}], "]"}], "]", " ", "&", ",", " ", "Missing", "[", "]"}], "]", ";", "\n", "   ", "If", "[", RowBox[{"MissingQ", "[", "key", "]", ",", "\n", "    ", "Return", "[", RowBox[{"Failure", "[", RowBox[{"\"InvalidProduct\"", ",", " ", "<|", RowBox[{"\"MessageTemplate\"", " ", ":>", " ", "FlexOfficePriceIndex", "::", "badprod", ",", " ", "\"MessageParameters\"", " ", "->", " ", "{", RowBox[{"product", ",", " ", "Keys", "[", "$cwvProducts", "]"}], "}"}], "|>"}], "]"}], "]"}], "]", ";", "\n", "   ", "c", " ", "=", " ", "cwvCity", "[", "city", "]", ";", "\n", "   ", "If", "[", RowBox[{"FailureQ", "[", "c", "]", ",", " ", "c", ",", " ", "cwvRows", "[", "c", "]", "[", "key", "]", "[", "\"Median\"", "]"}], "]", "\n", "  "}], "]", ";"}]], "Input", CellID -> 681485434],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"city", " ", ":", " ", "(", RowBox[{"_String", " ", "|", " ", "_Entity"}], ")", ",", " ", "\"Properties\""}], "]", " ", ":=", " ", "Keys", "[", "$cwvProducts", "]", ";"}]], "Input", CellID -> 729271245],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", "args___", "]", " ", ":=", " ", "Failure", "[", RowBox[{"\"InvalidArguments\"", ",", "\n", "   ", "<|", RowBox[{"\"MessageTemplate\"", " ", "->", " ", "\"FlexOfficePriceIndex expects a city name or Entity, optionally followed by a product name.\"", ",", " ", "\"Arguments\"", " ", "->", " ", "{", "args", "}"}], "|>"}], "]", ";"}]], "Input", CellID -> 975376611]
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", " ", "//", " ", "ClearAll", ";"}]], "Code", CellID -> 324461738],
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "::", "nocity", " ", "=", " ", "\"No published price data for city `1` (slug \\\"`2`\\\").\"", ";"}]], "Code", CellID -> 446787777],
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "::", "badprod", " ", "=", " ", "\"Unknown product `1`. Use one of `2`.\"", ";"}]], "Code", CellID -> 498157942],
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "::", "http", " ", "=", " ", "\"The CoworkingView API returned HTTP status `1`.\"", ";"}]], "Code", CellID -> 635554898],
+Cell[BoxData[RowBox[{"$cwvProducts", " ", "=", " ", RowBox[{"<|", RowBox[{"\"FlexDesk\"", " ", "->", " ", "\"flex_desk\"", ",", " ", "\"FixedDesk\"", " ", "->", " ", "\"fix_desk\"", ",", " ", "\"PrivateOffice\"", " ", "->", " ", "\"private_office\""}], "|>"}], ";"}]], "Code", CellID -> 734942636],
+Cell[BoxData[RowBox[{"$cwvAliases", " ", "=", " ", RowBox[{"<|", RowBox[{"\"muenchen\"", " ", "->", " ", "\"munich\"", ",", " ", "\"koeln\"", " ", "->", " ", "\"cologne\"", ",", " ", "\"wien\"", " ", "->", " ", "\"vienna\"", ",", "\n", "   ", "\"lisbon\"", " ", "->", " ", "\"lisboa\"", ",", " ", "\"seville\"", " ", "->", " ", "\"sevilla\"", ",", " ", "\"nuernberg\"", " ", "->", " ", "\"nuremberg\"", ",", "\n", "   ", "\"hannover\"", " ", "->", " ", "\"hanover\"", ",", " ", "\"duesseldorf\"", " ", "->", " ", "\"dusseldorf\"", ",", " ", "\"lubeck\"", " ", "->", " ", "\"luebeck\"", ",", "\n", "   ", "\"milano\"", " ", "->", " ", "\"milan\"", ",", " ", "\"roma\"", " ", "->", " ", "\"rome\"", ",", " ", "\"firenze\"", " ", "->", " ", "\"florence\"", ",", " ", "\"napoli\"", " ", "->", " ", "\"naples\"", ",", "\n", "   ", "\"torino\"", " ", "->", " ", "\"turin\"", ",", " ", "\"zuerich\"", " ", "->", " ", "\"zurich\"", ",", " ", "\"zurich\"", " ", "->", " ", "\"zurich\"", ",", " ", "\"frankfurt-am-main\"", " ", "->", " ", "\"frankfurt\""}], "|>"}], ";"}]], "Code", CellID -> 121716525],
+Cell[BoxData[RowBox[{RowBox[{"cwvSlug", "[", "s_String", "]"}], " ", ":=", " ", RowBox[{"Module", "[", RowBox[{RowBox[{"{", "t", "}"}], ",", "\n", "   ", "t", " ", "=", " ", RowBox[{"ToLowerCase", "[", RowBox[{"StringTrim", "[", "s", "]"}], "]"}], ";", "\n", "   ", "t", " ", "=", " ", RowBox[{"StringReplace", "[", RowBox[{"t", ",", " ", RowBox[{"{", RowBox[{"\"\\[ADoubleDot]\"", " ", "->", " ", "\"ae\"", ",", " ", "\"\\[ODoubleDot]\"", " ", "->", " ", "\"oe\"", ",", " ", "\"\\[UDoubleDot]\"", " ", "->", " ", "\"ue\"", ",", " ", "\"\\[SZ]\"", " ", "->", " ", "\"ss\""}], "}"}]}], "]"}], ";", "\n", "   ", "t", " ", "=", " ", RowBox[{"RemoveDiacritics", "[", "t", "]"}], ";", "\n", "   ", "t", " ", "=", " ", RowBox[{"StringReplace", "[", RowBox[{"t", ",", " ", RowBox[{"{", RowBox[{"\"'\"", " ", "->", " ", "\"\"", ",", " ", "\".\"", " ", "->", " ", "\"\""}], "}"}]}], "]"}], ";", "\n", "   ", "t", " ", "=", " ", RowBox[{"StringTrim", "[", RowBox[{RowBox[{"StringReplace", "[", RowBox[{"t", ",", " ", RowBox[{"Except", "[", RowBox[{"LetterCharacter", " ", "|", " ", "DigitCharacter"}], "]"}], " ", "..", " ", "->", " ", "\"-\""}], "]"}], ",", " ", "\"-\""}], "]"}], ";", "\n", "   ", RowBox[{"Lookup", "[", RowBox[{"$cwvAliases", ",", " ", "t", ",", " ", "t"}], "]"}], "\n", "  "}], "]"}], ";"}]], "Code", CellID -> 344858050],
+Cell[BoxData[RowBox[{RowBox[{"cwvSlug", "[", "e_Entity", "]"}], " ", ":=", " ", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{"n", " ", "=", " ", RowBox[{"Quiet", "[", RowBox[{"CommonName", "[", "e", "]"}], "]"}]}], "}"}], ",", "\n", "   ", RowBox[{"If", "[", RowBox[{RowBox[{"StringQ", "[", "n", "]"}], ",", " ", RowBox[{"cwvSlug", "[", "n", "]"}], ",", " ", RowBox[{"Failure", "[", RowBox[{"\"InvalidCity\"", ",", " ", RowBox[{"<|", RowBox[{"\"MessageTemplate\"", " ", "->", " ", "\"Cannot get a name for `1`.\"", ",", " ", "\"MessageParameters\"", " ", "->", " ", RowBox[{"{", "e", "}"}]}], "|>"}]}], "]"}]}], "]"}], "\n", "  "}], "]"}], ";"}]], "Code", CellID -> 515898545],
+Cell[BoxData[RowBox[{RowBox[{"cwvSlug", "[", "_", "]"}], " ", ":=", " ", "$Failed", ";"}]], "Code", CellID -> 106996185],
+Cell[BoxData[RowBox[{RowBox[{"cwvEUR", "[", "a_Association", "]"}], " ", ":=", " ", RowBox[{"If", "[", RowBox[{RowBox[{"NumericQ", "[", RowBox[{"a", "[", "\"amount\"", "]"}], "]"}], ",", " ", RowBox[{"Quantity", "[", RowBox[{RowBox[{"a", "[", "\"amount\"", "]"}], ",", " ", "\"Euros\""}], "]"}], ",", " ", RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}]}], "]"}], ";"}]], "Code", CellID -> 797246259],
+Cell[BoxData[RowBox[{RowBox[{"cwvEUR", "[", "_", "]"}], " ", ":=", " ", RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}], ";"}]], "Code", CellID -> 681485434],
+Cell[BoxData[RowBox[{RowBox[{"cwvFetch", "[", "slug_String", "]"}], " ", ":=", " ", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{"resp", ",", " ", "status", ",", " ", "json"}], "}"}], ",", "\n", "   ", "resp", " ", "=", " ", RowBox[{"URLRead", "[", RowBox[{RowBox[{"HTTPRequest", "[", RowBox[{"\"https://api.coworkingview.com/v1/market/rates\"", ",", "\n", "      ", RowBox[{"<|", RowBox[{"\"Query\"", " ", "->", " ", RowBox[{"{", RowBox[{"\"city\"", " ", "->", " ", "slug", ",", " ", "\"locale\"", " ", "->", " ", "\"en\"", ",", " ", "\"currency\"", " ", "->", " ", "\"EUR\""}], "}"}]}], "|>"}]}], "]"}], ",", " ", "TimeConstraint", " ", "->", " ", "30"}], "]"}], ";", "\n", "   ", RowBox[{"If", "[", RowBox[{RowBox[{"FailureQ", "[", "resp", "]"}], ",", " ", RowBox[{"Return", "[", "resp", "]"}]}], "]"}], ";", "\n", "   ", "status", " ", "=", " ", RowBox[{"resp", "[", "\"StatusCode\"", "]"}], ";", "\n", "   ", RowBox[{"If", "[", RowBox[{"status", " ", "=!=", " ", "200", ",", "\n", "    ", RowBox[{"Return", "[", RowBox[{"Failure", "[", RowBox[{"\"HTTPError\"", ",", " ", RowBox[{"<|", RowBox[{"\"MessageTemplate\"", " ", ":>", " ", "FlexOfficePriceIndex", "::", "http", ",", " ", "\"MessageParameters\"", " ", "->", " ", RowBox[{"{", "status", "}"}], ",", " ", "\"StatusCode\"", " ", "->", " ", "status"}], "|>"}]}], "]"}], "]"}]}], "]"}], ";", "\n", "   ", "json", " ", "=", " ", RowBox[{"Quiet", "[", RowBox[{"ImportByteArray", "[", RowBox[{RowBox[{"resp", "[", "\"BodyByteArray\"", "]"}], ",", " ", "\"RawJSON\""}], "]"}], "]"}], ";", "\n", "   ", RowBox[{"If", "[", RowBox[{"!", RowBox[{"AssociationQ", "[", "json", "]"}], ",", " ", RowBox[{"Return", "[", RowBox[{"Failure", "[", RowBox[{"\"BadResponse\"", ",", " ", RowBox[{"<|", RowBox[{"\"MessageTemplate\"", " ", "->", " ", "\"Could not parse the API response.\""}], "|>"}]}], "]"}], "]"}]}], "]"}], ";", "\n", "   ", "json", "\n", "  "}], "]"}], ";"}]], "Code", CellID -> 729271245],
+Cell[BoxData[RowBox[{RowBox[{"cwvCity", "[", "input_", "]"}], " ", ":=", " ", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{"slug", ",", " ", "json", ",", " ", "cities"}], "}"}], ",", "\n", "   ", "slug", " ", "=", " ", RowBox[{"cwvSlug", "[", "input", "]"}], ";", "\n", "   ", RowBox[{"If", "[", RowBox[{RowBox[{"FailureQ", "[", "slug", "]"}], ",", " ", RowBox[{"Return", "[", "slug", "]"}]}], "]"}], ";", "\n", "   ", RowBox[{"If", "[", RowBox[{"!", RowBox[{"StringQ", "[", "slug", "]"}], " ", "||", " ", "slug", " ", "===", " ", "\"\"", ",", "\n", "    ", RowBox[{"Return", "[", RowBox[{"Failure", "[", RowBox[{"\"InvalidCity\"", ",", " ", RowBox[{"<|", RowBox[{"\"MessageTemplate\"", " ", "->", " ", "\"`1` is not a valid city name.\"", ",", " ", "\"MessageParameters\"", " ", "->", " ", RowBox[{"{", "input", "}"}]}], "|>"}]}], "]"}], "]"}]}], "]"}], ";", "\n", "   ", "json", " ", "=", " ", RowBox[{"cwvFetch", "[", "slug", "]"}], ";", "\n", "   ", RowBox[{"If", "[", RowBox[{RowBox[{"FailureQ", "[", "json", "]"}], ",", " ", RowBox[{"Return", "[", "json", "]"}]}], "]"}], ";", "\n", "   ", "cities", " ", "=", " ", RowBox[{"Select", "[", RowBox[{RowBox[{"Lookup", "[", RowBox[{RowBox[{"Lookup", "[", RowBox[{"json", ",", " ", "\"data\"", ",", " ", RowBox[{"<|", "|>"}]}], "]"}], ",", " ", "\"cities\"", ",", " ", RowBox[{"{", "}"}]}], "]"}], ",", " ", "AssociationQ"}], "]"}], ";", "\n", "   ", RowBox[{"If", "[", RowBox[{"cities", " ", "===", " ", RowBox[{"{", "}"}], ",", "\n", "    ", RowBox[{"Return", "[", RowBox[{"Failure", "[", RowBox[{"\"NoData\"", ",", " ", RowBox[{"<|", RowBox[{"\"MessageTemplate\"", " ", ":>", " ", "FlexOfficePriceIndex", "::", "nocity", ",", " ", "\"MessageParameters\"", " ", "->", " ", RowBox[{"{", RowBox[{"input", ",", " ", "slug"}], "}"}]}], "|>"}]}], "]"}], "]"}]}], "]"}], ";", "\n", "   ", RowBox[{"First", "[", "cities", "]"}], "\n", "  "}], "]"}], ";"}]], "Code", CellID -> 975376611],
+Cell[BoxData[RowBox[{RowBox[{"cwvRows", "[", "c_Association", "]"}], " ", ":=", " ", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{"byType", ",", " ", "figs", ",", " ", "row"}], "}"}], ",", "\n", "   ", "byType", " ", "=", " ", RowBox[{"AssociationMap", "[", RowBox[{RowBox[{"Function", "[", RowBox[{"t", ",", " ", RowBox[{"SelectFirst", "[", RowBox[{RowBox[{"Lookup", "[", RowBox[{"c", ",", " ", "\"byType\"", ",", " ", RowBox[{"{", "}"}]}], "]"}], ",", " ", RowBox[{"#", "[", "\"optionType\"", "]"}], " ", "===", " ", "t", " ", "&", ",", " ", RowBox[{"<|", "|>"}]}], "]"}]}], "]"}], ",", " ", RowBox[{"Values", "[", "$cwvProducts", "]"}]}], "]"}], ";", "\n", "   ", "figs", " ", "=", " ", RowBox[{"AssociationMap", "[", RowBox[{RowBox[{"Function", "[", RowBox[{"t", ",", " ", RowBox[{"SelectFirst", "[", RowBox[{RowBox[{"Lookup", "[", RowBox[{"c", ",", " ", "\"figures\"", ",", " ", RowBox[{"{", "}"}]}], "]"}], ",", " ", RowBox[{"#", "[", "\"optionType\"", "]"}], " ", "===", " ", "t", " ", "&", ",", " ", RowBox[{"<|", "|>"}]}], "]"}]}], "]"}], ",", " ", RowBox[{"Values", "[", "$cwvProducts", "]"}]}], "]"}], ";", "\n", "   ", RowBox[{"row", "[", "t_", "]"}], " ", ":=", " ", RowBox[{"<|", RowBox[{"\n", "     ", "\"Median\"", " ", "->", " ", RowBox[{"cwvEUR", "[", RowBox[{"Lookup", "[", RowBox[{RowBox[{"figs", "[", "t", "]"}], ",", " ", "\"median\"", ",", " ", RowBox[{"Lookup", "[", RowBox[{RowBox[{"byType", "[", "t", "]"}], ",", " ", "\"median\"", ",", " ", "None"}], "]"}]}], "]"}], "]"}], ",", "\n", "     ", "\"P25\"", " ", "->", " ", RowBox[{"cwvEUR", "[", RowBox[{"Lookup", "[", RowBox[{RowBox[{"figs", "[", "t", "]"}], ",", " ", "\"p25\"", ",", " ", "None"}], "]"}], "]"}], ",", "\n", "     ", "\"P75\"", " ", "->", " ", RowBox[{"cwvEUR", "[", RowBox[{"Lookup", "[", RowBox[{RowBox[{"figs", "[", "t", "]"}], ",", " ", "\"p75\"", ",", " ", "None"}], "]"}], "]"}], ",", "\n", "     ", "\"Min\"", " ", "->", " ", RowBox[{"cwvEUR", "[", RowBox[{"Lookup", "[", RowBox[{RowBox[{"byType", "[", "t", "]"}], ",", " ", "\"min\"", ",", " ", "None"}], "]"}], "]"}], ",", "\n", "     ", "\"Max\"", " ", "->", " ", RowBox[{"cwvEUR", "[", RowBox[{"Lookup", "[", RowBox[{RowBox[{"byType", "[", "t", "]"}], ",", " ", "\"max\"", ",", " ", "None"}], "]"}], "]"}], ",", "\n", "     ", "\"SampleSize\"", " ", "->", " ", RowBox[{"Lookup", "[", RowBox[{RowBox[{"figs", "[", "t", "]"}], ",", " ", "\"sampleSize\"", ",", " ", RowBox[{"Lookup", "[", RowBox[{RowBox[{"byType", "[", "t", "]"}], ",", " ", "\"sampleSize\"", ",", " ", RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}]}], "]"}]}], "]"}], ",", "\n", "     ", "\"InsufficientData\"", " ", "->", " ", RowBox[{"Lookup", "[", RowBox[{RowBox[{"figs", "[", "t", "]"}], ",", " ", "\"insufficientData\"", ",", " ", RowBox[{"Missing", "[", "\"NotAvailable\"", "]"}]}], "]"}]}], "|>"}], ";", "\n", "   ", RowBox[{"AssociationThread", "[", RowBox[{RowBox[{"Keys", "[", "$cwvProducts", "]"}], ",", " ", "row", " ", "/@", " ", RowBox[{"Values", "[", "$cwvProducts", "]"}]}], "]"}], "\n", "  "}], "]"}], ";"}]], "Code", CellID -> 764898885],
+Cell[BoxData[RowBox[{RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"city", " ", ":", " ", RowBox[{"(", RowBox[{"_String", " ", "|", " ", "_Entity"}], ")"}]}], "]"}], " ", ":=", " ", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{"c", " ", "=", " ", RowBox[{"cwvCity", "[", "city", "]"}]}], "}"}], ",", "\n", "   ", RowBox[{"If", "[", RowBox[{RowBox[{"FailureQ", "[", "c", "]"}], ",", " ", "c", ",", " ", RowBox[{"Dataset", "[", RowBox[{"cwvRows", "[", "c", "]"}], "]"}]}], "]"}], "\n", "  "}], "]"}], ";"}]], "Code", CellID -> 844189663],
+Cell[BoxData[RowBox[{RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"city", " ", ":", " ", RowBox[{"(", RowBox[{"_String", " ", "|", " ", "_Entity"}], ")"}], ",", " ", "product_String"}], "]"}], " ", ":=", " ", RowBox[{"Module", "[", RowBox[{RowBox[{"{", RowBox[{"key", ",", " ", "c"}], "}"}], ",", "\n", "   ", "key", " ", "=", " ", RowBox[{"SelectFirst", "[", RowBox[{RowBox[{"Keys", "[", "$cwvProducts", "]"}], ",", "\n", "     ", RowBox[{"ToLowerCase", "[", RowBox[{"StringDelete", "[", RowBox[{"#", ",", " ", "\" \"", " ", "|", " ", "\"_\"", " ", "|", " ", "\"-\""}], "]"}], "]"}], " ", "===", " ", RowBox[{"ToLowerCase", "[", RowBox[{"StringDelete", "[", RowBox[{"product", ",", " ", "\" \"", " ", "|", " ", "\"_\"", " ", "|", " ", "\"-\""}], "]"}], "]"}], " ", "&", ",", " ", RowBox[{"Missing", "[", "]"}]}], "]"}], ";", "\n", "   ", RowBox[{"If", "[", RowBox[{RowBox[{"MissingQ", "[", "key", "]"}], ",", "\n", "    ", RowBox[{"Return", "[", RowBox[{"Failure", "[", RowBox[{"\"InvalidProduct\"", ",", " ", RowBox[{"<|", RowBox[{"\"MessageTemplate\"", " ", ":>", " ", "FlexOfficePriceIndex", "::", "badprod", ",", " ", "\"MessageParameters\"", " ", "->", " ", RowBox[{"{", RowBox[{"product", ",", " ", RowBox[{"Keys", "[", "$cwvProducts", "]"}]}], "}"}]}], "|>"}]}], "]"}], "]"}]}], "]"}], ";", "\n", "   ", "c", " ", "=", " ", RowBox[{"cwvCity", "[", "city", "]"}], ";", "\n", "   ", RowBox[{"If", "[", RowBox[{RowBox[{"FailureQ", "[", "c", "]"}], ",", " ", "c", ",", " ", RowBox[{RowBox[{RowBox[{"cwvRows", "[", "c", "]"}], "[", "key", "]"}], "[", "\"Median\"", "]"}]}], "]"}], "\n", "  "}], "]"}], ";"}]], "Code", CellID -> 179066519],
+Cell[BoxData[RowBox[{RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"city", " ", ":", " ", RowBox[{"(", RowBox[{"_String", " ", "|", " ", "_Entity"}], ")"}], ",", " ", "\"Properties\""}], "]"}], " ", ":=", " ", RowBox[{"Keys", "[", "$cwvProducts", "]"}], ";"}]], "Code", CellID -> 591138068],
+Cell[BoxData[RowBox[{RowBox[{"FlexOfficePriceIndex", "[", "args___", "]"}], " ", ":=", " ", RowBox[{"Failure", "[", RowBox[{"\"InvalidArguments\"", ",", "\n", "   ", RowBox[{"<|", RowBox[{"\"MessageTemplate\"", " ", "->", " ", "\"FlexOfficePriceIndex expects a city name or Entity, optionally followed by a product name.\"", ",", " ", "\"Arguments\"", " ", "->", " ", RowBox[{"{", "args", "}"}]}], "|>"}]}], "]"}], ";"}]], "Code", CellID -> 503333486]
 }, Open]],
 Cell[CellGroupData[{
 Cell[
@@ -186,16 +191,16 @@ Cell[
             CellID -> 586585833
            ],
 Cell[CellGroupData[{
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", "\"\!\(\*StyleBox[\"city\", \"TI\"]\)\"", "]"}]], "UsageInputs", FontFamily -> "Source Sans Pro", CellID -> 764898885],
-Cell[TextData[{"gives a ", Cell[BoxData[StyleBox[TagBox[ButtonBox[StyleBox["Dataset", "SymbolsRefLink", ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"], BaseStyle -> Dynamic[FEPrivate`If[CurrentValue["MouseOver"], {"Link", FontColor -> RGBColor[0.8549, 0.39608, 0.1451]}, {"Link"}]], ButtonData -> "paclet:ref/Dataset", ContentPadding -> False], MouseAppearanceTag["LinkHand"]], ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], " of monthly price statistics (median, 25th and 75th percentiles, minimum, maximum and sample size) for flex desks, fixed desks and private offices in ", Cell[BoxData[StyleBox["\"\!\(\*StyleBox[\"city\", \"TI\"]\)\"", ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], "."}], "UsageDescription", CellID -> 844189663]
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", "\"\!\(\*StyleBox[\"city\", \"TI\"]\)\"", "]"}]], "UsageInputs", FontFamily -> "Source Sans Pro", CellID -> 130428323],
+Cell[TextData[{"gives a ", Cell[BoxData[StyleBox[TagBox[ButtonBox[StyleBox["Dataset", "SymbolsRefLink", ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"], BaseStyle -> Dynamic[FEPrivate`If[CurrentValue["MouseOver"], {"Link", FontColor -> RGBColor[0.8549, 0.39608, 0.1451]}, {"Link"}]], ButtonData -> "paclet:ref/Dataset", ContentPadding -> False], MouseAppearanceTag["LinkHand"]], ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], " of monthly price statistics (median, 25th and 75th percentiles, minimum, maximum and sample size) for flex desks, fixed desks and private offices in ", Cell[BoxData[StyleBox["\"\!\(\*StyleBox[\"city\", \"TI\"]\)\"", ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], "."}], "UsageDescription", CellID -> 581324319]
 }, Open]],
 Cell[CellGroupData[{
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"\!\(\*StyleBox[\"city\", \"TI\"]\)\"", ",", "\"\!\(\*StyleBox[\"product\", \"TI\"]\)\""}], "]"}]], "UsageInputs", FontFamily -> "Source Sans Pro", CellID -> 179066519],
-Cell[TextData[{"gives the median monthly price of ", Cell[BoxData[StyleBox["\"\!\(\*StyleBox[\"product\", \"TI\"]\)\"", ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], " in ", Cell[BoxData[StyleBox["\"\!\(\*StyleBox[\"city\", \"TI\"]\)\"", ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], " as a Quantity in euros."}], "UsageDescription", CellID -> 591138068]
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"\!\(\*StyleBox[\"city\", \"TI\"]\)\"", ",", "\"\!\(\*StyleBox[\"product\", \"TI\"]\)\""}], "]"}]], "UsageInputs", FontFamily -> "Source Sans Pro", CellID -> 833555195],
+Cell[TextData[{"gives the median monthly price of ", Cell[BoxData[StyleBox["\"\!\(\*StyleBox[\"product\", \"TI\"]\)\"", ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], " in ", Cell[BoxData[StyleBox["\"\!\(\*StyleBox[\"city\", \"TI\"]\)\"", ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], " as a Quantity in euros."}], "UsageDescription", CellID -> 272053157]
 }, Open]],
 Cell[CellGroupData[{
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", StyleBox["entity", "TI"], "]"}]], "UsageInputs", FontFamily -> "Source Sans Pro", CellID -> 503333486],
-Cell[TextData[{"uses the common name of the city ", Cell[BoxData[StyleBox[StyleBox["entity", "TI"], ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], " (an Entity of type \"City\")."}], "UsageDescription", CellID -> 130428323]
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", StyleBox["entity", "TI"], "]"}]], "UsageInputs", FontFamily -> "Source Sans Pro", CellID -> 687641511],
+Cell[TextData[{"uses the common name of the city ", Cell[BoxData[StyleBox[StyleBox["entity", "TI"], ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], " (an Entity of type \"City\")."}], "UsageDescription", CellID -> 605957528]
 }, Open]]
 }, Open]],
 Cell[CellGroupData[{
@@ -254,14 +259,14 @@ Cell[
             CellTags -> {"Details & Options", "Notes", "TemplateCellGroup"},
             CellID -> 450324809
            ],
-Cell[TextData[{"Data comes from the /v1/market/rates endpoint of the public CoworkingView REST API (", ButtonBox["API documentation", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://coworkingview.com/en/api"], None}, ButtonNote -> "https://coworkingview.com/en/api"], "). No API key is needed. An Internet connection is required."}], "Notes", CellID -> 581324319],
-Cell["Supported products are \"FlexDesk\" (hot desk), \"FixedDesk\" (dedicated desk) and \"PrivateOffice\" (price per workstation in a private office). Matching ignores case, spaces, hyphens and underscores.", "Notes", CellID -> 833555195],
-Cell[TextData[{"Prices are monthly amounts in EUR, returned as ", Cell[BoxData[StyleBox[RowBox[{"Quantity", "[", RowBox[{"amount", ",", " ", "\"Euros\""}], "]"}], ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], ". Figures are aggregated from published list prices of spaces in the CoworkingView catalogue and may change daily."}], "Notes", CellID -> 272053157],
-Cell["City names are normalized to lowercase slugs: diacritics are removed, German umlauts are transliterated and spaces become hyphens. Common local or English variants such as \"M\:00fcnchen\", \"K\:00f6ln\", \"Wien\", \"Lisbon\" and \"Seville\" are mapped to the index slug.", "Notes", CellID -> 687641511],
-Cell["As of 2026-11-04, the index covers 273 cities, mainly in the UK, Ireland, Germany, Spain, Italy and Portugal, plus some other European and UAE cities.", "Notes", CellID -> 605957528],
-Cell["The \"InsufficientData\" column is True when the data provider flags the sample as too small to be representative.", "Notes", CellID -> 857801415],
-Cell["A Failure object is returned for unknown cities, unknown products, invalid arguments, network errors or non-200 HTTP responses.", "Notes", CellID -> 356965940],
-Cell[TextData[{"Data \:00a9 CoworkingView, licensed under ", ButtonBox["CC BY 4.0", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://creativecommons.org/licenses/by/4.0/"], None}, ButtonNote -> "https://creativecommons.org/licenses/by/4.0/"], " (attribution: \"Source: CoworkingView Price Index\")."}], "Notes", CellID -> 997024846]
+Cell[TextData[{"Data comes from the /v1/market/rates endpoint of the public CoworkingView REST API (", ButtonBox["API documentation", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://coworkingview.com/en/api"], None}, ButtonNote -> "https://coworkingview.com/en/api"], "). No API key is needed. An Internet connection is required."}], "Notes", CellID -> 857801415],
+Cell["Supported products are \"FlexDesk\" (hot desk), \"FixedDesk\" (dedicated desk) and \"PrivateOffice\" (price per workstation in a private office). Matching ignores case, spaces, hyphens and underscores.", "Notes", CellID -> 356965940],
+Cell[TextData[{"Prices are monthly amounts in EUR, returned as ", Cell[BoxData[StyleBox[RowBox[{"Quantity", "[", RowBox[{"amount", ",", " ", "\"Euros\""}], "]"}], ShowStringCharacters -> True, FontFamily -> "Source Sans Pro"]], "InlineFormula", FontFamily -> "Source Sans Pro"], ". Figures are aggregated from published list prices of spaces in the CoworkingView catalogue and may change daily."}], "Notes", CellID -> 997024846],
+Cell["City names are normalized to lowercase slugs: diacritics are removed, German umlauts are transliterated and spaces become hyphens. Common local or English variants such as \"M\:00fcnchen\", \"K\:00f6ln\", \"Wien\", \"Lisbon\" and \"Seville\" are mapped to the index slug.", "Notes", CellID -> 973260638],
+Cell["As of 2026-11-04, the index covers 273 cities, mainly in the UK, Ireland, Germany, Spain, Italy and Portugal, plus some other European and UAE cities.", "Notes", CellID -> 223855781],
+Cell["The \"InsufficientData\" column is True when the data provider flags the sample as too small to be representative.", "Notes", CellID -> 935202814],
+Cell["A Failure object is returned for unknown cities, unknown products, invalid arguments, network errors or non-200 HTTP responses.", "Notes", CellID -> 406832360],
+Cell[TextData[{"Data \:00a9 CoworkingView, licensed under ", ButtonBox["CC BY 4.0", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://creativecommons.org/licenses/by/4.0/"], None}, ButtonNote -> "https://creativecommons.org/licenses/by/4.0/"], " (attribution: \"Source: CoworkingView Price Index\")."}], "Notes", CellID -> 839724196]
 }, Open]]
 }, Open]],
 Cell[CellGroupData[{
@@ -571,46 +576,46 @@ Cell[
          CellID -> 692797660
         ],
 Cell[CellGroupData[{
-Cell["Basic Examples", "Subsection", CellID -> 973260638],
-Cell["Get monthly price statistics for flexible workspace in Berlin:", "Text", CellID -> 223855781],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", "\"Berlin\"", "]"}]], "Input", CellID -> 935202814],
-Cell[BoxData[InterpretationBox[Cell["\t", "ExampleDelimiter"], $Line = 0; ]], "ExampleDelimiter", CellID -> 406832360],
-Cell["Get the median monthly price of a private office workstation in Berlin:", "Text", CellID -> 839724196],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Berlin\"", ",", " ", "\"PrivateOffice\""}], "]"}]], "Input", CellID -> 412627677]
+Cell["Basic Examples", "Subsection", CellID -> 412627677],
+Cell["Get monthly price statistics for flexible workspace in Berlin:", "Text", CellID -> 328432671],
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", "\"Berlin\"", "]"}]], "Input", CellID -> 219298305],
+Cell[BoxData[InterpretationBox[Cell["\t", "ExampleDelimiter"], $Line = 0; ]], "ExampleDelimiter", CellID -> 926812196],
+Cell["Get the median monthly price of a private office workstation in Berlin:", "Text", CellID -> 832819058],
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Berlin\"", ",", " ", "\"PrivateOffice\""}], "]"}]], "Input", CellID -> 443130323]
 }, Open]],
 Cell[CellGroupData[{
-Cell["Scope", "Subsection", CellID -> 328432671],
-Cell["Local-language city names are accepted:", "Text", CellID -> 219298305],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"M\:00fcnchen\"", ",", " ", "\"FlexDesk\""}], "]"}]], "Input", CellID -> 926812196],
-Cell[BoxData[InterpretationBox[Cell["\t", "ExampleDelimiter"], $Line = 0; ]], "ExampleDelimiter", CellID -> 832819058],
-Cell["Use a city Entity:", "Text", CellID -> 443130323],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"Entity", "[", RowBox[{"\"City\"", ",", " ", "{", RowBox[{"\"Hamburg\"", ",", " ", "\"Hamburg\"", ",", " ", "\"Germany\""}], "}"}], "]", ",", " ", "\"FixedDesk\""}], "]"}]], "Input", CellID -> 691008736]
+Cell["Scope", "Subsection", CellID -> 691008736],
+Cell["Local-language city names are accepted:", "Text", CellID -> 640949966],
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"M\:00fcnchen\"", ",", " ", "\"FlexDesk\""}], "]"}]], "Input", CellID -> 634675930],
+Cell[BoxData[InterpretationBox[Cell["\t", "ExampleDelimiter"], $Line = 0; ]], "ExampleDelimiter", CellID -> 982112684],
+Cell["Use a city Entity:", "Text", CellID -> 664634893],
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{RowBox[{"Entity", "[", RowBox[{"\"City\"", ",", " ", RowBox[{"{", RowBox[{"\"Hamburg\"", ",", " ", "\"Hamburg\"", ",", " ", "\"Germany\""}], "}"}]}], "]"}], ",", " ", "\"FixedDesk\""}], "]"}]], "Input", CellID -> 938807992]
 }, Open]],
 Cell[CellGroupData[{
-Cell["Applications", "Subsection", CellID -> 640949966],
-Cell["Compare median private office prices across cities:", "Text", CellID -> 634675930],
-Cell[BoxData[RowBox[{"AssociationMap", "[", RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"#", ",", " ", "\"PrivateOffice\""}], "]", " ", "&", ",", " ", "{", RowBox[{"\"Berlin\"", ",", " ", "\"Munich\"", ",", " ", "\"Hamburg\"", ",", " ", "\"Madrid\"", ",", " ", "\"Barcelona\""}], "}"}], "]"}]], "Input", CellID -> 982112684],
-Cell[BoxData[InterpretationBox[Cell["\t", "ExampleDelimiter"], $Line = 0; ]], "ExampleDelimiter", CellID -> 664634893],
-Cell["Show the comparison as a bar chart:", "Text", CellID -> 938807992],
-Cell[BoxData[RowBox[{"BarChart", "[", RowBox[{"QuantityMagnitude", " ", "/@", " ", "AssociationMap", "[", RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"#", ",", " ", "\"PrivateOffice\""}], "]", " ", "&", ",", " ", "{", RowBox[{"\"Berlin\"", ",", " ", "\"Munich\"", ",", " ", "\"Hamburg\"", ",", " ", "\"Madrid\"", ",", " ", "\"Barcelona\""}], "}"}], "]", ",", " ", "ChartLabels", " ", "->", " ", "Automatic"}], "]"}]], "Input", CellID -> 629788296]
+Cell["Applications", "Subsection", CellID -> 629788296],
+Cell["Compare median private office prices across cities:", "Text", CellID -> 514042145],
+Cell[BoxData[RowBox[{"AssociationMap", "[", RowBox[{RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"#", ",", " ", "\"PrivateOffice\""}], "]"}], " ", "&", ",", " ", RowBox[{"{", RowBox[{"\"Berlin\"", ",", " ", "\"Munich\"", ",", " ", "\"Hamburg\"", ",", " ", "\"Madrid\"", ",", " ", "\"Barcelona\""}], "}"}]}], "]"}]], "Input", CellID -> 670962437],
+Cell[BoxData[InterpretationBox[Cell["\t", "ExampleDelimiter"], $Line = 0; ]], "ExampleDelimiter", CellID -> 585199411],
+Cell["Show the comparison as a bar chart:", "Text", CellID -> 436116285],
+Cell[BoxData[RowBox[{"BarChart", "[", RowBox[{"QuantityMagnitude", " ", "/@", " ", RowBox[{"AssociationMap", "[", RowBox[{RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"#", ",", " ", "\"PrivateOffice\""}], "]"}], " ", "&", ",", " ", RowBox[{"{", RowBox[{"\"Berlin\"", ",", " ", "\"Munich\"", ",", " ", "\"Hamburg\"", ",", " ", "\"Madrid\"", ",", " ", "\"Barcelona\""}], "}"}]}], "]"}], ",", " ", "ChartLabels", " ", "->", " ", "Automatic"}], "]"}]], "Input", CellID -> 294827423]
 }, Open]],
 Cell[CellGroupData[{
-Cell["Properties and Relations", "Subsection", CellID -> 514042145],
-Cell["List the available products:", "Text", CellID -> 670962437],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Berlin\"", ",", " ", "\"Properties\""}], "]"}]], "Input", CellID -> 585199411]
+Cell["Properties and Relations", "Subsection", CellID -> 893788050],
+Cell["List the available products:", "Text", CellID -> 546874388],
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Berlin\"", ",", " ", "\"Properties\""}], "]"}]], "Input", CellID -> 903076042]
 }, Open]],
 Cell[CellGroupData[{
-Cell["Possible Issues", "Subsection", CellID -> 436116285],
-Cell["Cities outside the index return a Failure:", "Text", CellID -> 294827423],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", "\"Atlantis\"", "]"}]], "Input", CellID -> 893788050],
-Cell[BoxData[InterpretationBox[Cell["\t", "ExampleDelimiter"], $Line = 0; ]], "ExampleDelimiter", CellID -> 546874388],
-Cell["Unknown product names also return a Failure:", "Text", CellID -> 903076042],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Berlin\"", ",", " ", "\"Hotel\""}], "]"}]], "Input", CellID -> 326628649]
+Cell["Possible Issues", "Subsection", CellID -> 326628649],
+Cell["Cities outside the index return a Failure:", "Text", CellID -> 264650007],
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", "\"Atlantis\"", "]"}]], "Input", CellID -> 748663947],
+Cell[BoxData[InterpretationBox[Cell["\t", "ExampleDelimiter"], $Line = 0; ]], "ExampleDelimiter", CellID -> 336597729],
+Cell["Unknown product names also return a Failure:", "Text", CellID -> 829409187],
+Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Berlin\"", ",", " ", "\"Hotel\""}], "]"}]], "Input", CellID -> 138939855]
 }, Open]],
 Cell[CellGroupData[{
-Cell["Neat Examples", "Subsection", CellID -> 264650007],
-Cell["Find the monthly price gap between a private office workstation and a flex desk in Barcelona:", "Text", CellID -> 748663947],
-Cell[BoxData[RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Barcelona\"", ",", " ", "\"PrivateOffice\""}], "]", " ", "-", " ", "FlexOfficePriceIndex", "[", RowBox[{"\"Barcelona\"", ",", " ", "\"FlexDesk\""}], "]"}]], "Input", CellID -> 336597729]
+Cell["Neat Examples", "Subsection", CellID -> 671879768],
+Cell["Find the monthly price gap between a private office workstation and a flex desk in Barcelona:", "Text", CellID -> 438820449],
+Cell[BoxData[RowBox[{RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Barcelona\"", ",", " ", "\"PrivateOffice\""}], "]"}], " ", "-", " ", RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Barcelona\"", ",", " ", "\"FlexDesk\""}], "]"}]}]], "Input", CellID -> 875844192]
 }, Open]]
 }, Open]],
 Cell[CellGroupData[{
@@ -683,7 +688,7 @@ Cell[
             },
             CellID -> 635454497
            ],
-Cell["CoworkingView", "Text", CellID -> 829409187]
+Cell["CoworkingView", "Text", CellID -> 628529252]
 }, Open]],
 Cell[CellGroupData[{
 Cell[
@@ -741,16 +746,16 @@ Cell[
             CellTags -> {"Keywords", "TemplateCellGroup"},
             CellID -> 156850785
            ],
-Cell["coworking", "Item", CellID -> 138939855],
-Cell["office prices", "Item", CellID -> 671879768],
-Cell["flexible workspace", "Item", CellID -> 438820449],
-Cell["hot desk", "Item", CellID -> 875844192],
-Cell["private office", "Item", CellID -> 628529252],
-Cell["real estate", "Item", CellID -> 655445399],
-Cell["rent", "Item", CellID -> 112812157],
-Cell["Europe", "Item", CellID -> 973829078],
-Cell["price index", "Item", CellID -> 649193389],
-Cell["REST API", "Item", CellID -> 477396594]
+Cell["coworking", "Item", CellID -> 655445399],
+Cell["office prices", "Item", CellID -> 112812157],
+Cell["flexible workspace", "Item", CellID -> 973829078],
+Cell["hot desk", "Item", CellID -> 649193389],
+Cell["private office", "Item", CellID -> 477396594],
+Cell["real estate", "Item", CellID -> 630300548],
+Cell["rent", "Item", CellID -> 509042962],
+Cell["Europe", "Item", CellID -> 569663338],
+Cell["price index", "Item", CellID -> 308194126],
+Cell["REST API", "Item", CellID -> 365257345]
 }, Open]],
 Cell[CellGroupData[{
 Cell[
@@ -1338,14 +1343,14 @@ Cell[
             CellTags -> {"Related Symbols", "TemplateCellGroup"},
             CellID -> 467106741
            ],
-Cell["URLRead", "Item", CellID -> 630300548],
-Cell["HTTPRequest", "Item", CellID -> 509042962],
-Cell["ImportByteArray", "Item", CellID -> 569663338],
-Cell["Dataset", "Item", CellID -> 308194126],
-Cell["Quantity", "Item", CellID -> 365257345],
-Cell["Failure", "Item", CellID -> 988692588],
-Cell["Entity", "Item", CellID -> 808193969],
-Cell["CommonName", "Item", CellID -> 967145787]
+Cell["URLRead", "Item", CellID -> 988692588],
+Cell["HTTPRequest", "Item", CellID -> 808193969],
+Cell["ImportByteArray", "Item", CellID -> 967145787],
+Cell["Dataset", "Item", CellID -> 658217661],
+Cell["Quantity", "Item", CellID -> 947371260],
+Cell["Failure", "Item", CellID -> 936352228],
+Cell["Entity", "Item", CellID -> 113317585],
+Cell["CommonName", "Item", CellID -> 665858969]
 }, Open]],
 Cell[CellGroupData[{
 Cell[
@@ -1460,7 +1465,7 @@ Cell[
             CellTags -> {"Source/Reference Citation", "TemplateCellGroup"},
             CellID -> 435134317
            ],
-Cell[TextData[{"CoworkingView Price Index, ", ButtonBox["https://coworkingview.com/en/tools/price-index", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://coworkingview.com/en/tools/price-index"], None}, ButtonNote -> "https://coworkingview.com/en/tools/price-index"], " (CC BY 4.0), accessed 2026-11-04."}], "Text", CellID -> 658217661]
+Cell[TextData[{"CoworkingView Price Index, ", ButtonBox["https://coworkingview.com/en/tools/price-index", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://coworkingview.com/en/tools/price-index"], None}, ButtonNote -> "https://coworkingview.com/en/tools/price-index"], " (CC BY 4.0), accessed 2026-11-04."}], "Text", CellID -> 903522127]
 }, Open]],
 Cell[CellGroupData[{
 Cell[
@@ -1518,8 +1523,8 @@ Cell[
             CellTags -> {"Links", "TemplateCellGroup"},
             CellID -> 401731283
            ],
-Cell[TextData[ButtonBox["CoworkingView Price Index", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://coworkingview.com/en/tools/price-index"], None}, ButtonNote -> "https://coworkingview.com/en/tools/price-index"]], "Item", CellID -> 947371260],
-Cell[TextData[ButtonBox["CoworkingView API documentation", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://coworkingview.com/en/api"], None}, ButtonNote -> "https://coworkingview.com/en/api"]], "Item", CellID -> 936352228]
+Cell[TextData[ButtonBox["CoworkingView Price Index", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://coworkingview.com/en/tools/price-index"], None}, ButtonNote -> "https://coworkingview.com/en/tools/price-index"]], "Item", CellID -> 593766537],
+Cell[TextData[ButtonBox["CoworkingView API documentation", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://coworkingview.com/en/api"], None}, ButtonNote -> "https://coworkingview.com/en/api"]], "Item", CellID -> 673325511]
 }, Open]],
 Cell[CellGroupData[{
 Cell[
@@ -1611,9 +1616,9 @@ Cell[
             CellTags -> {"TemplateCellGroup", "Tests", "VerificationTests"},
             CellID -> 443679100
            ],
-Cell[BoxData[RowBox[{"VerificationTest", "[", RowBox[{"Head", "[", RowBox[{"FlexOfficePriceIndex", "[", "\"Atlantis\"", "]"}], "]", ",", " ", "Failure", ",", " ", "TestID", " ", "->", " ", "\"UnknownCityFailure\""}], "]"}]], "Input", "Code", InitializationCell -> False, CellID -> 113317585],
-Cell[BoxData[RowBox[{"VerificationTest", "[", RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Berlin\"", ",", " ", "\"Hotel\""}], "]", "[", "\"Tag\"", "]", ",", " ", "\"InvalidProduct\"", ",", " ", "TestID", " ", "->", " ", "\"UnknownProductFailure\""}], "]"}]], "Input", "Code", InitializationCell -> False, CellID -> 665858969],
-Cell[BoxData[RowBox[{"VerificationTest", "[", RowBox[{"CompatibleUnitQ", "[", RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Berlin\"", ",", " ", "\"PrivateOffice\""}], "]", ",", " ", "Quantity", "[", RowBox[{"1", ",", " ", "\"Euros\""}], "]"}], "]", ",", " ", "True", ",", " ", "TestID", " ", "->", " ", "\"BerlinPrivateOfficeInEuros\""}], "]"}]], "Input", "Code", InitializationCell -> False, CellID -> 903522127]
+Cell[BoxData[RowBox[{"VerificationTest", "[", RowBox[{RowBox[{"Head", "[", RowBox[{"FlexOfficePriceIndex", "[", "\"Atlantis\"", "]"}], "]"}], ",", " ", "Failure", ",", " ", "TestID", " ", "->", " ", "\"UnknownCityFailure\""}], "]"}]], "Input", "Code", InitializationCell -> False, CellID -> 338990806],
+Cell[BoxData[RowBox[{"VerificationTest", "[", RowBox[{RowBox[{RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Berlin\"", ",", " ", "\"Hotel\""}], "]"}], "[", "\"Tag\"", "]"}], ",", " ", "\"InvalidProduct\"", ",", " ", "TestID", " ", "->", " ", "\"UnknownProductFailure\""}], "]"}]], "Input", "Code", InitializationCell -> False, CellID -> 692251917],
+Cell[BoxData[RowBox[{"VerificationTest", "[", RowBox[{RowBox[{"CompatibleUnitQ", "[", RowBox[{RowBox[{"FlexOfficePriceIndex", "[", RowBox[{"\"Berlin\"", ",", " ", "\"PrivateOffice\""}], "]"}], ",", " ", RowBox[{"Quantity", "[", RowBox[{"1", ",", " ", "\"Euros\""}], "]"}]}], "]"}], ",", " ", "True", ",", " ", "TestID", " ", "->", " ", "\"BerlinPrivateOfficeInEuros\""}], "]"}]], "Input", "Code", InitializationCell -> False, CellID -> 432811834]
 }, Open]],
 Cell[
          CellGroupData[
@@ -2586,7 +2591,7 @@ Cell[
          CellTags -> {"Author Notes", "TemplateCellGroup"},
          CellID -> 13737072
         ],
-Cell["CoworkingView maintains the price data and the public API that this function uses. The function was prepared with AI assistance on behalf of CoworkingView. Prices are aggregated from operators' published list prices and are not quotes.", "Text", CellID -> 593766537]
+Cell["CoworkingView maintains the price data and the public API that this function uses. The function was prepared with AI assistance on behalf of CoworkingView. Prices are aggregated from operators' published list prices and are not quotes.", "Text", CellID -> 921721098]
 }, Open]],
 Cell[CellGroupData[{
 Cell[
@@ -2644,7 +2649,7 @@ Cell[
          CellTags -> {"Submission Notes", "TemplateCellGroup"},
          CellID -> 563202925
         ],
-Cell[TextData[{"Wraps a free, keyless public REST API (OpenAPI spec: ", ButtonBox["https://coworkingview.com/openapi.json", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://coworkingview.com/openapi.json"], None}, ButtonNote -> "https://coworkingview.com/openapi.json"], "). The contributor is the data provider. Example outputs reflect live data on the evaluation date and will drift over time."}], "Text", CellID -> 673325511]
+Cell[TextData[{"Wraps a free, keyless public REST API (OpenAPI spec: ", ButtonBox["https://coworkingview.com/openapi.json", BaseStyle -> "Hyperlink", ButtonData -> {URL["https://coworkingview.com/openapi.json"], None}, ButtonNote -> "https://coworkingview.com/openapi.json"], "). The contributor is the data provider. Example outputs reflect live data on the evaluation date and will drift over time."}], "Text", CellID -> 812843245]
 }, Open]]
 }, Open]]
  },

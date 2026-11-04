@@ -72,7 +72,9 @@ if [[ ${#main[@]} -ne 1 ]]; then
   exit 1
 fi
 
-rpm -Uvh "${main[0]}"
+# Fedora 45 refuses an unsigned package. This is a local rebuild, not a
+# signed COPR build.
+rpm -Uvh --nosignature "${main[0]}"
 cwv --version
 cwv --help >/dev/null
 test -x /usr/bin/cwv

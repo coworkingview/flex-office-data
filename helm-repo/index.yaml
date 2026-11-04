@@ -1,0 +1,49 @@
+apiVersion: v1
+entries:
+  cwv:
+  - annotations:
+      artifacthub.io/category: analytics
+      artifacthub.io/changes: |
+        - kind: changed
+          description: Chart 0.1.1 is published from the HTTPS Helm repository.
+        - kind: added
+          description: CronJob that runs docker.io/coworkingview/cwv:0.1.0 and prints Price Index rates.
+      artifacthub.io/images: |
+        - name: cwv
+          image: docker.io/coworkingview/cwv:0.1.0
+          platforms:
+            - linux/amd64
+            - linux/arm64
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Price Index
+          url: https://coworkingview.com/en/tools/price-index
+        - name: homepage
+          url: https://coworkingview.com
+        - name: source
+          url: https://github.com/coworkingview/flex-office-data
+    apiVersion: v2
+    appVersion: 0.1.0
+    created: "2026-11-04T12:46:34.773204608Z"
+    description: CronJob that runs the cwv CLI and prints CoworkingView Price Index
+      rates.
+    digest: 1d042695d6aa5a7fa5a6a1a212d4cb131c86c140ed71db6d2305ab85e5a0dc12
+    home: https://coworkingview.com/en/tools/price-index
+    icon: https://raw.githubusercontent.com/coworkingview/flex-office-data/main/power-platform-connector/icon.png
+    keywords:
+    - coworking
+    - price-index
+    - flex-office
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - email: info@coworkingview.com
+      name: CoworkingView
+      url: https://coworkingview.com
+    name: cwv
+    sources:
+    - https://github.com/coworkingview/flex-office-data
+    type: application
+    urls:
+    - https://github.com/coworkingview/flex-office-data/releases/download/helm-v0.1.1/cwv-0.1.1.tgz
+    version: 0.1.1
+generated: "2026-11-04T12:46:34.772622573Z"
